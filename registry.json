@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "compaction",
+    "description": "上下文压缩（Context Compaction / Prompt Compression）：硬文本压缩、软/潜空间压缩、RL 训练的压缩、Agent RL 压缩、Agent 记忆、记忆架构、部署评估。合并两份 paper list 去重后涵盖 50 篇论文（全部含中文 README 解读、图片和公式），核心 formulation：prefix → compact → suffix PPL / agent continuation reward。",
+    "updated": "2026-05-29",
+    "survey": "compaction/survey/"
+  },
+  {
+    "slug": "gradient-flow",
+    "description": "深度 Transformer / LLM 中的梯度流与信号传播：初始化、残差缩放、谱约束、优化器、隐状态 Jacobian 分析",
+    "updated": "2026-05-21",
+    "survey": "gradient-flow/survey/"
+  },
+  {
+    "slug": "layer-stacking",
+    "description": "深度扩展与层复制（depth expansion / layer stacking）：函数保持增长、渐进堆叠、增长调度、层位置选择与 inductive bias。涵盖 Net2Net、StackBERT、GStack、MIDAS 等 16 篇论文，核心发现：复制中间层能引入有利于推理的 inductive bias。",
+    "updated": "2026-05-27",
+    "survey": "layer-stacking/survey/"
+  },
+  {
+    "slug": "loop-models",
+    "description": "Loop Models（循环深度架构）：在单次前向传播中复用共享权重层的架构（flat-loop、hierarchical-loop、parallel-loop、implicit-layer）。涵盖 Universal Transformers、DEQ、Ouro、Huginn、Parcae、i-DEQ 等论文，跟随 [Awesome-Loop-Models](https://github.com/huskydoge/Awesome-Loop-Models) 仓库。新增：MoDr — block-wise LoRA 多分支 + hard-gate 动态路由扩展 Huginn 循环模块。",
+    "updated": "2026-06-02",
+    "survey": "loop-models/survey/"
+  }
+]

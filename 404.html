@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>paper-reading</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f7f7f4;
+  --ink: #191917;
+  --muted: #65645f;
+  --line: #dedbd2;
+  --panel: #ffffff;
+  --accent: #0f766e;
+  --accent-2: #7c3aed;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+a { color: inherit; }
+.site-shell { max-width: 1160px; margin: 0 auto; padding: 32px 24px 56px; }
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 28px;
+  align-items: end;
+  padding: 46px 0 30px;
+  border-bottom: 1px solid var(--line);
+}
+.kicker {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0 0 12px;
+}
+h1 {
+  font-size: clamp(2.3rem, 6vw, 5.7rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+  margin: 0;
+}
+.hero p { margin: 18px 0 0; color: var(--muted); max-width: 760px; font-size: 1.05rem; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.stat {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 16px;
+}
+.stat strong { display: block; font-size: 1.7rem; line-height: 1.1; }
+.stat span { color: var(--muted); font-size: 0.9rem; }
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 28px 0;
+}
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 230px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  text-decoration: none;
+}
+.topic-card:hover { border-color: var(--accent); }
+.topic-card h2 { margin: 0; font-size: 1.35rem; letter-spacing: 0; }
+.topic-card p { margin: 0; color: var(--muted); }
+.topic-meta { margin-top: auto; display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 0.9rem; }
+.notice {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  padding-top: 22px;
+  font-size: 0.94rem;
+}
+.public-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 18px;
+  background: rgba(247, 247, 244, 0.92);
+  border-bottom: 1px solid #dedbd2;
+  backdrop-filter: blur(12px);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.public-site-nav a { color: #0f766e; text-decoration: none; font-weight: 700; }
+.public-site-nav span { color: #65645f; font-size: 0.92rem; }
+.public-attribution {
+  margin: 48px auto 28px;
+  max-width: 980px;
+  padding: 18px 20px;
+  border: 1px solid #dedbd2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #65645f;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+}
+@media (max-width: 760px) {
+  .site-shell { padding: 22px 16px 40px; }
+  .hero { grid-template-columns: 1fr; padding-top: 22px; }
+  .stats { grid-template-columns: 1fr; }
+  .public-site-nav { position: static; align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+  <main class="site-shell">
+    <section class="hero">
+      <div>
+        <p class="kicker">Paper Reading</p>
+        <h1>论文阅读笔记</h1>
+        <p>围绕机器学习系统、模型架构与训练机制整理的个人学习综述。每个主题由总览和逐篇论文解读组成，适合回看、分享和继续扩展。</p>
+      </div>
+      <div class="stats" aria-label="站点统计">
+        <div class="stat"><strong>4</strong><span>公开主题</span></div>
+        <div class="stat"><strong>179</strong><span>论文笔记</span></div>
+      </div>
+    </section>
+    <section class="topic-grid" aria-label="主题列表">
+      
+      <a class="topic-card" href="compaction/survey/">
+        <h2>compaction</h2>
+        <p>上下文压缩（Context Compaction / Prompt Compression）：硬文本压缩、软/潜空间压缩、RL 训练的压缩、Agent RL 压缩、Agent 记忆、记忆架构、部署评估。合并两份 paper list 去重后涵盖 50 篇论文（全部含中文 README 解读、图片和公式），核心 formulation：prefix → compact → suffix PPL / agent continuation reward。</p>
+        <div class="topic-meta">
+          <span>Survey</span>
+          <span>2026-05-29</span>
+        </div>
+      </a>
+      <a class="topic-card" href="gradient-flow/survey/">
+        <h2>gradient-flow</h2>
+        <p>深度 Transformer / LLM 中的梯度流与信号传播：初始化、残差缩放、谱约束、优化器、隐状态 Jacobian 分析</p>
+        <div class="topic-meta">
+          <span>Survey</span>
+          <span>2026-05-21</span>
+        </div>
+      </a>
+      <a class="topic-card" href="layer-stacking/survey/">
+        <h2>layer-stacking</h2>
+        <p>深度扩展与层复制（depth expansion / layer stacking）：函数保持增长、渐进堆叠、增长调度、层位置选择与 inductive bias。涵盖 Net2Net、StackBERT、GStack、MIDAS 等 16 篇论文，核心发现：复制中间层能引入有利于推理的 inductive bias。</p>
+        <div class="topic-meta">
+          <span>Survey</span>
+          <span>2026-05-27</span>
+        </div>
+      </a>
+      <a class="topic-card" href="loop-models/survey/">
+        <h2>loop-models</h2>
+        <p>Loop Models（循环深度架构）：在单次前向传播中复用共享权重层的架构（flat-loop、hierarchical-loop、parallel-loop、implicit-layer）。涵盖 Universal Transformers、DEQ、Ouro、Huginn、Parcae、i-DEQ 等论文，跟随 [Awesome-Loop-Models](https://github.com/huskydoge/Awesome-Loop-Models) 仓库。新增：MoDr — block-wise LoRA 多分支 + hard-gate 动态路由扩展 Huginn 循环模块。</p>
+        <div class="topic-meta">
+          <span>Survey</span>
+          <span>2026-06-02</span>
+        </div>
+      </a>
+    </section>
+    <footer class="notice">
+      本站内容为个人学习笔记与论文解读。论文、图表、实验结果和引用材料的版权归原作者及原出版方所有；本站仅为学习、研究和非商业分享用途。若需要引用原始成果，请以论文原文和官方发布版本为准。
+    </footer>
+  </main>
+</body>
+</html>

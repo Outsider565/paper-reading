@@ -1,0 +1,3642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梯度流与信号传播 — 深度 Transformer 综述</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161822;
+  --bg3: #1c1f2e;
+  --card: #1e2132;
+  --border: #2a2d42;
+  --text: #e0e0e8;
+  --text2: #9498b0;
+  --accent: #6c8cff;
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  background: var(--bg); color: var(--text); line-height:1.75; font-size:16px;
+}
+.container { max-width:960px; margin:0 auto; padding:0 24px; }
+a { color: var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* Header */
+header { padding:64px 0 48px; text-align:center; border-bottom:1px solid var(--border); }
+header h1 {
+  font-size:2.4em; font-weight:800;
+  background:linear-gradient(135deg,#6c8cff,#4ecdc4);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; margin-bottom:8px;
+}
+header p { color:var(--text2); font-size:1.05em; }
+
+/* Navigation */
+nav.toc {
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 28px; margin:32px 0;
+}
+nav.toc h2 { font-size:1.1em; color:var(--accent); margin-bottom:12px; }
+nav.toc ul { list-style:none; columns:2; gap:16px; }
+nav.toc li { margin-bottom:6px; break-inside:avoid; font-size:0.9em; }
+nav.toc a { color:var(--text); }
+nav.toc a:hover { color:var(--accent); }
+.toc-cat {
+  display:inline-block; font-size:0.7em; padding:1px 7px; border-radius:4px;
+  margin-right:5px; font-weight:600; vertical-align:middle;
+}
+
+/* Section separators */
+.section-divider {
+  border:none; border-top:1px solid var(--border); margin:48px 0;
+}
+
+/* Overview */
+.overview { margin:32px 0; }
+.overview h1, .overview h2, .overview h3 { color:var(--accent); margin:24px 0 12px; }
+.overview h1 { font-size:1.6em; }
+.overview h2 { font-size:1.3em; }
+.overview p { margin-bottom:12px; }
+.overview strong { color:#e8e8f0; }
+
+/* Paper articles */
+.paper-article {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  margin-bottom:24px; overflow:hidden;
+}
+.paper-meta-bar {
+  background:var(--bg3); padding:10px 24px; font-size:0.82em; color:var(--text2);
+  border-bottom:1px solid var(--border);
+}
+.paper-body {
+  padding:24px 28px;
+}
+.paper-body h1 { font-size:1.35em; margin:0 0 16px; }
+.paper-body h2 { font-size:1.15em; color:var(--accent); margin:24px 0 10px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+.paper-body h3 { font-size:1.0em; color:#b0b8d0; margin:18px 0 8px; }
+.paper-body h4 { font-size:0.95em; color:#a0a8c0; margin:14px 0 6px; }
+.paper-body p { margin-bottom:10px; }
+.paper-body ul, .paper-body ol { padding-left:24px; margin-bottom:10px; }
+.paper-body li { margin-bottom:4px; }
+.paper-body img {
+  max-width:100%; height:auto; border-radius:8px;
+  margin:12px 0; display:block;
+  background:#fff; padding:4px;
+}
+.paper-body table {
+  width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em;
+}
+.paper-body th, .paper-body td {
+  padding:8px 12px; text-align:left; border-bottom:1px solid var(--border);
+}
+.paper-body th { background:var(--bg3); color:var(--accent); font-weight:600; }
+.paper-body code {
+  background:var(--bg3); padding:2px 6px; border-radius:4px; font-size:0.88em;
+}
+.paper-body pre {
+  background:var(--bg3); padding:16px; border-radius:8px; overflow-x:auto;
+  margin:12px 0; font-size:0.88em;
+}
+.paper-body pre code { background:none; padding:0; }
+.paper-body blockquote {
+  border-left:3px solid var(--accent); padding:8px 16px; margin:12px 0;
+  background:rgba(108,140,255,0.05); color:var(--text2);
+}
+.paper-body hr { border:none; border-top:1px solid var(--border); margin:20px 0; }
+
+/* Footer */
+footer {
+  padding:32px 0; text-align:center; color:var(--text2);
+  font-size:0.82em; border-top:1px solid var(--border); margin-top:48px;
+}
+
+/* Responsive */
+@media (max-width:700px) {
+  header h1 { font-size:1.6em; }
+  nav.toc ul { columns:1; }
+  .container { padding:0 16px; }
+  .paper-body { padding:16px 18px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+</style>
+<style>
+.public-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 18px;
+  background: var(--bg2, rgba(247, 247, 244, 0.92));
+  border-bottom: 1px solid var(--border, #dedbd2);
+  backdrop-filter: blur(12px);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.public-site-nav a {
+  color: var(--accent, #0f766e);
+  text-decoration: none;
+  font-weight: 700;
+}
+.public-site-nav span {
+  color: var(--text2, #65645f);
+  font-size: 0.92rem;
+}
+.public-attribution {
+  margin: 48px auto 28px;
+  max-width: 980px;
+  padding: 18px 20px;
+  border: 1px solid var(--border, #dedbd2);
+  border-radius: 8px;
+  background: var(--card, #ffffff);
+  color: var(--text2, #65645f);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+}
+@media (max-width: 760px) {
+  .public-site-nav {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="public-site-nav"><a href="../../">paper-reading</a><span>gradient-flow</span></nav>
+
+<header>
+  <div class="container">
+    <h1>梯度流与信号传播</h1>
+    <p>深度 Transformer / LLM 训练中的梯度消失、爆炸与有用信号保持 — 27 篇论文综述</p>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- TOC -->
+<nav class="toc">
+  <h2>论文目录</h2>
+  <ul>
+<li><a href="#1711.04735-dynamical-isometry"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>Resurrecting the Sigmoid in Deep Learning Through Dynamical Isometry: Theory and Practice</a></li>
+<li><a href="#1312.6120-deep-linear-networks"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>Exact Solutions to the Nonlinear Dynamics of Learning in Deep Linear Networks</a></li>
+<li><a href="#2203.03466-mup"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</a></li>
+<li><a href="#1901.09321-fixup"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>Fixup Initialization: Residual Learning Without Normalization</a></li>
+<li><a href="#2403.09635-transformers-get-stable"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>Transformers Get Stable: An End-to-End Signal Propagation Theory for Language Models</a></li>
+<li><a href="#2203.00555-deepnet"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>DeepNet: Scaling Transformers to 1,000 Layers</a></li>
+<li><a href="#2003.04887-rezero"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>ReZero is All You Need: Fast Convergence at Large Depth</a></li>
+<li><a href="#2004.08249-admin"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>Understanding the Difficulty of Training Transformers</a></li>
+<li><a href="#2002.04745-layer-norm-transformer"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>On Layer Normalization in the Transformer Architecture</a></li>
+<li><a href="#2206.00330-b2t-connection"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>B2T Connection: Serving Stability and Performance in Deep Transformers</a></li>
+<li><a href="#2304.14802-residual"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>ResiDual: Transformer with Dual Residual Connections</a></li>
+<li><a href="#1802.05957-spectral-normalization"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">C</span>Spectral Normalization for Generative Adversarial Networks</a></li>
+<li><a href="#1511.06464-unitary-rnn"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">C</span>Unitary Evolution Recurrent Neural Networks</a></li>
+<li><a href="#1803.09327-spectral-rnn"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">C</span>Stabilizing Gradients for Deep Neural Networks via Efficient SVD Parameterization (Spectral-RNN)</a></li>
+<li><a href="#2507.13338-lipschitz-transformers"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">C</span>Training Transformers with Enforced Lipschitz Constants</a></li>
+<li><a href="#2601.08393-spectral-sphere-llm"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">C</span>Controlled LLM Training on Spectral Sphere (MACRO)</a></li>
+<li><a href="#1804.04235-adafactor"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Adafactor: Adaptive Learning Rates with Sublinear Memory Cost</a></li>
+<li><a href="#1708.03888-lars"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Large Batch Training of Convolutional Networks (LARS)</a></li>
+<li><a href="#1503.05671-kfac"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Optimizing Neural Networks with Kronecker-factored Approximate Curvature (K-FAC)</a></li>
+<li><a href="#2502.16982-muon-scalable"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Muon is Scalable for LLM Training</a></li>
+<li><a href="#2506.15054-muon-spectral-norm"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Muon Optimizes Under Spectral Norm Constraints</a></li>
+<li><a href="#2601.01306-principled-muon-mup"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Towards a Principled Muon under μP: Ensuring Spectral Conditions throughout Training</a></li>
+<li><a href="#2502.06742-gradient-multi-normalization"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">D</span>Gradient Multi-Normalization for Stateless and Scalable LLM Training</a></li>
+<li><a href="#1809.08848-dynamical-isometry-resnet"><span class="toc-cat" style="background:#ff6ca822;color:#ff6ca8">E</span>Dynamical Isometry is Achieved in Residual Networks in a Universal Way for any Activation Function</a></li>
+<li><a href="#2110.09456-normformer"><span class="toc-cat" style="background:#ff6ca822;color:#ff6ca8">E</span>NormFormer: Improved Transformer Pretraining with Extra Normalization</a></li>
+<li><a href="#2410.01131-ngpt"><span class="toc-cat" style="background:#ff6ca822;color:#ff6ca8">E</span>nGPT: Normalized Transformer with Representation Learning on the Hypersphere</a></li>
+<li><a href="#1906.01787-deep-transformer-mt"><span class="toc-cat" style="background:#ff6ca822;color:#ff6ca8">E</span>Learning Deep Transformer Models for Machine Translation</a></li>
+  </ul>
+</nav>
+
+<!-- Section 1: Overview -->
+<div class="overview">
+<h1>总览：深度 Transformer 中的梯度流与信号传播</h1>
+<h2>核心问题</h2>
+<p>对深度为 <span class="math inline">L</span> 的网络，第 <span class="math inline">\ell</span> 层收到的梯度信号为 <span class="math inline">g_\ell = J_{\ell \to L}^\top g_L</span>，其中 <span class="math inline">J_{\ell \to L} = \partial h_L / \partial h_\ell</span> 是隐状态的 Jacobian 矩阵。这个 Jacobian 的行为决定了深层网络能否有效训练。</p>
+<p><strong>控制爆炸</strong>（上界约束 <span class="math inline">\|J\|</span>）相对容易——谱范数约束、权重衰减、残差缩放都可以做到。<strong>防止有用梯度信号消失</strong>则困难得多——它要求 <span class="math inline">J_{\ell \to L}</span> 保持非退化的奇异值、足够的秩、以及与任务相关的方向。这两个目标有本质区别：一个矩阵可以谱范数完美有界（<span class="math inline">\|W\|_2 = 1</span>）却仍然秩亏，此时梯度范数不为零但信号已经退化。</p>
+<h2>方法谱系</h2>
+<p>本综述收录的 27 篇论文按其<strong>约束对象</strong>自然形成一条从&quot;远离 Jacobian&quot;到&quot;直接作用于 Jacobian&quot;的谱系：</p>
+<p><strong>离 Jacobian 最远 → 优化器更新约束（Category D）。</strong> Adafactor、LARS、K-FAC、Shampoo、Muon 等方法控制的是 <span class="math inline">\Delta W</span>——反向传播已经完成之后的更新步。如果 <span class="math inline">J_{\ell \to L}^\top g_L</span> 在到达某层时已经丢失了与任务相关的分量，无论如何归一化或预条件更新都无法恢复。这些方法改善的是优化效率和稳定性，而非信号传播本身。</p>
+<p><strong>中间层 → 权重谱约束（Category C）。</strong> 谱归一化将 <span class="math inline">W</span> 除以 <span class="math inline">\sigma_{\max}(W)</span>，酉参数化保证 <span class="math inline">W^\top W = I</span>。这些作用于单个权重矩阵的奇异值。谱上界（<span class="math inline">\sigma_{\max} \le c</span>）防爆炸但不防消失；只有同时保证下界（<span class="math inline">\sigma_{\min} \ge m &gt; 0</span>）才能双向保护。更关键的问题是：即使每个 <span class="math inline">W</span> 都条件良好，一个 Transformer block 包含 attention softmax、归一化层、残差加法、MLP 非线性——组合后的 block Jacobian 仍可能退化。</p>
+<p><strong>接近核心 → 初始化与参数化（Category A）。</strong> 动态等距理论直接瞄准 Jacobian 的奇异值分布：如果分布集中在 1 附近，信号既不消失也不爆炸。muP 解决宽度缩放，Fixup/T-Fixup 通过 <span class="math inline">L^{-1/(2m-2)}</span> 缩放让网络初始化时近似恒等，DeepScaleLM 推导了完整 Transformer 的前向和后向矩公式。这些方法的共同局限是保证通常仅在<strong>初始化时</strong>成立。</p>
+<p><strong>最直接 → 架构/残差路径设计（Category B）与隐状态约束（Category E）。</strong> 残差连接 <span class="math inline">h_{\ell+1} = h_\ell + \alpha F_\ell(h_\ell)</span> 中的恒等项 <span class="math inline">I</span> 是 Transformer 能训练到百层量级的根本原因。Pre-LN 把 LayerNorm 移到残差分支内部，给梯度一条不经过 LN Jacobian 的直通路径；但代价是容易产生表征坍缩。Post-LN 的 LN 在残差之后，梯度必须反复穿过 LN Jacobian，在深层中被逐步收缩或扭曲——B2T 论文直接指认这是 Post-LN 梯度消失的罪魁。ResiDual 用双残差路径同时缓解两个问题。nGPT 将所有隐状态约束到单位超球面，层操作变成角位移而非欧几里得加法。</p>
+<h2>关键洞察</h2>
+<p><strong>洞察 1：约束的层次越靠近 <span class="math inline">J_{\ell \to L}</span>，抗消失效果越直接。</strong> 从优化器（<span class="math inline">\Delta W</span>）→ 权重（<span class="math inline">W</span>）→ 初始化（<span class="math inline">J</span> at init）→ 架构（<span class="math inline">J</span> structurally），每上一层离真正的信号传播几何更近一步。但越直接的约束也越难在实际 LLM 规模上维持。</p>
+<p><strong>洞察 2：&quot;梯度范数不为零&quot;≠&quot;梯度信号有用&quot;。</strong> Pre-LN 能保持梯度流，但梯度可能几乎全部走 skip path，残差分支贡献极小——深层被&quot;浪费&quot;了。梯度可以非零但低秩、被归一化伪影主导、或对层自身学到的变换不敏感。这就是表征坍缩和深度浪费问题。</p>
+<p><strong>洞察 3：稳定性 vs. 有效深度是一对根本矛盾。</strong> 让网络在初始化时更像恒等（ReZero、Fixup、小 <span class="math inline">\alpha</span>）可以保持梯度，但也让每层的变换贡献更弱。DeepNorm 用 <span class="math inline">\alpha = L^{1/4}</span> 放大 skip path 实现稳定性，但同时也相对缩小了残差分支的影响。Admin 论文明确指出这个 tradeoff。</p>
+<p><strong>洞察 4：动态等距是正确的理论目标，但尚无 LLM 级别的训练时保证。</strong> 动态等距要求 <span class="math inline">J_{\ell \to L}</span> 的奇异值始终接近 1。现有方法要么只在初始化时满足（Saxe et al., RISOTTO），要么只约束局部对象（单个 <span class="math inline">W</span> 的谱），要么只保持统计矩（DeepScaleLM），而非完整的奇异值分布。</p>
+<h2>文献空白</h2>
+<p>现有可扩展方法大多保持<strong>激活矩</strong>、<strong>残差缩放</strong>、或 <strong><span class="math inline">W</span> 的谱约束</strong>，很少在训练全程直接约束<strong>隐状态 Jacobian 的有用敏感性谱</strong>。一个理想的新方法会维护类似 <span class="math inline">m_\ell \|v\| \le \|\partial h_{\ell+k} / \partial h_\ell \cdot v\| \le M_\ell \|v\|</span> 的条件，对采样的或与任务相关的方向 <span class="math inline">v</span>，在训练期间成立。可能的实用近似包括：随机化 JVP/VJP 估计局部 Jacobian 奇异值、自适应残差门控、秩坍缩惩罚、block 级双 Lipschitz 约束等。</p>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- Section 2: Per-paper details -->
+<div class="cat-header" style="border-left:4px solid #6c8cff;padding-left:16px;margin:48px 0 24px"><h2 style="color:#6c8cff">Category A: 初始化 / 参数化</h2></div>
+<article class="paper-article" id="1711.04735-dynamical-isometry"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1711.04735" target="_blank">arXiv:1711.04735</a> · <a href="#1711.04735-dynamical-isometry">README source</a></div><div class="paper-body"><h1>Resurrecting the Sigmoid in Deep Learning Through Dynamical Isometry: Theory and Practice</h1>
+<p><strong>论文</strong>: Pennington, Schoenholz, Ganguli (2017)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/1711.04735">1711.04735</a>
+<strong>分类</strong>: A. 初始化 / 参数化 · E. 隐状态 / Jacobian / 信号传播</p>
+<hr />
+<h2>问题动机</h2>
+<p>深度网络训练中，梯度消失 / 爆炸是核心瓶颈。传统分析仅关注 Jacobian 的<strong>均方奇异值</strong>（mean squared singular value）是否为 <span class="math inline">O(1)</span>，但这只是一个平均量——即使均值合适，奇异值分布可能非常宽，仍然存在大量接近 0 的方向导致梯度在这些方向上消失。</p>
+<p>更具体地说，sigmoid 激活函数在深度网络中已被 ReLU 系列取代，主要原因就是 sigmoid 的梯度消失问题。但作者认为，如果能找到合适的初始化方案，sigmoid 可以被&quot;复活&quot;。</p>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>Xavier / He 初始化仅保证信号方差逐层不变（前向传播的二阶矩），对应的是 Jacobian 均方奇异值为 <span class="math inline">O(1)</span>，但不控制完整奇异值分布。</li>
+<li>&quot;混沌边缘&quot;（edge of chaos）初始化保持网络处于有序-混沌相变点，信号可以传播，但仍不保证 Jacobian 的所有奇异值都接近 1。</li>
+</ul>
+<h2>核心想法</h2>
+<p><strong>Dynamical isometry（动态等距）</strong>：要求输入-输出 Jacobian <span class="math inline">J</span> 的<strong>整个奇异值分布</strong>集中在 1 附近，而非仅均方奇异值为 <span class="math inline">O(1)</span>。这是比 edge-of-chaos 更强的条件，能确保反向传播的梯度在<strong>所有方向</strong>上既不消失也不爆炸。</p>
+<p>关键洞察：通过精心选择权重分布（而非仅设置方差），可以使深度网络（包括 sigmoid 网络）在初始化时实现动态等距。</p>
+<h2>方法细节</h2>
+<h3>理论框架</h3>
+<p>考虑 <span class="math inline">L</span> 层全连接网络，输入-输出 Jacobian 为：</p>
+<div class="math block">
+J = \prod_{\ell=1}^{L} D_\ell W_\ell
+</div>
+<p>其中 <span class="math inline">W_\ell</span> 是权重矩阵，<span class="math inline">D_\ell = \text{diag}(\phi'(h_\ell))</span> 是激活函数导数的对角矩阵。</p>
+<p><strong>核心量</strong>：Jacobian 的奇异值分布由 <span class="math inline">J^\top J</span> 的特征值分布决定。作者利用自由概率论（free probability theory）和随机矩阵理论分析 <span class="math inline">J^\top J</span> 的谱。</p>
+<h3>Edge of Chaos vs. Dynamical Isometry</h3>
+<p>网络的信号传播行为由两个序参量（order parameters）决定：</p>
+<ol>
+<li><strong><span class="math inline">q^\ell</span></strong>：第 <span class="math inline">\ell</span> 层预激活值的方差</li>
+<li><strong><span class="math inline">c^\ell</span></strong>：两个不同输入在第 <span class="math inline">\ell</span> 层的归一化相关性</li>
+</ol>
+<p>这两个量的递推关系定义了一个<strong>相图</strong>（phase diagram）：</p>
+<ul>
+<li><strong>有序相</strong>（ordered phase）：所有输入收敛到同一表示，<span class="math inline">c^\ell \to 1</span></li>
+<li><strong>混沌相</strong>（chaotic phase）：相似输入被映射到无关表示</li>
+<li><strong>混沌边缘</strong>（edge of chaos）：相变点，信号刚好可以传播</li>
+</ul>
+<p><img src="../papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.webp" alt="tanh 激活函数的有序-混沌相变图。临界线 χ(σ_w, σ_b)=1 分隔两个相：混沌相（χ&gt;1）中梯度指数爆炸，有序相（χ&lt;1）中梯度指数消失。热力图显示临界线上的 q* 值。" /></p>
+<p><strong>动态等距是比混沌边缘更强的要求</strong>：</p>
+<ul>
+<li>Edge of chaos ⟹ Jacobian 均方奇异值 <span class="math inline">\approx 1</span></li>
+<li>Dynamical isometry ⟹ Jacobian 所有奇异值 <span class="math inline">\approx 1</span></li>
+</ul>
+<h3>实现动态等距</h3>
+<p>关键发现：使用<strong>正交初始化</strong>（orthogonal initialization）而非高斯初始化，配合正确的方差缩放，可以使 Jacobian 奇异值分布急剧收窄到 1 附近。</p>
+<p>对于 sigmoid 激活函数 <span class="math inline">\phi(x) = \tanh(x)</span>：</p>
+<ol>
+<li>将网络置于混沌边缘（选择合适的 <span class="math inline">\sigma_w^2, \sigma_b^2</span>）</li>
+<li>使用正交矩阵初始化 <span class="math inline">W_\ell</span>（而非 i.i.d. 高斯）</li>
+<li>正交性使 <span class="math inline">W_\ell^\top W_\ell = \sigma_w^2 I</span>，消除了权重矩阵本身的奇异值散布</li>
+</ol>
+<p>下图展示了不同激活函数和初始化方式下的 Jacobian 奇异值分布。正交 hard-tanh 的分布远比高斯初始化或正交 ReLU 更集中：</p>
+<p><img src="../papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig2.webp" alt="不同非线性函数在临界点处的深层 Jacobian 谱。理论预测（实线）与宽度 1000 的网络模拟（虚线）高度吻合。正交 hard-tanh 的条件数远优于高斯线性和正交 ReLU。" /></p>
+<p>下图量化了最大奇异值 <span class="math inline">s_{\max}</span> 随深度 <span class="math inline">L</span> 和 <span class="math inline">q^*</span> 的增长行为，揭示了正交初始化 + 有界激活函数（hard-tanh）是实现动态等距的关键组合：</p>
+<p><img src="../papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig3.webp" alt="Jacobian 最大奇异值 s_max 随深度 L 和 q* 的变化。(a,c) 高斯初始化下 s_max 随 L 增长；(b,d) 正交 hard-tanh 在小 q* 时 s_max 保持 O(1)，而正交 ReLU 仍然增长。" /></p>
+<h3>实验验证</h3>
+<p>训练深度 tanh 网络（200 层），比较不同初始化和激活函数的组合：</p>
+<p><img src="../papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig4.webp" alt="200 层、宽度 400 网络在 CIFAR-10 上的泛化性能。蓝色：tanh σ²=1.05，红色：tanh σ²=2，黑色：ReLU σ²=2。实线为正交初始化，虚线为高斯初始化。动态等距程度越高（s_max 越接近 1），学习速度越快。" /></p>
+<p>训练时间的系统性测量揭示了一个优雅的缩放规律——当学习率按 <span class="math inline">L</span> 缩放、训练时间按 <span class="math inline">\sqrt{L}</span> 缩放后，不同深度的曲线坍缩到同一条通用曲线上：</p>
+<p><img src="../papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig5.webp" alt="正交 tanh 网络的 SGD 训练时间 τ。(a) 不同深度 L 的曲线在 η 按 L 缩放、τ 按 √L 缩放后坍缩到一条通用曲线。(b) 不同 q* 下，更小的 q*（更强的动态等距）允许更大的最优学习率。(c,d) τ 与 L、q* 的关系。" /></p>
+<p>训练过程中 Jacobian 奇异值分布的演化显示，动态等距不仅在初始化时重要，最优的初始 <span class="math inline">q^*</span> 也能更好地在训练过程中<strong>维持</strong>等距性：</p>
+<p><img src="../papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig6.webp" alt="训练过程中 Jacobian 奇异值的演化。(a) 不同 SGD 步数的分布。(b) 条件数指标随训练的变化。(c) 测试准确率。(d) 泛化准确率 vs 初始 q*。最优的非零 q* 在训练中最好地维持了动态等距，也获得了最快学习速度和最佳泛化。" /></p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>Sigmoid 可以在深度网络中有效训练</strong>，前提是使用正交初始化实现动态等距。</li>
+<li><strong>正交初始化 &gt;&gt; 高斯初始化</strong>：相同的 edge-of-chaos 超参数下，正交初始化使 200 层 tanh 网络的训练速度提升数个数量级。</li>
+<li><strong>奇异值分布的宽度</strong>是关键：仅仅让均方奇异值为 1 是不够的，需要整个分布集中。</li>
+<li><strong>理论预测与实验吻合</strong>：自由概率论给出的 Jacobian 谱预测与数值模拟高度一致。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>分析主要适用于<strong>全连接网络的初始化时刻</strong>，不保证训练过程中持续保持动态等距。</li>
+<li>对于现代 LLM 中的组件——attention、LayerNorm/RMSNorm、softmax、gating 机制、残差缩放、数据依赖的激活——精确的动态等距保证变得极为困难。</li>
+<li>正交初始化的计算开销在超大规模模型中可能成为瓶颈。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>1312.6120-deep-linear-networks/</code>：为动态等距提供了深度线性网络中的精确解析基础。</li>
+<li><code>1901.09321-fixup/</code>、<code>2003.04887-rezero/</code>：通过残差缩放在初始化时近似实现&quot;类动态等距&quot;效果。</li>
+<li><code>2403.09635-transformers-get-stable/</code>（DeepScaleLM）：将信号传播理论推广到完整的 Transformer 组件。</li>
+<li>动态等距是本主题的<strong>理论理想</strong>，后续方法大多可以理解为在不同程度上近似这一目标。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1312.6120-deep-linear-networks"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1312.6120" target="_blank">arXiv:1312.6120</a> · <a href="#1312.6120-deep-linear-networks">README source</a></div><div class="paper-body"><h1>Exact Solutions to the Nonlinear Dynamics of Learning in Deep Linear Networks</h1>
+<p><strong>论文</strong>: Saxe, McClelland, Ganguli (2013)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/1312.6120">1312.6120</a>
+<strong>分类</strong>: A. 初始化 / 参数化</p>
+<hr />
+<h2>问题动机</h2>
+<p>深度网络的优化 landscape 极其复杂。即便是最简单的深度网络——每层都是线性变换的<strong>深度线性网络</strong>——其学习动态也展现出非线性行为：存在鞍点、平台期和相变现象。</p>
+<p>核心问题：</p>
+<ol>
+<li>深度是否必然导致优化困难（梯度消失）？</li>
+<li>什么样的初始化能让深度线性网络获得<strong>与深度无关</strong>的收敛速度？</li>
+<li>即使输入-输出映射是线性的，深度学习动态中隐藏着什么结构？</li>
+</ol>
+<p><strong>已有方法的不足</strong>：之前对深度网络的分析要么基于浅层近似，要么依赖经验性的 heuristic 初始化。缺乏对学习动态的<strong>精确解析解</strong>。</p>
+<h2>核心想法</h2>
+<p>在深度线性网络 <span class="math inline">y = W_L W_{L-1} \cdots W_1 x</span> 中，虽然端到端映射是线性的，但<strong>损失函数关于各层权重的优化问题是非凸的</strong>。作者发现，通过<strong>正交初始化</strong>，可以得到学习动态的精确解，且收敛时间与深度 <span class="math inline">L</span> 无关。</p>
+<p><img src="../papers/1312.6120-deep-linear-networks/raw/network.webp" alt="本文分析的三层线性网络结构示意图。" /></p>
+<h2>方法细节</h2>
+<h3>模型设置</h3>
+<p><span class="math inline">L</span> 层线性网络：</p>
+<div class="math block">
+y = W_L W_{L-1} \cdots W_1 x
+</div>
+<p>端到端权重矩阵 <span class="math inline">W_e = W_L \cdots W_1</span>。训练目标是使 <span class="math inline">W_e</span> 逼近输入-输出相关矩阵 <span class="math inline">\Sigma_{yx} \Sigma_{xx}^{-1}</span> 的最优线性映射。</p>
+<h3>学习动态的精确解</h3>
+<p>对 <span class="math inline">\Sigma_{yx}</span> 做 SVD 分解：<span class="math inline">\Sigma_{yx} = U S V^\top</span>，其中 <span class="math inline">S = \text{diag}(s_1, s_2, \ldots)</span> 是奇异值。</p>
+<p><strong>关键结果</strong>：在正交初始化下，每个奇异值模式 <span class="math inline">s_\alpha</span> 的学习动态解耦，第 <span class="math inline">\alpha</span> 个模式的有效端到端权重 <span class="math inline">a_\alpha(t)</span> 的动态为：</p>
+<div class="math block">
+\frac{da_\alpha}{dt} = L \cdot a_\alpha^{(L-1)/L} \left( s_\alpha - a_\alpha \right)
+</div>
+<p>这是一个标量 ODE，具有精确的 sigmoidal 解——先在接近零处停留（平台期），然后快速跃迁到目标值 <span class="math inline">s_\alpha</span>。</p>
+<p>下图展示了二维情况下的向量场和解轨迹，直观呈现了鞍点结构：</p>
+<p><img src="../papers/1312.6120-deep-linear-networks/raw/vector_field.webp" alt="二维动态 (a, b) 的向量场（蓝色）、稳定流形（红色）和两条解轨迹（绿色），参数 τ=1, s=1。清晰展示了鞍点处的减速（平台期）。" /></p>
+<h3>阶段性学习（Staged Learning）</h3>
+<p>学习过程展现出离散的相变——各奇异值模式按大小顺序依次&quot;跃迁&quot;到目标值：</p>
+<p><img src="../papers/1312.6120-deep-linear-networks/raw/mode_strength_trajectory_three_layer.webp" alt="三层网络的学习动态。曲线展示网络对输入-输出相关矩阵七个模式的表示强度随时间的演化。红色：方程解析解；蓝色：线性网络完整动态模拟；绿色：tanh 非线性网络模拟。大奇异值对应的模式先被学到，呈现阶段性学习。" /></p>
+<p>每次跃迁类似一次&quot;顿悟&quot;（sudden insight），对应非线性学习动态中的鞍点逃逸。这种 <strong>progressive learning</strong> 行为与深度非线性网络和人类认知发展中观察到的阶段性学习惊人地一致。</p>
+<h3>正交初始化的关键性</h3>
+<p>如果 <span class="math inline">W_\ell(0) = I</span>（或正交矩阵），则：</p>
+<ol>
+<li><strong>初始端到端 Jacobian <span class="math inline">= I</span></strong>：梯度反向传播时不衰减也不放大。</li>
+<li><strong>收敛时间与深度无关</strong>：上述 ODE 的收敛速度不依赖 <span class="math inline">L</span>（因为 <span class="math inline">a_\alpha^{(L-1)/L}</span> 在 <span class="math inline">a_\alpha</span> 接近目标值时趋于 <span class="math inline">s_\alpha^{(L-1)/L}</span>，与 <span class="math inline">L</span> 的依赖可控）。</li>
+<li><strong>各模式按奇异值大小顺序学习</strong>：大奇异值对应的模式先被学到，形成阶段性学习。</li>
+</ol>
+<p>下图系统对比了不同初始化方案（随机高斯、预训练、正交）对深度敏感性的影响：</p>
+<p><img src="../papers/1312.6120-deep-linear-networks/raw/DynamCrit.webp" alt="A-左：不同初始化（缩放均匀 Glorot（蓝）、贪心预训练（绿）、正交（红，与绿重合）下学习时间随深度的变化。A-中：最优学习率随深度的变化。A-右：随机正交矩阵的特征值谱（在复平面上均匀分布在单位圆上）。B：随机高斯矩阵乘积的奇异值分布随深度急剧退化。" /></p>
+<h3>与随机初始化的对比</h3>
+<p>随机小初始化 <span class="math inline">W_\ell(0) \sim \mathcal{N}(0, \epsilon^2/N)</span>：</p>
+<ul>
+<li>初始端到端映射 <span class="math inline">W_e(0) \approx 0</span></li>
+<li>梯度信号需要穿越 <span class="math inline">L</span> 层随机矩阵 → 指数衰减</li>
+<li>收敛时间随深度 <span class="math inline">L</span> 增长</li>
+</ul>
+<p>MNIST 上的实验直接量化了这一对比：</p>
+<p><img src="../papers/1312.6120-deep-linear-networks/raw/mnist_depth_dependence.webp" alt="左：MNIST 上学习时间随深度的变化——随机初始化的学习时间随深度急剧增长。右：经验最优学习率随深度的变化。" /></p>
+<h3>非线性网络中的奇异值分布</h3>
+<p>作者进一步分析了非线性网络端到端 Jacobian 的奇异值分布，展示了增益 <span class="math inline">g</span> 和输入方差 <span class="math inline">q</span> 对谱分布的影响：</p>
+<p><img src="../papers/1312.6120-deep-linear-networks/raw/FigNonSingVal.webp" alt="非线性网络端到端 Jacobian 的奇异值分布（100 层、1000 神经元/层），不同增益 g 和输入方差 q 下的分布形状。" /></p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>正交初始化消除深度对收敛速度的负面影响</strong>：深度线性网络可以在 <span class="math inline">O(1)</span>（与 <span class="math inline">L</span> 无关）时间内收敛。</li>
+<li><strong>学习动态的精确解</strong>：每个奇异值模式独立演化，遵循 sigmoidal 轨迹。</li>
+<li><strong>阶段性学习是深度的固有特征</strong>：即使在线性网络中，深度也诱导出结构化的、分阶段的学习行为。</li>
+<li><strong>鞍点而非局部极小值</strong>是优化的主要障碍：loss landscape 中的平坦区域对应鞍点，而非 bad local minima。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>结果严格来说只对<strong>线性</strong>网络成立。非线性激活函数引入的 <span class="math inline">D_\ell</span> 矩阵使动态不再可解耦。</li>
+<li>现代 Transformer 架构（attention、LayerNorm、softmax 等）远比深度线性网络复杂，精确解析方法不直接适用。</li>
+<li>正交初始化在线性网络中是最优的，但在非线性网络中只是一个好的起点（参见 dynamical isometry 论文）。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>1711.04735-dynamical-isometry/</code>：将正交初始化 + 动态等距的思想从线性网络推广到非线性（sigmoid）网络。</li>
+<li><code>2003.04887-rezero/</code>：ReZero 的零初始化门控在初始时刻给出 <span class="math inline">J = I</span>，与正交初始化在线性网络中的效果类似。</li>
+<li><code>1901.09321-fixup/</code>：Fixup 的初始化缩放也追求&quot;初始时刻接近恒等映射&quot;的目标。</li>
+<li>本文是理解深度网络梯度流问题的<strong>理论基石</strong>，后续几乎所有初始化方法都可以追溯到这里的分析框架。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2203.03466-mup"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2203.03466" target="_blank">arXiv:2203.03466</a> · <a href="#2203.03466-mup">README source</a></div><div class="paper-body"><h1>Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</h1>
+<p><strong>论文</strong>: Yang, Hu, Salimans, Zhang, Chen, Sudjianto (2022)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2203.03466">2203.03466</a>
+<strong>分类</strong>: A. 初始化 / 参数化</p>
+<hr />
+<h2>问题动机</h2>
+<p>大模型训练的超参数调优代价极高——在 GPT-3 规模上做 grid search 几乎不可能。实践中，研究者要么依赖经验法则，要么在小模型上调参再&quot;手动外推&quot;到大模型，但这种外推缺乏理论保证。</p>
+<p>核心问题：<strong>能否在小模型上找到最优超参数，然后零成本迁移到大模型？</strong></p>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>标准参数化（SP, Standard Parameterization）下，最优学习率随宽度 <span class="math inline">n</span> 变化，无法直接迁移。</li>
+<li>经验性的缩放法则（如&quot;宽度翻倍则学习率减半&quot;）缺乏系统性理论支撑。</li>
+</ul>
+<p>下图直观展示了问题：在 SP 下，不同宽度的最优学习率不一致，且更宽的网络反而可能更差（虚线）；而在 muP 下，最优超参数稳定迁移：</p>
+<p><img src="../papers/2203.03466-mup/raw/figures/TP5_figure1.webp" alt="Training loss vs learning rate（不同宽度的 Transformer，Adam 优化器）。传统 SP 下不同宽度不共享最优超参数，且更宽网络未必更好（虚线）。" /></p>
+<h2>核心想法</h2>
+<p><strong>maximal update parameterization（muP, 最大更新参数化）</strong>：调整权重初始化和学习率的宽度缩放方式，使得在无限宽度极限下，每层的<strong>特征更新量</strong>（feature update）为 <span class="math inline">O(1)</span>——既不随宽度消失也不爆炸。在 muP 下，最优超参数（学习率、初始化尺度等）可以从小模型<strong>零样本迁移</strong>到大模型。</p>
+<p><img src="../papers/2203.03466-mup/raw/figures/mainfig_cropped.webp" alt="muTransfer 流程示意图：在小代理模型上搜索最优超参数，然后通过 muP 缩放规则直接迁移到大目标模型。" /></p>
+<h2>方法细节</h2>
+<h3>Standard Parameterization (SP) vs. muP</h3>
+<p>考虑宽度为 <span class="math inline">n</span> 的网络。SP 和 muP 的区别在于各层权重和学习率的缩放：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>SP</th>
+<th>muP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>隐藏层权重初始化</td>
+<td><span class="math inline">W \sim \mathcal{N}(0, 1/n)</span></td>
+<td><span class="math inline">W \sim \mathcal{N}(0, 1/n)</span></td>
+</tr>
+<tr>
+<td>输出层权重初始化</td>
+<td><span class="math inline">W \sim \mathcal{N}(0, 1/n)</span></td>
+<td><span class="math inline">W \sim \mathcal{N}(0, 1/n^2)</span></td>
+</tr>
+<tr>
+<td>隐藏层学习率</td>
+<td><span class="math inline">\eta</span></td>
+<td><span class="math inline">\eta / n</span> → 实际上是 <strong><span class="math inline">\eta</span></strong> (base lr 不变, 但乘以 <span class="math inline">1/n</span> 的 multiplier)</td>
+</tr>
+<tr>
+<td>输出层学习率</td>
+<td><span class="math inline">\eta</span></td>
+<td><span class="math inline">\eta / n</span></td>
+</tr>
+</tbody>
+</table>
+<p>精确的缩放规则取决于层的类型（输入层、隐藏层、输出层），核心原则是：</p>
+<div class="math block">
+\text{feature update} = \eta \cdot \nabla_W L \cdot W \sim O(1) \quad \text{as } n \to \infty
+</div>
+<p>下图展示了 Transformer 各层的结构示意，说明了各组件（attention、FFN）中需要分别设置缩放的位置：</p>
+<p><img src="../papers/2203.03466-mup/raw/figures/transformer_schematics.webp" alt="Transformer 各层结构示意图。key/value 维度 d_k、d_v 通常设为 d_model/n_head（记为 d_head）。" /></p>
+<h3>关键机制：Feature Learning Regime</h3>
+<ul>
+<li><strong>SP（kernel regime）</strong>：随着 <span class="math inline">n \to \infty</span>，特征更新 <span class="math inline">\to 0</span>，网络退化为线性模型（NTK regime）。最优超参数随宽度改变。</li>
+<li><strong>muP（feature learning regime）</strong>：特征更新保持 <span class="math inline">O(1)</span>，网络在所有宽度下都做有意义的特征学习。最优超参数<strong>稳定</strong>。</li>
+</ul>
+<p>下图在 WikiText-2 上验证了这一对比——muP 下四种超参数（学习率、输出层乘子、初始化标准差、学习率 schedule）在不同宽度间保持稳定：</p>
+<p><img src="../papers/2203.03466-mup/raw/figures/TP5_wikitext2_SP_MUP.webp" alt="Pre-LN Transformer 在 muP 下四种超参数的稳定性验证。不同宽度的 loss 曲线高度重合，证明超参数可以跨宽度迁移。" /></p>
+<h3>muTransfer 实践流程</h3>
+<pre><code>1. 选择目标模型架构（如 GPT-3 6.7B）
+2. 构建小代理模型（同架构，宽度缩小，如 40M）
+3. 在代理模型上做超参数搜索（学习率、初始化、weight decay 等）
+4. 按 muP 缩放规则直接迁移到目标模型
+5. 无需在大模型上重新调参
+</code></pre>
+<h3>数学核心：Tensor Programs 框架</h3>
+<p>muP 建立在 Tensor Programs（张量程序）的理论框架上：</p>
+<ul>
+<li>将网络前向/反向传播表示为张量运算序列</li>
+<li>在 <span class="math inline">n \to \infty</span> 极限下推导每个张量的缩放行为</li>
+<li>muP 是唯一使&quot;特征学习在无限宽度下非退化&quot;的参数化方案</li>
+</ul>
+<h3>与梯度流的关系</h3>
+<p>muP 控制的是<strong>宽度维度</strong>的缩放：</p>
+<ul>
+<li>保证各层特征更新 <span class="math inline">\Delta h_\ell</span> 在宽度增大时不消失不爆炸</li>
+<li>这是关于 width scaling 的保证，<strong>不是关于 depth 的保证</strong></li>
+</ul>
+<p><strong>重要区分</strong>：muP <strong>不直接控制</strong>深度方向的 Jacobian <span class="math inline">J_{\ell \to L}</span>。一个模型可以满足 muP（宽度缩放正确）的同时，仍然存在深度方向的梯度消失。</p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>muTransfer 有效</strong>：在 BERT-large 和 GPT-3 6.7B 上验证，代理模型的最优超参数直接迁移到大模型，性能接近或等于在大模型上独立调参。</li>
+</ol>
+<p>GPT-3 6.7B 的训练曲线展示了 muTransfer 的实际效果：</p>
+<p><img src="../papers/2203.03466-mup/raw/figures/oai_result.webp" alt="GPT-3 6.7B 训练曲线。橙色：muTransfer（从 40M 代理模型迁移超参数）；蓝色：使用原始设置重新训练。muTransfer 模型使用相对注意力，原始模型使用绝对注意力。" /></p>
+<ol start="2">
+<li><strong>超参数稳定性</strong>：在 muP 下，最优学习率等超参数在不同宽度间几乎不变（曲线重合）。</li>
+<li><strong>SP 的不稳定性</strong>：在 SP 下，最优学习率随宽度系统性偏移，无法迁移。</li>
+<li><strong>节省大量计算</strong>：调参成本降低几个数量级（在 40M 模型上搜索 → 应用到 6.7B 模型）。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><strong>muP 是宽度缩放理论，不是深度缩放理论</strong>：不解决 <span class="math inline">J_{\ell \to L}</span> 的深度方向奇异值问题。可以与深度方向的梯度消失共存。</li>
+<li>标准 muP 假设宽度 <span class="math inline">\to \infty</span>，对于有限宽度只是近似。</li>
+<li>实际应用中需要仔细处理 attention head 数量、embedding 层、tied weights 等架构细节的缩放。</li>
+<li>尚未完全解决深度方向（layer 数量）的超参数迁移。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2403.09635-transformers-get-stable/</code>（DeepScaleLM）：从深度方向的信号传播角度补充 muP 未覆盖的部分。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：处理深度缩放问题，与 muP 的宽度缩放正交互补。</li>
+<li><code>1711.04735-dynamical-isometry/</code>：动态等距关注 Jacobian 全谱，muP 关注宽度缩放，两者解决不同维度的问题。</li>
+<li><strong>muP + 深度方向方法</strong>（如 DeepNorm、Fixup）的结合是开放研究方向。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1901.09321-fixup"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1901.09321" target="_blank">arXiv:1901.09321</a> · <a href="#1901.09321-fixup">README source</a></div><div class="paper-body"><h1>Fixup Initialization: Residual Learning Without Normalization</h1>
+<p><strong>论文</strong>: Zhang, Dauphin, Ma (2019)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/1901.09321">1901.09321</a>
+<strong>分类</strong>: A. 初始化 / 参数化</p>
+<hr />
+<h2>问题动机</h2>
+<p>残差网络（ResNet）的成功训练严重依赖 Batch Normalization（BN）。但 BN 引入了多种问题：</p>
+<ul>
+<li>训练和推理行为不一致（running statistics vs. batch statistics）</li>
+<li>小 batch size 下性能退化</li>
+<li>分布式训练中引入额外通信开销</li>
+<li>在序列模型（RNN、Transformer）中不自然</li>
+</ul>
+<p>核心问题：<strong>能否找到一种初始化方案，使残差网络无需任何归一化层即可稳定训练？</strong></p>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>Xavier/He 初始化在有 BN 的网络中表现良好，但在无 BN 的深层残差网络中仍然出现梯度爆炸/消失。</li>
+<li>原因：残差连接 <span class="math inline">x_{\ell+1} = x_\ell + F_\ell(x_\ell)</span> 使信号方差逐层累积，<span class="math inline">L</span> 层后方差增长为 <span class="math inline">O(L)</span>。</li>
+</ul>
+<h2>核心想法</h2>
+<p>通过<strong>缩放残差分支的初始化</strong>，使网络在初始化时近似恒等映射，从而避免信号爆炸。具体地，将残差分支中最后一层的权重初始化缩放为 <span class="math inline">L^{-1/(2m-2)}</span>，其中 <span class="math inline">L</span> 是残差块总数，<span class="math inline">m</span> 是每个残差块中的层数。</p>
+<p>下图展示了三种残差块设计的对比——从依赖 BN 的标准块，到完全不需要归一化的 Fixup 块：</p>
+<p><img src="../papers/1901.09321-fixup/raw/figures/zeroinit_denormalize.webp" alt="左：标准 ResNet basic block，红色标注的 BN 层。中：去掉 BN 后的简化块（仍可稳定训练）。右：Fixup 进一步添加可学习 bias 参数以补偿 BN 缺失的 shift。" /></p>
+<h2>方法细节</h2>
+<h3>残差网络的梯度爆炸问题</h3>
+<p>标准残差网络（无 BN）：</p>
+<div class="math block">
+x_{\ell+1} = x_\ell + F_\ell(x_\ell)
+</div>
+<p>前向传播中，输出方差为：</p>
+<div class="math block">
+\text{Var}(x_L) = \text{Var}(x_0) + \sum_{\ell=0}^{L-1} \text{Var}(F_\ell(x_\ell))
+</div>
+<p>如果每个 <span class="math inline">F_\ell</span> 按标准初始化使 <span class="math inline">\text{Var}(F_\ell) = O(1)</span>，则 <span class="math inline">\text{Var}(x_L) = O(L)</span>，导致<strong>方差爆炸</strong>。</p>
+<p>反向传播同理：</p>
+<div class="math block">
+\frac{\partial \mathcal{L}}{\partial x_\ell} = \frac{\partial \mathcal{L}}{\partial x_L} \prod_{k=\ell}^{L-1}\left(I + \frac{\partial F_k}{\partial x_k}\right)
+</div>
+<p>这个乘积的范数可以指数增长。</p>
+<h3>Fixup 初始化方案</h3>
+<p><strong>核心思路</strong>：让残差分支的初始输出足够小，使网络在初始化时&quot;接近恒等映射&quot;。</p>
+<p>对于一个残差块包含 <span class="math inline">m</span> 层的 ResNet（<span class="math inline">L</span> 个残差块）：</p>
+<ol>
+<li><strong>残差分支中每层的权重</strong>按标准 He 初始化</li>
+<li><strong>残差分支中最后一层权重</strong>额外乘以缩放因子：</li>
+</ol>
+<div class="math block">
+W_{\text{last}}^{(\ell)} \leftarrow L^{-1/(2m-2)} \cdot W_{\text{last}}^{(\ell)}
+</div>
+<ol start="3">
+<li>在残差分支的最后一层之前添加<strong>可学习的标量 bias</strong>（补偿去掉 BN 后缺失的 shift）</li>
+<li>在残差分支的最后一层之后添加<strong>可学习的标量乘子</strong>，初始化为 1</li>
+</ol>
+<h3>缩放因子的推导</h3>
+<p>对于 <span class="math inline">m=2</span>（标准 ResNet block），缩放因子为 <span class="math inline">L^{-1/2}</span>。直觉：</p>
+<ul>
+<li>每个残差块贡献的方差为 <span class="math inline">O(L^{-1})</span></li>
+<li><span class="math inline">L</span> 个块累积后总方差为 <span class="math inline">O(L \cdot L^{-1}) = O(1)</span></li>
+</ul>
+<p>更一般地，对于 <span class="math inline">m</span> 层的残差块：</p>
+<div class="math block">
+\text{Var}(F_\ell) \propto \left(L^{-1/(2m-2)}\right)^2 = L^{-1/(m-1)}
+</div>
+<div class="math block">
+\text{Var}(x_L) \propto L \cdot L^{-1/(m-1)} = L^{(m-2)/(m-1)}
+</div>
+<p>当 <span class="math inline">m=2</span> 时，<span class="math inline">\text{Var}(x_L) = O(1)</span>。</p>
+<h3>应用到 Transformer</h3>
+<p>对 Transformer 的 encoder/decoder 块：</p>
+<ul>
+<li>每个 sub-layer（attention 或 FFN）视为一个残差分支</li>
+<li>对 FFN 中最后一层线性变换的权重应用 Fixup 缩放</li>
+<li>对 attention 的输出投影应用类似缩放</li>
+</ul>
+<h2>关键结果</h2>
+<h3>深度缩放能力</h3>
+<p>Fixup 使极深的 ResNet 在无 BN 条件下仍可训练，与 BN 版本的训练稳定性相当：</p>
+<p><img src="../papers/1901.09321-fixup/raw/figures/depth_cifar10.webp" alt="不同方法在 CIFAR-10 上的第一个 epoch 测试准确率 vs 残差网络深度。Fixup 在不使用 BN 的情况下，能以与 BN 相同的学习率训练极深网络。" /></p>
+<h3>ImageNet 实验</h3>
+<p>在 ImageNet 上，Fixup ResNet-50 达到与 BN 版本相当的性能：</p>
+<p><img src="../papers/1901.09321-fixup/raw/figures/imagenet_train.webp" alt="ResNet-50 在 ImageNet 上的训练误差（无额外正则化）。Fixup 能更好地拟合训练数据。" /></p>
+<p><img src="../papers/1901.09321-fixup/raw/figures/imagenet_test.webp" alt="ResNet-50 在 ImageNet 上的测试误差（无额外正则化）。Fixup 出现过拟合——需要更多正则化。BN 和 GroupNorm 结果复现自 Wu &amp; He (2018)。" /></p>
+<p>加入 Mixup 正则化后，Fixup 的测试性能与 GroupNorm 接近：</p>
+<p><img src="../papers/1901.09321-fixup/raw/figures/imagenet_mixup.webp" alt="ResNet-50 在 ImageNet 上使用 Mixup 的测试误差。Fixup 在不使用任何归一化的情况下，最终结果与 GroupNorm 接近。" /></p>
+<h3>总结</h3>
+<ol>
+<li><strong>10,000 层 ResNet 无 BN 训练成功</strong>：Fixup 初始化使极深的 ResNet 在 CIFAR-10 上无需 BN 即可训练。</li>
+<li><strong>性能与 BN 版本可比</strong>：在 ImageNet 上，Fixup ResNet-50 达到与 BN 版本相当的性能。</li>
+<li><strong>机器翻译</strong>：在 Transformer 上应用 Fixup，无需 warmup 即可训练，BLEU 分数与标准 Transformer（含 LN + warmup）相当。</li>
+<li><strong>训练更稳定</strong>：无需 learning rate warmup。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>Fixup 只保证<strong>初始化时刻</strong>残差分支足够小，不保证训练过程中 Jacobian 奇异值的下界。训练过程中，如果残差分支学到了大的权重，仍可能出现梯度问题。</li>
+<li>缩放因子的推导基于简化的方差分析，对实际网络中的高阶统计量和非线性交互是近似的。</li>
+<li>对于 Transformer 的应用没有 attention 矩阵的精确分析。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2003.04887-rezero/</code>：ReZero 用零初始化门控（<span class="math inline">\alpha_\ell(0)=0</span>）实现更极端的&quot;初始恒等&quot;，Fixup 则通过缩放到小值（而非零）来实现。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：同样通过缩放残差连接来稳定深度训练，但保留了 LayerNorm 并提供了不同的理论分析。</li>
+<li><code>2002.04745-layer-norm-transformer/</code>：Pre-LN 的分析表明，归一化层的位置也很重要，不仅仅是初始化缩放。</li>
+<li><code>1312.6120-deep-linear-networks/</code>：Fixup 的&quot;接近恒等&quot;初始化思想可追溯到深度线性网络中正交初始化的优势。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2403.09635-transformers-get-stable"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2403.09635" target="_blank">arXiv:2403.09635</a> · <a href="#2403.09635-transformers-get-stable">README source</a></div><div class="paper-body"><h1>Transformers Get Stable: An End-to-End Signal Propagation Theory for Language Models</h1>
+<p><strong>论文</strong>: DeepScaleLM (2024)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2403.09635">2403.09635</a>
+<strong>分类</strong>: A. 初始化 / 参数化 · E. 隐状态 / Jacobian / 信号传播</p>
+<hr />
+<h2>问题动机</h2>
+<p>现有 Transformer 的初始化和缩放方案（Xavier、He、muP、DeepNorm 等）存在两个主要缺陷：</p>
+<ol>
+<li><strong>分析不完整</strong>：大多数方法只分析了部分组件（如仅分析 FFN，忽略 attention + softmax + LayerNorm 的交互）。</li>
+<li><strong>只关注前向传播或宽度缩放</strong>：muP 解决宽度缩放，但不分析反向信号传播；Fixup 分析初始化方差，但不考虑完整的 Transformer block。</li>
+</ol>
+<p>核心问题：<strong>能否为完整的 Transformer 语言模型（包括 embedding、attention、softmax、FFN、LayerNorm、残差连接）建立端到端的前向和反向信号传播理论？</strong></p>
+<h2>核心想法</h2>
+<p>逐组件推导 Transformer 中每个操作的<strong>前向输出矩</strong>（均值和方差）和<strong>反向梯度矩</strong>，然后将它们组合成端到端的信号传播公式。基于此理论，设计 DeepScaleLM 初始化/缩放方案，使隐状态和梯度的矩在所有层都保持单位量级。</p>
+<p>下图展示了 DeepScaleLM 的整体架构——在 Post-LN Transformer encoder 中，通过缩放 skip connection（<span class="math inline">\lambda</span>）和残差分支（<span class="math inline">\beta</span>），并设计新的初始化方案（<span class="math inline">\sigma_f</span> 和 <span class="math inline">\sigma_{qk}</span>）来保持信号稳定：</p>
+<p><img src="../papers/2403.09635-transformers-get-stable/raw/fig/Moment_Transformer.webp" alt="DeepScaleLM 应用于 Post-LN Transformer encoder 的架构图。缩放 skip connection 和残差分支（λ, β），并提出新的初始化方案（σ_f 和 σ_qk）。" /></p>
+<h2>方法细节</h2>
+<h3>逐组件的矩分析</h3>
+<p>作者为以下每个 Transformer 组件推导了前向和反向的矩传播公式：</p>
+<h4>1. Token Embedding + Positional Encoding</h4>
+<div class="math block">
+h^{(0)} = \text{Embed}(x) + \text{PE}(x)
+</div>
+<p>初始化使 <span class="math inline">\mathbb{E}[\|h^{(0)}\|^2] = d_{\text{model}}</span>，即每个维度的方差为 1。</p>
+<h4>2. LayerNorm</h4>
+<p>前向：<span class="math inline">\text{LN}(x) = \gamma \odot \frac{x - \mu}{\sigma} + \beta</span></p>
+<p>LayerNorm 的 Jacobian 不是简单的对角矩阵：</p>
+<div class="math block">
+\frac{\partial \text{LN}(x)}{\partial x} = \frac{\gamma}{\sigma}\left(I - \frac{1}{d}\mathbf{1}\mathbf{1}^\top - \frac{\hat{x}\hat{x}^\top}{d}\right)
+</div>
+<p>这个 Jacobian 会<strong>收缩</strong>某些梯度方向（与均值方向和 <span class="math inline">\hat{x}</span> 方向正交的分量才被保留）。</p>
+<h4>3. Multi-Head Attention</h4>
+<div class="math block">
+\text{Attn}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right) V
+</div>
+<p>关键分析：softmax 的输出是概率分布（行和为 1），这对信号传播有特殊影响。attention 矩阵的 entropy 越低（越 peaked），信号传播越不均匀。</p>
+<h4>4. FFN</h4>
+<div class="math block">
+\text{FFN}(x) = W_2 \cdot \text{GELU}(W_1 x + b_1) + b_2
+</div>
+<p>标准的矩传播分析，但需要考虑 GELU 的非线性效应。</p>
+<h4>5. 残差连接 + 完整 Transformer Block</h4>
+<p>Pre-LN block：<span class="math inline">x_{\ell+1} = x_\ell + \text{SubLayer}(\text{LN}(x_\ell))</span></p>
+<p>前向矩递推：</p>
+<div class="math block">
+\mathbb{E}[\|x_{\ell+1}\|^2] = \mathbb{E}[\|x_\ell\|^2] + \mathbb{E}[\|\text{SubLayer}(\text{LN}(x_\ell))\|^2] + 2\mathbb{E}[x_\ell^\top \text{SubLayer}(\text{LN}(x_\ell))]
+</div>
+<h3>DeepScaleLM 缩放方案</h3>
+<p>基于上述逐组件分析，DeepScaleLM 为每个组件设定缩放因子，目标是：</p>
+<div class="math block">
+\mathbb{E}[\|x_\ell\|^2] = d_{\text{model}} \quad \text{和} \quad \mathbb{E}\left[\left\|\frac{\partial \mathcal{L}}{\partial x_\ell}\right\|^2\right] = O(1) \quad \forall \ell
+</div>
+<p>具体措施包括：</p>
+<ul>
+<li>调整各层权重的初始化方差</li>
+<li>设置残差分支的缩放因子（类似 DeepNorm，但推导更完整）</li>
+<li>调整 attention 的 <span class="math inline">\sqrt{d_k}</span> 缩放</li>
+</ul>
+<h3>实际训练中的信号传播验证</h3>
+<p>下图展示了多面板的实验结果，包括理论预测与实际网络的方差传播对比、rank collapse 分析、以及不同方法下梯度方差的行为：</p>
+<p><img src="../papers/2403.09635-transformers-get-stable/raw/fig/all_figs.webp" alt="多面板实验结果：包括 FFN 和 Attention 的前向相关性传播、rank collapse 分析、反向梯度方差爆炸/消失现象、以及 DeepScaleLM 保持方差守恒的验证。" /></p>
+<h3>与其他方法的对比</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>分析范围</th>
+<th>前向信号</th>
+<th>反向信号</th>
+<th>完整 Transformer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Xavier/He</td>
+<td>单层</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>muP</td>
+<td>宽度缩放</td>
+<td>✓</td>
+<td>✗ (间接)</td>
+<td>部分</td>
+</tr>
+<tr>
+<td>DeepNorm</td>
+<td>残差+LN</td>
+<td>✓</td>
+<td>✗</td>
+<td>部分</td>
+</tr>
+<tr>
+<td>Fixup</td>
+<td>残差</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>DeepScaleLM</strong></td>
+<td>全组件</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<h2>关键结果</h2>
+<ol>
+<li><strong>1,000 层 Transformer 训练成功</strong>：DeepScaleLM 使 1,000 层 Pre-LN Transformer 无需特殊技巧即可稳定训练。</li>
+<li><strong>梯度矩保持稳定</strong>：实验验证，各层梯度的均值和方差在训练初期保持在设计的量级。</li>
+<li><strong>比 DeepNorm 更系统</strong>：DeepScaleLM 的缩放因子是从完整的端到端分析推导出来的，而非仅基于残差连接的分析。</li>
+<li><strong>与 muP 互补</strong>：DeepScaleLM 处理深度方向，muP 处理宽度方向，两者可以结合。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><strong>保持梯度矩 ≠ 保持 Jacobian 谱</strong>：即使每层梯度的二阶矩为 <span class="math inline">O(1)</span>，Jacobian <span class="math inline">J_{\ell \to L}</span> 的奇异值分布仍可能不理想（例如可以是高秩但某些方向的奇异值很小）。矩保持是比动态等距更弱的条件。</li>
+<li>矩分析依赖于独立性假设和高斯近似，实际网络中的相关性和非高斯性可能导致偏差。</li>
+<li>分析基于初始化时刻的统计量，不保证训练过程中持续成立。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>1711.04735-dynamical-isometry/</code>：动态等距要求完整的 Jacobian 奇异值分布集中在 1，比 DeepScaleLM 的矩保持更强。</li>
+<li><code>2203.03466-mup/</code>：muP 处理宽度方向的缩放，DeepScaleLM 处理深度方向，两者正交互补。</li>
+<li><code>2203.00555-deepnet/</code>：DeepNorm 的残差缩放可以视为 DeepScaleLM 的特例。</li>
+<li><code>2002.04745-layer-norm-transformer/</code>：DeepScaleLM 包含了对 LayerNorm 梯度效应的更完整分析。</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #4ecdc4;padding-left:16px;margin:48px 0 24px"><h2 style="color:#4ecdc4">Category B: 架构 / 残差缩放</h2></div>
+<article class="paper-article" id="2203.00555-deepnet"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2203.00555" target="_blank">arXiv:2203.00555</a> · <a href="#2203.00555-deepnet">README source</a></div><div class="paper-body"><h1>DeepNet: Scaling Transformers to 1,000 Layers</h1>
+<p><strong>论文</strong>: Wang, Wei, Dong, Bao, Yang, Wei (2022)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2203.00555">2203.00555</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>将 Transformer 扩展到极大深度（数百至上千层）面临严重的训练不稳定性：</p>
+<ul>
+<li>Post-LN Transformer 在深度增加时梯度消失/爆炸加剧</li>
+<li>Pre-LN Transformer 虽然训练更稳定，但在极大深度下也开始出问题</li>
+<li>已有的稳定化方法（warmup、梯度裁剪）只是治标不治本</li>
+</ul>
+<p>核心问题：<strong>如何通过理论指导的残差缩放和初始化，使 Transformer 稳定训练到 1,000 层？</strong></p>
+<p><img src="../papers/2203.00555-deepnet/raw/pic/trend.webp" alt="Trend of Transformer depths of state-of-the-art NLP models over time" /></p>
+<p>上图展示了近年来 SOTA NLP 模型的深度趋势——模型深度持续增长，但训练稳定性成为关键瓶颈。</p>
+<h2>核心想法</h2>
+<p>引入 <strong>DeepNorm</strong>——一种新的残差归一化函数，配合理论推导的初始化方案。核心保证是<strong>模型更新有界</strong>：在训练过程中，参数更新不会导致模型输出的灾难性变化。</p>
+<h2>方法细节</h2>
+<h3>DeepNorm 残差连接</h3>
+<p>标准 Post-LN：</p>
+<div class="math block">
+x_{\ell+1} = \text{LN}(x_\ell + F_\ell(x_\ell))
+</div>
+<p><strong>DeepNorm</strong> 修改为：</p>
+<div class="math block">
+x_{\ell+1} = \text{LN}(\alpha \cdot x_\ell + G_\ell(x_\ell, \theta_\ell))
+</div>
+<p>其中 <span class="math inline">\alpha &gt; 1</span> 是残差缩放常数，<span class="math inline">G_\ell</span> 是子层函数（attention 或 FFN），其权重初始化也需要相应缩放。</p>
+<h3>理论推导</h3>
+<h4>更新有界性</h4>
+<p>定义模型更新为参数从 <span class="math inline">\theta</span> 变化到 <span class="math inline">\theta + \Delta\theta</span> 时输出的变化。作者证明，在 DeepNorm 下：</p>
+<div class="math block">
+\|f(x; \theta + \Delta\theta) - f(x; \theta)\| = O(\log L \cdot \|\Delta\theta\|)
+</div>
+<p>即模型更新随深度仅以对数速率增长，而非标准 Post-LN 中的多项式或指数增长。</p>
+<h4><span class="math inline">\alpha</span> 和初始化的选择</h4>
+<p>对于 <span class="math inline">L</span> 层 encoder（<span class="math inline">N</span> 个 attention sub-layer + <span class="math inline">N</span> 个 FFN sub-layer，<span class="math inline">L = 2N</span>）：</p>
+<div class="math block">
+\alpha = (2N)^{1/4} \approx L^{1/4}
+</div>
+<p>权重初始化缩放：</p>
+<div class="math block">
+\beta = (8N)^{-1/4} \approx L^{-1/4}
+</div>
+<p>具体地：</p>
+<ul>
+<li>attention 中 <span class="math inline">W_V, W_O</span> 的初始化方差乘以 <span class="math inline">\beta</span></li>
+<li>FFN 中 <span class="math inline">W_2</span>（第二层线性变换）的初始化方差乘以 <span class="math inline">\beta</span></li>
+</ul>
+<p>对于 encoder-decoder 架构（encoder <span class="math inline">N</span> 层，decoder <span class="math inline">M</span> 层），<span class="math inline">\alpha</span> 和 <span class="math inline">\beta</span> 的公式更复杂，需要分别计算。</p>
+<h3>梯度与训练稳定性实验</h3>
+<p>下图展示了不同归一化方案的梯度流和训练曲线对比：</p>
+<p><img src="../papers/2203.00555-deepnet/raw/pic/his_grad.webp" alt="Gradient norm histograms in top layers of 18L-18L models" /></p>
+<p><strong>(a)</strong> 18L-18L 模型中顶层的梯度范数直方图。Post-LN 的梯度分布极不均衡，DeepNorm 显著改善。</p>
+<p><img src="../papers/2203.00555-deepnet/raw/pic/plot_grad.webp" alt="Gradient norm in last layer vs depth" /></p>
+<p><strong>(b)</strong> 随着深度从 6L-6L 增加到 24L-24L，最后一层的梯度范数变化。Post-LN 梯度快速增长，DeepNorm 保持稳定。</p>
+<p><img src="../papers/2203.00555-deepnet/raw/pic/valid_loss.webp" alt="Validation loss curves of 18L-18L models" /></p>
+<p><strong>(c)</strong> 18L-18L 模型的验证损失曲线。Post-LN 训练 diverge，而 DeepNorm 稳定收敛。</p>
+<h3>模型更新有界性的实验验证</h3>
+<p><img src="../papers/2203.00555-deepnet/raw/pic/plot_model_update_vs_depth.webp" alt="Model updates of Post-LN and DeepNorm vs depth" /></p>
+<p>上图验证了理论预测：在训练初期，vanilla Post-LN 的模型更新随深度急剧增长，而 DeepNorm 的更新保持很小且稳定——这正是 <span class="math inline">O(\log L)</span> bound 的实验体现。</p>
+<h3>与 Pre-LN 和 Post-LN 的比较</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>Post-LN</th>
+<th>Pre-LN</th>
+<th>DeepNorm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>残差连接</td>
+<td><span class="math inline">\text{LN}(x + F(x))</span></td>
+<td><span class="math inline">x + F(\text{LN}(x))</span></td>
+<td><span class="math inline">\text{LN}(\alpha x + G(x))</span></td>
+</tr>
+<tr>
+<td>梯度稳定性</td>
+<td>差（深层梯度消失）</td>
+<td>好（skip connection 直通）</td>
+<td>好（<span class="math inline">\alpha</span> 放大 skip path）</td>
+</tr>
+<tr>
+<td>表征多样性</td>
+<td>好（LN 在残差后）</td>
+<td>差（趋向表征坍缩）</td>
+<td>好（类 Post-LN 结构）</td>
+</tr>
+<tr>
+<td>极深训练</td>
+<td>失败</td>
+<td>困难</td>
+<td>成功</td>
+</tr>
+</tbody>
+</table>
+<h3>直觉理解</h3>
+<p>DeepNorm 的 <span class="math inline">\alpha &gt; 1</span> 做了两件事：</p>
+<ol>
+<li><strong>放大 skip connection</strong>：增强梯度的直通路径，缓解消失</li>
+<li><strong>相对缩小残差分支</strong>：减少每层函数分支的影响，使更新更平滑</li>
+</ol>
+<p>配合缩小的初始化 <span class="math inline">\beta &lt; 1</span>：</p>
+<ul>
+<li>函数分支 <span class="math inline">G_\ell</span> 的初始输出更小</li>
+<li>网络在初始化时更接近&quot;缩放后的恒等映射&quot;</li>
+</ul>
+<h2>关键结果</h2>
+<ol>
+<li><strong>1,000 层 Transformer 训练成功</strong>：在机器翻译任务上，DeepNorm 使 1,000 层 encoder + 1,000 层 decoder 的 Transformer 稳定训练。</li>
+<li><strong>200 层 3.2B 模型 &gt; 48 层 12B 基线</strong>：在多语言基准上，深且小的模型（200 层 3.2B）超过了浅且大的模型（48 层 12B），表明深度是有价值的。</li>
+<li><strong>无需复杂训练技巧</strong>：无需 learning rate warmup 的特殊调整、无需梯度裁剪的精细调参。</li>
+<li><strong>训练过程中更新有界</strong>：实验验证了理论预测的对数级更新增长。</li>
+</ol>
+<h3>多语言翻译 FLORES 结果</h3>
+<p><img src="../papers/2203.00555-deepnet/raw/pic/deepnet-flores.webp" alt="DeepNet 3.2B FLORES-101 evaluation results" /></p>
+<p>3.2B 参数的 200 层 DeepNet 在 FLORES-101 devtest 上的评估结果——87 种语言、7,482 个翻译方向。DeepNorm 使超深模型在大规模多语言场景中表现优异。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>DeepNorm 的理论保证是<strong>更新有界性</strong>（stability），而非<strong>梯度非消失性</strong>的直接保证。更新有界意味着训练稳定，但不意味着深层的梯度信号仍然足够有用。</li>
+<li><span class="math inline">\alpha = L^{1/4}</span> 意味着 skip connection 被放大，残差分支的<strong>相对贡献</strong>被缩小。这可能导致深层的有效容量下降（类似 Pre-LN 的表征坍缩问题，但程度较轻）。</li>
+<li>理论分析依赖简化假设（如 attention 权重的独立性），实际 softmax attention 的行为可能偏离。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>1901.09321-fixup/</code>：Fixup 通过 <span class="math inline">L^{-1/(2m-2)}</span> 缩放初始化实现类似目标，但不保留归一化层。DeepNorm 保留了 LN 并调整了残差系数。</li>
+<li><code>2003.04887-rezero/</code>：ReZero 用 <span class="math inline">\alpha_\ell(0)=0</span> 实现初始恒等，DeepNorm 用 <span class="math inline">\alpha &gt; 1</span> 实现&quot;强 skip path&quot;。</li>
+<li><code>2002.04745-layer-norm-transformer/</code>：DeepNorm 的结构介于 Pre-LN 和 Post-LN 之间，试图兼顾两者优势。</li>
+<li><code>2304.14802-residual/</code>（ResiDual）：也试图同时解决 Post-LN 梯度消失和 Pre-LN 表征坍缩，但采用双路径而非缩放系数。</li>
+<li><code>2403.09635-transformers-get-stable/</code>（DeepScaleLM）：提供了比 DeepNorm 更完整的端到端矩分析。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2003.04887-rezero"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2003.04887" target="_blank">arXiv:2003.04887</a> · <a href="#2003.04887-rezero">README source</a></div><div class="paper-body"><h1>ReZero is All You Need: Fast Convergence at Large Depth</h1>
+<p><strong>论文</strong>: Bachlechner, Majumder, Mao, Cottrell, McAuley (2020)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2003.04887">2003.04887</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>深度网络的训练需要精心设计的归一化（BN、LN）和学习率 warmup。这些技巧虽然有效，但增加了训练的复杂度，且各自有局限：</p>
+<ul>
+<li>BN 在小 batch、序列模型中表现不佳</li>
+<li>LN 的位置（Pre-LN vs. Post-LN）显著影响训练稳定性</li>
+<li>warmup 需要额外的超参数调优</li>
+</ul>
+<p>核心问题：<strong>有没有一种极其简单的方法，仅通过修改残差连接就能实现深度网络的稳定快速训练？</strong></p>
+<h2>核心想法</h2>
+<p>在每个残差分支上添加一个<strong>零初始化的可学习标量</strong> <span class="math inline">\alpha_\ell</span>：</p>
+<div class="math block">
+h_{\ell+1} = h_\ell + \alpha_\ell \cdot F_\ell(h_\ell), \quad \alpha_\ell(0) = 0
+</div>
+<p>在初始化时刻，网络就是精确的恒等映射，具有完美的动态等距（Jacobian = 单位矩阵）。训练过程中 <span class="math inline">\alpha_\ell</span> 从零开始逐渐增长，网络逐步&quot;打开&quot;各层的功能。</p>
+<h2>方法细节</h2>
+<h3>ReZero 机制</h3>
+<p>标准残差连接：</p>
+<div class="math block">
+h_{\ell+1} = h_\ell + F_\ell(h_\ell)
+</div>
+<p><strong>ReZero</strong> 残差连接：</p>
+<div class="math block">
+h_{\ell+1} = h_\ell + \alpha_\ell \cdot F_\ell(h_\ell)
+</div>
+<p>其中 <span class="math inline">\alpha_\ell \in \mathbb{R}</span> 是一个<strong>标量可学习参数</strong>，初始化为 0。</p>
+<h3>在 Transformer 中的应用</h3>
+<p><img src="../papers/2003.04887-rezero/raw/rezero_encoder.webp" alt="ReZero for Transformers architecture" /></p>
+<p>上图展示了 ReZero 应用于 Transformer 的架构：对每个 sub-layer（self-attention 和 FFN）各添加一个 <span class="math inline">\alpha</span>：</p>
+<div class="math block">
+h_{\ell+1} = h_\ell + \alpha_\ell^{\text{attn}} \cdot \text{Attn}(h_\ell)
+</div>
+<div class="math block">
+h_{\ell+2} = h_{\ell+1} + \alpha_\ell^{\text{ffn}} \cdot \text{FFN}(h_{\ell+1})
+</div>
+<p>可以完全移除 LayerNorm 和 warmup。</p>
+<h3>初始化时的梯度流</h3>
+<p>在 <span class="math inline">t=0</span> 时刻，<span class="math inline">\alpha_\ell = 0 \;\forall \ell</span>，因此：</p>
+<div class="math block">
+h_L = h_{L-1} = \cdots = h_0
+</div>
+<p>端到端 Jacobian：</p>
+<div class="math block">
+J = \prod_{\ell=0}^{L-1} \left(I + \alpha_\ell \frac{\partial F_\ell}{\partial h_\ell}\right) \bigg|_{t=0} = \prod_{\ell=0}^{L-1} I = I
+</div>
+<p>这是<strong>完美的动态等距</strong>——所有奇异值精确等于 1。</p>
+<h3><span class="math inline">\alpha_\ell</span> 的梯度</h3>
+<p><span class="math inline">\alpha_\ell</span> 自身的梯度为：</p>
+<div class="math block">
+\frac{\partial \mathcal{L}}{\partial \alpha_\ell} = \frac{\partial \mathcal{L}}{\partial h_{\ell+1}} \cdot F_\ell(h_\ell)
+</div>
+<p>即使 <span class="math inline">\alpha_\ell = 0</span>，这个梯度通常非零（因为 <span class="math inline">F_\ell(h_\ell)</span> 和 <span class="math inline">\frac{\partial \mathcal{L}}{\partial h_{\ell+1}}</span> 都非零），所以 <span class="math inline">\alpha_\ell</span> 可以从零开始学习。</p>
+<h3>梯度景观分析</h3>
+<p><img src="../papers/2003.04887-rezero/raw/gradcont5.webp" alt="Contour plot of log gradient norm over weight w and residual weight alpha" /></p>
+<p>上图展示了一个简化的线性模型中，梯度范数的对数等高线图。红色轨迹展示了从 <span class="math inline">\alpha=0</span> 初始化的梯度下降路径——它们巧妙地绕开了 <span class="math inline">\alpha \approx 1</span> 附近 ill-conditioned 的区域，安全收敛到最优解。这解释了为什么零初始化比随机初始化更稳定。</p>
+<h3><span class="math inline">\alpha_\ell</span> 的增长动态</h3>
+<p>训练初期，<span class="math inline">\alpha_\ell</span> 从 0 缓慢增长。不同层的 <span class="math inline">\alpha_\ell</span> 增长速度不同，反映了各层对任务的重要性。实验观察到：</p>
+<ul>
+<li>靠近输出的层 <span class="math inline">\alpha_\ell</span> 增长更快（更早开始发挥作用）</li>
+<li>这种渐进式的&quot;层激活&quot;类似于 curriculum learning</li>
+</ul>
+<p><img src="../papers/2003.04887-rezero/raw/heatmap64.webp" alt="Heatmap of residual weight evolution during training for 64L ReZero Transformer" /></p>
+<p>上图展示了 64 层 ReZero Transformer 训练过程中 <span class="math inline">|\alpha_i|</span> 的演化热图。可以清晰看到：靠近输出的层（右侧）更早、更快地激活，而靠近输入的层则较缓慢地增长。</p>
+<h3>动态等距验证</h3>
+<p><img src="../papers/2003.04887-rezero/raw/ioJacobian.webp" alt="Histograms of log singular values of I/O Jacobian" /></p>
+<p>上图展示了不同方法的输入-输出 Jacobian 奇异值的对数直方图。ReZero 的奇异值分布紧密集中在 <span class="math inline">\log(\lambda) = 0</span>（即 <span class="math inline">\lambda = 1</span>）附近，表明网络在训练过程中保持了良好的动态等距——信号既不被放大也不被压缩。</p>
+<h3>全连接网络训练对比</h3>
+<p><img src="../papers/2003.04887-rezero/raw/fc_ana_2.webp" alt="Training loss of 32-layer FC networks with different methods" /></p>
+<p>32 层全连接网络在四种配置下的训练 loss 对比：ReZero 不仅收敛最快，且是唯一在无归一化层的情况下也能成功训练的方法。</p>
+<h3>实现极简</h3>
+<pre><code class="language-python">class ReZeroBlock(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.alpha = nn.Parameter(torch.zeros(1))
+        self.sublayer = ...  # attention or FFN
+    
+    def forward(self, x):
+        return x + self.alpha * self.sublayer(x)
+</code></pre>
+<p>每个残差块仅增加<strong>一个标量参数</strong>，几乎零计算开销。</p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>极深全连接网络</strong>：数千层的全连接网络（无 BN）可以训练，收敛速度远超标准初始化。</li>
+<li><strong>120 层 Transformer</strong>：在 enwiki8 字符级语言建模上，120 层 ReZero Transformer 成功训练。</li>
+<li><strong>12 层 Transformer 加速收敛</strong>：在标准 12 层 Transformer 设置中，ReZero 比 Pre-LN + warmup 收敛更快（达到相同 loss 所需步数更少）。</li>
+<li><strong>可以移除归一化层</strong>：ReZero 在没有 LayerNorm 的情况下也能训练。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><strong>初始化时的动态等距 ≠ 训练中的动态等距</strong>：一旦 <span class="math inline">\alpha_\ell</span> 增长到较大值，Jacobian 不再是单位矩阵，梯度流的质量取决于学到的 <span class="math inline">\alpha_\ell</span> 和 <span class="math inline">F_\ell</span> 的交互。</li>
+<li><strong>Identity-bias 的风险</strong>：<span class="math inline">\alpha_\ell</span> 从零开始可能导致训练初期网络&quot;太像恒等映射&quot;，延迟各层学到有意义的表示变换。如果某些层的 <span class="math inline">\alpha_\ell</span> 始终很小，这些层实际上被浪费了。</li>
+<li><strong>与 LayerNorm 的交互</strong>：在保留 LN 的设置中，ReZero 的效果可能不如纯 ReZero（因为 LN 已经提供了部分梯度稳定化）。</li>
+<li><strong>大规模 LLM 验证不足</strong>：主要实验在中小规模模型上，缺乏 GPT-3 级别的大规模验证。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>1312.6120-deep-linear-networks/</code>：ReZero 在初始化时实现 <span class="math inline">J = I</span>，与深度线性网络正交初始化的效果一致。</li>
+<li><code>1901.09321-fixup/</code>：Fixup 让残差分支初始化为&quot;小&quot;，ReZero 更极端地让它为&quot;零&quot;。两者都追求初始时的近恒等映射。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：DeepNorm 通过 <span class="math inline">\alpha &gt; 1</span> 放大 skip path，ReZero 通过 <span class="math inline">\alpha(0) = 0</span> 抑制残差分支。方向不同但目标一致——初始化时以 skip connection 为主。</li>
+<li><code>2004.08249-admin/</code>（Admin）：Admin 的分析指出，残差分支过小会限制模型潜力（amplification effect tradeoff），这正是 ReZero 可能面临的问题。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2004.08249-admin"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2004.08249" target="_blank">arXiv:2004.08249</a> · <a href="#2004.08249-admin">README source</a></div><div class="paper-body"><h1>Understanding the Difficulty of Training Transformers</h1>
+<p><strong>论文</strong>: Liu, Liu, Gao, Chen, Han (2020)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2004.08249">2004.08249</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>Transformer 的训练不稳定性通常被归因于梯度消失/爆炸。但作者提出了一个更细致的问题：<strong>梯度不平衡是否真的是训练困难的唯一或主要原因？</strong></p>
+<p>实验观察表明：</p>
+<ul>
+<li>即使使用 Pre-LN（梯度相对平衡），训练仍然可能不稳定</li>
+<li>过度抑制残差分支（如 ReZero）虽然稳定了梯度，但可能限制模型的表达能力</li>
+<li>稳定性和模型潜力之间存在 tradeoff</li>
+</ul>
+<p><img src="../papers/2004.08249-admin/raw/fig/Pre-Post-new.webp" alt="Pre-LN (left) and Post-LN (right) Transformer architecture" /></p>
+<p>上图展示了 Pre-LN 和 Post-LN Transformer 的架构及符号标注。两者的核心区别在于 LayerNorm 的位置。</p>
+<p>核心问题：<strong>除了梯度消失/爆炸之外，Transformer 训练困难的更深层原因是什么？如何在稳定性和表达能力之间取得最佳平衡？</strong></p>
+<h2>核心想法</h2>
+<p>Transformer 训练困难的一个被忽视的原因是<strong>放大效应</strong>（amplification effect）：残差连接中对函数分支的依赖会<strong>放大参数扰动</strong>对输出的影响。如果残差分支的依赖过强，微小的参数更新会导致输出的大幅变化（不稳定）；如果依赖过弱，模型退化为近恒等映射（表达能力受限）。<strong>稳定化和有效利用深度是一对根本性 tradeoff。</strong></p>
+<h2>方法细节</h2>
+<h3>训练不稳定的直观展示</h3>
+<p><img src="../papers/2004.08249-admin/raw/fig/wmt14-devppl-6l-18l.webp" alt="Training divergence: 6L vs 18L Post-LN Transformer" /></p>
+<p>上图直观展示了问题：18 层 Post-LN Transformer 训练直接 diverge（被省略），而 Admin 不仅稳定了训练，还释放了更深模型的性能潜力。</p>
+<h3>梯度不平衡分析</h3>
+<p><img src="../papers/2004.08249-admin/raw/fig/annotate_all_postln.webp" alt="Relative gradient norm histogram of 18-layer Transformers" /></p>
+<p>18 层 Transformer 的相对梯度范数直方图（对数坐标）。Post-LN 中，靠近输出的层梯度远大于底层——梯度极不平衡。Pre-LN 的梯度分布更均衡，但仍然存在其他问题。</p>
+<h3>Amplification Effect</h3>
+<p>考虑残差连接：</p>
+<div class="math block">
+x_{\ell+1} = x_\ell + F_\ell(x_\ell; \theta_\ell)
+</div>
+<p>当参数从 <span class="math inline">\theta_\ell</span> 扰动到 <span class="math inline">\theta_\ell + \delta_\ell</span> 时，输出变化为：</p>
+<div class="math block">
+\Delta x_{\ell+1} = \Delta x_\ell + \left[F_\ell(x_\ell + \Delta x_\ell; \theta_\ell + \delta_\ell) - F_\ell(x_\ell; \theta_\ell)\right]
+</div>
+<p>关键在于 <span class="math inline">F_\ell</span> 不仅对 <span class="math inline">\delta_\ell</span> 敏感，还对<strong>之前所有层累积的输入变化</strong> <span class="math inline">\Delta x_\ell</span> 敏感。这种累积效应导致：</p>
+<div class="math block">
+\|\Delta x_L\| \gg \sum_\ell \|\delta_\ell\|
+</div>
+<p>即参数空间中的小扰动被残差路径<strong>放大</strong>为输出空间中的大扰动。</p>
+<h3>层依赖度分析</h3>
+<p><img src="../papers/2004.08249-admin/raw/fig/annotate_ld.webp" alt="Layer dependency visualization" /></p>
+<p>上图展示了 <strong>layer dependency</strong>——衡量每层输出对其残差分支输入的依赖程度。Post-LN 的层依赖度显著高于 Pre-LN，意味着参数扰动会被更严重地放大。</p>
+<h3>定量分析</h3>
+<p>作者定义 <strong>amplification ratio</strong>：</p>
+<div class="math block">
+r = \frac{\|\Delta x_L\|}{\sum_\ell \|\delta_\ell\|}
+</div>
+<p>在标准 Post-LN Transformer 中，<span class="math inline">r</span> 随深度 <span class="math inline">L</span> 快速增长。Pre-LN 的 <span class="math inline">r</span> 增长较慢，但仍然可能很大。</p>
+<h3>稳定性 vs. 表达能力的 Tradeoff</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>稳定性</th>
+<th>表达能力</th>
+<th>分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Post-LN</td>
+<td>差</td>
+<td>强</td>
+<td>残差分支依赖强 → 放大严重，但每层贡献大</td>
+</tr>
+<tr>
+<td>Pre-LN</td>
+<td>中</td>
+<td>中</td>
+<td>残差分支依赖减弱 → 放大可控，但可能趋向表征坍缩</td>
+</tr>
+<tr>
+<td>ReZero (<span class="math inline">\alpha=0</span>)</td>
+<td>好</td>
+<td>初始弱</td>
+<td>初始无残差依赖 → 无放大，但初始无深度贡献</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td><strong>好</strong></td>
+<td><strong>强</strong></td>
+<td><strong>自适应平衡</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Admin（Adaptive Model Initialization）</h3>
+<p>Admin 的核心思路是<strong>自适应地初始化</strong>各层的残差缩放，根据每层的实际放大效应来调整。</p>
+<h4>两阶段过程</h4>
+<p><strong>阶段 1：Profiling</strong></p>
+<ul>
+<li>用一小批数据前向传播，测量每层残差分支的输出方差</li>
+<li>计算每层的放大效应</li>
+</ul>
+<p><strong>阶段 2：Adaptive Initialization</strong></p>
+<ul>
+<li>根据 profiling 结果，为每层设置<strong>自适应的残差缩放因子</strong> <span class="math inline">\omega_\ell</span></li>
+<li>残差连接变为：<span class="math inline">x_{\ell+1} = x_\ell + \omega_\ell \cdot F_\ell(x_\ell)</span></li>
+<li><span class="math inline">\omega_\ell</span> 的选择使得每层的放大贡献在可控范围内</li>
+<li>初始化完成后，<span class="math inline">\omega_\ell</span> 作为固定常数（不参与训练）或可学习参数</li>
+</ul>
+<h4>具体实现</h4>
+<p>Admin 在 Post-LN Transformer 上操作：</p>
+<div class="math block">
+x_{\ell+1} = \text{LN}(x_\ell + \omega_\ell \cdot F_\ell(x_\ell))
+</div>
+<p><span class="math inline">\omega_\ell</span> 的初始化通过 profiling 确定：</p>
+<pre><code>1. 初始化所有 ω_ℓ = 1
+2. 前向传播一批数据
+3. 测量每层 F_ℓ(x_ℓ) 的方差 σ²_ℓ
+4. 设置 ω_ℓ ∝ 1/σ_ℓ（使每层贡献归一化）
+5. 开始正式训练
+</code></pre>
+<p><img src="../papers/2004.08249-admin/raw/fig/weight.webp" alt="Admin weight initialization profile" /></p>
+<p>上图展示了 Admin profiling 后各层的权重 <span class="math inline">\omega_\ell</span> 分布——不同层获得了不同的缩放因子，自适应地平衡了放大效应。</p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>放大效应是独立于梯度消失的训练困难来源</strong>：即使梯度范数正常，参数扰动的放大也会导致训练不稳定。</li>
+<li><strong>Admin 在 Post-LN 上恢复稳定性</strong>：Admin 使 Post-LN Transformer 无需 warmup 即可训练，性能优于 Pre-LN。</li>
+<li><strong>在机器翻译上的改进</strong>：Admin 在 WMT 英德翻译任务上，比标准 Post-LN（+ warmup）和 Pre-LN 都有提升。</li>
+<li><strong>深层 Transformer 的稳定训练</strong>：Admin 使 60 层 Post-LN Transformer 训练稳定。</li>
+</ol>
+<p><img src="../papers/2004.08249-admin/raw/fig/wmt14-devppl-12l-iwslt.webp" alt="Admin IWSLT and WMT training curves" /></p>
+<p>上图展示了 Admin 在 IWSLT 和 WMT 任务上的训练曲线。Admin 在保持训练稳定的同时，达到了比 Pre-LN 更好的性能，验证了&quot;放大效应控制&quot;策略的有效性。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>Admin <strong>不是一种直接的梯度消失对策</strong>。它的核心贡献是识别并控制放大效应，这与梯度消失/爆炸是不同维度的问题。</li>
+<li>Profiling 阶段增加了训练流程的复杂度（虽然开销很小）。</li>
+<li>自适应缩放因子依赖于初始数据批次，可能对数据分布敏感。</li>
+<li>在超大规模模型（数千亿参数）上的验证不足。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2003.04887-rezero/</code>：Admin 的分析直接指出了 ReZero 的潜在问题——<span class="math inline">\alpha(0)=0</span> 消除了放大效应但也消除了有效深度。</li>
+<li><code>2002.04745-layer-norm-transformer/</code>：Admin 在 Post-LN 结构上工作，补充了 Pre-LN vs. Post-LN 的讨论。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：DeepNorm 的 <span class="math inline">\alpha</span> 缩放可以理解为一种&quot;手动&quot;的放大效应控制，Admin 则是&quot;自适应&quot;的。</li>
+<li><code>2304.14802-residual/</code>（ResiDual）：ResiDual 同样认识到 Post-LN 和 Pre-LN 各有 tradeoff，但采用双路径而非自适应初始化来解决。</li>
+<li>本文的核心洞察——<strong>稳定化和有效利用深度是 tradeoff</strong>——是理解整个深度 Transformer 训练文献的关键视角。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2002.04745-layer-norm-transformer"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2002.04745" target="_blank">arXiv:2002.04745</a> · <a href="#2002.04745-layer-norm-transformer">README source</a></div><div class="paper-body"><h1>On Layer Normalization in the Transformer Architecture</h1>
+<p><strong>论文</strong>: Xiong, Yang, He, Zheng, Zheng, Xing, Zhang, Lan, Wang, Liu (2020)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2002.04745">2002.04745</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>原始 Transformer（Vaswani et al., 2017）使用 <strong>Post-LN</strong>（LayerNorm 在残差加法之后），但训练需要精心设计的 learning rate warmup——没有 warmup 就会 diverge。后来 GPT-2 等模型改用 <strong>Pre-LN</strong>（LayerNorm 在残差加法之前），发现无需 warmup 即可训练。</p>
+<p>关键问题：</p>
+<ol>
+<li><strong>为什么 Post-LN 需要 warmup 而 Pre-LN 不需要？</strong></li>
+<li><strong>两种结构在梯度传播上有什么本质区别？</strong></li>
+</ol>
+<p>这些问题对现代 LLM 架构选择至关重要——几乎所有主流 LLM（GPT 系列、LLaMA 等）都使用 Pre-LN 变体。</p>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/img/pre-vs-post.webp" alt="Post-LN Transformer layer (a) vs Pre-LN Transformer layer (b)" /></p>
+<p>上图对比了两种架构：(a) Post-LN 将 LN 放在残差加法之后（主路径上），(b) Pre-LN 将 LN 放在函数分支内部。</p>
+<h2>核心想法</h2>
+<p>Post-LN 在初始化时，靠近输出层的梯度<strong>异常大</strong>（而非通常讨论的&quot;梯度消失&quot;），导致训练初期参数更新过大而 diverge，这就是需要 warmup 的原因。Pre-LN 由于 skip connection 提供了直通的梯度路径，各层梯度更均衡，因此无需 warmup。</p>
+<h2>方法细节</h2>
+<h3>Post-LN vs. Pre-LN 结构</h3>
+<p><strong>Post-LN</strong>（原始 Transformer）：</p>
+<div class="math block">
+x_{\ell+1} = \text{LN}(x_\ell + F_\ell(x_\ell))
+</div>
+<p><strong>Pre-LN</strong>：</p>
+<div class="math block">
+x_{\ell+1} = x_\ell + F_\ell(\text{LN}(x_\ell))
+</div>
+<p>关键区别在于 LN 的位置：Post-LN 将 LN 放在残差加法之后（在主路径上），Pre-LN 将 LN 放在函数分支内部（不在主路径上）。</p>
+<h3>梯度分析</h3>
+<h4>Pre-LN 的梯度路径</h4>
+<p>在 Pre-LN 中，从第 <span class="math inline">L</span> 层到第 <span class="math inline">\ell</span> 层的梯度：</p>
+<div class="math block">
+\frac{\partial x_L}{\partial x_\ell} = I + \sum_{k=\ell}^{L-1} \frac{\partial F_k(\text{LN}(x_k))}{\partial x_\ell}
+</div>
+<p><strong><span class="math inline">I</span> 项</strong>提供了直通的梯度路径（skip connection）。即使所有函数分支的梯度贡献 <span class="math inline">\frac{\partial F_k}{\partial x_\ell}</span> 都很小，梯度仍然至少为 <span class="math inline">I</span>。</p>
+<h4>Post-LN 的梯度路径</h4>
+<p>在 Post-LN 中：</p>
+<div class="math block">
+\frac{\partial x_L}{\partial x_\ell} = \prod_{k=\ell}^{L-1} J_{\text{LN}}^{(k)} \left(I + \frac{\partial F_k}{\partial x_k}\right)
+</div>
+<p><strong>每一层都有一个 <span class="math inline">J_{\text{LN}}^{(k)}</span></strong>（LayerNorm 的 Jacobian）乘在主路径上。LayerNorm 的 Jacobian 为：</p>
+<div class="math block">
+J_{\text{LN}} = \frac{\gamma}{\sigma}\left(I - \frac{1}{d}\mathbf{1}\mathbf{1}^\top - \frac{\hat{x}\hat{x}^\top}{d}\right)
+</div>
+<p>这个 Jacobian 的<strong>谱范数 <span class="math inline">\leq 1</span></strong>（归一化操作不放大信号）。<span class="math inline">L - \ell</span> 个这样的 Jacobian 连乘，可以导致梯度在深层急剧衰减。</p>
+<h3>Mean-Field 理论分析</h3>
+<p>作者使用 mean-field theory 分析初始化时刻各层梯度的期望范数。</p>
+<h4>Post-LN 的关键发现</h4>
+<p>在 Post-LN 中，对于靠近输出的层（<span class="math inline">\ell</span> 接近 <span class="math inline">L</span>）：</p>
+<div class="math block">
+\mathbb{E}\left[\left\|\frac{\partial \mathcal{L}}{\partial \theta_\ell}\right\|\right] \propto \sqrt{L - \ell}
+</div>
+<p>即<strong>最后几层的梯度随深度增大而增大</strong>。当 <span class="math inline">L</span> 很大时，最后几层的梯度范数可能非常大。</p>
+<p>对于靠近输入的层（<span class="math inline">\ell</span> 接近 0），梯度可能很小（消失）。</p>
+<p>这种<strong>梯度不平衡</strong>——最后几层过大、前面几层过小——是训练不稳定的核心原因。</p>
+<h4>Pre-LN 的关键发现</h4>
+<p>在 Pre-LN 中：</p>
+<div class="math block">
+\mathbb{E}\left[\left\|\frac{\partial \mathcal{L}}{\partial \theta_\ell}\right\|\right] \approx O(1) \quad \forall \ell
+</div>
+<p>各层梯度范数在同一量级，训练稳定。</p>
+<h3>梯度范数的实验验证</h3>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/v1_v2_fc1_decoder_expect.webp" alt="Gradient norms of different layers in 6-6 Transformer and gradient variance across depths" /></p>
+<p>上图展示了 6-6 Transformer 中各层（<span class="math inline">W^{1,k}</span>）的梯度范数。Post-LN（v1）中靠近输出的层梯度<strong>爆炸式增长</strong>，而 Pre-LN（v2）各层梯度保持在同一量级——直接验证了理论预测。</p>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/v1_v2_fc2_decoder_expect.webp" alt="Gradient norms of fc2 across layers" /></p>
+<p><span class="math inline">W^{2,k}</span> 的梯度范数也呈现相同趋势——Post-LN 存在严重的梯度不平衡。</p>
+<h3>不同深度下的梯度方差</h3>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/img/L_decoder_expect_preln.webp" alt="Pre-LN gradient expectation vs depth" /></p>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/img/L_decoder_expect_postln.webp" alt="Post-LN gradient expectation vs depth" /></p>
+<p>上两图分别展示了 Pre-LN 和 Post-LN 在不同深度（6L 到 24L）下最后一层梯度范数的变化。Post-LN 的梯度随深度急剧增大（<span class="math inline">\propto \sqrt{L}</span>），而 Pre-LN 基本不变——这正是 warmup 的必要性来源。</p>
+<h3>Warmup 的作用</h3>
+<p>Warmup 通过在训练初期使用小学习率，抑制 Post-LN 中靠近输出的大梯度导致的大更新，直到训练动态稳定后再逐步增大学习率。Pre-LN 不需要这种补救措施。</p>
+<h3>Warmup 对比实验</h3>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/img/v1_adam_warmup_compare_group_same_new.webp" alt="Adam warmup comparison on IWSLT14 De-En" /></p>
+<p>上图展示了不同 warmup 策略对 Post-LN（v1）和 Pre-LN（v2）训练的影响。Post-LN 在无 warmup 或 warmup 不足时训练 diverge，而 Pre-LN 在所有 warmup 设置下都能稳定训练。</p>
+<h3>训练性能对比</h3>
+<p><img src="../papers/2002.04745-layer-norm-transformer/raw/iwslt-v1_v2_compare_bleu_new.webp" alt="IWSLT De-En validation loss and BLEU comparison" /></p>
+<p>IWSLT14 De-En 上 Pre-LN 和 Post-LN 的 BLEU 对比。Pre-LN 无需 warmup 即可达到与 Post-LN + warmup 相当的性能。</p>
+<h3>注意事项</h3>
+<p>作者指出 Pre-LN 的最终表示 <span class="math inline">x_L</span> 前需要一个额外的 LN（因为 Pre-LN 的最后一层输出没有经过归一化），否则性能可能下降。这在实际 LLM 中是标准做法（final LN / final RMSNorm）。</p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>Post-LN 的梯度不是简单的&quot;消失&quot;，而是&quot;不平衡&quot;</strong>：靠近输出的层梯度过大，靠近输入的层梯度过小。</li>
+<li><strong>Pre-LN 消除了梯度不平衡</strong>：skip connection 的直通路径保证各层梯度量级一致。</li>
+<li><strong>Pre-LN 不需要 warmup</strong>：理论分析和实验都验证了这一点。</li>
+<li><strong>实验验证</strong>：在机器翻译任务上，Pre-LN 无需 warmup 即可达到与 Post-LN + warmup 相当的性能。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>本文主要分析<strong>初始化时刻</strong>的梯度行为，对训练过程中的梯度动态分析较少。</li>
+<li>Pre-LN 虽然梯度更平衡，但可能导致<strong>表征坍缩</strong>（representation collapse）——深层的表示趋同，有效深度降低。这一问题被后续工作（如 ResiDual）详细分析。</li>
+<li>分析更关注&quot;不稳定的大梯度&quot;（靠近输出层），对&quot;消失的小梯度&quot;（靠近输入层）的分析相对不充分。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2206.00330-b2t-connection/</code>（B2T）：进一步分析了 Post-LN 中 LayerNorm 作为梯度消失来源的机制，提出了修复方案。</li>
+<li><code>2304.14802-residual/</code>（ResiDual）：明确了 Post-LN 梯度消失和 Pre-LN 表征坍缩的 tradeoff，提出双路径解决方案。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：在 Post-LN 基础上通过残差缩放解决梯度不平衡。</li>
+<li><code>2004.08249-admin/</code>（Admin）：从放大效应角度补充了 Post-LN 训练困难的理解。</li>
+<li>本文是 <strong>Pre-LN vs. Post-LN 梯度分析的奠基性工作</strong>，几乎所有后续关于 Transformer 梯度流的论文都引用并建立在此基础上。现代 LLM 普遍采用 Pre-LN（或 Pre-RMSNorm）在很大程度上归功于本文的分析。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2206.00330-b2t-connection"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2206.00330" target="_blank">arXiv:2206.00330</a> · <a href="#2206.00330-b2t-connection">README source</a></div><div class="paper-body"><h1>B2T Connection: Serving Stability and Performance in Deep Transformers</h1>
+<p><strong>论文</strong>: (2022)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2206.00330">2206.00330</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>Pre-LN 和 Post-LN 各有优劣：</p>
+<ul>
+<li><strong>Post-LN</strong> 在深层中训练不稳定（梯度消失），但在训练稳定时性能通常优于 Pre-LN</li>
+<li><strong>Pre-LN</strong> 训练稳定（无需 warmup），但可能导致表征坍缩，性能有上限</li>
+</ul>
+<p>关键问题：<strong>Post-LN 中梯度消失的具体机制是什么？能否精确定位到某个组件，然后修复它？</strong></p>
+<p>已有的分析（如 <code>2002.04745-layer-norm-transformer/</code>）指出了 Post-LN 的梯度不平衡，但没有将原因精确归结到 LayerNorm 这个操作本身。</p>
+<p><img src="../papers/2206.00330-b2t-connection/raw/loss_curve_18layer.webp" alt="Loss curves of 18-layer Transformer encoder-decoder architectures" /></p>
+<p>上图展示了 18 层 Transformer 的训练 loss 曲线：Post-LN 直接 diverge，Pre-LN 稳定但最终性能有限。这个矛盾驱动了本文的研究。</p>
+<h2>核心想法</h2>
+<p><strong>LayerNorm 是 Post-LN 中梯度消失的主要来源。</strong> 在 Post-LN 结构中，LayerNorm 位于主残差路径上，其 Jacobian 反复作用于反向传播的梯度，逐步压缩梯度的信息内容。Post-LN 之所以在浅层时性能好，是因为 LN 在残差之后能保持较高层的梯度范数，增强表征多样性；但在深层中，LN Jacobian 的累积压缩效应导致底层梯度消失。</p>
+<p>作者提出 <strong>B2T（Bottom-to-Top）Connection</strong>：一种简单的修改，在保留 Post-LN 性能优势的同时解决梯度消失问题。</p>
+<h2>方法细节</h2>
+<h3>架构概览</h3>
+<p><img src="../papers/2206.00330-b2t-connection/raw/overview_of_lns.webp" alt="Overview of Post-LN, Pre-LN, and Post-LN with B2T connection" /></p>
+<p>上图是本文的核心架构图：(a) Post-LN 在每层残差后做 LN，(b) Pre-LN 在函数分支内做 LN，(c) <strong>B2T connection</strong> 在保留 Post-LN 结构的同时，添加一条从底层到顶层的直通连接，绕过所有 LN 的梯度压缩。</p>
+<h3>LayerNorm 作为梯度消失来源的分析</h3>
+<p>Post-LN 中，从第 <span class="math inline">L</span> 层反向传播到第 <span class="math inline">\ell</span> 层的梯度为：</p>
+<div class="math block">
+\frac{\partial x_L}{\partial x_\ell} = \prod_{k=\ell}^{L-1} J_{\text{LN}}^{(k)} \left(I + \frac{\partial F_k}{\partial x_k}\right)
+</div>
+<p>LayerNorm 的 Jacobian：</p>
+<div class="math block">
+J_{\text{LN}}(x) = \frac{1}{\sigma_x}\left(I - \frac{1}{d}\mathbf{1}\mathbf{1}^\top\right) - \frac{1}{d\sigma_x} \hat{x}\hat{x}^\top
+</div>
+<p>其中 <span class="math inline">\hat{x} = \frac{x - \mu_x}{\sigma_x}</span>。</p>
+<p><strong>关键性质</strong>：</p>
+<ol>
+<li><span class="math inline">J_{\text{LN}}</span> 的谱范数 <span class="math inline">\leq \frac{1}{\sigma_x}</span>（有界）</li>
+<li><span class="math inline">J_{\text{LN}}</span> 将梯度投影到与 <span class="math inline">\mathbf{1}</span>（均值方向）和 <span class="math inline">\hat{x}</span>（标准化后的输入方向）正交的子空间</li>
+<li><strong>每经过一次 LN，梯度的有效维度降低</strong> — 这才是梯度消失的本质机制</li>
+</ol>
+<p>具体地，<span class="math inline">L - \ell</span> 层的 LN Jacobian 连乘后，梯度中与各层 <span class="math inline">\hat{x}</span> 对齐的分量被逐步清除。如果不同层的 <span class="math inline">\hat{x}</span> 方向有显著差异，那么连乘后梯度的有效维度（秩）急剧下降，导致底层收到的梯度信号<strong>信息量</strong>极低，即使其<strong>范数</strong>不一定为零。</p>
+<h3>梯度范数实验</h3>
+<p><img src="../papers/2206.00330-b2t-connection/raw/grad_norm_each_layer.webp" alt="Gradient norms of 18-layer Transformer encoder-decoder architectures" /></p>
+<p>上图展示了 18 层 Transformer 中每层的梯度范数。Post-LN 的底层梯度急剧衰减（梯度消失），Pre-LN 各层梯度相对均衡，而 B2T 在保留 Post-LN 顶层大梯度优势的同时，显著提升了底层的梯度信号。</p>
+<h3>梯度分解</h3>
+<p><img src="../papers/2206.00330-b2t-connection/raw/gradient_of_each_part_withTransformer.webp" alt="Gradient norms of each component in the 18th decoder" /></p>
+<p>上图进一步分解了 Post-LN 第 18 层 decoder 中各组件的梯度贡献——展示了 LN 在反向传播中的压缩效应。</p>
+<h3>表征相似度分析</h3>
+<p><img src="../papers/2206.00330-b2t-connection/raw/heatmap.webp" alt="Cosine similarities between outputs of each pair of layers" /></p>
+<p>层间输出的余弦相似度热图。Pre-LN 的深层表示趋于高度相似（表征坍缩），而 Post-LN 和 B2T 保持了更大的层间差异性（表征多样性）。</p>
+<h3>B2T Connection 方案</h3>
+<p>B2T 的思路：<strong>保留 Post-LN 结构，但添加一条从底层到顶层的直通连接，绕过中间所有 LayerNorm 的梯度压缩</strong>。</p>
+<p>具体实现：</p>
+<div class="math block">
+x_L^{\text{B2T}} = x_L^{\text{Post-LN}} + \alpha \cdot x_0
+</div>
+<p>即在 Post-LN Transformer 的最终输出上加上一个<strong>缩放后的初始输入</strong>。这条连接：</p>
+<ol>
+<li>提供了一条<strong>不经过任何 LN</strong>的梯度直通路径：<span class="math inline">\frac{\partial x_L^{\text{B2T}}}{\partial x_0}</span> 包含 <span class="math inline">\alpha \cdot I</span> 项</li>
+<li>底层参数可以通过这条直通路径接收到非退化的梯度信号</li>
+<li>不改变 Post-LN 的核心结构（每层内部仍然是 Post-LN）</li>
+</ol>
+<h3>Post-LN 的优势</h3>
+<p>尽管有上述缺陷，Post-LN 在较浅的网络中性能通常优于 Pre-LN，因为：</p>
+<ol>
+<li>LN 在残差加法之后，迫使每层输出都经过归一化，<strong>表征不会坍缩</strong></li>
+<li>高层能保持较大的梯度范数，学习效率更高</li>
+<li>Post-LN 的归一化效应增强了层间的表征多样性</li>
+</ol>
+<h2>关键结果</h2>
+<ol>
+<li><strong>直接定位了 Post-LN 梯度消失的来源</strong>：是 LayerNorm 的 Jacobian 在主路径上的累积投影效应，而非简单的&quot;梯度范数缩小&quot;。</li>
+<li><strong>Post-LN + B2T &gt; Pre-LN</strong>：在多个任务上，添加 B2T 连接的 Post-LN 性能优于 Pre-LN，同时保持训练稳定。</li>
+<li><strong>深层 Transformer 训练改善</strong>：B2T 使深层 Post-LN Transformer 的底层梯度显著增大。</li>
+<li><strong>实现极简</strong>：仅需在网络最终输出上加一条 skip connection。</li>
+</ol>
+<h3>训练曲线对比</h3>
+<p><img src="../papers/2206.00330-b2t-connection/raw/training_curve_exclude_postln.webp" alt="NLL on validation data for 18-layer models" /></p>
+<p>18 层模型在 WMT newstest2013 验证集上的 NLL 曲线。B2T connection 在 Pre-LN、DeepNorm 等方法中表现最佳。</p>
+<h3>100 层超深模型结果</h3>
+<p><img src="../papers/2206.00330-b2t-connection/raw/100layer_valid_log.webp" alt="NLL of DeepNet and B2T in 100L-100L configuration" /></p>
+<p>在 100L-100L 的极深配置下，B2T connection 仍然能有效训练，且性能优于 DeepNorm。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>B2T 提供了一条绕过 LN 的梯度路径，但<strong>不保证完整的 Jacobian <span class="math inline">J_{\ell \to L}</span> 奇异值谱</strong>的良好性质。直通路径的 <span class="math inline">\alpha I</span> 项确保梯度范数不为零，但不保证所有方向都有足够的梯度信号。</li>
+<li>简单的底层到顶层连接可能不足以解决<strong>中间层</strong>的梯度问题。</li>
+<li>缩放系数 <span class="math inline">\alpha</span> 的选择需要调优。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2002.04745-layer-norm-transformer/</code>：本文是对其 Post-LN 梯度分析的深化——从&quot;梯度不平衡&quot;深入到&quot;LN 是梯度消失的具体来源&quot;。</li>
+<li><code>2304.14802-residual/</code>（ResiDual）：ResiDual 同样试图融合 Pre-LN 和 Post-LN 的优点，但采用双残差流而非单一的 B2T 连接。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：DeepNorm 通过放大残差系数 <span class="math inline">\alpha</span> 来对抗 LN 的压缩效应，B2T 则通过添加旁路来绕过它。</li>
+<li>本文是<strong>少数直接将梯度消失归因于特定架构组件（LayerNorm）的工作</strong>，为理解 Transformer 梯度流提供了精确的机制性解释。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2304.14802-residual"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2304.14802" target="_blank">arXiv:2304.14802</a> · <a href="#2304.14802-residual">README source</a></div><div class="paper-body"><h1>ResiDual: Transformer with Dual Residual Connections</h1>
+<p><strong>论文</strong>: (2023)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2304.14802">2304.14802</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>Transformer 中 Post-LN 和 Pre-LN 的 tradeoff 是一个根本性问题：</p>
+<ul>
+<li>
+<p><strong>Post-LN</strong>：<span class="math inline">x_{\ell+1} = \text{LN}(x_\ell + F_\ell(x_\ell))</span></p>
+<ul>
+<li>优点：每层输出经过归一化，表征多样性好</li>
+<li>缺点：深层时梯度消失（LN Jacobian 在主路径上累积压缩）</li>
+</ul>
+</li>
+<li>
+<p><strong>Pre-LN</strong>：<span class="math inline">x_{\ell+1} = x_\ell + F_\ell(\text{LN}(x_\ell))</span></p>
+<ul>
+<li>优点：skip connection 提供直通梯度路径，训练稳定</li>
+<li>缺点：表征坍缩（representation collapse）——深层的表示逐渐趋同，有效深度下降</li>
+</ul>
+</li>
+</ul>
+<p>这两个问题看似是同一个 tradeoff 的两面：<strong>要梯度流就牺牲表征多样性，要表征多样性就牺牲梯度流。</strong></p>
+<p>核心问题：<strong>能否同时获得 Post-LN 的表征多样性和 Pre-LN 的梯度稳定性？</strong></p>
+<h2>核心想法</h2>
+<p>构建<strong>双残差连接</strong>（dual residual connections）：维护两条并行的残差流——一条具有 Pre-LN 行为（保证梯度流），另一条具有 Post-LN 行为（保持表征多样性）。最终输出融合两条流的信息。</p>
+<h2>方法细节</h2>
+<h3>架构概览</h3>
+<p><img src="../papers/2304.14802-residual/raw/all_in_one_single_layer.webp" alt="Overview of Post-LN, Pre-LN, and ResiDual single layer" /></p>
+<p>上图展示了三种架构的单层结构对比：Post-LN 将 LN 放在残差之后，Pre-LN 将 LN 放在函数分支内，而 ResiDual 同时维护两条残差流——<span class="math inline">x</span> 流（Pre-LN 行为）和 <span class="math inline">y</span> 流（Post-LN 行为）。</p>
+<p><img src="../papers/2304.14802-residual/raw/prepost.webp" alt="Pre-LN vs Post-LN comparison diagram" /></p>
+<p>上图进一步对比了 Pre-LN 和 Post-LN 的完整结构特征——它们各自的优势和问题构成了 ResiDual 的设计动机。</p>
+<h3>Pre-LN 的表征坍缩问题</h3>
+<p>在 Pre-LN 中，<span class="math inline">L</span> 层后的输出为：</p>
+<div class="math block">
+x_L = x_0 + \sum_{\ell=0}^{L-1} F_\ell(\text{LN}(x_\ell))
+</div>
+<p>当 <span class="math inline">L</span> 很大时，<span class="math inline">x_0</span> 的贡献在 <span class="math inline">x_L</span> 中占比 <span class="math inline">O(1/L)</span>（被 <span class="math inline">L</span> 个残差分支的累积覆盖），且 final LN 会进一步归一化。但更关键的是：</p>
+<ul>
+<li>各层 <span class="math inline">F_\ell(\text{LN}(x_\ell))</span> 的贡献趋向相似（LN 把输入归一化到相似的分布后，<span class="math inline">F_\ell</span> 的输出也趋向相似）</li>
+<li>深层表示的余弦相似度趋近 1</li>
+<li>这意味着深层实际上在做&quot;几乎相同的变换&quot;，有效深度远小于实际深度</li>
+</ul>
+<h3>Post-LN 的梯度消失问题</h3>
+<p>在 Post-LN 中，每层 LN 的 Jacobian 投影会压缩梯度。<span class="math inline">L - \ell</span> 个 LN Jacobian 连乘后，底层梯度的有效维度急剧下降。</p>
+<h3>ResiDual：双路径架构</h3>
+<p><img src="../papers/2304.14802-residual/raw/dual.webp" alt="ResiDual dual residual connection architecture" /></p>
+<p>上图展示了 ResiDual 的完整双路径架构。ResiDual 维护两个残差流 <span class="math inline">x_\ell</span> 和 <span class="math inline">y_\ell</span>：</p>
+<div class="math block">
+x_{\ell+1} = x_\ell + F_\ell(\text{LN}(x_\ell))
+</div>
+<div class="math block">
+y_{\ell+1} = \text{LN}(y_\ell + F_\ell(\text{LN}(x_\ell)))
+</div>
+<p>注意：</p>
+<ul>
+<li><strong><span class="math inline">x</span> 流</strong>：Pre-LN 结构，提供稳定的梯度流</li>
+<li><strong><span class="math inline">y</span> 流</strong>：Post-LN 结构，保持表征多样性</li>
+<li><strong><span class="math inline">F_\ell</span> 的输入来自 <span class="math inline">x</span> 流</strong>（经过 LN），两条流共享同一个函数分支</li>
+<li>最终输出使用 <span class="math inline">y_L</span>（Post-LN 流），利用其表征多样性</li>
+</ul>
+<h3>梯度分析</h3>
+<h4><span class="math inline">x</span> 流的梯度</h4>
+<div class="math block">
+\frac{\partial \mathcal{L}}{\partial x_\ell} = \frac{\partial \mathcal{L}}{\partial x_L} \cdot \prod_{k=\ell}^{L-1}\left(I + \frac{\partial F_k(\text{LN}(x_k))}{\partial x_k}\right)
+</div>
+<p>包含 <span class="math inline">I</span> 的直通路径 → <strong>梯度下界有保证</strong>。</p>
+<h4><span class="math inline">y</span> 流的梯度</h4>
+<p><span class="math inline">y</span> 流的梯度可以通过两条路径到达 <span class="math inline">F_\ell</span>：</p>
+<ol>
+<li>直接通过 <span class="math inline">y</span> 流（Post-LN 路径，可能消失）</li>
+<li>通过 <span class="math inline">x</span> 流间接传播（Pre-LN 路径，有保证）</li>
+</ol>
+<p>因此，<span class="math inline">F_\ell</span> 的参数 <span class="math inline">\theta_\ell</span> 总能收到来自 <span class="math inline">x</span> 流的非退化梯度。</p>
+<h3>梯度下界定理</h3>
+<p>作者证明，在 ResiDual 中：</p>
+<div class="math block">
+\left\|\frac{\partial \mathcal{L}}{\partial \theta_\ell}\right\| \geq C \cdot \left\|\frac{\partial \mathcal{L}}{\partial x_L}\right\|
+</div>
+<p>其中 <span class="math inline">C &gt; 0</span> 是与深度无关的常数（在合理假设下）。这给出了梯度的<strong>非零下界</strong>——深度不会导致梯度消失。</p>
+<h3>梯度与表征的实验验证</h3>
+<p><img src="../papers/2304.14802-residual/raw/study.webp" alt="Study of Gradient Norm and hidden representation w.r.t layer in each method" /></p>
+<p>上图是本文最关键的实验结果之一：左侧展示了各方法的梯度范数随层的变化，右侧展示了隐藏表示的层间差异。ResiDual（红色）同时实现了——底层梯度不消失（左图）且各层表征保持多样性（右图），这正是它兼得两者优点的直接证据。</p>
+<h3>计算开销分析</h3>
+<ul>
+<li><strong>参数量</strong>：与标准 Transformer 相同（<span class="math inline">F_\ell</span> 共享，仅多了一条残差路径和额外的 LN）</li>
+<li><strong>计算量</strong>：每层多一次 LN 操作和一次加法（<span class="math inline">y</span> 流的更新），开销极小</li>
+<li><strong>内存</strong>：需要存储两条流的中间结果，内存增加约 <span class="math inline">2 \times</span> 用于激活存储</li>
+</ul>
+<h3>与其他方法的统一视角</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="math inline">x</span> 流</th>
+<th><span class="math inline">y</span> 流</th>
+<th>梯度下界</th>
+<th>表征多样性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-LN</td>
+<td>✓</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Post-LN</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>ResiDual</strong></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>ResiDual 可以视为 Pre-LN 和 Post-LN 的<strong>严格泛化</strong>：</p>
+<ul>
+<li>如果移除 <span class="math inline">y</span> 流 → Pre-LN</li>
+<li>如果移除 <span class="math inline">x</span> 流 → Post-LN</li>
+</ul>
+<h3>条件数分析</h3>
+<p><img src="../papers/2304.14802-residual/raw/adam.webp" alt="Absolute condition number w.r.t t and sigma_g" /></p>
+<p>上图展示了不同方法的绝对条件数 <span class="math inline">\hat{\kappa}</span> 随时间和梯度噪声的变化。ResiDual 保持了较低的条件数，意味着优化景观更平滑，训练更稳定。</p>
+<h2>关键结果</h2>
+<ol>
+<li><strong>同时解决梯度消失和表征坍缩</strong>：理论证明梯度有非零下界，实验表明表征多样性接近 Post-LN。</li>
+<li><strong>机器翻译性能提升</strong>：在 WMT 英德翻译上，ResiDual 优于 Pre-LN 和 Post-LN + warmup。</li>
+<li><strong>深层训练稳定</strong>：18 层、25 层 Transformer 训练稳定，无需 warmup。</li>
+<li><strong>语言模型实验</strong>：在 language modeling 任务上也验证了改进。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><strong>双流增加内存开销</strong>：需要存储两条残差路径的激活值，在极大规模模型中可能是瓶颈。</li>
+<li>梯度下界定理依赖于一些假设（如 <span class="math inline">F_\ell</span> 的 Lipschitz 常数有界），这些假设在训练过程中可能被违反。</li>
+<li>虽然保证了梯度范数的下界，但不保证 <strong>Jacobian 完整谱</strong>的良好性质（可能有些方向的梯度仍然很小）。</li>
+<li>在 GPT-3/LLaMA 级别的大规模 LLM 上缺乏验证。</li>
+<li>两条流的最终融合方式（直接使用 <span class="math inline">y_L</span>）可能不是最优的。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2002.04745-layer-norm-transformer/</code>：ResiDual 直接建立在 Pre-LN vs. Post-LN 的梯度分析之上。</li>
+<li><code>2206.00330-b2t-connection/</code>（B2T）：B2T 通过添加底层到顶层的连接来解决 Post-LN 的梯度消失，ResiDual 通过维护完整的双流来更彻底地解决。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：DeepNorm 在 Post-LN 基础上通过缩放解决稳定性，ResiDual 通过架构改变来同时解决两个问题。</li>
+<li><code>2004.08249-admin/</code>（Admin）：Admin 的 tradeoff 分析（稳定性 vs. 表达能力）在 ResiDual 中得到了架构层面的解决方案。</li>
+<li>本文是<strong>最清晰地将梯度消失和表征坍缩作为对偶问题来处理</strong>的工作之一。</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #ffe66d;padding-left:16px;margin:48px 0 24px"><h2 style="color:#ffe66d">Category C: 谱 / 正交约束</h2></div>
+<article class="paper-article" id="1802.05957-spectral-normalization"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1802.05957" target="_blank">arXiv:1802.05957</a> · <a href="#1802.05957-spectral-normalization">README source</a></div><div class="paper-body"><h1>Spectral Normalization for Generative Adversarial Networks</h1>
+<p><strong>论文</strong>：Miyato, Kataoka, Koyama, Yoshida (2018)
+<strong>ArXiv</strong>：<a href="https://arxiv.org/abs/1802.05957">1802.05957</a>
+<strong>类别</strong>：C. 谱 / 正交约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>GAN 训练中判别器（discriminator）的梯度极不稳定——如果判别器的 Lipschitz 常数过大，生成器接收到的梯度信号会爆炸或剧烈震荡，导致模式坍缩（mode collapse）和训练发散。此前的 weight clipping（WGAN）直接截断权重值，过于粗暴，会把权重推向截断边界的极端值；gradient penalty（WGAN-GP）则需要额外的前向-反向计算，开销较高。</p>
+<p><strong>核心需求</strong>：一种轻量、通用的方式来<strong>上界约束</strong>判别器每层的 Lipschitz 常数。</p>
+<p>下图直观展示了谱归一化（SN）与权重归一化（WN）对允许的奇异值集合的不同约束效果——SN 只限制最大奇异值，而 WN 限制的是所有奇异值的 Frobenius 范数：</p>
+<p><img src="../papers/1802.05957-spectral-normalization/raw/figures/svhist_example.webp" alt="谱归一化 vs 权重归一化的奇异值约束对比。红色：SN 允许的奇异值集合（谱范数 ≤ 1）；蓝色：WN 允许的奇异值集合（Frobenius 范数固定）。SN 的约束更宽松，允许奇异值分布更自由。" /></p>
+<h2>核心想法</h2>
+<p>对每个权重矩阵 <span class="math inline">W</span> 除以其最大奇异值 <span class="math inline">\sigma_{\max}(W)</span>，使归一化后的矩阵谱范数恒为 1。这直接将该层的 Lipschitz 常数上界控制为 1，而整个网络的 Lipschitz 常数上界为各层之积。</p>
+<h2>方法细节</h2>
+<h3>谱归一化公式</h3>
+<div class="math block">
+\bar{W} = \frac{W}{\sigma_{\max}(W)}
+</div>
+<p>其中 <span class="math inline">\sigma_{\max}(W) = \|W\|_2 = \max_{\|h\|=1} \|Wh\|</span> 是 <span class="math inline">W</span> 的谱范数（最大奇异值）。</p>
+<h3>Power Iteration 估计 <span class="math inline">\sigma_{\max}</span></h3>
+<p>精确计算 SVD 代价为 <span class="math inline">O(\min(mn^2, m^2n))</span>，对每步每层不可接受。论文使用 power iteration 近似：</p>
+<pre><code>初始化随机向量 û
+每个训练步：
+  v̂ ← W^T û / ‖W^T û‖
+  û ← W v̂ / ‖W v̂‖
+  σ_max ≈ û^T W v̂
+  W_SN ← W / σ_max
+</code></pre>
+<p>只需 <strong>1 次</strong> power iteration 即可在训练过程中跟踪 <span class="math inline">\sigma_{\max}</span> 的漂移（因为权重每步只微小变化），额外开销几乎可忽略。</p>
+<p>下图验证了这一点：训练过程中，谱归一化有效地将每一层卷积的谱范数控制在稳定水平：</p>
+<p><img src="../papers/1802.05957-spectral-normalization/raw/figures/snorm.webp" alt="CIFAR-10 上标准 CNN 七个卷积层的谱范数随训练的变化曲线。使用 spectral normalization 后，所有层的谱范数在训练全程保持稳定。" /></p>
+<h3>Lipschitz 链式组合</h3>
+<p>对于 <span class="math inline">L</span> 层网络 <span class="math inline">f = f_L \circ \cdots \circ f_1</span>，若每层 <span class="math inline">f_\ell</span> 是 1-Lipschitz 的线性变换加 1-Lipschitz 激活（如 ReLU），则：</p>
+<div class="math block">
+\text{Lip}(f) \le \prod_{\ell=1}^{L} \|\bar{W}_\ell\|_2 = 1
+</div>
+<h3>不同归一化方法对奇异值分布的影响</h3>
+<p>下图比较了 Weight Clipping（WC）、Weight Normalization（WN）和 Spectral Normalization（SN）训练出的权重矩阵的奇异值分布。SN 只约束最大奇异值，允许其余奇异值自由分布，而 WC 导致奇异值极端分化：</p>
+<p><img src="../papers/1802.05957-spectral-normalization/raw/figures/svhist_cifar10.webp" alt="CIFAR-10 上不同方法训练的权重矩阵奇异值分布对比。每个子图对应一层权重。SN 的奇异值分布最为自然，WC 将权重推向极端值。" /></p>
+<h2>关键结果</h2>
+<p>在 CIFAR-10 和 STL-10 上，SN-GAN 在 Inception Score 和 FID 两个指标上全面超越或持平 WGAN-GP，且训练更稳定：</p>
+<p><img src="../papers/1802.05957-spectral-normalization/raw/figures/incpscores_cifar10.webp" alt="CIFAR-10 上不同方法和超参数的 Inception Score 训练曲线（越高越好）。Spectral Normalization 在多种设置下均表现稳定，且收敛到更高的 Inception Score。" /></p>
+<p><img src="../papers/1802.05957-spectral-normalization/raw/figures/fids_cifar10.webp" alt="CIFAR-10 上不同方法和超参数的 FID 训练曲线（越低越好）。Spectral Normalization 实现了最低且最稳定的 FID。" /></p>
+<p>核心数据：</p>
+<ul>
+<li>在 CIFAR-10、STL-10、ImageNet 上的 GAN 生成质量（Inception Score、FID）优于或持平 WGAN-GP，训练更稳定。</li>
+<li>计算开销极低：每层每步仅一次矩阵-向量乘法。</li>
+<li>成为后续 GAN 和判别式模型训练的标准组件。</li>
+</ul>
+<h2>与梯度消失的关系</h2>
+<p><strong>谱归一化通常不防止梯度消失。</strong></p>
+<p>关键区分：</p>
+<table>
+<thead>
+<tr>
+<th>约束类型</th>
+<th>效果</th>
+<th>防爆炸</th>
+<th>防消失</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\sigma_{\max}(W) \le 1</span>（谱上界）</td>
+<td>限制最大奇异值</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><span class="math inline">\sigma_{\min}(W) \ge c &gt; 0</span>（谱下界）</td>
+<td>限制最小奇异值</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>所有奇异值 <span class="math inline">\approx 1</span>（等距）</td>
+<td>保持范数不变</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p>谱归一化只控制 <span class="math inline">\sigma_{\max} = 1</span>，但 <span class="math inline">\sigma_{\min}</span> 可以任意小——矩阵仍可以是秩亏的。信号经过这样的层后，在 <span class="math inline">\sigma_{\min}</span> 对应的方向上会被压缩甚至消灭。</p>
+<p>更深层的问题：即使每层 <span class="math inline">W</span> 的谱范数为 1，Transformer block 的完整 Jacobian 还涉及 attention、LayerNorm、残差连接、MLP 非线性等，单独约束线性层的 <span class="math inline">\sigma_{\max}</span> 远不足以保证整个 block 的 Jacobian 是良条件的。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>只约束上界，不防消失——这是一个 <strong>anti-explosion</strong> 工具，而非 <strong>anti-vanishing</strong> 工具。</li>
+<li>Power iteration 给出的是近似值，在极端条件（奇异值非常接近）下可能不够精确。</li>
+<li>对 Transformer 而言，逐层谱归一化不等于全局 Lipschitz 约束，因为 attention 机制引入了输入依赖的非线性。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Unitary RNN</strong>（<code>1511.06464-unitary-rnn/</code>）：通过酉矩阵同时约束上界和下界，实现真正的 anti-vanishing。</li>
+<li><strong>Lipschitz Transformers</strong>（<code>2507.13338-lipschitz-transformers/</code>）：将 Lipschitz 约束扩展到 Transformer，发现紧的 Lipschitz 上界与模型表达力存在根本张力。</li>
+<li><strong>Spectral Sphere LLM</strong>（<code>2601.08393-spectral-sphere-llm/</code>）：在 LLM 预训练中引入谱球约束，约束权重和更新的谱结构。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1511.06464-unitary-rnn"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1511.06464" target="_blank">arXiv:1511.06464</a> · <a href="#1511.06464-unitary-rnn">README source</a></div><div class="paper-body"><h1>Unitary Evolution Recurrent Neural Networks</h1>
+<p><strong>论文</strong>：Arjovsky, Shah, Bengio (2016)
+<strong>ArXiv</strong>：<a href="https://arxiv.org/abs/1511.06464">1511.06464</a>
+<strong>类别</strong>：C. 谱 / 正交约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>RNN 的核心难题是<strong>长程依赖学习</strong>：隐状态从时间步 <span class="math inline">t</span> 传播到 <span class="math inline">t+T</span> 时，梯度需要经过 <span class="math inline">T</span> 次 hidden-to-hidden 矩阵 <span class="math inline">W_h</span> 的乘法。如果 <span class="math inline">W_h</span> 的谱半径 <span class="math inline">\rho(W_h) &gt; 1</span>，梯度指数爆炸；如果 <span class="math inline">\rho(W_h) &lt; 1</span>，梯度指数消失。</p>
+<p>传统做法（梯度裁剪、LSTM 门控）是对症状的缓解，而非对根因的修正。LSTM 虽然缓解了消失问题，但门控机制的容量有限，对极长序列仍然困难。</p>
+<p><strong>核心需求</strong>：让 <span class="math inline">W_h</span> 的所有特征值的模恰好为 1，从根源上消除指数增长/衰减。</p>
+<h2>核心想法</h2>
+<p>将 hidden-to-hidden 权重参数化为<strong>酉矩阵</strong>（unitary matrix），即 <span class="math inline">W_h^* W_h = I</span>。酉矩阵的所有特征值绝对值恰为 1，因此信号在时间维度上既不放大也不衰减。</p>
+<h2>方法细节</h2>
+<h3>酉矩阵的构造</h3>
+<p>直接优化 <span class="math inline">n \times n</span> 酉矩阵需要 <span class="math inline">O(n^2)</span> 参数并保持酉约束，代价高且不易梯度下降。论文将酉矩阵分解为一系列结构化酉变换的乘积：</p>
+<div class="math block">
+W_h = D_3 \cdot R_2 \cdot \mathcal{F}^{-1} \cdot D_2 \cdot \Pi \cdot R_1 \cdot \mathcal{F} \cdot D_1
+</div>
+<p>其中：</p>
+<ul>
+<li><span class="math inline">D_k = \text{diag}(e^{i\theta_1}, \ldots, e^{i\theta_n})</span>：对角酉矩阵（<span class="math inline">n</span> 个相位参数）</li>
+<li><span class="math inline">R_k = I - 2\frac{vv^*}{\|v\|^2}</span>：Householder 反射（<span class="math inline">n</span> 个实参数）</li>
+<li><span class="math inline">\mathcal{F}</span>：离散傅里叶变换矩阵（无参数，<span class="math inline">O(n \log n)</span> 计算）</li>
+<li><span class="math inline">\Pi</span>：固定排列矩阵（无参数）</li>
+</ul>
+<p>这样的乘积：</p>
+<ol>
+<li><strong>始终是酉矩阵</strong>（酉矩阵之积仍为酉矩阵）</li>
+<li>参数量为 <span class="math inline">O(n)</span> 而非 <span class="math inline">O(n^2)</span></li>
+<li>矩阵-向量乘法 <span class="math inline">O(n \log n)</span>（得益于 FFT）</li>
+</ol>
+<h3>隐状态更新</h3>
+<div class="math block">
+h_t = \sigma\bigl(W_h h_{t-1} + W_x x_t + b\bigr)
+</div>
+<p>激活函数 <span class="math inline">\sigma</span> 使用 modReLU：</p>
+<div class="math block">
+\sigma(z) = \frac{z}{|z|} \cdot \text{ReLU}(|z| + b_\sigma)
+</div>
+<p>作用在复数域上，保持相位、只修改模。</p>
+<h3>梯度的范数保持</h3>
+<p>对于纯线性递推 <span class="math inline">h_t = W_h h_{t-1}</span>：</p>
+<div class="math block">
+\frac{\partial h_{t+T}}{\partial h_t} = W_h^T
+</div>
+<p>当 <span class="math inline">W_h</span> 是酉矩阵时，<span class="math inline">\|W_h^T\|_2 = 1</span>（所有奇异值为 1），因此：</p>
+<div class="math block">
+\left\|\frac{\partial h_{t+T}}{\partial h_t}\right\|_2 = 1 \quad \forall T
+</div>
+<p>梯度既不爆炸也不消失。下图展示了训练过程中 uRNN 的梯度范数衰减远慢于其他模型，验证了酉约束对梯度流的保护作用：</p>
+<p><img src="../papers/1511.06464-unitary-rnn/raw/grads_100.webp" alt="从左到右：(i) 训练初期的梯度范数 ∂C/∂h_t；(ii) 训练 100 步后的梯度范数；(iii) 隐状态范数随时间步的变化；(iv) 隐状态与最终隐状态的 L2 距离。uRNN 的梯度衰减显著慢于 RNN 和 LSTM。" /></p>
+<h2>关键结果</h2>
+<h3>Copying Problem</h3>
+<p>这是测试长程记忆的经典任务：模型需要在看到一段序列后，经过 <span class="math inline">T</span> 个空白时间步，原样输出该序列。</p>
+<p>当 <span class="math inline">T = 100</span> 时，LSTM 勉强收敛但很慢，而 uRNN 快速收敛到零误差：</p>
+<p><img src="../papers/1511.06464-unitary-rnn/raw/memory_100.webp" alt="Copying problem T=100。LSTM 缓慢收敛，uRNN 快速解决。RNN(tanh) 完全停在 baseline。" /></p>
+<p>当 <span class="math inline">T</span> 增大到 500 时，LSTM 完全失败，只有 uRNN 仍能成功：</p>
+<p><img src="../papers/1511.06464-unitary-rnn/raw/memory_500.webp" alt="Copying problem T=500。只有 uRNN 能在极长时间依赖下成功记忆序列。LSTM 和 RNN 均停在 baseline。" /></p>
+<h3>Adding Problem</h3>
+<p>模型需要从长度为 <span class="math inline">T</span> 的序列中选择被标记的两个数并求和。在 <span class="math inline">T = 750</span> 时：</p>
+<p><img src="../papers/1511.06464-unitary-rnn/raw/adding_750.webp" alt="Adding problem T=750。uRNN 和 LSTM 均能收敛，表现接近，远优于 vanilla RNN。" /></p>
+<h3>Pixel-by-pixel MNIST</h3>
+<p>将 <span class="math inline">28 \times 28</span> 图像逐像素输入（序列长度 784），进行分类：</p>
+<p><img src="../papers/1511.06464-unitary-rnn/raw/mnist.webp" alt="Pixel-by-pixel MNIST 分类结果。uRNN 收敛速度远快于 LSTM，但最终准确率 LSTM 略优（~97% vs ~95%）。右图为 permuted MNIST 变体，uRNN 更具优势。" /></p>
+<h3>汇总</h3>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>Vanilla RNN</th>
+<th>LSTM</th>
+<th>uRNN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copying Problem（<span class="math inline">T=200</span>）</td>
+<td>失败</td>
+<td>缓慢收敛</td>
+<td><strong>快速收敛</strong></td>
+</tr>
+<tr>
+<td>Copying Problem（<span class="math inline">T=750</span>）</td>
+<td>失败</td>
+<td>失败</td>
+<td><strong>成功</strong></td>
+</tr>
+<tr>
+<td>Adding Problem（<span class="math inline">T=750</span>）</td>
+<td>失败</td>
+<td>缓慢</td>
+<td><strong>快速</strong></td>
+</tr>
+<tr>
+<td>Pixel-by-pixel MNIST</td>
+<td>~90%</td>
+<td>~97%</td>
+<td><strong>~95%</strong>（接近 LSTM）</td>
+</tr>
+</tbody>
+</table>
+<p>在极长依赖任务上 uRNN 显著优于 LSTM，但在 MNIST 分类（短程特征即可）上 LSTM 略优，说明酉约束可能限制了短程信息的选择性遗忘能力。</p>
+<h2>与 Transformer 梯度流的关系</h2>
+<p><strong>酉 RNN 的思想对 Transformer 的直接适用性有限。</strong> 原因：</p>
+<ol>
+<li>Transformer block 不是单一矩阵递推——包含 multi-head attention（输入依赖）、LayerNorm、残差连接、MLP 非线性。</li>
+<li>即使 <span class="math inline">Q, K, V, O</span> 投影矩阵全部正交，attention block 的 Jacobian 仍不一定等距。</li>
+<li>残差连接 <span class="math inline">h_\ell = h_{\ell-1} + f_\ell(h_{\ell-1})</span> 的 Jacobian 为 <span class="math inline">I + J_{f_\ell}</span>，其特征值分布取决于 <span class="math inline">J_{f_\ell}</span> 的谱结构，不是简单的酉约束能控制的。</li>
+</ol>
+<p>但酉/正交的<strong>思想</strong>仍有影响：nGPT 在超球面上归一化隐状态，DeepNet/DeepScaleLM 通过残差缩放近似保持 Jacobian 谱范数，都可以看作向等距理想的不同近似路径。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><span class="math inline">O(n)</span> 参数量限制了表达能力，后续 Full-capacity uRNN 放宽到 <span class="math inline">O(n^2)</span> 但训练更昂贵。</li>
+<li>modReLU 激活函数设计特殊，迁移到其他架构不直接。</li>
+<li>酉约束阻止了选择性遗忘——对需要&quot;忘掉旧信息&quot;的任务可能不利。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Spectral-RNN</strong>（<code>1803.09327-spectral-rnn/</code>）：通过 SVD 参数化直接控制权重奇异值，思路类似但更灵活。</li>
+<li><strong>Dynamical Isometry</strong>（<code>1711.04735-dynamical-isometry/</code>）：将等距思想从 RNN 推广到前馈网络初始化。</li>
+<li><strong>nGPT</strong>（<code>2410.01131-ngpt/</code>）：在 Transformer 中通过超球面归一化隐状态，间接追求信号传播的稳定性。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1803.09327-spectral-rnn"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1803.09327" target="_blank">arXiv:1803.09327</a> · <a href="#1803.09327-spectral-rnn">README source</a></div><div class="paper-body"><h1>Stabilizing Gradients for Deep Neural Networks via Efficient SVD Parameterization (Spectral-RNN)</h1>
+<p><strong>论文</strong>：Wisdom, Powers, Hershey, Le Roux, Atlas (2016)
+<strong>ArXiv</strong>：<a href="https://arxiv.org/abs/1803.09327">1803.09327</a>
+<strong>类别</strong>：C. 谱 / 正交约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>延续 Unitary RNN 的思路：RNN 的梯度消失/爆炸根源在于 hidden-to-hidden 矩阵 <span class="math inline">W_h</span> 的谱结构。Unitary RNN 通过结构化酉分解保证所有奇异值为 1，但代价是：</p>
+<ol>
+<li>参数化受限于特定酉构造块的组合，表达能力有限。</li>
+<li>严格酉约束阻止了选择性信息衰减（有些信息确实应该被遗忘）。</li>
+</ol>
+<p><strong>核心需求</strong>：能<strong>显式观察并控制</strong>权重矩阵的全部奇异值，既允许某些方向衰减（学习遗忘），又防止所有方向同时坍缩。</p>
+<h2>核心想法</h2>
+<p>直接使用 SVD 参数化 <span class="math inline">W = U \Sigma V^\top</span>，将正交因子 <span class="math inline">U, V</span> 和奇异值对角阵 <span class="math inline">\Sigma</span> 作为独立可训练参数。训练时可以对 <span class="math inline">\Sigma</span> 施加任意约束（如 soft clamp 到 <span class="math inline">[c, 1]</span>），实现精细的谱控制。</p>
+<h2>方法细节</h2>
+<h3>SVD 参数化</h3>
+<div class="math block">
+W = U \, \text{diag}(\sigma_1, \ldots, \sigma_r) \, V^\top
+</div>
+<ul>
+<li><span class="math inline">U \in \mathbb{R}^{m \times r}</span>，<span class="math inline">V \in \mathbb{R}^{n \times r}</span> 保持在 Stiefel 流形上（列正交）</li>
+<li><span class="math inline">\Sigma = \text{diag}(\sigma_1, \ldots, \sigma_r)</span>，<span class="math inline">\sigma_i &gt; 0</span> 可自由学习或受约束</li>
+</ul>
+<p>具体地，使用 <span class="math inline">m_1 + m_2</span> 个 Householder 反射来参数化：</p>
+<div class="math block">
+W = \mathcal{H}_n(u_n) \cdots \mathcal{H}_{k_1}(u_{k_1}) \, \text{diag}(\sigma) \, \mathcal{H}_{k_2}(v_{k_2}) \cdots \mathcal{H}_n(v_n)
+</div>
+<p>其中 <span class="math inline">\mathcal{H}_k(u) h = h - 2 \frac{\hat{u}_k^\top h}{\hat{u}_k^\top \hat{u}_k} \hat{u}_k</span> 是 Householder 变换。选择 <span class="math inline">m_1, m_2</span> 可以灵活平衡表达力与计算成本。</p>
+<h3>奇异值约束</h3>
+<p>通过 sigmoid 参数化将奇异值约束在 <span class="math inline">[\sigma^* - r, \sigma^* + r]</span> 区间：</p>
+<div class="math block">
+\sigma_i = 2r(f(\hat{\sigma}_i) - 0.5) + \sigma^*, \quad i \in [n]
+</div>
+<p>实践中 <span class="math inline">\sigma^*</span> 通常设为 1，<span class="math inline">r \ll 1</span>，使奇异值保持在 1 附近但允许微小偏离。</p>
+<h3>谱控制策略</h3>
+<p>对奇异值 <span class="math inline">\sigma_i</span> 可施加不同约束：</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>公式</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>硬酉约束</td>
+<td><span class="math inline">\sigma_i = 1 \; \forall i</span></td>
+<td>完全等距，等价于 Unitary RNN</td>
+</tr>
+<tr>
+<td>带状约束</td>
+<td><span class="math inline">c \le \sigma_i \le 1</span></td>
+<td>允许衰减但有下限，防消失</td>
+</tr>
+<tr>
+<td>软惩罚</td>
+<td><span class="math inline">+\lambda \sum_i (\sigma_i - 1)^2</span></td>
+<td>柔性地鼓励奇异值接近 1</td>
+</tr>
+<tr>
+<td>无约束</td>
+<td>自由学习</td>
+<td>最大灵活性，但可能退化</td>
+</tr>
+</tbody>
+</table>
+<h3>梯度传播分析</h3>
+<p>对于 <span class="math inline">T</span> 步递推 <span class="math inline">h_{t+T} = W^T h_t</span>（线性部分）：</p>
+<div class="math block">
+\left\|\frac{\partial h_{t+T}}{\partial h_t}\right\| \propto \sigma_{\max}^T \quad (\text{最大方向})
+</div>
+<div class="math block">
+\left\|\frac{\partial h_{t+T}}{\partial h_t}\right\| \propto \sigma_{\min}^T \quad (\text{最小方向})
+</div>
+<p>当所有 <span class="math inline">\sigma_i \in [c, 1]</span> 时，梯度范数在最坏方向上的衰减速率被限制为 <span class="math inline">c^T</span>，远好于无约束情况。</p>
+<h3>计算复杂度</h3>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spectral-RNN 前向传播</td>
+<td><span class="math inline">O(n(m_1+m_2) - 2m_1^2 - 2m_2^2 + O(n))</span></td>
+</tr>
+<tr>
+<td>Spectral-RNN 反向传播</td>
+<td><span class="math inline">O(6n(m_1+m_2) - 1.5m_1^2 - 1.5m_2^2 + O(n))</span></td>
+</tr>
+<tr>
+<td>oRNN 前向传播</td>
+<td><span class="math inline">O(4nm - m^2)</span></td>
+</tr>
+<tr>
+<td>oRNN 反向传播</td>
+<td><span class="math inline">O(7nm - 2m^2)</span></td>
+</tr>
+</tbody>
+</table>
+<p>当 <span class="math inline">m_1 = m_2 = n</span> 时，Spectral-RNN 与 vanilla RNN 的参数量和计算量同阶。</p>
+<h2>关键结果</h2>
+<p>下图为论文核心实验结果页，包含 Addition 任务和 Copy 任务的表现对比（Figure 1: Addition task, Figure 2: Copy task）：</p>
+<p><img src="../papers/1803.09327-spectral-rnn/raw/page_10.webp" alt="Figure 1: Addition 任务结果（上排：test MSE，下排：第一层梯度范数），分别对应 L=30/100/300。当 L 增大时，IRNN 和 LSTM 梯度消失/爆炸，而 Spectral-RNN 和 oRNN 保持稳定。Figure 2: Copy 任务结果（T=100/300/500），Spectral-RNN 在所有时间尺度上均优于其他模型。" /></p>
+<p>下图为 pixel-MNIST 分类结果和准确率汇总表（Figure 3 &amp; Table 2）：</p>
+<p><img src="../papers/1803.09327-spectral-rnn/raw/page_11.webp" alt="Figure 3: pixel-MNIST 和 permuted-MNIST 分类准确率曲线。Spectral-RNN 始终达到最高准确率。Table 2 显示 Spectral-RNN 以仅 ~6k 参数达到 97.7% 准确率，超越 LSTM（97.3%，~64k 参数）。" /></p>
+<p>核心数据：</p>
+<ul>
+<li>在 copying problem、adding problem 等长程依赖基准上，Spectral-RNN 达到与 Unitary RNN 相当的长程依赖捕获能力。</li>
+<li>当允许奇异值在 <span class="math inline">[c, 1]</span> 区间自由学习时，模型可以自适应地在不同方向上调节信息保留/衰减，在需要选择性遗忘的任务上优于严格酉约束。</li>
+<li>pixel-MNIST 上以 ~6k 参数达到 <strong>97.7%</strong> 准确率，优于 LSTM（97.3%，~64k 参数）。</li>
+<li>训练稳定性显著优于无谱约束的 vanilla RNN。</li>
+</ul>
+<h2>与 Transformer 的相关性</h2>
+<p><strong>概念上有价值，但直接应用到现代 LLM 有困难</strong>：</p>
+<ul>
+<li><strong>计算成本</strong>：对 <span class="math inline">d \times d</span> 矩阵维护完整 SVD 的代价为 <span class="math inline">O(d^3)</span>。LLM 的 <span class="math inline">d</span> 可达 4096-16384，每步每层做 SVD 不现实。</li>
+<li><strong>部分适用性</strong>：可以考虑只对小矩阵（如 LoRA 的低秩因子）或关键层做 SVD 参数化。</li>
+<li><strong>思想延续</strong>：MACRO（<code>2601.08393-spectral-sphere-llm/</code>）在谱球流形上优化权重，可看作 SVD 参数化思想在 LLM 尺度上的变体。</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><span class="math inline">O(d^3)</span> 的 SVD 计算/维护成本限制了扩展到大模型。</li>
+<li>只约束单个权重矩阵的谱，不处理整个 block 的 Jacobian 结构。</li>
+<li>实验主要在 RNN 上，对 Transformer 的实验验证不足。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Unitary RNN</strong>（<code>1511.06464-unitary-rnn/</code>）：严格酉约束的先驱工作，Spectral-RNN 是其灵活化推广。</li>
+<li><strong>Spectral Normalization</strong>（<code>1802.05957-spectral-normalization/</code>）：只约束最大奇异值（上界），比 SVD 参数化廉价得多但控制粒度更粗。</li>
+<li><strong>MACRO / Spectral Sphere LLM</strong>（<code>2601.08393-spectral-sphere-llm/</code>）：在 LLM 预训练规模上实践谱约束思想。</li>
+<li><strong>Muon</strong>（<code>2502.16982-muon-scalable/</code>）：通过极分解控制更新矩阵的谱结构，间接实现类似目标。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2507.13338-lipschitz-transformers"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2507.13338" target="_blank">arXiv:2507.13338</a> · <a href="#2507.13338-lipschitz-transformers">README source</a></div><div class="paper-body"><h1>Training Transformers with Enforced Lipschitz Constants</h1>
+<p><strong>ArXiv</strong>：<a href="https://arxiv.org/abs/2507.13338">2507.13338</a>
+<strong>类别</strong>：C. 谱 / 正交约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>许多理论分析希望 Transformer 具有有界 Lipschitz 常数，以获得泛化保证、对抗鲁棒性、或训练稳定性。但此前缺乏对<strong>在训练过程中持续强制 Lipschitz 约束</strong>的 Transformer 的系统研究：</p>
+<ol>
+<li>谱归一化（<code>1802.05957</code>）仅约束单个权重矩阵的 <span class="math inline">\sigma_{\max}</span>，不保证 Transformer block 整体的 Lipschitz 常数。</li>
+<li>Attention 机制是输入依赖的非线性映射，其 Lipschitz 常数分析比简单线性层困难得多。</li>
+<li>理论上 Lipschitz 约束应提升泛化和稳定性，但实际效果如何？</li>
+</ol>
+<p><strong>核心问题</strong>：在 Transformer 训练中持续强制全局 Lipschitz 约束，是否能在保持性能的同时获得稳定性收益？</p>
+<h2>核心想法</h2>
+<p>系统实验表明：<strong>紧的 Lipschitz 约束与 Transformer 的表达力之间存在根本张力</strong>。要在 145M 参数量级匹配无约束 baseline 的性能，所需的 Lipschitz 上界必须非常大——以至于约束几乎名存实亡。</p>
+<p>下图给出了方法框架的总览——除了像 Muon 那样谱约束梯度更新，还可以对权重本身施加谱约束（如 spectral cap），而 weight decay 只是最简单的一种奇异值收缩：</p>
+<p><img src="../papers/2507.13338-lipschitz-transformers/raw/figures/method.webp" alt="方法总览：当前研究聚焦于高效的梯度更新谱约束（如 Muon），但同样可以对权重本身施加谱约束。Weight decay 是最简单的奇异值均匀收缩 U Σ V⊤ → U (1-λ)Σ V⊤，而 spectral cap 等方法提供了更灵活的奇异值映射 U Σ V⊤ → U f(Σ) V⊤。" /></p>
+<h2>方法细节</h2>
+<h3>逐层 Lipschitz 约束</h3>
+<p>对 Transformer 的每一层 <span class="math inline">f_\ell</span> 施加 Lipschitz 约束：</p>
+<div class="math block">
+\|f_\ell(x) - f_\ell(y)\| \le L_\ell \|x - y\| \quad \forall x, y
+</div>
+<p>整个网络的 Lipschitz 常数上界为各层之积：</p>
+<div class="math block">
+\text{Lip}(f) \le \prod_{\ell=1}^{L} L_\ell
+</div>
+<h3>约束实现方式</h3>
+<ol>
+<li><strong>Spectral Normalization</strong>：经典方法，通过 power iteration 将 <span class="math inline">\|W\|_2</span> 约束到目标值</li>
+<li><strong>Spectral Soft Cap</strong>：本文提出的新方法，使用奇多项式 <span class="math inline">p(x) = x - \alpha x^3</span> 平滑地压缩大奇异值</li>
+<li><strong>Spectral Hammer</strong>：更激进的奇异值压缩策略</li>
+<li><strong>Stiefel 流形投影</strong>：将权重投影到正交矩阵集合上</li>
+</ol>
+<p>下图展示了 spectral soft cap 对奇异值的作用效果——不同 <span class="math inline">\alpha</span> 值下的压缩曲线：</p>
+<p><img src="../papers/2507.13338-lipschitz-transformers/raw/figures/generalized.webp" alt="Spectral soft cap 的奇异值映射函数。先施加 p₁(x) = x - αx³，再施加 p₂(x) = x + αx³，二者的组合可平滑地约束大奇异值。不同 α 值（蓝: 0.2，红: 0.1，绿: 0.05，紫: 0）对应不同的压缩强度。" /></p>
+<h3>Attention 的 Lipschitz 分析</h3>
+<p>标准 self-attention：</p>
+<div class="math block">
+\text{Attn}(X) = \text{softmax}\!\left(\frac{XW_Q (XW_K)^\top}{\sqrt{d_k}}\right) XW_V
+</div>
+<p>这是关于 <span class="math inline">X</span> 的<strong>二次</strong>映射（<span class="math inline">Q \cdot K^\top</span> 项），其 Lipschitz 常数随输入范数增长。要约束 attention 的 Lipschitz 常数，需要同时限制：</p>
+<ul>
+<li><span class="math inline">\|W_Q\|_2, \|W_K\|_2, \|W_V\|_2, \|W_O\|_2</span> 的谱范数</li>
+<li>输入 <span class="math inline">X</span> 的范数（通过归一化或约束前层输出）</li>
+</ul>
+<h3>残差连接的影响</h3>
+<div class="math block">
+h_\ell = h_{\ell-1} + f_\ell(h_{\ell-1})
+</div>
+<div class="math block">
+\text{Lip}(h_\ell) \le 1 + \text{Lip}(f_\ell)
+</div>
+<p>如果 <span class="math inline">\text{Lip}(f_\ell) = L</span>，则 <span class="math inline">L</span> 层后的 Lipschitz 上界为 <span class="math inline">(1+L)^L</span>，增长极快。要使这个上界有意义地紧，需要每层 <span class="math inline">L</span> 非常小。</p>
+<h2>关键结果</h2>
+<h3>Lipschitz-性能 Pareto 前沿</h3>
+<p>核心发现：<strong>Muon 优化器配合谱约束方法，比 AdamW 能在更低的 Lipschitz 上界下达到更好的性能</strong>：</p>
+<p><img src="../papers/2507.13338-lipschitz-transformers/raw/figures/pareto_val_loss_vs_lipschitz_combined.webp" alt="Lipschitz 常数 vs 验证损失的 Pareto 前沿。左：CIFAR-10 MLP；右：Shakespeare Transformer。在两个任务上，Muon 优化器搭配谱约束方法（spectral normalization、spectral soft cap）均能在更低 Lipschitz 上界下达到更好的 loss。" /></p>
+<h3>Muon 生态下的权重约束方法对比</h3>
+<p>对比 Muon 配合不同权重约束方法的效果——spectral normalization 和 spectral cap 在 Lipschitz-loss 权衡中表现最优：</p>
+<p><img src="../papers/2507.13338-lipschitz-transformers/raw/figures/full_moun_comparision.webp" alt="左：各权重约束方法在 Lipschitz vs loss 权衡的 Pareto 前沿。中：各方法达到 baseline 1% 以内的准确率时对应的 Lipschitz 上界。右：训练过程中各方法的隐藏层 RMS→RMS 算子范数变化，SN 和 Stiefel 投影严格满足约束。" /></p>
+<h3>对抗鲁棒性</h3>
+<p>更低的 Lipschitz 上界确实带来更强的对抗鲁棒性：</p>
+<p><img src="../papers/2507.13338-lipschitz-transformers/raw/figures/accuracy_epsilon_cifar.webp" alt="Lipschitz 约束提升对抗鲁棒性。左：不同 ε 扰动预算下的对抗样本可视化。右上：Lipschitz 约束模型在较大 ε 下保持更高准确率。右下：各模型的认证鲁棒半径，低 Lipschitz 模型在每个半径上都有更多样本通过认证。" /></p>
+<h3>NanoGPT 实验</h3>
+<table>
+<thead>
+<tr>
+<th>模型规模</th>
+<th>Lipschitz 上界</th>
+<th>是否匹配 baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小模型（&lt;10M）</td>
+<td>适度（如 <span class="math inline">L_\ell \le 2</span>）</td>
+<td>是，性能差距小</td>
+</tr>
+<tr>
+<td>145M</td>
+<td>需要极大上界</td>
+<td>仅当约束极松时</td>
+</tr>
+<tr>
+<td>145M + 紧约束</td>
+<td><span class="math inline">L_\ell \le 2</span></td>
+<td><strong>性能显著下降</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心发现</strong>：在 145M 参数规模，要匹配 baseline 准确率，所需的 Lipschitz 上界大到基本等于没有约束（<span class="math inline">10^{264}</span>）。10-Lipschitz Transformer 可以在不使用 LayerNorm/QK-norm 的情况下稳定训练，达到 21.2% 准确率——但与无约束 baseline 差距显著。这揭示了<strong>稳定性保证与模型表达力之间的根本矛盾</strong>。</p>
+<h2>与梯度消失/爆炸的关系</h2>
+<p>Lipschitz 约束属于 <strong>anti-explosion</strong> 工具：</p>
+<div class="math block">
+\|J_{f}\|_2 \le L \implies \text{梯度范数被上界约束}
+</div>
+<p>但 <span class="math inline">\|J_{f}\|_2 \le L</span> 不保证 <span class="math inline">\sigma_{\min}(J_f) &gt; 0</span>——Jacobian 仍可以是低秩的，梯度在某些方向上仍会消失。只有当 Lipschitz 约束足够紧（如每层接近等距），才能同时防止消失，但此时模型表达力严重受限。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>最大实验规模 145M，对现代 LLM（&gt;1B）的适用性未验证。</li>
+<li>对 attention 的 Lipschitz 分析是上界估计，可能过于保守。</li>
+<li>揭示了问题（tension between stability and expressivity）但未提出解决方案。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Spectral Normalization</strong>（<code>1802.05957-spectral-normalization/</code>）：逐层谱范数约束，是本文方法的基础组件。</li>
+<li><strong>MACRO / Spectral Sphere LLM</strong>（<code>2601.08393-spectral-sphere-llm/</code>）：在 LLM 规模上探索谱约束，采用不同的约束策略。</li>
+<li><strong>DeepNet</strong>（<code>2203.00555-deepnet/</code>）：通过残差缩放而非 Lipschitz 约束实现深层 Transformer 的稳定训练——可能是更实用的路线。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2601.08393-spectral-sphere-llm"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2601.08393" target="_blank">arXiv:2601.08393</a> · <a href="#2601.08393-spectral-sphere-llm">README source</a></div><div class="paper-body"><h1>Controlled LLM Training on Spectral Sphere (MACRO)</h1>
+<p><strong>ArXiv</strong>：<a href="https://arxiv.org/abs/2601.08393">2601.08393</a>
+<strong>类别</strong>：C. 谱 / 正交约束 + D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>大规模 LLM 预训练中，权重矩阵的谱结构在训练过程中会漂移，导致：</p>
+<ol>
+<li><strong>激活尺度不稳定</strong>：不同层输出的范数差异可达数量级，需要大量归一化层来补救。</li>
+<li><strong>训练不稳定</strong>：loss spike、需要精细调整 learning rate warmup/decay。</li>
+<li><strong>缩放困难</strong>：从小模型到大模型的超参数迁移不可靠。</li>
+</ol>
+<p>此前的谱约束方法（谱归一化、Lipschitz 约束）要么只控制单个矩阵的最大奇异值，要么发现紧约束伤害性能。</p>
+<p><strong>核心问题</strong>：能否在<strong>LLM 预训练规模</strong>上系统地对权重和更新施加谱/流形约束，同时保持或提升性能？</p>
+<h2>核心想法</h2>
+<p>提出 <strong>MACRO</strong>（MAnifold Constrained Regularized Optimization）框架，将权重约束到谱球（spectral sphere）、Frobenius 球、或 oblique 流形上，并设计配套的优化器在流形上进行约束更新。核心论点：这类约束能建立稳定的&quot;旋转均衡&quot;（rotational equilibrium），使激活尺度和梯度流在训练全程保持可控。</p>
+<h2>方法细节</h2>
+<h3>Spectral Sphere Optimizer (SSO)</h3>
+<p>下图展示了 SSO 的几何直觉——在谱球流形的切空间内寻找最陡下降方向：</p>
+<p><img src="../papers/2601.08393-spectral-sphere-llm/raw/figures/method/sso.webp" alt="SSO 的几何示意。左侧实线弧表示 W 的谱球约束面，右侧虚线弧表示 ΔW 的单位球面（缩放 η 后）。阴影区域是 W 球面在 Wᵢ 处切空间内的可行集。将梯度 G 投影到切空间（Spectral Sphere）可获得最大更新角度。" /></p>
+<p>核心步骤：</p>
+<pre><code>输入：当前权重 W, 梯度 ∇L, 约束谱范数 R
+1. 计算极分解方向：Φ = msign(∇L)（矩阵符号函数，类似 Muon）
+2. 投影到谱球切空间：去除法向分量
+3. Retraction 回谱球：W' ← R · W' / ‖W'‖₂
+</code></pre>
+<h3>谱 μP 初始化</h3>
+<p>为实现宽度无关的超参数迁移，论文推导了 spectral μP 条件：对 <span class="math inline">d_\text{out} \times d_\text{in}</span> 的权重矩阵，设置谱范数约束半径为：</p>
+<div class="math block">
+R = \sqrt{d_\text{out} / d_\text{in}}
+</div>
+<p>配合相应的 learning rate scaler，实现从 70M 到 1.8B 模型的 LR 零漂移迁移：</p>
+<p><img src="../papers/2601.08393-spectral-sphere-llm/raw/figures/mup_comparison.webp" alt="μP 宽度缩放实验（70M → 1.8B）。Muon 的最优 LR 仍有明显漂移，而 Spectral Sphere 实现了稳定的 LR 迁移，同时在各宽度上均取得比 Muon 更低的最优 loss。" /></p>
+<h3>流形约束类型</h3>
+<table>
+<thead>
+<tr>
+<th>流形</th>
+<th>约束</th>
+<th>几何含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>谱球（Spectral Sphere）</td>
+<td><span class="math inline">|W|_2 = c</span>（谱范数固定）</td>
+<td>最大奇异值恒为 <span class="math inline">c</span></td>
+</tr>
+<tr>
+<td>Frobenius 球</td>
+<td><span class="math inline">|W|_F = c</span>（Frobenius 范数固定）</td>
+<td>所有奇异值的平方和恒为 <span class="math inline">c^2</span></td>
+</tr>
+<tr>
+<td>Oblique 流形</td>
+<td>每列/每行归一化</td>
+<td>权重矩阵的列（或行）在超球面上</td>
+</tr>
+</tbody>
+</table>
+<h3>模块级约束（Module-wise Constraints）</h3>
+<p>不是对整个模型施加单一约束，而是对每个模块（attention 的 <span class="math inline">W_Q, W_K, W_V, W_O</span>，MLP 的 <span class="math inline">W_1, W_2</span>）独立施加谱约束。QKV per-head 拆分是最关键的设计选择。</p>
+<h3>二阶流形约束</h3>
+<p>为对抗高阶误差的累积漂移，使用 retraction 将权重精确投影回谱球：</p>
+<div class="math block">
+\text{Retract}(W) = R \cdot W / \|W\|_2
+</div>
+<p>论文证明这一步的余项为 <span class="math inline">\mathcal{O}(\eta^2 R^2 \|\Phi\|_2^2)</span>，在实践中可控。</p>
+<h3>激活尺度的稳定性</h3>
+<p>如果每层线性变换 <span class="math inline">W_\ell</span> 的谱范数固定为 <span class="math inline">c</span>，则：</p>
+<div class="math block">
+\|W_\ell x\| \le c \|x\|
+</div>
+<p>配合归一化层，可以建立前向传播中激活范数的不变量——&quot;旋转均衡&quot;：权重在谱球上旋转但不改变尺度。</p>
+<h2>关键结果</h2>
+<h3>Dense 1.7B 训练</h3>
+<p>Spectral Sphere 在 100B token 训练中比 AdamW 快 19% 达到同等验证损失，比 Muon 快 7%：</p>
+<p><img src="../papers/2601.08393-spectral-sphere-llm/raw/figures/exp/dense_val_loss_comparison.webp" alt="Dense 1.7B 模型在 100B tokens 上的验证损失曲线。AdamW 在 23k 步达到的 loss，Muon 用 12% 更少的步数达到，Spectral Sphere 用 19% 更少的步数达到。三者中 Spectral Sphere 的最终 loss 最低。" /></p>
+<h3>MoE 8B-A1B 训练</h3>
+<p>在 MoE 架构下，Spectral Sphere 不仅 loss 最低，还具有最好的专家负载均衡：</p>
+<p><img src="../papers/2601.08393-spectral-sphere-llm/raw/figures/exp/moe_val_loss_comparison.webp" alt="MoE 8B-A1B 训练结果。左：验证损失曲线，Spectral Sphere 最低。右：MaxVio（MoE 负载均衡指标），AdamW 波动剧烈，Spectral Sphere 最平稳——将每个 expert 约束在谱球上进一步改善了路由稳定性。" /></p>
+<h3>200-layer DeepNet 极端深度测试</h3>
+<p>在 200 层超深 Transformer 上，Spectral Sphere 无需任何特殊初始化即可稳定训练：</p>
+<p><img src="../papers/2601.08393-spectral-sphere-llm/raw/figures/exp/deepnet_train_loss.webp" alt="200 层 DeepNet 训练损失。AdamW 频繁出现 loss spike，训练极不稳定；Muon 较稳定但仍有波动；Spectral Sphere 达到最低 loss 且最高稳定性，无需 DeepNorm 等特殊技巧。" /></p>
+<h3>汇总</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>配置</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dense 1.7B</td>
+<td>MACRO vs AdamW baseline</td>
+<td>匹配或略优，步数效率 +19%</td>
+</tr>
+<tr>
+<td>MoE 8B-A1B</td>
+<td>Spectral sphere constraint</td>
+<td>训练更稳定，减少 loss spike，改善负载均衡</td>
+</tr>
+<tr>
+<td>200-layer DeepNet</td>
+<td>MACRO</td>
+<td>无需特殊初始化即可训练</td>
+</tr>
+</tbody>
+</table>
+<h2>与梯度消失的关系</h2>
+<p><strong>MACRO 对尺度稳定性和激活控制有明显帮助，但对&quot;有用梯度信号保持&quot;的作用是间接的。</strong></p>
+<p>具体分析：</p>
+<ul>
+<li><strong>防爆炸</strong>：✅ 谱范数上界直接控制</li>
+<li><strong>防消失（部分）</strong>：约束 <span class="math inline">\|W\|_2 = c</span> 固定了最大奇异值，但 <span class="math inline">\sigma_{\min}</span> 仍可自由衰减。Frobenius 约束 <span class="math inline">\|W\|_F = c</span> 间接限制了奇异值的&quot;总预算&quot;，但不阻止个别奇异值趋近零。</li>
+<li><strong>隐状态 Jacobian</strong>：MACRO 约束的是 <span class="math inline">W</span> 和 <span class="math inline">\Delta W</span>，不是完整的隐状态 Jacobian <span class="math inline">\partial h_\ell / \partial h_{\ell-1}</span>（后者还涉及 attention、LayerNorm、激活函数等）。</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>流形投影步增加了每步计算开销（尤其是谱范数计算/投影需要 SVD 或 power iteration）。</li>
+<li>约束的是各模块权重的谱结构，但模块组合后的整体 Jacobian 行为未被直接约束。</li>
+<li>Oblique 流形约束与 LayerNorm/RMSNorm 的交互可能产生冗余。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Spectral Normalization</strong>（<code>1802.05957-spectral-normalization/</code>）：MACRO 的谱球约束可视为谱归一化的严格化版本（固定而非上界）。</li>
+<li><strong>Lipschitz Transformers</strong>（<code>2507.13338-lipschitz-transformers/</code>）：发现紧 Lipschitz 约束伤害性能；MACRO 的模块级策略可能是缓解此张力的一种方案。</li>
+<li><strong>Muon</strong>（<code>2502.16982-muon-scalable/</code>）：通过极分解约束更新矩阵的谱结构，与 MACRO 约束 <span class="math inline">W</span> 本身的方法互补。</li>
+<li><strong>nGPT</strong>（<code>2410.01131-ngpt/</code>）：在隐状态空间而非权重空间施加超球面约束，思路正交但目标相近。</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #ff8a5c;padding-left:16px;margin:48px 0 24px"><h2 style="color:#ff8a5c">Category D: 优化器 / 更新约束</h2></div>
+<article class="paper-article" id="1804.04235-adafactor"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1804.04235" target="_blank">arXiv:1804.04235</a> · <a href="#1804.04235-adafactor">README source</a></div><div class="paper-body"><h1>Adafactor: Adaptive Learning Rates with Sublinear Memory Cost</h1>
+<p><strong>论文</strong>：Shazeer &amp; Stern (2018)
+<strong>ArXiv</strong>：<a href="https://arxiv.org/abs/1804.04235">1804.04235</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>Adam 优化器为每个参数维护一阶动量 <span class="math inline">m</span> 和二阶动量 <span class="math inline">v</span>，内存开销是参数本身的 <strong>3 倍</strong>（参数 + <span class="math inline">m</span> + <span class="math inline">v</span>）。对 Transformer 这种参数量巨大的模型，优化器状态成为 GPU 内存的主要瓶颈。</p>
+<p>例如：一个 <span class="math inline">d_{\text{model}} \times d_{\text{ff}}</span> 的 MLP 权重矩阵，Adam 需要存储同样尺寸的 <span class="math inline">m</span> 和 <span class="math inline">v</span>。如果 <span class="math inline">d_{\text{model}} = 1024, d_{\text{ff}} = 4096</span>，仅这一层的优化器状态就是 <span class="math inline">2 \times 1024 \times 4096 \times 4\text{B} = 32\text{MB}</span>。</p>
+<p>此外，Adam 使用慢衰减（<span class="math inline">\beta_2 = 0.999</span>）时，二阶动量估计器严重滞后于真实值，导致参数更新偏离预期：</p>
+<p><img src="../papers/1804.04235-adafactor/raw/u.webp" alt="慢衰减 (β₂=0.999) 下二阶动量估计器滞后，导致更新量偏大或偏小" /></p>
+<p>上图展示了 Transformer 某个权重矩阵训练过程中 <span class="math inline">\text{RMS}(U_t)</span> 的变化。快衰减（红色，<span class="math inline">\beta_2 = 0.9</span>）下更新量稳定在 1 附近，而慢衰减（蓝色，<span class="math inline">\beta_2 = 0.999</span>）则大幅波动，出现超预期的更新量——这正是训练不稳定的来源。</p>
+<h2>核心想法</h2>
+<p>用<strong>矩阵分解</strong>近似 Adam 的二阶动量：将 <span class="math inline">v \in \mathbb{R}^{m \times n}</span> 分解为行统计量 <span class="math inline">r \in \mathbb{R}^m</span> 和列统计量 <span class="math inline">c \in \mathbb{R}^n</span>，内存从 <span class="math inline">O(mn)</span> 降到 <span class="math inline">O(m + n)</span>。同时引入更新裁剪（update clipping），使更新量相对于参数尺度自动缩放，解决慢衰减导致的更新不稳定问题。</p>
+<h2>方法细节</h2>
+<h3>分解的二阶动量</h3>
+<p>Adam 的二阶动量更新：</p>
+<div class="math block">
+v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2
+</div>
+<p>Adafactor 对矩阵参数 <span class="math inline">W \in \mathbb{R}^{m \times n}</span>，不存储完整 <span class="math inline">v_t \in \mathbb{R}^{m \times n}</span>，而是分别维护行和列的统计量：</p>
+<div class="math block">
+r_t = \beta_2 r_{t-1} + (1 - \beta_2) \cdot \text{RowMean}(g_t^2) \in \mathbb{R}^m
+</div>
+<div class="math block">
+c_t = \beta_2 c_{t-1} + (1 - \beta_2) \cdot \text{ColMean}(g_t^2) \in \mathbb{R}^n
+</div>
+<p>重建近似：</p>
+<div class="math block">
+\hat{v}_t = \frac{r_t \cdot c_t^\top}{\text{mean}(r_t)}
+</div>
+<p>内存节省：从 <span class="math inline">mn</span> 降到 <span class="math inline">m + n</span>。</p>
+<h3>更新裁剪（Update Clipping）</h3>
+<p>Adafactor 的关键创新之一：根据参数尺度自适应裁剪更新量。先计算未裁剪的更新：</p>
+<div class="math block">
+U_t = \frac{g_t}{\sqrt{\hat{v}_t}}
+</div>
+<p>然后裁剪：</p>
+<div class="math block">
+\hat{U}_t = \frac{U_t}{\max\!\left(1, \; \text{RMS}(U_t) / d\right)}
+</div>
+<p>其中 <span class="math inline">d</span> 是裁剪阈值（通常取 1.0）。这确保更新的 RMS 不超过 <span class="math inline">d</span>，自动防止某些参数更新过于激进。</p>
+<h3>无需存储一阶动量</h3>
+<p>Adafactor 默认不使用一阶动量（<span class="math inline">\beta_1 = 0</span>），进一步节省内存。参数更新变为：</p>
+<div class="math block">
+W_{t+1} = W_t - \alpha_t \cdot \hat{U}_t
+</div>
+<h3>自适应学习率衰减</h3>
+<p>使用 <span class="math inline">\beta_2 = 1 - t^{-0.8}</span> 的时间依赖衰减，无需手动设置 <span class="math inline">\beta_2</span>。这使得早期训练时衰减快（<span class="math inline">\beta_2</span> 小，二阶动量更新快），后期逐渐变慢趋于稳定。</p>
+<h2>关键结果</h2>
+<ul>
+<li>在 Transformer 机器翻译（WMT EN-DE, EN-FR）上，<strong>Adafactor 匹配 Adam 的翻译质量</strong>，同时将优化器内存从 <span class="math inline">3 \times</span> 参数降到约 <span class="math inline">1.5 \times</span> 参数。</li>
+<li>成为 T5 等大模型训练的默认优化器。</li>
+<li>更新裁剪机制提升了训练稳定性，减少了对 learning rate warmup 的依赖。</li>
+</ul>
+<h2>与梯度消失的关系</h2>
+<p><strong>Adafactor 不直接解决梯度消失问题。</strong></p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>Adafactor 的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>某层梯度很小但方向有用</td>
+<td>自适应学习率放大更新 ✅</td>
+</tr>
+<tr>
+<td>某层梯度几乎为零（隐状态敏感性丧失）</td>
+<td>无法从噪声中恢复信号 ❌</td>
+</tr>
+<tr>
+<td>梯度范数非零但低秩（只在 skip connection 方向有信号）</td>
+<td>更新裁剪可能放大这些方向的更新，但不增加新方向的信息 ❌</td>
+</tr>
+</tbody>
+</table>
+<p>核心问题：Adafactor（和所有自适应优化器）作用在<strong>反向传播之后</strong>。如果 <span class="math inline">J_{\ell \to L}^\top</span> 已经丢失了某些方向的敏感性，优化器无论如何缩放都无法恢复。</p>
+<p>用一个比喻：如果信号在传输中被截断（消失），放大器（优化器）能做的只是放大噪声，而非恢复原始信号。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>分解近似在极端条件下可能不够精确（如梯度分布高度非对称时）。</li>
+<li>无一阶动量的版本在某些任务上收敛略慢。</li>
+<li>不解决梯度消失的根本问题——这是优化器类方法的共同局限。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>LARS</strong>（<code>1708.03888-lars/</code>）：另一种层级自适应学习率方法，关注大批量训练稳定性。</li>
+<li><strong>K-FAC</strong>（<code>1503.05671-kfac/</code>）：二阶优化器，利用 Fisher 信息矩阵的 Kronecker 近似进行更激进的预条件化。</li>
+<li><strong>Muon</strong>（<code>2502.16982-muon-scalable/</code>）：通过极分解正交化更新，不存储动量，也是内存高效的优化器。</li>
+<li><strong>Gradient Multi-Normalization</strong>（<code>2502.06742-gradient-multi-normalization/</code>）：进一步去除优化器状态，仅对梯度做多重归一化。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1708.03888-lars"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1708.03888" target="_blank">arXiv:1708.03888</a> · <a href="#1708.03888-lars">README source</a></div><div class="paper-body"><h1>Large Batch Training of Convolutional Networks (LARS)</h1>
+<p><strong>论文</strong>：You, Gitman, Ginsburg (2017)
+<strong>ArXiv</strong>：<a href="https://arxiv.org/abs/1708.03888">1708.03888</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>使用大 batch size 训练可以充分利用数据并行，大幅缩短训练时间。但直接增大 batch size 会导致：</p>
+<ol>
+<li><strong>泛化差距</strong>：大 batch 训练的模型往往泛化性能不如小 batch。</li>
+<li><strong>训练不稳定</strong>：简单地按线性缩放规则（learning rate <span class="math inline">\propto</span> batch size）调整学习率，经常导致训练发散。</li>
+<li><strong>层间梯度尺度不均衡</strong>：不同层的权重范数 <span class="math inline">\|w_\ell\|</span> 和梯度范数 <span class="math inline">\|\nabla w_\ell\|</span> 可能相差数个数量级，全局学习率无法同时适配所有层。</li>
+</ol>
+<p><strong>核心观察</strong>：不同层的&quot;信赖比率&quot;（trust ratio）<span class="math inline">\|w_\ell\| / \|\nabla w_\ell\|</span> 差异巨大。使用全局学习率时，某些层更新过大（不稳定），另一些层更新过小（学不动）。</p>
+<p>作者首先排除了泛化差距假说——大 batch 训练中训练与测试 loss 之间的差距并无显著增大：</p>
+<p><img src="../papers/1708.03888-lars/raw/figs/train_test_loss_diff.webp" alt="Alexnet-BN：训练与测试 loss 差距对比，B=256 与 B=8K 无显著差异" /></p>
+<h2>核心想法</h2>
+<p>为每一层计算独立的有效学习率，通过<strong>层级信赖比率</strong>（layerwise trust ratio）自动缩放：如果某层的梯度相对于参数太大，就减小该层的学习率；反之则增大。</p>
+<h2>方法细节</h2>
+<h3>LARS 更新规则</h3>
+<p>对第 <span class="math inline">\ell</span> 层：</p>
+<div class="math block">
+\eta_\ell = \eta_{\text{global}} \cdot \gamma_\ell \cdot \frac{\|w_\ell\|}{\|\nabla w_\ell\| + \lambda \|w_\ell\|}
+</div>
+<p>其中：</p>
+<ul>
+<li><span class="math inline">\eta_{\text{global}}</span>：全局基础学习率</li>
+<li><span class="math inline">\gamma_\ell</span>：可选的每层固定系数（通常为 1）</li>
+<li><span class="math inline">\|w_\ell\|</span>：该层参数的范数</li>
+<li><span class="math inline">\|\nabla w_\ell\|</span>：该层梯度的范数</li>
+<li><span class="math inline">\lambda</span>：权重衰减系数</li>
+</ul>
+<p>参数更新：</p>
+<div class="math block">
+w_\ell \leftarrow w_\ell - \eta_\ell \cdot (\nabla w_\ell + \lambda w_\ell)
+</div>
+<h3>层级自适应 LR 的可视化</h3>
+<p>LARS 为每层计算的 local LR 在不同层和不同 batch size 下差异巨大，体现了逐层缩放的必要性：</p>
+<p><img src="../papers/1708.03888-lars/raw/figs/alexnetbn_lars_conv1w.webp" alt="LARS 在不同层和 batch size 下的 local LR（conv1 权重）" /></p>
+<p><img src="../papers/1708.03888-lars/raw/figs/alexnetbn_lars_conv5w.webp" alt="LARS 在不同层和 batch size 下的 local LR（conv5 权重）" /></p>
+<p>可以看到浅层（conv1）和深层（conv5）的 local LR 差异可达一个数量级以上，且随 batch size 变化趋势不同。</p>
+<h3>直觉理解</h3>
+<p>信赖比率 <span class="math inline">\|w_\ell\| / \|\nabla w_\ell\|</span> 的含义：</p>
+<ul>
+<li><strong>比率大</strong>（梯度相对小）→ 该层可以安全地使用较大步长</li>
+<li><strong>比率小</strong>（梯度相对大）→ 该层需要抑制步长以防不稳定</li>
+</ul>
+<p>这相当于将每层的更新 <span class="math inline">\Delta w_\ell</span> 的相对尺度（<span class="math inline">\|\Delta w_\ell\| / \|w_\ell\|</span>）标准化到大致统一的水平。</p>
+<h3>与 LAMB 的关系</h3>
+<p>LAMB（Layer-wise Adaptive Moments optimizer for Batch training）将 LARS 的思想与 Adam 结合：</p>
+<div class="math block">
+\eta_\ell^{\text{LAMB}} = \eta_{\text{global}} \cdot \frac{\|w_\ell\|}{\|m_\ell / \sqrt{v_\ell} + \lambda w_\ell\|}
+</div>
+<p>其中 <span class="math inline">m_\ell, v_\ell</span> 是 Adam 的一阶和二阶动量。LAMB 在 BERT 等 Transformer 训练中使用更广泛。</p>
+<h2>关键结果</h2>
+<h3>LARS 使大 batch 训练匹配 baseline</h3>
+<p>下图对比了 Alexnet-BN 在 B=8K 时无 LARS（左）和有 LARS（右）的训练效果：</p>
+<p><img src="../papers/1708.03888-lars/raw/figs/alexnet_bn_8k.webp" alt="无 LARS 时 B=8K 训练退化" /></p>
+<p><img src="../papers/1708.03888-lars/raw/figs/alexnet_bn_8k_auto_lr.webp" alt="使用 LARS 后 B=8K 匹配 baseline" /></p>
+<h3>ResNet-50 大规模扩展</h3>
+<p>LARS 使 ResNet-50 在 ImageNet 上可以扩展到 B=32K，精度几乎不损失：</p>
+<p><img src="../papers/1708.03888-lars/raw/figs/resnet50_32k_whole.webp" alt="LARS 将 ResNet-50 扩展到 B=32K，精度损失极小" /></p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>Batch Size</th>
+<th>Top-1 Accuracy</th>
+<th>训练时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline SGD</td>
+<td>256</td>
+<td>~73% (ResNet-50)</td>
+<td>数天</td>
+</tr>
+<tr>
+<td>linear scaling</td>
+<td>8192</td>
+<td>发散或下降</td>
+<td>—</td>
+</tr>
+<tr>
+<td>LARS</td>
+<td>8192</td>
+<td>~73%（匹配 baseline）</td>
+<td>大幅缩短</td>
+</tr>
+<tr>
+<td>LARS</td>
+<td>32K</td>
+<td>仍接近 baseline</td>
+<td>极大缩短</td>
+</tr>
+</tbody>
+</table>
+<h3>学习率鲁棒性</h3>
+<p>LARS 在较宽的 base LR 区间内都能获得接近最优的精度：</p>
+<p><img src="../papers/1708.03888-lars/raw/figs/AlexnetBN_Accuracy_BaseLR.webp" alt="Alexnet-BN B=16K/32K：精度随 base LR 变化，存在较宽的最优区间" /></p>
+<h2>与梯度消失的关系</h2>
+<p><strong>LARS 不直接解决梯度消失问题。</strong></p>
+<p>LARS 的设计目标是<strong>大 batch 训练的稳定性</strong>，与隐状态信号在深度方向上的传播是不同的问题：</p>
+<ul>
+<li><strong>LARS 解决的问题</strong>：层间更新尺度不平衡 → 某些层步长过大/过小</li>
+<li><strong>梯度消失问题</strong>：信号经过多层后在某些方向上的敏感性丧失 → <span class="math inline">J_{\ell \to L}</span> 的奇异值坍缩</li>
+</ul>
+<p>即使 LARS 完美地平衡了各层的更新尺度，如果某层收到的梯度方向已经是退化的（低秩、只在 skip connection 方向有信号），LARS 只会均匀地更新这个退化方向，不会恢复丢失的方向。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>信赖比率是一个启发式指标，缺乏严格的理论最优性保证。</li>
+<li>在某些架构上（如 Transformer 的 embedding 层），固定的范数缩放策略可能不适用。</li>
+<li>不处理梯度方向的质量问题——只处理尺度。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Adafactor</strong>（<code>1804.04235-adafactor/</code>）：另一种自适应学习率方法，更关注内存效率。</li>
+<li><strong>K-FAC</strong>（<code>1503.05671-kfac/</code>）：二阶优化器，不仅调整尺度还调整方向。</li>
+<li><strong>Muon</strong>（<code>2502.16982-muon-scalable/</code>）：通过极分解控制更新矩阵的几何结构，比 LARS 的尺度调整更深入。</li>
+<li><strong>Gradient Multi-Normalization</strong>（<code>2502.06742-gradient-multi-normalization/</code>）：对梯度施加多重归一化，也有尺度标准化效果。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1503.05671-kfac"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1503.05671" target="_blank">arXiv:1503.05671</a> · <a href="#1503.05671-kfac">README source</a></div><div class="paper-body"><h1>Optimizing Neural Networks with Kronecker-factored Approximate Curvature (K-FAC)</h1>
+<p><strong>论文</strong>：Martens &amp; Grosse (2015)
+<strong>ArXiv</strong>：<a href="https://arxiv.org/abs/1503.05671">1503.05671</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>一阶优化器（SGD、Adam）只用梯度方向和尺度来更新参数，忽略了参数空间的<strong>曲率信息</strong>。在损失函数的高曲率方向上步长过大导致震荡，在低曲率方向上步长过小导致收敛缓慢。</p>
+<p><strong>自然梯度</strong>（natural gradient）通过 Fisher 信息矩阵 <span class="math inline">F</span> 进行预条件化，将参数空间中的欧氏梯度转换为统计流形上的自然梯度：</p>
+<div class="math block">
+\Delta \theta = -F^{-1} \nabla_\theta \mathcal{L}
+</div>
+<p>问题：<span class="math inline">F \in \mathbb{R}^{P \times P}</span>（<span class="math inline">P</span> = 总参数量），存储 <span class="math inline">O(P^2)</span>、求逆 <span class="math inline">O(P^3)</span>，对深度网络完全不可行。</p>
+<p><strong>核心需求</strong>：一种高效的 Fisher 矩阵近似，使自然梯度在深度网络中可行。</p>
+<h2>核心想法</h2>
+<p>利用神经网络的层结构，将 Fisher 矩阵近似为<strong>分块对角 + Kronecker 乘积</strong>形式。每层的 Fisher 块 <span class="math inline">F_\ell</span> 被近似为输入激活协方差和梯度协方差的 Kronecker 乘积：<span class="math inline">F_\ell \approx A_{\ell-1} \otimes G_\ell</span>，从而将 <span class="math inline">O(d_\ell^2 d_{\ell-1}^2)</span> 的存储和求逆降到 <span class="math inline">O(d_\ell^2 + d_{\ell-1}^2)</span>。</p>
+<p>下图展示了一个标准的前馈神经网络（<span class="math inline">\ell = 2</span> 层），K-FAC 利用这种分层结构进行 Fisher 矩阵的分块近似：</p>
+<p><img src="../papers/1503.05671-kfac/raw/nnet_4a.webp" alt="标准前馈神经网络结构图（ℓ=2）" /></p>
+<h2>方法细节</h2>
+<h3>Fisher 信息矩阵</h3>
+<p>对于参数 <span class="math inline">\theta</span> 和损失 <span class="math inline">\mathcal{L}</span>，Fisher 矩阵定义为：</p>
+<div class="math block">
+F = \mathbb{E}\!\left[\nabla_\theta \log p(y|x;\theta) \cdot \nabla_\theta \log p(y|x;\theta)^\top\right]
+</div>
+<h3>K-FAC 近似</h3>
+<p>对第 <span class="math inline">\ell</span> 层（<span class="math inline">W_\ell \in \mathbb{R}^{d_\ell \times d_{\ell-1}}</span>，输入 <span class="math inline">a_{\ell-1}</span>，反向传播梯度 <span class="math inline">g_\ell</span>）：</p>
+<div class="math block">
+F_\ell \approx \underbrace{\mathbb{E}[a_{\ell-1} a_{\ell-1}^\top]}_{A_{\ell-1} \in \mathbb{R}^{d_{\ell-1} \times d_{\ell-1}}} \;\otimes\; \underbrace{\mathbb{E}[g_\ell g_\ell^\top]}_{G_\ell \in \mathbb{R}^{d_\ell \times d_\ell}}
+</div>
+<p>Kronecker 乘积的关键性质使求逆高效：</p>
+<div class="math block">
+(A \otimes G)^{-1} = A^{-1} \otimes G^{-1}
+</div>
+<p>因此只需分别求逆 <span class="math inline">A_{\ell-1}</span> 和 <span class="math inline">G_\ell</span>，代价从 <span class="math inline">O((d_\ell d_{\ell-1})^3)</span> 降到 <span class="math inline">O(d_\ell^3 + d_{\ell-1}^3)</span>。</p>
+<h3>Kronecker 近似的质量</h3>
+<p>下图对比了精确 Fisher <span class="math inline">F</span>（左）、K-FAC 的 Kronecker 近似 <span class="math inline">\tilde{F}</span>（中）和两者的差异（右），可以看到近似效果良好：</p>
+<p><img src="../papers/1503.05671-kfac/raw/newfig3_exactF.webp" alt="精确 Fisher F（左）vs K-FAC Kronecker 近似 F̃（中）vs 差异（右）" /> <img src="../papers/1503.05671-kfac/raw/newfig3_kronF.webp" alt="K-FAC Kronecker 近似 F̃" /> <img src="../papers/1503.05671-kfac/raw/newfig3_diffF.webp" alt="近似误差" /></p>
+<h3>K-FAC 逆的块结构</h3>
+<p>虽然 <span class="math inline">\tilde{F}</span> 本身不是块三对角的，但其逆 <span class="math inline">\tilde{F}^{-1}</span> 呈现近似<strong>块三对角结构</strong>——这与 Fisher 逆在层间的统计独立性假设一致。论文利用此结构进一步提高效率：</p>
+<p><img src="../papers/1503.05671-kfac/raw/newfig3_invkronF_defdamp.webp" alt="K-FAC 近似 F̃（左）、其逆 F̃⁻¹（中）和逆的块平均（右）——逆展现近似块三对角结构" /></p>
+<p>论文还引入了有向高斯图模型（DGGM）来解释这种块结构：</p>
+<p><img src="../papers/1503.05671-kfac/raw/graphical_model_diag5.webp" alt="UGGM 与等价 DGGM 的图模型——解释 K-FAC 逆的块三对角结构" /></p>
+<h3>K-FAC 更新</h3>
+<pre><code>维护统计量（指数移动平均）：
+  A_{ℓ-1} ← α A_{ℓ-1} + (1-α) a_{ℓ-1} a_{ℓ-1}^T
+  G_ℓ     ← α G_ℓ     + (1-α) g_ℓ g_ℓ^T
+
+每隔 T_inv 步重新计算逆：
+  A_{ℓ-1}^{-1}  (加 damping: A + λI)
+  G_ℓ^{-1}      (加 damping: G + λI)
+
+更新：
+  ΔW_ℓ = G_ℓ^{-1} · ∇_{W_ℓ} L · A_{ℓ-1}^{-1}
+  W_ℓ ← W_ℓ - η · ΔW_ℓ
+</code></pre>
+<h3>Damping 和信赖域</h3>
+<p>为了数值稳定性和防止过大步长，使用 factored Tikhonov damping：</p>
+<div class="math block">
+(A_{\ell-1} + \sqrt{\gamma} I)^{-1} \otimes (G_\ell + \sqrt{\gamma} I)^{-1}
+</div>
+<p>其中 <span class="math inline">\gamma</span> 是 damping 系数。配合更新 rescaling 技术，可以显著提升 damping 的有效性：</p>
+<p><img src="../papers/1503.05671-kfac/raw/damping_rescaling_2.webp" alt="Damping 方案对比：有/无 rescaling 的 loss 改进量随 damping 强度 γ 的变化" /></p>
+<h2>关键结果</h2>
+<p>在 CURVES、MNIST、FACES 三个深度自编码器问题上，K-FAC（包括 block-diagonal 和 block-tridiagonal 变体）在收敛速度上显著优于 SGD 和不带动量的版本：</p>
+<p><img src="../papers/1503.05671-kfac/raw/K-FAC_new_curves_5.webp" alt="CURVES（上）、MNIST（中）、FACES（下）深度自编码器：训练误差 vs 计算时间" /></p>
+<p><img src="../papers/1503.05671-kfac/raw/K-FAC_new_mnist_5.webp" alt="K-FAC 在 MNIST 深度自编码器上的收敛曲线" /></p>
+<ul>
+<li>在自编码器、卷积网络等任务上，K-FAC 的<strong>每步 loss 下降</strong>显著优于 SGD 和 Adam。</li>
+<li>收敛步数减少，但每步计算开销略增（需维护和求逆 <span class="math inline">A, G</span>）。</li>
+<li>后续工作（Distributed K-FAC, Kronecker-factored Shampoo）将其扩展到更大规模。</li>
+</ul>
+<h2>与梯度消失的关系</h2>
+<p><strong>K-FAC 能更好地利用现有梯度，但不能修复已丢失的隐状态敏感性。</strong></p>
+<p>需要区分两种&quot;梯度消失&quot;：</p>
+<table>
+<thead>
+<tr>
+<th>&quot;消失&quot;的含义</th>
+<th>K-FAC 能帮助？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始参数梯度 <span class="math inline">\nabla_{W_\ell} \mathcal{L}</span> 很小，因为损失曲面在某些方向上非常平坦</td>
+<td>✅ 预条件化可以放大低曲率方向的步长</td>
+</tr>
+<tr>
+<td>隐状态敏感性 <span class="math inline">\partial h_L / \partial h_\ell</span> 坍缩（Jacobian 秩亏或奇异值极小）</td>
+<td>❌ 预条件化作用在 <span class="math inline">\nabla_{W_\ell} \mathcal{L}</span> 上，但 <span class="math inline">\nabla_{W_\ell} \mathcal{L} = g_\ell \cdot a_{\ell-1}^\top</span> 中 <span class="math inline">g_\ell = J_{\ell \to L}^\top \cdot \nabla_{h_L} \mathcal{L}</span>。如果 <span class="math inline">J_{\ell \to L}</span> 已经丢失了某些方向的信息，<span class="math inline">g_\ell</span> 中就没有这些方向的信号，预条件化无法凭空创造</td>
+</tr>
+</tbody>
+</table>
+<p>本质区别：<strong>K-FAC 是在损失函数的参数空间中做更聪明的移动，但它不改变反向传播的 Jacobian 链</strong>。预条件化在 Jacobian 完成矩阵-向量乘法之后才起作用。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>Kronecker 近似假设 <span class="math inline">a_{\ell-1}</span> 和 <span class="math inline">g_\ell</span> 统计独立，这在深度网络中通常不精确。</li>
+<li>每层需要额外存储 <span class="math inline">A_{\ell-1}</span> 和 <span class="math inline">G_\ell</span>，以及定期求逆的计算开销。</li>
+<li>对 attention 层的 Fisher 近似需要额外处理（输入依赖于其他层的输出）。</li>
+<li>不解决隐状态 Jacobian 退化——这是所有优化器类方法的根本局限。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Adafactor</strong>（<code>1804.04235-adafactor/</code>）：也用矩阵分解近似二阶矩，但更轻量。</li>
+<li><strong>LARS</strong>（<code>1708.03888-lars/</code>）：层级学习率缩放，只调尺度不调方向。</li>
+<li><strong>Muon</strong>（<code>2502.16982-muon-scalable/</code>）：通过极分解正交化更新矩阵——可视为一种对更新方向做几何约束的替代方案。</li>
+<li><strong>Shampoo</strong>：K-FAC 的扩展，对任意张量参数适用。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2502.16982-muon-scalable"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2502.16982" target="_blank">arXiv:2502.16982</a> · <a href="#2502.16982-muon-scalable">README source</a></div><div class="paper-body"><h1>Muon is Scalable for LLM Training</h1>
+<p><strong>ArXiv</strong>：<a href="https://arxiv.org/abs/2502.16982">2502.16982</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>Adam 及其变体虽然是 LLM 训练的标准优化器，但存在几个不足：</p>
+<ol>
+<li><strong>优化器状态占用大量内存</strong>：一阶动量 <span class="math inline">m</span> + 二阶动量 <span class="math inline">v</span> = 2× 参数量的额外存储。</li>
+<li><strong>更新矩阵的谱结构不受控</strong>：Adam 的更新 <span class="math inline">\Delta W = m / \sqrt{v}</span> 可能是低秩的、各向异性的、或谱结构退化的。</li>
+<li><strong>缩放行为不明确</strong>：从小模型到大模型的超参数迁移缺乏理论指导。</li>
+</ol>
+<p><strong>Muon</strong>（Momentum Orthogonalized Update）通过对更新矩阵做<strong>极分解</strong>（polar decomposition），确保更新具有良好的谱结构。本文证明 Muon 可以扩展到大规模 LLM/MoE 训练。</p>
+<h2>核心想法</h2>
+<p>在每步更新时，将梯度的动量版本通过极分解投影为一个正交矩阵乘以缩放因子。这样更新矩阵的所有奇异值相等（或接近相等），消除更新中的各向异性。</p>
+<p>核心实验结果：Muon 的 scaling law 显示其<strong>计算效率约为 Adam 的 2 倍</strong>，且 Moonlight 模型在 MMLU 上推进了性能-FLOPs Pareto 前沿：</p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/chinlaw_8k_flops_ratio.webp" alt="Scaling law 对比：Muon ~2× 计算效率于 Adam（左）；Moonlight MMLU 性能（右）" /></p>
+<h2>方法细节</h2>
+<h3>极分解（Polar Decomposition）</h3>
+<p>任何矩阵 <span class="math inline">M</span> 可分解为：</p>
+<div class="math block">
+M = UP
+</div>
+<p>其中 <span class="math inline">U</span> 是正交矩阵（<span class="math inline">U^\top U = I</span> 或部分正交），<span class="math inline">P</span> 是半正定对称矩阵。<span class="math inline">U</span> 被称为 <span class="math inline">M</span> 的&quot;极因子&quot;。</p>
+<p>极因子 <span class="math inline">U</span> 的几何意义：<span class="math inline">U</span> 是与 <span class="math inline">M</span> 最近的正交矩阵（在 Frobenius 范数下），即：</p>
+<div class="math block">
+U = \arg\min_{Q: Q^\top Q = I} \|M - Q\|_F
+</div>
+<h3>Muon 更新规则</h3>
+<pre><code>输入：梯度 ∇L(W), 动量缓冲 buf, 动量系数 β, 学习率 η
+
+1. 动量更新：
+   buf ← β · buf + ∇L(W)
+
+2. 极分解（Newton-Schulz 迭代近似）：
+   U ← polar(buf)  // U 是 buf 的正交极因子
+
+3. 参数更新：
+   W ← W - η · U
+</code></pre>
+<h3>Newton-Schulz 迭代</h3>
+<p>精确极分解需要 SVD，代价 <span class="math inline">O(\min(mn^2, m^2n))</span>。Muon 用 Newton-Schulz 迭代近似：</p>
+<div class="math block">
+X_0 = M / \|M\|_F
+</div>
+<div class="math block">
+X_{k+1} = \frac{1}{2} X_k (3I - X_k^\top X_k)
+</div>
+<p>收敛到极因子 <span class="math inline">U</span>。通常 <strong>5-10 次迭代</strong>即可达到足够精度。每次迭代只需矩阵乘法，可高效 GPU 并行。</p>
+<h3>权重衰减的重要性</h3>
+<p>本文发现权重衰减对 Muon 在大规模训练中至关重要。下图对比了 AdamW、vanilla Muon（无权重衰减）和 Muon + 权重衰减的验证 loss：</p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/fig_weight_decay.webp" alt="AdamW（绿）vs Muon 无权重衰减（红）vs Muon 有权重衰减（蓝）" /></p>
+<p>Vanilla Muon 初始收敛更快，但权重范数持续增长导致后期性能受限。加入权重衰减后，更新规则变为：</p>
+<div class="math block">
+W_{t+1} = (1 - \lambda\eta) W_t - \eta \cdot \text{polar}(G_t)
+</div>
+<h3>更新的谱性质</h3>
+<p>Muon 更新 <span class="math inline">U = \text{polar}(\text{buf})</span> 的所有奇异值为 1，因此：</p>
+<div class="math block">
+\|\Delta W\|_2 = \eta, \quad \|\Delta W\|_F = \eta \sqrt{\min(m, n)}
+</div>
+<p>这意味着：</p>
+<ul>
+<li>更新不会在某些方向过大（防止不稳定）</li>
+<li>更新不会在某些方向过小（充分利用所有方向）</li>
+<li>更新的&quot;有效秩&quot;是最大的</li>
+</ul>
+<h3>权重谱结构的差异</h3>
+<p>Muon 训练出的权重矩阵呈现与 AdamW 不同的 SVD 熵特征。以下展示了注意力层各权重矩阵的奇异值分布对比：</p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/svd_dist_attn_final_v2.webp" alt="注意力层各权重矩阵的奇异值分布：Muon vs AdamW" /></p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/svd_dist_ffn_final_v2.webp" alt="FFN 层各权重矩阵的奇异值分布：Muon vs AdamW" /></p>
+<p>红色边框表示 Muon 的奇异值熵低于 AdamW——即 Muon 倾向于产生更低秩（更结构化）的权重。</p>
+<h2>关键结果</h2>
+<h3>Scaling Law</h3>
+<p>通过对 Muon 和 AdamW 分别拟合 scaling law，Muon 在 compute-optimal 训练下达到相同 loss 所需 FLOPs 约为 AdamW 的一半：</p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/chinlaw_8k.webp" alt="Muon 与 AdamW 的 fitted scaling law 曲线" /></p>
+<h3>Moonlight 训练稳定性</h3>
+<p>Moonlight（使用 Muon）相比 Moonlight-A（使用 AdamW）在训练 loss、梯度范数等指标上表现更稳定：</p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/moonlight_loss.webp" alt="Moonlight 训练 loss（左）和梯度范数（右）" /></p>
+<p><img src="../papers/2502.16982-muon-scalable/raw/figures/moonlight_grad_norm.webp" alt="Moonlight 梯度范数" /></p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>对比</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dense LLM (350M-7B)</td>
+<td>Muon vs AdamW</td>
+<td>匹配或微优</td>
+</tr>
+<tr>
+<td>MoE 模型</td>
+<td>Muon vs AdamW</td>
+<td>匹配</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>Muon vs AdamW</td>
+<td>少一份动量状态（不需要 <span class="math inline">v</span>）</td>
+</tr>
+<tr>
+<td>训练稳定性</td>
+<td>Muon vs AdamW</td>
+<td>更少 loss spike</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Muon 在 LLM 预训练中首次达到与 AdamW 匹配的性能，且训练更稳定。</li>
+<li>内存节省：不需要二阶动量 <span class="math inline">v</span>，总优化器内存从 2× 参数降到 1× 参数。</li>
+<li>Newton-Schulz 迭代的计算开销可以被通信延迟遮盖（overlap with gradient all-reduce）。</li>
+</ul>
+<h2>与梯度消失的关系</h2>
+<p><strong>Muon 在严格的隐状态 Jacobian 意义上不直接防止梯度消失。</strong></p>
+<p>详细分析：</p>
+<ul>
+<li><strong>Muon 控制的对象</strong>：更新矩阵 <span class="math inline">\Delta W</span> 的谱结构——确保更新是&quot;满秩&quot;的、各向同性的。</li>
+<li><strong>Muon 不控制的对象</strong>：反向传播 Jacobian <span class="math inline">J_{\ell \to L}</span> 的谱结构——如果到达某层的梯度已经是退化的，Muon 只是用一个正交矩阵来更新该层参数，但更新的&quot;方向&quot;仍然基于退化的梯度信息。</li>
+</ul>
+<p><strong>间接收益</strong>：</p>
+<ul>
+<li>通过保持更新的谱结构健康，Muon 可能减少权重矩阵漂移到&quot;坏&quot;谱区域（如奇异值坍缩）的概率。</li>
+<li>配合权重衰减，隐式地保持权重矩阵的谱范数在合理范围内。</li>
+<li>这些间接效果不等于直接约束 Jacobian，但在实践中可能有助于维护梯度流的质量。</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>Newton-Schulz 迭代增加了每步计算量（约 10% overhead）。</li>
+<li>对 1D 参数（bias、LayerNorm scale）不适用，需要回退到 Adam。</li>
+<li>理论上 Muon 与 muP 的交互尚未完全理解（见 <code>2601.01306</code>）。</li>
+<li>不直接约束隐状态 Jacobian 的谱。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Muon 与谱范数约束</strong>（<code>2506.15054-muon-spectral-norm/</code>）：理论分析 Muon 与谱范数约束优化的关系。</li>
+<li><strong>Principled Muon under μP</strong>（<code>2601.01306-principled-muon-mup/</code>）：尝试在 μP 框架下理论化 Muon 的缩放行为。</li>
+<li><strong>K-FAC</strong>（<code>1503.05671-kfac/</code>）：另一种对更新做几何约束的方法（通过 Fisher 预条件化）。</li>
+<li><strong>Gradient Multi-Normalization</strong>（<code>2502.06742-gradient-multi-normalization/</code>）：也追求无状态优化器，但通过多重梯度归一化而非极分解。</li>
+<li><strong>MACRO</strong>（<code>2601.08393-spectral-sphere-llm/</code>）：约束权重本身（而非更新）的谱结构，与 Muon 互补。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2506.15054-muon-spectral-norm"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2506.15054" target="_blank">arXiv:2506.15054</a> · <a href="#2506.15054-muon-spectral-norm">README source</a></div><div class="paper-body"><h1>Muon Optimizes Under Spectral Norm Constraints</h1>
+<p><strong>ArXiv</strong>：<a href="https://arxiv.org/abs/2506.15054">2506.15054</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>Muon 优化器通过极分解正交化更新，在大规模 LLM 训练中表现出色。但一个关键问题悬而未决：<strong>Muon 为什么有效？</strong> 它只是一个经验上好用的启发式，还是有更深层的数学结构？</p>
+<p>具体来说：</p>
+<ol>
+<li>Muon 更新 <span class="math inline">\Delta W = \text{polar}(\nabla W)</span> 中，正交化的数学意义是什么？</li>
+<li>配合权重衰减时，Muon 隐式地在优化什么问题？</li>
+<li>Muon 与谱范数约束优化之间有什么联系？</li>
+</ol>
+<h2>核心想法</h2>
+<p><strong>Muon + 解耦权重衰减</strong> 可以被形式化地解释为在<strong>谱范数球</strong>上的约束优化。具体而言，Muon 隐式地求解：</p>
+<div class="math block">
+\min_{W} \mathcal{L}(W) \quad \text{s.t.} \quad \|W\|_2 \le R
+</div>
+<p>其中 <span class="math inline">R</span> 由权重衰减系数和学习率共同决定。这不是一个近似解释——在某些条件下可以严格证明。</p>
+<h2>方法细节</h2>
+<h3>回顾：Muon 更新</h3>
+<div class="math block">
+\Delta W = \eta \cdot \text{polar}(G)
+</div>
+<p>其中 <span class="math inline">G</span> 是梯度（或动量），<span class="math inline">\text{polar}(G) = G(G^\top G)^{-1/2}</span> 是 <span class="math inline">G</span> 的正交极因子。</p>
+<h3>解耦权重衰减</h3>
+<p>Muon 配合解耦权重衰减（decoupled weight decay）的更新：</p>
+<div class="math block">
+W_{t+1} = (1 - \lambda \eta) W_t - \eta \cdot \text{polar}(G_t)
+</div>
+<h3>谱范数约束的对偶解释</h3>
+<p><strong>定理（非形式化）</strong>：在适当条件下，上述迭代的不动点满足谱范数约束 KKT 条件。</p>
+<p>直觉理解：</p>
+<ol>
+<li><strong>极分解更新</strong> <span class="math inline">\text{polar}(G)</span> 对应拉格朗日约束优化中的<strong>谱范数球上的投影梯度</strong>。</li>
+<li><strong>权重衰减</strong> <span class="math inline">(1-\lambda\eta)W</span> 起到将权重拉回谱范数球内部的作用。</li>
+<li>两者结合，隐式地将权重限制在 <span class="math inline">\|W\|_2 \lesssim R(\eta, \lambda)</span> 的谱范数球内。</li>
+</ol>
+<h3>Toy Example：奇异值轨迹</h3>
+<p>下图展示了 Muon 在 2D 矩阵优化问题上的行为。奇异值在不同约束强度 <span class="math inline">\lambda</span> 下快速进入并保持在约束区域内：</p>
+<p><img src="../papers/2506.15054-muon-spectral-norm/raw/figs_plots/muon_0.webp" alt="Muon 奇异值轨迹：不同 λ 下奇异值快速进入约束区域（蓝：λ=1.5，绿：λ=5.0）" /></p>
+<h3>收敛性与 Lyapunov 分析</h3>
+<p>论文构造了两阶段 Lyapunov 函数来证明收敛性。虽然目标函数 <span class="math inline">\mathcal{F}(\mathbf{X})</span> 可能非单调波动，但 Lyapunov 函数在各自域内单调下降：</p>
+<p><img src="../papers/2506.15054-muon-spectral-norm/raw/figs_plots/clip_extended_regions.webp" alt="收敛行为：目标函数非单调波动，但 Lyapunov 函数 V_B 和 V_K 在各自域内单调下降" /></p>
+<p>更详细的 toy example 展示了从可行域内外不同初始化点的收敛轨迹：</p>
+<p><img src="../papers/2506.15054-muon-spectral-norm/raw/figs_plots/toy_0611.webp" alt="λ=1.25 可行域内初始化（上）和 λ=4 可行域外初始化（下）的收敛轨迹" /></p>
+<h3>实际网络中的谱约束验证</h3>
+<p>在 ResNet-18/CIFAR-10 上，初始在约束集外的奇异值在约 400 步内快速进入约束区域，并在此后保持有界：</p>
+<p><img src="../papers/2506.15054-muon-spectral-norm/raw/figs_plots/sigma_histograms_muon_fresh_neurips_colors_red.webp" alt="ResNet-18 各模块权重矩阵的奇异值直方图：λ=2.0 的约束（红线）在 ~400 步内被强制执行" /></p>
+<h3>Muon vs AdamW 的谱正则化效果</h3>
+<p>在 LLaMA 0.5B 模型上，Muon 训练出的权重展现出明显的谱正则化效果，而 AdamW 则没有：</p>
+<p><img src="../papers/2506.15054-muon-spectral-norm/raw/figs_plots/adam_muon.webp" alt="LLaMA 0.5B 的 Q/K/V 权重奇异值分布：Muon 产生正则化的谱分布，AdamW 则无" /></p>
+<h3>与显式谱约束的对比</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>约束类型</th>
+<th>实现方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>谱归一化</td>
+<td><span class="math inline">|W|_2 = 1</span>（硬约束）</td>
+<td>每步除以 <span class="math inline">\sigma_{\max}</span></td>
+</tr>
+<tr>
+<td>Muon + WD</td>
+<td><span class="math inline">|W|_2 \lesssim R</span>（隐式约束）</td>
+<td>极分解更新 + 权重衰减</td>
+</tr>
+<tr>
+<td>MACRO</td>
+<td><span class="math inline">|W|_2 = c</span>（流形约束）</td>
+<td>流形投影</td>
+</tr>
+</tbody>
+</table>
+<p>Muon 的优势：不需要显式计算谱范数或做投影，约束通过更新规则<strong>隐式</strong>实现。</p>
+<h3>更深层的分析：对 <span class="math inline">W</span> 本身的隐式约束</h3>
+<p>本文不仅分析了对 <span class="math inline">\Delta W</span> 的约束（这是已知的——<span class="math inline">\Delta W</span> 是正交的），还揭示了对 <span class="math inline">W</span> 本身的隐式约束。关键发现：</p>
+<div class="math block">
+\text{在稳态时，} \quad \sigma_i(W) \approx \frac{1}{\lambda} \sigma_i(\text{polar}(G)) = \frac{1}{\lambda}
+</div>
+<p>即权重矩阵的奇异值倾向于聚集在 <span class="math inline">1/\lambda</span> 附近。这意味着 Muon + WD 不仅控制 <span class="math inline">\sigma_{\max}</span>（上界），还隐式地控制了 <span class="math inline">\sigma_{\min}</span>（下界），使权重矩阵趋于良条件。</p>
+<h3>Lion-K 框架的推广</h3>
+<p>论文提出了更一般的 Lion-K 框架，通过选择不同的凸映射 <span class="math inline">\mathcal{K}</span> 可以产生不同的隐式约束：</p>
+<p><img src="../papers/2506.15054-muon-spectral-norm/raw/figs_plots/kappa.webp" alt="Lion-K 在不同凸映射 K 下的行为：不同 K 产生不同隐式约束和惩罚结构" /></p>
+<h2>关键结果</h2>
+<ul>
+<li>建立了 Muon 与谱范数约束优化的<strong>严格数学联系</strong>，将 Muon 从启发式提升为有原则的算法。</li>
+<li>分析揭示了 Muon 通过权重衰减隐式控制权重谱结构的机制。</li>
+<li>理论预测与实际训练中观察到的权重谱分布吻合。</li>
+</ul>
+<h2>与梯度消失的关系</h2>
+<p><strong>约束的对象主要是 <span class="math inline">\Delta W</span>（更新）和 <span class="math inline">W</span>（权重），不是隐状态 Jacobian。</strong></p>
+<p>但有一个有趣的间接联系：</p>
+<ul>
+<li>如果 Muon + WD 使 <span class="math inline">W</span> 的奇异值聚集在 <span class="math inline">1/\lambda</span> 附近，那么线性层 <span class="math inline">y = Wx</span> 的 Jacobian 就是 <span class="math inline">W</span> 本身，其条件数 <span class="math inline">\kappa(W) = \sigma_{\max}/\sigma_{\min}</span> 趋向于 1。</li>
+<li>对于纯线性层堆叠，这接近动态等距条件。</li>
+<li>但 Transformer 中线性层只是 block 的一部分，attention、LayerNorm、激活函数等非线性组件的 Jacobian 不受此控制。</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>理论分析基于简化假设（如凸性、稳态条件），实际训练中不完全满足。</li>
+<li>隐式谱约束的&quot;紧度&quot;（实际谱分布与理论预测的偏差）需要更多实验验证。</li>
+<li>不直接约束隐状态 Jacobian 的完整谱结构。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Muon is Scalable</strong>（<code>2502.16982-muon-scalable/</code>）：Muon 的大规模实验验证，本文是其理论基础。</li>
+<li><strong>Principled Muon under μP</strong>（<code>2601.01306-principled-muon-mup/</code>）：尝试将 Muon 的谱控制与 μP 的宽度缩放理论结合。</li>
+<li><strong>Spectral Normalization</strong>（<code>1802.05957-spectral-normalization/</code>）：显式谱归一化——与 Muon 的隐式谱约束形成对比。</li>
+<li><strong>MACRO</strong>（<code>2601.08393-spectral-sphere-llm/</code>）：另一种显式谱约束方案，直接将权重投影到谱球上。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2601.01306-principled-muon-mup"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2601.01306" target="_blank">arXiv:2601.01306</a> · <a href="#2601.01306-principled-muon-mup">README source</a></div><div class="paper-body"><h1>Towards a Principled Muon under μP: Ensuring Spectral Conditions throughout Training</h1>
+<p><strong>ArXiv</strong>：<a href="https://arxiv.org/abs/2601.01306">2601.01306</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>两个重要但此前独立的研究方向需要统一：</p>
+<ol>
+<li>
+<p><strong>μP（Maximal Update Parameterization）</strong>：通过宽度缩放理论确保模型在不同宽度下行为一致，使超参数可从小模型迁移到大模型。核心条件是各层的更新 <span class="math inline">\Delta W</span> 和激活变化 <span class="math inline">\Delta h</span> 在合适的范数下与宽度无关。</p>
+</li>
+<li>
+<p><strong>Muon</strong>：通过极分解正交化更新矩阵，控制 <span class="math inline">\Delta W</span> 的谱结构。在大规模训练中表现优异。</p>
+</li>
+</ol>
+<p><strong>问题</strong>：Muon 的极分解更新是否满足 μP 的谱条件？如果不满足，如何修改 Muon 使其在 μP 框架下有原则的缩放行为？</p>
+<h2>核心想法</h2>
+<p>直接将 Muon 应用到标准 μP 参数化中，<strong>谱条件在训练过程中可能被违反</strong>——特别是在宽度变化时，极分解更新的尺度与 μP 要求的缩放不一致。本文尝试通过逐层学习率调整和更新缩放来弥合这一差距。</p>
+<h2>方法细节</h2>
+<h3>μP 的核心谱条件</h3>
+<p>μP 要求在宽度 <span class="math inline">n \to \infty</span> 的极限下，以下量保持 <span class="math inline">O(1)</span>：</p>
+<div class="math block">
+\|W_\ell\|_{\text{op}} = O(1) \quad (\text{谱范数})
+</div>
+<div class="math block">
+\|\Delta W_\ell\|_{\text{op}} = O(1/n) \quad (\text{更新谱范数})
+</div>
+<div class="math block">
+\|h_\ell\|_\infty / \sqrt{n} = O(1) \quad (\text{激活尺度})
+</div>
+<p>标准 μP 通过初始化缩放（<span class="math inline">W \sim O(1/\sqrt{n})</span> 或 <span class="math inline">O(1/n)</span>）和学习率缩放（<span class="math inline">\eta \propto 1/n</span> 对某些层）来实现。</p>
+<h3>Muon 更新的谱特性</h3>
+<p>Muon 更新 <span class="math inline">U = \text{polar}(G)</span> 的所有奇异值为 1：</p>
+<div class="math block">
+\|U\|_2 = 1, \quad \|\Delta W\|_2 = \eta
+</div>
+<p>但 μP 要求隐藏层权重的更新谱范数为 <span class="math inline">O(1/n)</span>。如果直接使用 Muon：</p>
+<div class="math block">
+\|\Delta W\|_2 = \eta \neq O(1/n)
+</div>
+<p>除非 <span class="math inline">\eta</span> 随宽度缩放为 <span class="math inline">O(1/n)</span>。这意味着 Muon 在不同宽度下需要不同的学习率，违背了 μP 的超参数迁移目标。</p>
+<h3>不兼容性的数学表述</h3>
+<p>更精确地说，设宽度为 <span class="math inline">n</span>、学习率为 <span class="math inline">\eta</span>、Muon 更新的正交极因子为 <span class="math inline">U_\ell</span>（<span class="math inline">\|U_\ell\|_2 = 1</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>层类型</th>
+<th>μP 要求的 <span class="math inline">|\Delta W_\ell|_2</span></th>
+<th>Muon 实际的 <span class="math inline">|\Delta W_\ell|_2</span></th>
+<th>是否兼容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>隐藏层</td>
+<td><span class="math inline">O(1/n)</span></td>
+<td><span class="math inline">\eta</span></td>
+<td>需要 <span class="math inline">\eta = O(1/n)</span></td>
+</tr>
+<tr>
+<td>Embedding</td>
+<td><span class="math inline">O(1)</span></td>
+<td><span class="math inline">\eta</span></td>
+<td>兼容（若 <span class="math inline">\eta = O(1)</span>）</td>
+</tr>
+<tr>
+<td>Output head</td>
+<td><span class="math inline">O(1/n)</span></td>
+<td><span class="math inline">\eta</span></td>
+<td>需要 <span class="math inline">\eta = O(1/n)</span></td>
+</tr>
+</tbody>
+</table>
+<p>核心矛盾：μP 对不同层要求不同的更新谱范数缩放，而 Muon 的极分解对所有层都产生 <span class="math inline">\|\Delta W\|_2 = \eta</span>。单一学习率无法满足所有层的缩放要求。</p>
+<h3>调和方案</h3>
+<p>本文提出的修正：</p>
+<pre><code>对每层 ℓ, 根据 μP 的要求设定缩放因子 α_ℓ(n)：
+  ΔW_ℓ = α_ℓ(n) · η · polar(G_ℓ)
+
+其中：
+  - 隐藏层：α_ℓ = 1/n (确保 ‖ΔW‖₂ = η/n)
+  - Embedding/Head 层：α_ℓ 依层类型而定
+</code></pre>
+<p>这样：</p>
+<ul>
+<li>Muon 的谱正交性（更新满秩、各向同性）得以保留</li>
+<li>μP 的宽度缩放条件通过逐层 <span class="math inline">\alpha_\ell</span> 得以满足</li>
+</ul>
+<h3>训练过程中的谱监控</h3>
+<p>论文强调仅在初始化时满足谱条件不够——训练过程中权重和更新的谱结构会漂移。提出在训练中周期性检查：</p>
+<div class="math block">
+\kappa_\ell(t) = \frac{\sigma_{\max}(W_\ell(t))}{\sigma_{\min}(W_\ell(t))}
+</div>
+<p>如果条件数 <span class="math inline">\kappa_\ell</span> 过大，通过调整该层学习率或更新缩放来修正。</p>
+<h3>更新的 Frobenius 范数 vs 谱范数</h3>
+<p>一个重要的技术细节。对 <span class="math inline">W_\ell \in \mathbb{R}^{m \times n}</span>（<span class="math inline">m \le n</span>），Muon 更新的两种范数之间有确定关系：</p>
+<div class="math block">
+\|\Delta W_\ell\|_F = \eta \cdot \sqrt{m}, \quad \|\Delta W_\ell\|_2 = \eta
+</div>
+<p>而标准 μP 的分析通常基于 Frobenius 范数。这意味着从 Frobenius 范数角度看，Muon 的更新大小依赖于矩阵维度——引入了额外的宽度依赖。</p>
+<p>修正方案中 <span class="math inline">\alpha_\ell</span> 的选择需要同时考虑两种范数的缩放要求。</p>
+<h2>关键结果</h2>
+<ul>
+<li>识别了 Muon 与 μP 之间的谱条件不兼容性。</li>
+<li>提出了逐层缩放修正方案，在小规模实验上验证了修正后的 Muon 满足 μP 缩放行为。</li>
+<li>展示了训练过程中谱条件的漂移现象，说明仅靠初始化不足以保证全程稳定性。</li>
+</ul>
+<h2>与梯度消失的关系</h2>
+<p><strong>本文控制的是更新/权重的几何结构，不是隐状态 Jacobian 的下界。</strong></p>
+<p>分析：</p>
+<ul>
+<li>μP 的谱条件确保了不同宽度下的行为一致性，但 <strong>μP 本身不保证深度方向的梯度信号保持</strong>。</li>
+<li>Muon 的正交更新保持更新的满秩性，但不保证到达该层的梯度包含有用信息。</li>
+<li>两者结合控制了&quot;更新做得有多好&quot;，但&quot;需要更新什么方向&quot;的信息仍来自可能退化的反向传播梯度。</li>
+</ul>
+<p>这属于 D 类方法（优化器/更新约束）的共同局限：<strong>改善了参数空间中的移动效率，但不改变信号在深度方向上传播的质量</strong>。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>分析和实验主要在小/中规模（宽度几百到几千），大规模验证不足。</li>
+<li>训练中的谱监控和动态调整增加了实现复杂度。</li>
+<li>μP 理论本身基于无限宽度极限，有限宽度下的近似误差不明确。</li>
+<li>不解决深度方向的梯度消失。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Muon is Scalable</strong>（<code>2502.16982-muon-scalable/</code>）：大规模 Muon 实验，本文是其理论补充。</li>
+<li><strong>Muon 与谱范数</strong>（<code>2506.15054-muon-spectral-norm/</code>）：从谱范数约束角度理解 Muon。</li>
+<li><strong>μP</strong>（<code>2203.03466-mup/</code>）：宽度缩放理论的基础工作。</li>
+<li><strong>MACRO</strong>（<code>2601.08393-spectral-sphere-llm/</code>）：另一条通过流形约束控制谱结构的路线。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2502.06742-gradient-multi-normalization"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2502.06742" target="_blank">arXiv:2502.06742</a> · <a href="#2502.06742-gradient-multi-normalization">README source</a></div><div class="paper-body"><h1>Gradient Multi-Normalization for Stateless and Scalable LLM Training</h1>
+<p><strong>ArXiv</strong>：<a href="https://arxiv.org/abs/2502.06742">2502.06742</a>
+<strong>类别</strong>：D. 优化器 / 更新约束</p>
+<hr />
+<h2>问题动机</h2>
+<p>大规模 LLM 训练中优化器状态是主要的内存开销来源：</p>
+<ul>
+<li><strong>Adam</strong>：需要一阶动量 <span class="math inline">m</span> + 二阶动量 <span class="math inline">v</span> = 2× 参数量额外内存</li>
+<li><strong>Adafactor</strong>：通过分解降到 <span class="math inline">\sim</span>0.5× 额外内存，但仍需要维护状态</li>
+<li><strong>SGD</strong>：无状态但性能远不如自适应方法</li>
+</ul>
+<p><strong>核心问题</strong>：能否设计一个<strong>完全无状态</strong>（stateless）的优化器，仅通过对当前步梯度的变换来计算更新，而不维护任何历史状态？</p>
+<h2>核心想法</h2>
+<p>对随机梯度在多个范数下同时归一化（multi-normalization），替代 Adam 式的动量和二阶矩跟踪。每步更新仅依赖当前梯度，<strong>优化器内存为零</strong>。</p>
+<p>核心结果预览——SinkGD 在 350M 和 1.3B LLaMA 上均大幅优于 Adam：</p>
+<p><img src="../papers/2502.06742-gradient-multi-normalization/raw/figures/Sinkhorn_evaluation_ppl_comparison_350M_preview.webp" alt="350M LLaMA 预训练：SinkGD vs Adam/SWAN/Apollo 的测试困惑度对比" /></p>
+<p><img src="../papers/2502.06742-gradient-multi-normalization/raw/figures/Sinkhorn_evaluation_ppl_comparison_1B_preview_3.webp" alt="1.3B LLaMA 预训练：SinkGD 达到 &gt;2× Adam 的 token 效率加速" /></p>
+<h2>方法细节</h2>
+<h3>多重归一化框架 (MultiNorm)</h3>
+<p>给定 <span class="math inline">K</span> 个范数 <span class="math inline">(g_1, \dots, g_K)</span>，对梯度 <span class="math inline">\nabla</span> 求解：</p>
+<div class="math block">
+\arg\max_{z} \langle \nabla, z \rangle \quad \text{s.t.} \quad \forall\, i \in [1, K],\; g_i(z) = 1
+</div>
+<p>这是一个在多个范数约束的交集上最大化与梯度内积的方向。虽然一般情况下 NP-hard，但可以通过<strong>交替投影</strong>（alternating projection）高效近似：</p>
+<pre><code>Algorithm: MultiNorm(∇, L, g)
+输入：随机梯度 ∇, 范数列表 g = (g₁,...,gₖ), 迭代次数 L
+
+x ← ∇
+for ℓ = 1 to L:
+    for i = 1 to K:
+        x ← P_{gᵢ}(x) = argmax_{z: gᵢ(z)=1} ⟨x, z⟩
+return x
+</code></pre>
+<p>其中 <span class="math inline">\mathcal{P}_{g_i}</span> 是关于范数 <span class="math inline">g_i</span> 的归一化投影。对 <span class="math inline">\ell_p</span> 范数和 Schatten <span class="math inline">p</span> 范数均存在闭式解。</p>
+<h3>SWAN 作为 MultiNorm 的特例</h3>
+<p>SWAN 优化器恰好是 <span class="math inline">K=2</span>、<span class="math inline">L=1</span> 的 MultiNorm：</p>
+<div class="math block">
+g_1(W) = \frac{\max_i \|W_{i,:}\|_2}{\sqrt{n}}, \quad g_2(W) = \frac{\|W\|_{\sigma,\infty}}{\sqrt{n}}
+</div>
+<p>对应的投影为：
+<div class="math inline">\mathcal{P}_{g_1}(W) = \sqrt{n}\, Q(W)^{-1} W \quad \text{(行归一化)}</div>
+<div class="math inline">\mathcal{P}_{g_2}(W) = \sqrt{n}\, (WW^\top)^{-1/2} W \quad \text{(谱归一化 / 极分解)}</div></p>
+<h3>SinkGD：Sinkhorn 版本的 MultiNorm</h3>
+<p>SinkGD 在 SWAN 的基础上使用 <span class="math inline">L &gt; 1</span> 次交替投影迭代（通常 <span class="math inline">L = 5</span>），使得同时满足多个范数约束的近似更精确。</p>
+<p>理论上，作者证明了交替投影的收敛性：</p>
+<div class="math block">
+d(x_n, \mathcal{F}) \xrightarrow{n \to \infty} 0
+</div>
+<p>其中 <span class="math inline">\mathcal{F} = \{x : \mathcal{P}_{g_1}(x) = \mathcal{P}_{g_2}(x) = x\}</span> 是不动点集。</p>
+<h3>各归一化的作用</h3>
+<table>
+<thead>
+<tr>
+<th>归一化类型</th>
+<th>消除的不均衡</th>
+<th>类比 Adam 的哪个组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行归一化（<span class="math inline">g_1</span>）</td>
+<td>不同输出神经元间的尺度差异</td>
+<td>对应 Adafactor 的行统计</td>
+</tr>
+<tr>
+<td>谱归一化（<span class="math inline">g_2</span>）</td>
+<td>奇异值方向的尺度差异</td>
+<td>对应 Muon 的极分解</td>
+</tr>
+<tr>
+<td>多次迭代（<span class="math inline">L &gt; 1</span>）</td>
+<td>两种约束的不兼容残差</td>
+<td>无直接类比</td>
+</tr>
+</tbody>
+</table>
+<h3>内存分析</h3>
+<table>
+<thead>
+<tr>
+<th>优化器</th>
+<th>额外内存（×参数量）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adam</td>
+<td>2.0×</td>
+</tr>
+<tr>
+<td>Adafactor</td>
+<td>~0.5×</td>
+</tr>
+<tr>
+<td>Muon</td>
+<td>1.0×（动量）</td>
+</tr>
+<tr>
+<td>SinkGD</td>
+<td><strong>0×</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>关键结果</h2>
+<h3>LLaMA 预训练</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>SinkGD vs Adam (reproduced) 加速</th>
+<th>SinkGD vs Adam (cited) 加速</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>60M</td>
+<td>1.60×</td>
+<td>1.66×</td>
+</tr>
+<tr>
+<td>130M</td>
+<td>1.56×</td>
+<td>1.73×</td>
+</tr>
+<tr>
+<td>350M</td>
+<td>2.42×</td>
+<td>2.10×</td>
+</tr>
+<tr>
+<td>1.3B</td>
+<td>2.79×</td>
+<td>2.17×</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>SinkGD 在 1.3B LLaMA 上达到 Adam 相同 perplexity 仅需不到一半的训练 step。</li>
+<li>在所有测试规模中，SinkGD 达到或超越 Adam、Apollo、SWAN 等 baseline。</li>
+</ul>
+<h3>吞吐量分析</h3>
+<p>多重归一化步骤的计算开销极小，SinkGD 的原始吞吐量甚至略高于 Adam（因为不需要维护和更新优化器状态）：</p>
+<p><img src="../papers/2502.06742-gradient-multi-normalization/raw/figures/sinkhorn_throughput.webp" alt="1.3B 模型在 8×A100 上的吞吐量：SinkGD 原始吞吐量与 Adam 相当，有效吞吐量 3× 更高" /></p>
+<h3>1B vs 7B 对比</h3>
+<p>SinkGD 训练 1B LLaMA 模型在 3.3 天内（8×A100）达到了 Apollo/8-bit Adam 训练 7B 模型 15 天才能达到的 perplexity。</p>
+<h2>与梯度消失的关系</h2>
+<p><strong>Gradient Multi-Normalization 可以防止&quot;小梯度范数导致小更新&quot;的问题，但不能防止&quot;梯度方向退化&quot;的问题。</strong></p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>深层梯度范数很小但方向有用</td>
+<td>✅ 归一化后更新尺度正常</td>
+</tr>
+<tr>
+<td>梯度低秩（只在 skip connection 方向有信号）</td>
+<td>❌ 归一化会放大这个方向但不增加新方向</td>
+</tr>
+<tr>
+<td>梯度方向与任务无关（隐状态敏感性已丧失）</td>
+<td>❌ 归一化放大的是噪声方向</td>
+</tr>
+<tr>
+<td>梯度完全为零</td>
+<td>❌ 无法除以零范数，需要特殊处理</td>
+</tr>
+</tbody>
+</table>
+<p>核心限制：归一化在反向传播之后作用，<strong>不改变反向传播本身产生的梯度方向</strong>。如果 <span class="math inline">J_{\ell \to L}^\top</span> 已经丢失了某些方向的信息，归一化只能调整幸存方向的尺度。</p>
+<p>一个形象的类比：梯度归一化像是调整照片的亮度和对比度——如果原始照片的某个区域完全是黑色（信号丢失），提高亮度只会得到灰色噪声，而不是原始场景。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>无动量意味着失去了梯度平滑的效果——在高噪声梯度环境中可能收敛震荡更大。</li>
+<li>多重归一化的范数选择和迭代次数是超参数，需要实验确定。</li>
+<li>对于结构高度非均匀的梯度（如稀疏梯度），归一化可能不是最优的变换。</li>
+<li>与所有优化器类方法一样，不解决隐状态 Jacobian 退化的根本问题。</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Adafactor</strong>（<code>1804.04235-adafactor/</code>）：也用行/列分解降低内存，但仍维护状态。</li>
+<li><strong>Muon</strong>（<code>2502.16982-muon-scalable/</code>）：通过极分解正交化更新——数学上更优雅但需要动量和 Newton-Schulz 迭代的计算/内存开销。</li>
+<li><strong>LARS</strong>（<code>1708.03888-lars/</code>）：层级尺度缩放，粒度比 Multi-Normalization 更粗。</li>
+<li><strong>K-FAC</strong>（<code>1503.05671-kfac/</code>）：在频谱的另一端——用更多内存换取更好的更新方向。</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #ff6ca8;padding-left:16px;margin:48px 0 24px"><h2 style="color:#ff6ca8">Category E: 隐状态 / Jacobian / 信号传播</h2></div>
+<article class="paper-article" id="1809.08848-dynamical-isometry-resnet"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1809.08848" target="_blank">arXiv:1809.08848</a> · <a href="#1809.08848-dynamical-isometry-resnet">README source</a></div><div class="paper-body"><h1>Dynamical Isometry is Achieved in Residual Networks in a Universal Way for any Activation Function</h1>
+<p><strong>论文</strong>: Tarnowski, Warchoł, Jastrzębski, Tabor, Nowak (2018)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/1809.08848">1809.08848</a>
+<strong>分类</strong>: A. 初始化 / 参数化 · E. 隐状态 / Jacobian / 信号传播</p>
+<hr />
+<h2>问题动机</h2>
+<p>Pennington et al. (2017) 证明了动态等距（dynamical isometry）——要求输入-输出 Jacobian 的<strong>全部奇异值</strong>集中在 1 附近——是深度网络高效训练的关键条件。但该结论有一个限制：在普通前馈网络中，只有<strong>正交初始化 + 反对称 sigmoid 激活</strong>（如 tanh）才能实现动态等距；ReLU 网络则被证明无法实现。</p>
+<p>这就引出了核心问题：残差网络（ResNets）中的 skip connection 能否从根本上改变这一限制？</p>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>前馈网络实现动态等距对激活函数有严格要求（排除了 ReLU 等流行选择）。</li>
+<li>此前关于 ResNet 初始化的工作（Taki 2017、Balduzzi et al. 2017）讨论了方差缩放 <span class="math inline">\sigma_W^2 \sim 1/(NL)</span>，但未分析完整的 Jacobian 奇异值谱。</li>
+<li>没有理论说明为什么 ResNets 对激活函数的选择表现出鲁棒性。</li>
+</ul>
+<h2>核心想法</h2>
+<p>残差网络的 Jacobian <span class="math inline">J = \prod_{\ell=1}^{L}(D^\ell W^\ell + aI)</span> 中，恒等项 <span class="math inline">aI</span> 的存在使得奇异值谱在大深度极限下由一个<strong>普适公式</strong>描述——该公式仅依赖一个标量参数 <span class="math inline">c</span>（有效累积量），而与激活函数的具体形式无关。只要 <span class="math inline">c</span> 足够小，所有激活函数都能实现动态等距。</p>
+<h2>方法细节</h2>
+<h3>残差网络模型</h3>
+<p><img src="../papers/1809.08848-dynamical-isometry-resnet/raw/arch_rot.webp" alt="残差网络架构示意图" /></p>
+<p>考虑 <span class="math inline">L</span> 层宽度 <span class="math inline">N</span> 的残差网络：</p>
+<div class="math block">
+x^\ell = \phi(h^\ell) + a \cdot x^{\ell-1}, \quad h^\ell = W^\ell x^{\ell-1} + b^\ell
+</div>
+<p>输入-输出 Jacobian 为：</p>
+<div class="math block">
+J = \prod_{\ell=1}^{L} (D^\ell W^\ell + aI)
+</div>
+<p>其中 <span class="math inline">D^\ell = \mathrm{diag}(\phi'(h^\ell))</span>。</p>
+<h3>利用自由概率论推导奇异值谱</h3>
+<p>核心工具是 <span class="math inline">S</span>-transform 的乘法性质。对于 <span class="math inline">J J^\top</span> 的 <span class="math inline">S</span>-transform：</p>
+<div class="math block">
+S_{JJ^\top}(z) = \prod_{\ell=1}^{L} S_{Y_\ell Y_\ell^\top}(z)
+</div>
+<p>其中 <span class="math inline">Y_\ell = D^\ell W^\ell + aI</span>。</p>
+<p>在权重方差按 <span class="math inline">1/L</span> 缩放（即 <span class="math inline">\mathrm{Var}(W_{ij}) = \sigma_W^2 / (NL)</span>）的设定下，取大 <span class="math inline">L</span> 极限，单层 <span class="math inline">S</span>-transform 仅保留领先项：</p>
+<div class="math block">
+S_{Y_\ell Y_\ell^\top}(z) = \frac{1}{a^2}\left(1 - \frac{c_2^\ell}{a^2 L}(1 + 2z) + O(1/L^2)\right)
+</div>
+<p>其中 <span class="math inline">c_2^\ell = \sigma_W^2 \langle (\phi'(h))^2 \rangle_\ell</span> 是第 <span class="math inline">\ell</span> 层激活导数的平方均值。</p>
+<h3>普适的 Green 函数方程</h3>
+<p>对 <span class="math inline">S</span>-transform 取对数并求和，定义<strong>有效累积量</strong>：</p>
+<div class="math block">
+c = \frac{1}{L}\sum_{\ell=1}^{L} c_2^\ell
+</div>
+<p>最终得到 Jacobian 平方奇异值分布的 Green 函数方程（取 <span class="math inline">a=1</span>）：</p>
+<div class="math block">
+G(z) = (zG(z) - 1) \exp\left[c(1 - 2zG(z))\right]
+</div>
+<p>这是<strong>普适方程</strong>：对所有激活函数，奇异值谱都由同一个方程描述，仅通过参数 <span class="math inline">c</span> 区分。</p>
+<h3>谱边界与条件数</h3>
+<p>谱的支撑边界为：</p>
+<div class="math block">
+z_{\pm} = (1 + c \pm \sqrt{c(2+c)}) \cdot e^{\pm\sqrt{c(2+c)}}
+</div>
+<ul>
+<li>当 <span class="math inline">c = 0</span>：完美等距（所有奇异值 = 1）</li>
+<li>当 <span class="math inline">c</span> 很小：<span class="math inline">z_{\pm} \approx 1 \pm 2\sqrt{2c}</span>，谱宽度亚线性增长</li>
+<li>当 <span class="math inline">c</span> 很大：最大奇异值指数级大，最小奇异值指数级小</li>
+</ul>
+<h3>理论 vs. 数值模拟</h3>
+<p>下图展示了理论预测与随机矩阵模拟的对比。上图为 tanh 激活的 Jacobian 奇异值分布（不同 <span class="math inline">\sigma_W^2</span>），下图为 ReLU 激活在不同 <span class="math inline">c</span> 值下的普适分布：</p>
+<p><img src="../papers/1809.08848-dynamical-isometry-resnet/raw/fig_ResNet_jacobian_Tanh.webp" alt="Tanh 激活的 Jacobian 奇异值分布——理论 (红线) vs. 模拟 (直方图)，N=500, L=10" /></p>
+<p><img src="../papers/1809.08848-dynamical-isometry-resnet/raw/fig_Jacobian_ReLU.webp" alt="不同 c 值下 ReLU 的普适奇异值分布 (虚线: 理论, 实线: 模拟)" /></p>
+<p><span class="math inline">c</span> 越小，谱越窄，越接近理想等距。即使在 <span class="math inline">L=10</span> 这样不算很深的网络中，渐近理论已能准确描述奇异值分布。</p>
+<h3>各激活函数的 <span class="math inline">c</span> 值</h3>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th><span class="math inline">c_2</span> / <span class="math inline">c</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linear (<span class="math inline">\phi(x)=x</span>)</td>
+<td><span class="math inline">\sigma_W^2</span></td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td><span class="math inline">\sigma_W^2 / 2</span></td>
+</tr>
+<tr>
+<td>Leaky ReLU (<span class="math inline">\alpha</span>)</td>
+<td><span class="math inline">\sigma_W^2(1+\alpha^2)/2</span></td>
+</tr>
+<tr>
+<td>Hard Tanh</td>
+<td><span class="math inline">\sigma_W^2 \cdot \mathrm{erf}(1/\sqrt{2})</span></td>
+</tr>
+<tr>
+<td>Tanh, Sigmoid, SELU</td>
+<td>需要通过信号传播递推方程数值求解</td>
+</tr>
+</tbody>
+</table>
+<p>对分段线性激活，<span class="math inline">c</span> 不依赖于偏置方差且与权重方差线性相关；对非线性激活，<span class="math inline">c</span> 需通过预激活方差的递推关系计算。</p>
+<p>下图验证了 Tanh 激活的信号传播递推方程。左列为后激活方差，中列为预激活方差，右列为各层有效累积量 <span class="math inline">c_2^\ell</span>。<span class="math inline">c_2^\ell</span> 在各层间的变化很小，验证了理论推导中&quot;<span class="math inline">c</span> 近似为常数&quot;的假设：</p>
+<p><img src="../papers/1809.08848-dynamical-isometry-resnet/raw/fig_ResNet_Tanh_c2_v2.webp" alt="Tanh 信号传播验证: 后激活方差 / 预激活方差 / 各层 c₂ (红线: 理论, 点: 模拟, L=200, N=800)" /></p>
+<h3>实用方案</h3>
+<p>给定目标 <span class="math inline">c</span>（如 <span class="math inline">c = 0.125</span>），对任意激活函数可反推所需的 <span class="math inline">\sigma_W^2</span>，从而在初始化时保证相同的 Jacobian 谱。这消除了&quot;激活函数选择&quot;作为混淆变量对训练动态的影响。</p>
+<h2>关键结果</h2>
+<ol>
+<li>
+<p><strong>普适性</strong>：ResNets 中 Jacobian 奇异值分布在大宽度、大深度极限下由单一普适方程描述，不依赖具体激活函数。这与前馈网络形成鲜明对比（前馈网络区分 Bernoulli 和 smooth 两个普适性类别）。</p>
+</li>
+<li>
+<p><strong>动态等距对所有激活函数可达</strong>：通过调节 <span class="math inline">\sigma_W^2</span> 使 <span class="math inline">c</span> 足够小，ReLU、tanh、sigmoid、SELU 等激活函数都能实现动态等距。</p>
+</li>
+<li>
+<p><strong>理论-实验吻合</strong>：<span class="math inline">N=500</span>、<span class="math inline">L=10</span> 时，数值模拟已与大 <span class="math inline">N,L</span> 理论预测高度一致。</p>
+</li>
+<li>
+<p><strong>训练动态的普适行为</strong>：在 CIFAR-10 上，当不同激活函数的 <span class="math inline">c</span> 被设为相同值时，训练曲线表现出显著的一致性；而使用相同 <span class="math inline">\sigma_W^2</span> 时则差异很大。下面两幅图分别展示了&quot;匹配 <span class="math inline">c</span>&quot;和&quot;匹配 <span class="math inline">\sigma_W^2</span>&quot;下的训练准确率曲线：</p>
+</li>
+</ol>
+<p><img src="../papers/1809.08848-dynamical-isometry-resnet/raw/train_acc_epochs_v4.webp" alt="不同初始化策略的训练准确率对比——上: Taki (1/NL 方差) vs. 匹配 c 的初始化; 中: 匹配 c 时前 200 epochs; 下: 匹配 c 时前 100 iterations" /></p>
+<p>匹配 <span class="math inline">c</span> 时，同类激活函数（如不同 <span class="math inline">\alpha</span> 的 Leaky ReLU）的训练曲线几乎完全重合。</p>
+<p>下图进一步展示了使用真实 CIFAR-10 数据时各激活函数的 Jacobian 奇异值谱（<span class="math inline">L=10, 20</span>），验证了在有限深度和真实数据上的普适性：</p>
+<p><img src="../papers/1809.08848-dynamical-isometry-resnet/raw/jacobians_data_v2.webp" alt="不同激活函数在 CIFAR-10 数据上的 Jacobian 奇异值谱 (L=10, 20)" /></p>
+<ol start="5">
+<li><strong>Batch normalization 兼容</strong>：理论框架可自然扩展到包含 BatchNorm 的情况，普适方程形式不变，仅 <span class="math inline">c_2^\ell</span> 的表达式需修改。</li>
+</ol>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>分析在<strong>初始化时刻</strong>成立，不保证训练过程中 <span class="math inline">c</span> 保持不变（特别是对于 tanh、sigmoid 等非线性激活，预激活方差随深度增长，<span class="math inline">c_2^\ell</span> 会变化）。</li>
+<li>使用的 ResNet 模型是简化的全连接单阶段架构，没有考虑多阶段、bottleneck、attention 等实际组件。</li>
+<li>对于 sigmoid，预激活方差增长导致饱和问题依然存在，即使初始 Jacobian 谱良好。</li>
+<li>后续工作 <strong>RISOTTO</strong> 进一步提出了在有限宽度、有限深度 ReLU ResNets 中实现<strong>完美</strong>动态等距的初始化方案。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>1711.04735-dynamical-isometry/</code>：本文的理论基础，首次在前馈网络中建立动态等距与正交初始化的联系。</li>
+<li><code>1901.09321-fixup/</code>、<code>2003.04887-rezero/</code>：通过零初始化残差缩放在实践中近似实现&quot;类动态等距&quot;。</li>
+<li><code>2002.04745-layer-norm-transformer/</code>：分析 Pre-LN 的梯度直通性质，与本文揭示的 ResNet 梯度流机制互补。</li>
+<li>本文的关键贡献在于建立了<strong>残差连接为何普遍有效</strong>的理论基础：恒等路径使 Jacobian 谱自动集中，而不需要像前馈网络那样精细调节激活函数和初始化方案。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2110.09456-normformer"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2110.09456" target="_blank">arXiv:2110.09456</a> · <a href="#2110.09456-normformer">README source</a></div><div class="paper-body"><h1>NormFormer: Improved Transformer Pretraining with Extra Normalization</h1>
+<p><strong>论文</strong>: Shleifer, Weston, Ott (2021, ICLR 2022)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2110.09456">2110.09456</a>
+<strong>分类</strong>: B. 架构 / 残差缩放 · E. 隐状态 / Jacobian / 信号传播</p>
+<hr />
+<h2>问题动机</h2>
+<p>Post-LN Transformer 的梯度问题已被广泛认知：<strong>后层梯度远大于前层</strong>，导致训练不稳定。Pre-LN 通过将 LayerNorm 移到子层输入处解决了这个问题，成为 GPT-3 等大模型的标准选择。</p>
+<p>但本文发现 Pre-LN 引入了<strong>相反的梯度失配</strong>：</p>
+<ul>
+<li><strong>前层（靠近输入）的梯度显著大于后层（靠近输出）</strong></li>
+</ul>
+<p>这一失配意味着：(1) 前层参数更新过大，后层参数更新不足；(2) 在混合精度训练中，不同层梯度的量级差异增加了 FP16 溢出风险；(3) 后层 FFN 的学习被压制。</p>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>Pre-LN 解决了 Post-LN 的后层梯度爆炸，但将失配方向反转而非消除。</li>
+<li>GradInit、Admin 等方法引入额外的初始化阶段或方差启发式，增加工程复杂度。</li>
+<li>ReZero 等残差缩放方法不直接处理层间梯度量级差异。</li>
+</ul>
+<h2>核心想法</h2>
+<p>在 Pre-LN Transformer 的每一层中<strong>策略性地添加三个归一化/缩放操作</strong>（额外 LayerNorm + HeadScale），使前层梯度被抑制、后层梯度被增强，从而缩小层间梯度量级差异。整个修改仅增加约 0.4% 参数。</p>
+<h2>方法细节</h2>
+<h3>架构总览</h3>
+<p><img src="../papers/2110.09456-normformer/raw/nf_arch_v4.webp" alt="NormFormer 架构: 左为 baseline Pre-LN 层, 中为 NormFormer (加粗为新增操作), 右为 HeadScale 细节。*ResScale 仅作用于第二个残差连接。" /></p>
+<h3>标准 Pre-LN 层</h3>
+<div class="math block">
+x_{l+1}^{\text{PreLN}} = \text{FFN}(\text{MHA}(x_l))
+</div>
+<p>其中：</p>
+<div class="math block">
+\text{MHA}(x) = x + \text{MultiHeadAttention}(\text{LN}(x))
+</div>
+<div class="math block">
+\text{FFN}(x) = x + \sigma(\text{LN}(x) W_1 + b_1) W_2 + b_2
+</div>
+<h3>NormFormer 层</h3>
+<p>NormFormer 引入三处修改（加粗部分）：</p>
+<div class="math block">
+x_{l+1}^{\text{NormFormer}} = \text{NormFFN}(\text{NormScaledMHA}(x_l))
+</div>
+<p><strong>修改 1：HeadScale</strong>——在 attention heads 拼接后、输出投影前，对每个 head 输出乘以可学习标量 <span class="math inline">\gamma_i</span>（初始化为 1）：</p>
+<div class="math block">
+\text{HeadScaleMHA}(Q,K,V) = \text{Concat}(\gamma_1 h_1, \ldots, \gamma_n h_n) W^O
+</div>
+<p><strong>修改 2：Post-Attention LayerNorm</strong>——在 attention 输出之后、残差加法之前添加 LayerNorm：</p>
+<div class="math block">
+\text{NormScaledMHA}(x) = x + \mathbf{LN}(\text{HeadScaleMHA}(\text{LN}(x)))
+</div>
+<p><strong>修改 3：FFN 中间 LayerNorm</strong>——在 FFN 第一层线性变换 + 激活之后、第二层线性变换之前添加 LayerNorm：</p>
+<div class="math block">
+\text{NormFFN}(x) = x + \mathbf{LN}(\sigma(\text{LN}(x) W_1 + b_1)) W_2 + b_2
+</div>
+<h3>可选：残差缩放（ResScale）</h3>
+<p>对 FFN 子模块的残差连接添加可学习逐维缩放 <span class="math inline">\lambda_{\text{resid}}</span>：</p>
+<div class="math block">
+\text{ResScale}(x) = \lambda_{\text{resid}} \circ x + \text{Sublayer}(\text{LN}(x))
+</div>
+<p>在 125M 和 355M 模型中有效，但在 1.3B+ 模型中有害。</p>
+<h3>梯度失配的可视化</h3>
+<p>下图展示了训练早期各层 FC2 参数的平均 L1 梯度范数。可以看到 Pre-LN baseline 中 layer 0 的梯度远大于 layer 11，而 NormFormer 显著缩小了这一差距：</p>
+<p><img src="../papers/2110.09456-normformer/raw/gnorm_title_fix.webp" alt="各层 FC2 权重的平均 L1 梯度范数 (训练早期): baseline Pre-LN 中前层梯度远大于后层" /></p>
+<p>下图展示了 NormFormer 每个新增操作对各层参数梯度范数的影响。Y 轴为相对于 baseline 的倍数——NormFormer 增大了后层 FC 参数的梯度，同时降低了所有层 attention 参数的梯度：</p>
+<p><img src="../papers/2110.09456-normformer/raw/all_params_scale_smaller.webp" alt="NormFormer 各操作对梯度范数的影响: 后层 FC 梯度被增强, attention 梯度被整体降低" /></p>
+<h3>缓解机制：学习到的缩放参数</h3>
+<p>下图展示了三个新增操作中学习到的缩放参数 <span class="math inline">\gamma</span> 的分布。关键观察：FFN LN 的 <span class="math inline">\gamma</span> 在前层更小（抑制前层梯度），后层更大（维持后层梯度）：</p>
+<p><img src="../papers/2110.09456-normformer/raw/lnweight.webp" alt="三个新增操作的 γ 参数分布: FFN LN 的 γ 随深度递增是梯度均衡的关键" /></p>
+<h2>关键结果</h2>
+<h3>因果语言模型（Causal LM）</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Params</th>
+<th>Val PPL</th>
+<th>Zero-Shot Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT3-125M (High LR)</td>
+<td>124.4M</td>
+<td>21.09</td>
+<td>50.9</td>
+</tr>
+<tr>
+<td>NormFormer-125M + ResScale</td>
+<td>124.5M</td>
+<td><strong>20.11</strong></td>
+<td><strong>52.3</strong></td>
+</tr>
+<tr>
+<td>GPT3-355M (High LR)</td>
+<td>354.7M</td>
+<td>14.85</td>
+<td>58.1</td>
+</tr>
+<tr>
+<td>NormFormer-355M + ResScale</td>
+<td>355.0M</td>
+<td><strong>14.52</strong></td>
+<td><strong>59.1</strong></td>
+</tr>
+<tr>
+<td>GPT3-1.3B (High LR)</td>
+<td>1313.5M</td>
+<td>12.21</td>
+<td>63.6</td>
+</tr>
+<tr>
+<td>NormFormer-1.3B</td>
+<td>1314.0M</td>
+<td><strong>11.94</strong></td>
+<td><strong>64.7</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>训练效率</h3>
+<p>下图展示了 NormFormer 相对于 baseline 的计算效率优势。蓝色星号标记 NormFormer 达到 baseline 最优 PPL 的时间点：</p>
+<p><img src="../papers/2110.09456-normformer/raw/curves_v6.webp" alt="预训练 PPL vs. 计算量 (GPU days): NormFormer 在 CLM 和 MLM 上分别节省约 40% 和 43% 计算量" /></p>
+<p>在等计算量对比下：</p>
+<ul>
+<li>125M CLM：NormFormer 达到 baseline 最优 PPL 所需计算量减少 <strong>40%</strong></li>
+<li>MLM（RoBERTa）：NormFormer 达到 baseline 最优 PPL 所需计算量减少 <strong>43%</strong></li>
+</ul>
+<h3>训练稳定性</h3>
+<p>在学习率线性增长的稳定性测试中，NormFormer 可以在更高学习率下保持稳定，不发生 FP16 溢出：</p>
+<p><img src="../papers/2110.09456-normformer/raw/stab_v5.webp" alt="LR 稳定性测试: 学习率从 0 线性增长, NormFormer 在更高 LR 下才失稳 (每点为 3 次运行的中位数)" /></p>
+<p>Baseline 模型的崩溃点出现在 layer 0 的 QK 乘积溢出 FP16 范围时。</p>
+<h3>Ablation</h3>
+<p>移除任何一个操作都会导致性能下降：</p>
+<ul>
+<li>移除 HeadScale：损害最大（+0.34 PPL）</li>
+<li>移除 FFN LN：+0.26 PPL</li>
+<li>移除 ResScale：+0.32 PPL</li>
+<li>移除 Post-Attn LN：损害最小（+0.04 PPL）</li>
+<li>添加更多 LN（如 QKV 归一化）：PPL 不变但速度降低 5%</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>NormFormer 缓解的是梯度<strong>量级失配</strong>（gradient magnitude mismatch），而非直接约束 Jacobian 奇异值。即使层间梯度量级均衡，也不保证 Jacobian 的奇异值不会坍缩——梯度可能是非退化范数但低秩的。</li>
+<li>ResScale 在大规模（1.3B+）模型中反而有害，原因尚不完全清楚。</li>
+<li>额外的 LayerNorm 引入 2%-6% 的训练开销（可通过算子融合缓解）。</li>
+<li>未分析训练中后期 NormFormer 是否持续优于 baseline，还是仅在早期收敛更快。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2002.04745-layer-norm-transformer/</code>：Xiong et al. 首次系统分析 Pre-LN vs Post-LN 的梯度行为，NormFormer 直接建立在此基础上。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：通过残差缩放 <span class="math inline">\alpha</span> 和改进初始化训练千层 Transformer，与 NormFormer 的 ResScale 思想相关但目标（极深网络）不同。</li>
+<li><code>2206.00330-b2t-connection/</code>（B2T）：从 Jacobian 结构角度分析残差缩放，为 NormFormer 的经验观察提供了更深的理论解释。</li>
+<li><code>2410.01131-ngpt/</code>（nGPT）：nGPT 作者在附录中对比了 NormFormer，指出两者的关键区别——NormFormer 不约束隐状态范数，不归一化网络参数，其 LayerNorm 的 <span class="math inline">\gamma</span> 不能被解释为 eigen learning rates。</li>
+<li><code>2004.08249-admin/</code>（Admin）：同样试图解决 Transformer 训练中的梯度失配，但通过初始化阶段而非持久的架构修改。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2410.01131-ngpt"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2410.01131" target="_blank">arXiv:2410.01131</a> · <a href="#2410.01131-ngpt">README source</a></div><div class="paper-body"><h1>nGPT: Normalized Transformer with Representation Learning on the Hypersphere</h1>
+<p><strong>论文</strong>: Loshchilov, Hsieh, Sun, Ginsburg (2024, ICLR 2025)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/2410.01131">2410.01131</a>
+<strong>分类</strong>: E. 隐状态 / Jacobian / 信号传播</p>
+<hr />
+<h2>问题动机</h2>
+<p>标准 Transformer 中，隐状态 <span class="math inline">h</span> 的范数不受约束——每次残差加法 <span class="math inline">h \leftarrow h + \text{Block}(h)</span> 后范数可能增长或缩小。为此需要 RMSNorm/LayerNorm 反复&quot;修正&quot;，weight decay 控制参数范数，warmup 防止早期不稳定。这些都是对同一问题的不同治标措施。</p>
+<p>更深层的问题是：</p>
+<ul>
+<li><strong>Attention 矩阵退化为低秩</strong>：在标准 GPT 中，<span class="math inline">W_q, W_k</span> 等矩阵的 condition number 显著高于 nGPT，表明有效表达能力受损。</li>
+<li><strong>范数失控扭曲相似度计算</strong>：embedding 向量范数差异大时，点积不再准确反映语义相似度。</li>
+<li><strong>参数、隐状态、梯度的量级相互耦合</strong>：一个组件的范数变化会级联影响整个网络。</li>
+</ul>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>LayerNorm/RMSNorm 仅在特定位置归一化隐状态，不保证全局范数一致性。</li>
+<li>Weight decay 间接控制参数范数，但可能导致 attention 矩阵低秩退化。</li>
+<li>NormFormer 添加更多归一化点，但不约束隐状态到特定流形。</li>
+</ul>
+<h2>核心想法</h2>
+<p>将 Transformer 中的<strong>所有向量</strong>——embedding、隐状态、<span class="math inline">W_q, W_k, W_v, W_o</span> 及 MLP 矩阵的列向量——都约束在<strong>单位超球面</strong> <span class="math inline">S^{d-1}</span> 上。每一层的更新被重新诠释为超球面上的<strong>角位移</strong>（angular displacement），而非欧几里得空间中的加法。</p>
+<h2>方法细节</h2>
+<h3>标准 Transformer vs. nGPT</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">标准 Transformer</th>
+<th style="text-align:left">nGPT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">h_A \leftarrow \text{ATTN}(\text{RMSNorm}(h))</span></td>
+<td style="text-align:left"><span class="math inline">h_A \leftarrow \text{Norm}(\text{ATTN}(h))</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">h \leftarrow h + h_A</span></td>
+<td style="text-align:left"><span class="math inline">h \leftarrow \text{Norm}(h + \alpha_A (h_A - h))</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">h_M \leftarrow \text{MLP}(\text{RMSNorm}(h))</span></td>
+<td style="text-align:left"><span class="math inline">h_M \leftarrow \text{Norm}(\text{MLP}(h))</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">h \leftarrow h + h_M</span></td>
+<td style="text-align:left"><span class="math inline">h \leftarrow \text{Norm}(h + \alpha_M (h_M - h))</span></td>
+</tr>
+<tr>
+<td style="text-align:left">最终层：<span class="math inline">h \leftarrow \text{RMSNorm}(h)</span></td>
+<td style="text-align:left">不需要</td>
+</tr>
+</tbody>
+</table>
+<h3>超球面上的更新</h3>
+<p>理论上，两个球面点之间的插值应使用 SLERP（球面线性插值）：</p>
+<div class="math block">
+\text{SLERP}(a, b; \alpha) = \frac{\sin((1-\alpha)\theta)}{\sin(\theta)} a + \frac{\sin(\alpha\theta)}{\sin(\theta)} b
+</div>
+<p>实验发现 LERP + 归一化是足够好的近似：</p>
+<div class="math block">
+h \leftarrow \text{Norm}(h + \alpha (h_{\text{block}} - h))
+</div>
+<p>其中 <span class="math inline">\text{Norm}(x) = x / \|x\|</span> 将向量投影回单位球。这对应黎曼优化中的<strong>回缩步</strong>（retraction）。</p>
+<h3>Eigen learning rates</h3>
+<p><span class="math inline">\alpha_A \in \mathbb{R}_{\geq 0}^{d_{\text{model}}}</span> 和 <span class="math inline">\alpha_M \in \mathbb{R}_{\geq 0}^{d_{\text{model}}}</span> 是逐维的可学习参数，初始化为 <span class="math inline">\alpha_{\text{init}} \approx 0.05</span>（约 <span class="math inline">1/n_{\text{layers}}</span> 量级）。它们可以被解释为 quasi-Newton 方法中变度量矩阵 <span class="math inline">B</span> 的对角元素——nGPT 的每一层就是一个变度量优化器在超球面上的一步。</p>
+<p>下图展示了训练后各层的 eigen learning rates 和缩放因子分布：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/newparamsmean.webp" alt="Eigen learning rates 和缩放因子: (左) Attention/MLP 的 α, (中) MLP 中间状态缩放, (右) QK 缩放和 logits 缩放" /></p>
+<ul>
+<li>Attention 的 <span class="math inline">|\alpha_A|</span> 平均约 0.20-0.25（0.5B → 1B 递减），MLP 的 <span class="math inline">|\alpha_M|</span> 平均约 0.32-0.37</li>
+<li>MLP 的 eigen learning rates 更大，可能因为 MLP block 参数更多、预测能力更强</li>
+</ul>
+<h3>QK 归一化</h3>
+<p>Attention 的 query 和 key 在 RoPE 之后归一化并乘以可学习缩放因子：</p>
+<div class="math block">
+q \leftarrow \text{Norm}(q) \cdot s_{qk}, \quad k \leftarrow \text{Norm}(k) \cdot s_{qk}
+</div>
+<p>由于归一化后 <span class="math inline">q \cdot k</span> 的方差为 <span class="math inline">1/d_k</span>，softmax 的缩放因子从 <span class="math inline">1/\sqrt{d_k}</span> 改为 <span class="math inline">\sqrt{d_k}</span>（或等价地，初始化 <span class="math inline">s_{qk} = d_k^{1/4}</span>）。</p>
+<p>QK 归一化对域内性能影响很小，但对<strong>长度外推</strong>至关重要——移除后 PG19 长文本的困惑度显著上升。</p>
+<h3>MLP 归一化与缩放</h3>
+<p><span class="math inline">W_u, W_\nu</span> 沿 embedding 维度归一化后，SiLU 的输入被限制在 <span class="math inline">[-1, 1]</span>，非线性效果消失。因此需要将 <span class="math inline">\nu</span> 乘以 <span class="math inline">\sqrt{d_{\text{model}}}</span> 恢复方差：</p>
+<div class="math block">
+\nu \leftarrow \nu \cdot s_\nu \cdot \sqrt{d_{\text{model}}}
+</div>
+<h3>有效学习率控制</h3>
+<p>对可学习缩放参数 <span class="math inline">s</span>，使用两个标量 <span class="math inline">s_{\text{init}}</span> 和 <span class="math inline">s_{\text{scale}}</span> 控制 Adam 的有效学习率：参数初始化为 <span class="math inline">s_{\text{scale}}</span>，前向传播时乘以 <span class="math inline">s_{\text{init}} / s_{\text{scale}}</span>。这样通过调节 <span class="math inline">s_{\text{scale}}</span> 可以在不改变全局学习率的前提下精确控制每个缩放参数的更新速度。</p>
+<h3>完整转换配方</h3>
+<ol>
+<li>移除所有 RMSNorm / LayerNorm</li>
+<li>训练每步后（可选地在前向传播中也）归一化所有矩阵（<span class="math inline">E_{\text{in}}, E_{\text{out}}, W_q, W_k, W_v, W_o, W_u, W_\nu, W_{o\text{MLP}}</span>）沿 embedding 维度</li>
+<li>残差更新改为 LERP + Norm</li>
+<li>softmax 缩放因子改为 <span class="math inline">\sqrt{d_k}</span></li>
+<li>MLP 中间状态乘以 <span class="math inline">\sqrt{d_{\text{model}}}</span></li>
+<li>logits 乘以可学习缩放 <span class="math inline">s_z</span></li>
+<li>移除 weight decay 和 learning rate warmup</li>
+</ol>
+<h2>关键结果</h2>
+<h3>训练加速</h3>
+<p>下图展示了 nGPT 相对于标准 GPT 在不同序列长度下的 validation loss 对比。nGPT 在 token 效率上有 4-20 倍加速：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/loss.webp" alt="Validation loss vs. 训练 tokens: nGPT 在 1K/4K/8K 上下文长度分别实现约 4×/10×/20× 加速" /></p>
+<table>
+<thead>
+<tr>
+<th>序列长度</th>
+<th>加速倍数（达到相同 val loss 所需 tokens）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1K</td>
+<td>~4×</td>
+</tr>
+<tr>
+<td>4K</td>
+<td>~10×</td>
+</tr>
+<tr>
+<td>8K</td>
+<td>~20×</td>
+</tr>
+</tbody>
+</table>
+<p>1B 参数模型在 4K 上下文的收敛曲线进一步验证了这一加速——nGPT 用 20K 步达到 GPT 200K 步的 val loss：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/conv1B.webp" alt="1B 模型在 4K 上下文的 validation loss 收敛曲线" /></p>
+<h3>下游任务表现</h3>
+<p>下图展示了 4K 上下文训练的模型在多个下游任务上的表现。nGPT 在几乎所有任务和计算预算下都优于 GPT：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/4Ktasks.webp" alt="4K 上下文训练的下游任务表现: nGPT (虚线) vs. GPT (实线), 右下角为平均值" /></p>
+<h3>参数矩阵质量</h3>
+<p>nGPT 的 attention 矩阵 condition number 显著低于 GPT，表明参数归一化有效防止了低秩退化：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/condnums.webp" alt="Attention 和 MLP 矩阵在各层的 median condition number: nGPT 全面低于 GPT" /></p>
+<p>即使将 GPT 训练后的矩阵归一化，condition number 仍高于 nGPT，证实 weight decay 导致了真正的秩退化（与 Kobayashi et al. 2024 的独立发现一致）。</p>
+<h3>Embedding 分析</h3>
+<p>下图对比了 GPT 和 nGPT 的 embedding 矩阵性质——范数分布、特征值分布和向量间点积分布：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/embeds.webp" alt="Embedding 矩阵对比: (左) 范数分布, (中) 特征值分布, (右) 点积分布。nGPT 的 embedding 范数均匀且点积分布更集中" /></p>
+<h3>长度外推</h3>
+<p>nGPT 在 PG19 上展示出优秀的长度外推能力——在 1K-32K 范围内困惑度保持稳定，而 GPT 在超过训练长度时急剧上升。QK 归一化是长度外推的关键组件：</p>
+<p><img src="../papers/2410.01131-ngpt/raw/pg19-ppl.webp" alt="PG19 困惑度 vs. 上下文长度 (1K-32K): nGPT 保持稳定，GPT 急剧上升" /></p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li><strong>单位范数隐状态不自动保证 Jacobian 良好条件</strong>：球面上的映射仍然可以坍缩方向、丢失秩。<span class="math inline">\|h\| = 1</span> 约束的是<strong>范数</strong>，而不是层间映射的<strong>奇异值谱</strong>。</li>
+<li><strong>每步时间开销</strong>：4K 上下文约增加 80%，8K 约增加 60%。部分原因是归一化操作未充分优化融合，但这在大模型中影响递减。</li>
+<li>仅在 0.5B 和 1B 模型上验证，<strong>更大规模</strong>（10B+）的行为未知。</li>
+<li>在最长运行的 nGPT 中观察到性能饱和，表明模型容量可能成为瓶颈。</li>
+<li>Ablation 显示固定 <span class="math inline">s_{qk}, s_u, s_\nu</span> 为常数、仅保留全局 <span class="math inline">s_z</span> 可学习时性能下降很小，但这一简化版本的长期训练效果未充分验证。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2003.04887-rezero/</code>（ReZero）：nGPT 作者在附录详细对比——ReZero 的 <span class="math inline">\alpha</span> 缩放 <span class="math inline">h_T</span> 本身（<span class="math inline">h \leftarrow h + \alpha h_T</span>），而 nGPT 缩放的是<strong>方向</strong>（<span class="math inline">h \leftarrow \text{Norm}(h + \alpha(h_T - h))</span>），且 nGPT 的 <span class="math inline">\alpha</span> 不受输出投影矩阵缩放的影响，因此是 block 贡献度的真实度量。</li>
+<li><code>2110.09456-normformer/</code>（NormFormer）：nGPT 作者指出 NormFormer 不归一化网络参数，隐状态范数不受控，LN 的 <span class="math inline">\gamma</span> 不等同于 eigen learning rates。</li>
+<li><code>1809.08848-dynamical-isometry-resnet/</code>：动态等距理论要求 Jacobian 奇异值集中在 1，nGPT 通过几何约束（球面表示）间接接近这一目标，但未直接分析 Jacobian 谱。</li>
+<li>代表了一种根本不同的信号传播范式——<strong>通过约束表示流形的几何</strong>来控制信号，而非调整缩放系数。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="1906.01787-deep-transformer-mt"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1906.01787" target="_blank">arXiv:1906.01787</a> · <a href="#1906.01787-deep-transformer-mt">README source</a></div><div class="paper-body"><h1>Learning Deep Transformer Models for Machine Translation</h1>
+<p><strong>论文</strong>: Wang, Li, Xiao, Zhu, Li, Wong, Chao (ACL 2019)
+<strong>arXiv</strong>: <a href="https://arxiv.org/abs/1906.01787">1906.01787</a>
+<strong>分类</strong>: B. 架构 / 残差缩放</p>
+<hr />
+<h2>问题动机</h2>
+<p>Transformer 的性能提升主要依赖&quot;加宽&quot;（Transformer-Big，增大 <span class="math inline">d_{\text{model}}</span> 和 FFN 维度），但&quot;加深&quot;的探索很有限。Vaswani et al. (2017) 使用 6 层 encoder，Bapna et al. (2018) 尝试 16 层但需要特殊的 transparent attention 机制。直接堆叠更多层会导致训练失败。</p>
+<p>核心问题有两个：</p>
+<ol>
+<li><strong>Post-LN 位置导致梯度消失</strong>：当 LayerNorm 放在残差加法之后（Post-LN），梯度从顶层传播到底层必须经过每一层 LN 的导数乘积 <span class="math inline">\prod_{k=l}^{L-1} \frac{\partial \text{LN}(y_k)}{\partial y_k}</span>，层数一多就容易消失。</li>
+<li><strong>标准残差连接的&quot;遗忘&quot;问题</strong>：<span class="math inline">x_{l+1} = x_l + F(x_l)</span> 仅依赖前一层，深层网络中底层特征难以直接传递到高层。</li>
+</ol>
+<p><strong>已有方法的不足</strong>：</p>
+<ul>
+<li>Transparent Attention (Bapna et al. 2018) 仅在 encoder 编码完成后、向 decoder 传递时融合各层，不在 encoding 过程中促进层间交互。</li>
+<li>DenseNet 式的密集连接使用均匀权重 <span class="math inline">w=1</span>，无法学习层间的差异化贡献。</li>
+</ul>
+<h2>核心想法</h2>
+<p>通过两个关键改动使深层 Transformer 可训练：(1) 使用 <strong>Pre-LN</strong>（LayerNorm 在子层输入处）建立梯度直通路径；(2) 提出 <strong>DLCL</strong>（Dynamic Linear Combination of Layers）——每一层的输入是此前所有层输出的可学习加权组合，而非仅依赖前一层。</p>
+<h2>方法细节</h2>
+<h3>Pre-LN 的梯度优势</h3>
+<p><strong>Post-LN</strong> 的梯度传播：</p>
+<div class="math block">
+\frac{\partial \mathcal{E}}{\partial x_l} = \frac{\partial \mathcal{E}}{\partial x_L} \times \prod_{k=l}^{L-1} \frac{\partial \text{LN}(y_k)}{\partial y_k} \times \prod_{k=l}^{L-1} \left(1 + \frac{\partial F(x_k)}{\partial x_k}\right)
+</div>
+<p><span class="math inline">\prod \frac{\partial \text{LN}}{\partial y_k}</span> 这个乘积项使梯度在深层网络中极易消失或爆炸。</p>
+<p><strong>Pre-LN</strong> 的梯度传播：</p>
+<div class="math block">
+\frac{\partial \mathcal{E}}{\partial x_l} = \frac{\partial \mathcal{E}}{\partial x_L} \times \left(1 + \sum_{k=l}^{L-1} \frac{\partial F(\text{LN}(x_k))}{\partial x_l}\right)
+</div>
+<p>关键差异：右侧是<strong>求和</strong>而非连乘，且有常数项 1 保证梯度信号不会完全消失。这是因为 Pre-LN 下 <span class="math inline">x_L = x_l + \sum_{k=l}^{L-1} F_{\text{pre}}(x_k)</span>，残差连接完全绕过了 LN 单元。</p>
+<h3>DLCL（Dynamic Linear Combination of Layers）</h3>
+<p>设 <span class="math inline">\{y_0, y_1, \ldots, y_l\}</span> 为各层输出（<span class="math inline">y_0</span> 为 embedding），第 <span class="math inline">l+1</span> 层的输入为：</p>
+<div class="math block">
+x_{l+1} = \mathcal{G}(y_0, \ldots, y_l) = \sum_{k=0}^{l} W_k^{(l+1)} \text{LN}(y_k)
+</div>
+<p>其中 <span class="math inline">W_k^{(l+1)} \in \mathbb{R}</span> 是可学习标量权重。</p>
+<p>与其他方法的对比（以 3 层 encoder 为例）：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>连接矩阵特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准残差</strong></td>
+<td>下三角，对角线下方为 1，其余为 0</td>
+</tr>
+<tr>
+<td><strong>Dense 残差</strong></td>
+<td>全 1 矩阵</td>
+</tr>
+<tr>
+<td><strong>Transparent Attention</strong></td>
+<td>仅最后一行可学习（<span class="math inline">O(M \times N)</span> 连接）</td>
+</tr>
+<tr>
+<td><strong>DLCL</strong></td>
+<td>全下三角可学习（<span class="math inline">O(M^2)</span> 连接）</td>
+</tr>
+</tbody>
+</table>
+<p>DLCL 的设计灵感来自数值分析中的<strong>线性多步法</strong>（Linear Multi-step Method, LMM）：残差网络类似前向 Euler 法（仅用前一步），而 DLCL 类似 LMM（线性组合多个历史步）。区别在于 DLCL 的权重是端到端学习的，且历史窗口不限长度。</p>
+<h3>架构可视化</h3>
+<p>下图展示了 30 层 encoder 和 6 层 decoder 的 DLCL 架构。Encoder 中每一层的输入汇聚了此前所有层的加权输出（橙色方块），形成密集的跨层连接；decoder 使用相同机制但层数较少：</p>
+<p><img src="../papers/1906.01787-deep-transformer-mt/raw/encoder.webp" alt="30 层 Pre-norm DLCL encoder: 每层输入为此前所有层输出的加权组合，橙色方块为可学习权重" /></p>
+<p><img src="../papers/1906.01787-deep-transformer-mt/raw/decoder.webp" alt="6 层 Pre-norm DLCL decoder: 结构与 encoder 对称，跨层连接使底层特征直接可达" /></p>
+<h3>实现要点</h3>
+<ul>
+<li>DLCL 在 encoder 和 decoder 都使用。</li>
+<li>为计算效率，仅组合完整层的输出（而非子层输出）。</li>
+<li>深层模型（<span class="math inline">L \geq 20</span>）使用梯度累积处理显存限制：batch=8192, lr=<span class="math inline">2 \times 10^{-3}</span>, warmup=16000，更新步数减半以保持总训练数据量不变。</li>
+</ul>
+<h2>关键结果</h2>
+<h3>WMT'16 En-De</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Params</th>
+<th>BLEU</th>
+<th>vs Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transformer-Base (6L, post-norm)</td>
+<td>62M</td>
+<td>27.5</td>
+<td>ref</td>
+</tr>
+<tr>
+<td>Transformer-Big (6L, post-norm)</td>
+<td>211M</td>
+<td>28.8</td>
+<td>+1.3</td>
+</tr>
+<tr>
+<td>Transformer-deep (20L, post-norm)</td>
+<td>106M</td>
+<td><strong>failed</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>DLCL-deep (25L, post-norm)</td>
+<td>121M</td>
+<td>29.2</td>
+<td>+1.7</td>
+</tr>
+<tr>
+<td>Pre-norm Transformer-deep (20L)</td>
+<td>106M</td>
+<td>28.9</td>
+<td>+1.8</td>
+</tr>
+<tr>
+<td><strong>Pre-norm DLCL-deep (30L)</strong></td>
+<td><strong>137M</strong></td>
+<td><strong>29.3</strong></td>
+<td><strong>+2.2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>30 层 Pre-norm DLCL encoder 以 137M 参数达到 29.3 BLEU：</p>
+<ul>
+<li>比 Transformer-Big (211M, 28.8) 高 <strong>0.5 BLEU</strong></li>
+<li>参数量仅为 Transformer-Big 的 <strong>65%</strong></li>
+<li>训练时间仅为 Transformer-Big 的 <strong>1/3</strong></li>
+<li>推理速度比 Transformer-Big 快 <strong>10%</strong></li>
+</ul>
+<h3>NIST Zh-En &amp; WMT'18 Zh-En</h3>
+<p>25 层 DLCL 在两个中英任务上均超越 Transformer-Big（+0.45 和 +0.4 BLEU），证实深层优势在大数据集上同样成立。</p>
+<h3>Ablation</h3>
+<ul>
+<li>移除 DLCL 中的 LayerNorm：BLEU 下降 0.13</li>
+<li>固定权重为 1（All-One）：BLEU 下降 0.58</li>
+<li>固定权重为 <span class="math inline">1/(l+1)</span>（Average）：BLEU 下降 0.29</li>
+<li>可学习权重 &gt;&gt; 固定权重，说明层间贡献的动态调整是关键</li>
+</ul>
+<h3>学习到的权重可视化</h3>
+<p>30 层 encoder 的权重矩阵显示：</p>
+<ul>
+<li>早期层连接<strong>密集</strong>（需要充分利用有限信息）</li>
+<li>深层连接变<strong>稀疏</strong></li>
+<li>大权重值集中在矩阵右侧（相邻层贡献更大）</li>
+<li>同一层的输出对不同后续层的贡献<strong>动态变化</strong></li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>深度超过 30 层后收益递减，且显存消耗使训练效率下降。</li>
+<li>DLCL 引入 <span class="math inline">O(L^2)</span> 个额外标量参数和 <span class="math inline">O(L^2)</span> 次 LayerNorm 计算（可通过稀疏连接优化）。</li>
+<li>仅在 NMT 任务上验证，未扩展到语言建模或更大模型。</li>
+<li>Decoder 深度增加效果不明显（每加 2 层仅 +0.15 BLEU，但推理速度下降约 500 tokens/s），因此本文仅深化 encoder。</li>
+<li>Pre-LN 虽然解决了训练稳定性，但在浅层网络中略逊于 Post-LN（6 层时差约 0.4 BLEU）。</li>
+</ul>
+<p><strong>与本主题其他论文的关系</strong>：</p>
+<ul>
+<li><code>2002.04745-layer-norm-transformer/</code>：Xiong et al. 后续从理论上严格分析了 Pre-LN 的梯度优势，与本文的实验观察一致。本文是最早在 NMT 中系统比较 Pre-LN vs Post-LN 并证明 Pre-LN 对深层训练至关重要的工作之一。</li>
+<li><code>2203.00555-deepnet/</code>（DeepNorm）：将 Transformer 扩展到 1000 层，使用 <span class="math inline">\alpha</span> 缩放残差 + 改进初始化。可以视为 DLCL 思想的极致延伸——DeepNorm 不需要跨层连接，而是通过更精细的缩放方案实现深层训练。</li>
+<li><code>2206.00330-b2t-connection/</code>（B2T）：从 Jacobian 角度分析残差缩放，为 DLCL 的&quot;加权层组合&quot;提供理论依据。</li>
+<li><code>2003.04887-rezero/</code>、<code>1901.09321-fixup/</code>：与 DLCL 互补——它们通过零初始化残差缩放简化训练，DLCL 通过跨层连接丰富梯度路径。</li>
+<li>本文的重要性在于<strong>早期证明了&quot;深度 &gt; 宽度&quot;在 Transformer 中可行</strong>——前提是正确管理梯度流。这一洞察激励了后续大量关于深度 Transformer 的研究。</li>
+</ul>
+</div></article>
+
+</div>
+
+<footer>
+  <p>Generated by build_survey.py · Source: papers/*/README.md</p>
+</footer>
+
+<script>
+document.querySelectorAll('.math.inline,.math.block').forEach(function(el){
+  try { katex.render(el.textContent, el, {displayMode: el.classList.contains('block'), throwOnError: false}); }
+  catch(e) {}
+});
+</script>
+<section class="public-attribution">本站内容为个人学习笔记与论文解读。论文、图表、实验结果和引用材料的版权归原作者及原出版方所有；本站仅为学习、研究和非商业分享用途。若需要引用原始成果，请以论文原文和官方发布版本为准。</section>
+</body>
+</html>

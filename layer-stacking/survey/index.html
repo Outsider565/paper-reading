@@ -1,0 +1,3015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深度扩展与层复制 — Layer Stacking 综述</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161822;
+  --bg3: #1c1f2e;
+  --card: #1e2132;
+  --border: #2a2d42;
+  --text: #e0e0e8;
+  --text2: #9498b0;
+  --accent: #6c8cff;
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  background: var(--bg); color: var(--text); line-height:1.75; font-size:16px;
+}
+.container { max-width:960px; margin:0 auto; padding:0 24px; }
+a { color: var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* Header */
+header { padding:64px 0 48px; text-align:center; border-bottom:1px solid var(--border); }
+header h1 {
+  font-size:2.4em; font-weight:800;
+  background:linear-gradient(135deg,#ff8a5c,#6c8cff);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; margin-bottom:8px;
+}
+header p { color:var(--text2); font-size:1.05em; }
+
+/* Navigation */
+nav.toc {
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 28px; margin:32px 0;
+}
+nav.toc h2 { font-size:1.1em; color:var(--accent); margin-bottom:12px; }
+nav.toc ul { list-style:none; columns:2; gap:16px; }
+nav.toc li { margin-bottom:6px; break-inside:avoid; font-size:0.9em; }
+nav.toc a { color:var(--text); }
+nav.toc a:hover { color:var(--accent); }
+.toc-cat {
+  display:inline-block; font-size:0.7em; padding:1px 7px; border-radius:4px;
+  margin-right:5px; font-weight:600; vertical-align:middle;
+}
+
+/* Section separators */
+.section-divider {
+  border:none; border-top:1px solid var(--border); margin:48px 0;
+}
+
+/* Overview */
+.overview { margin:32px 0; }
+.overview h1, .overview h2, .overview h3 { color:var(--accent); margin:24px 0 12px; }
+.overview h1 { font-size:1.6em; }
+.overview h2 { font-size:1.3em; }
+.overview p { margin-bottom:12px; }
+.overview strong { color:#e8e8f0; }
+.overview table {
+  width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em;
+}
+.overview th, .overview td {
+  padding:8px 12px; text-align:left; border-bottom:1px solid var(--border);
+}
+.overview th { background:var(--bg3); color:var(--accent); font-weight:600; }
+
+/* Paper articles */
+.paper-article {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  margin-bottom:24px; overflow:hidden;
+}
+.paper-meta-bar {
+  background:var(--bg3); padding:10px 24px; font-size:0.82em; color:var(--text2);
+  border-bottom:1px solid var(--border);
+}
+.paper-body {
+  padding:24px 28px;
+}
+.paper-body h1 { font-size:1.35em; margin:0 0 16px; }
+.paper-body h2 { font-size:1.15em; color:var(--accent); margin:24px 0 10px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+.paper-body h3 { font-size:1.0em; color:#b0b8d0; margin:18px 0 8px; }
+.paper-body h4 { font-size:0.95em; color:#a0a8c0; margin:14px 0 6px; }
+.paper-body p { margin-bottom:10px; }
+.paper-body ul, .paper-body ol { padding-left:24px; margin-bottom:10px; }
+.paper-body li { margin-bottom:4px; }
+.paper-body img {
+  max-width:100%; height:auto; border-radius:8px;
+  margin:12px 0; display:block;
+  background:#fff; padding:4px;
+}
+.paper-body table {
+  width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em;
+}
+.paper-body th, .paper-body td {
+  padding:8px 12px; text-align:left; border-bottom:1px solid var(--border);
+}
+.paper-body th { background:var(--bg3); color:var(--accent); font-weight:600; }
+.paper-body code {
+  background:var(--bg3); padding:2px 6px; border-radius:4px; font-size:0.88em;
+}
+.paper-body pre {
+  background:var(--bg3); padding:16px; border-radius:8px; overflow-x:auto;
+  margin:12px 0; font-size:0.88em;
+}
+.paper-body pre code { background:none; padding:0; }
+.paper-body blockquote {
+  border-left:3px solid var(--accent); padding:8px 16px; margin:12px 0;
+  background:rgba(108,140,255,0.05); color:var(--text2);
+}
+.paper-body hr { border:none; border-top:1px solid var(--border); margin:20px 0; }
+
+/* Footer */
+footer {
+  padding:32px 0; text-align:center; color:var(--text2);
+  font-size:0.82em; border-top:1px solid var(--border); margin-top:48px;
+}
+
+/* Responsive */
+@media (max-width:700px) {
+  header h1 { font-size:1.6em; }
+  nav.toc ul { columns:1; }
+  .container { padding:0 16px; }
+  .paper-body { padding:16px 18px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+</style>
+<style>
+.public-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 18px;
+  background: var(--bg2, rgba(247, 247, 244, 0.92));
+  border-bottom: 1px solid var(--border, #dedbd2);
+  backdrop-filter: blur(12px);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.public-site-nav a {
+  color: var(--accent, #0f766e);
+  text-decoration: none;
+  font-weight: 700;
+}
+.public-site-nav span {
+  color: var(--text2, #65645f);
+  font-size: 0.92rem;
+}
+.public-attribution {
+  margin: 48px auto 28px;
+  max-width: 980px;
+  padding: 18px 20px;
+  border: 1px solid var(--border, #dedbd2);
+  border-radius: 8px;
+  background: var(--card, #ffffff);
+  color: var(--text2, #65645f);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+}
+@media (max-width: 760px) {
+  .public-site-nav {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="public-site-nav"><a href="../../">paper-reading</a><span>layer-stacking</span></nav>
+
+<header>
+  <div class="container">
+    <h1>深度扩展与层复制</h1>
+    <p>Layer Stacking for Efficient LLM Pre-Training — 16 篇论文综述</p>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- TOC -->
+<nav class="toc">
+  <h2>论文目录</h2>
+  <ul>
+<li><a href="#1511.05641-net2net"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>Net2Net — 通过函数保持变换加速大模型训练</a></li>
+<li><a href="#gong2019-stackbert"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>StackBERT — 通过渐进层堆叠加速 BERT 训练</a></li>
+<li><a href="#2110.07143-bert2bert"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>bert2BERT — 通过参数复用加速大模型预训练</a></li>
+<li><a href="#2310.07999-lemon"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>LEMON — 无损模型扩展与优化学习率调度</a></li>
+<li><a href="#2305.02869-msg"><span class="toc-cat" style="background:#6c8cff22;color:#6c8cff">A</span>MSG — 基于掩码的严格函数保持结构增长</a></li>
+<li><a href="#2011.13635-mslt"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>MSLT — 多阶段分层训练实现 BERT 110%+ 加速</a></li>
+<li><a href="#2010.12562-compound-grow"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>CompoundGrow — 多维度复合增长加速 BERT 预训练</a></li>
+<li><a href="#2203.06211-staged-training"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>Staged Training — 用 scaling law 指导模型逐阶段增长以节省训练计算</a></li>
+<li><a href="#reddi2023-gradual-stacking"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>Gradual Stacking — 用 few-shot learning 视角理解和改进 progressive stacking</a></li>
+<li><a href="#2303.00980-ligo"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>LiGO — 学习线性增长算子以加速 Transformer 训练</a></li>
+<li><a href="#wang2025-progressive-growth"><span class="toc-cat" style="background:#4ecdc422;color:#4ecdc4">B</span>Wang et al. 2025 — 何时、如何增长：渐进式模型增长的时机与操作</a></li>
+<li><a href="#2405.15319-gstack"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">C</span>$G_{\text{stack}}$ — 系统研究深度堆叠加速 LLM 预训练</a></li>
+<li><a href="#2409.19044-midas"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">C</span>MIDAS — 中间层堆叠引入有利于推理的 Inductive Bias</a></li>
+<li><a href="#2410.10928-slayer"><span class="toc-cat" style="background:#ff8a5c22;color:#ff8a5c">C</span>Llama SLayer 8B — 浅层蕴含知识，选择性扩展构建更强模型</a></li>
+<li><a href="#2312.15166-solar"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">D</span>SOLAR 10.7B — 简单高效的深度上扩展</a></li>
+<li><a href="#2401.02415-llama-pro"><span class="toc-cat" style="background:#ffe66d22;color:#ffe66d">D</span>LLaMA Pro — 通过块扩展实现领域知识注入</a></li>
+  </ul>
+</nav>
+
+<!-- Section 1: Overview -->
+<div class="overview">
+<h1>深度扩展与层复制：从训练加速到 Inductive Bias</h1>
+<h2>这条研究线索在回答什么问题？</h2>
+<p>当我们想训练一个更深的 Transformer 时，能否复用一个已训练好的较浅模型来加速？如果可以，<strong>应该复制哪些层？</strong> 这个看似简单的工程问题，在十年的演进中逐渐暴露出深层的理论含义——层复制的位置不仅影响训练效率，更决定了模型最终学到的计算模式。</p>
+<h2>第一阶段：函数保持与优化热启动（2016–2022）</h2>
+<p>Net2Net（2016）奠定了&quot;模型扩展应保持函数不变&quot;的基本范式：通过 identity 初始化新增层（Net2Deeper）或按权重比例复制神经元（Net2Wider），使大模型在扩展瞬间与小模型计算完全相同的函数。这个 <strong>function-preserving</strong> 原则成为后续几乎所有工作的出发点。</p>
+<p>StackBERT（2019）将这个思想首次落地到 BERT 预训练：观察到 BERT 各层的注意力分布高度相似（尤其集中在 [CLS] 和局部位置），因此可以直接复制 <span class="math inline">L</span> 层模型的参数来初始化 <span class="math inline">2L</span> 层模型。这带来了约 25% 的训练加速，开创了 &quot;layer stacking&quot; 这一技术路线。</p>
+<p>随后的 MSLT（2020）进一步发现：stacking 后只训练新增的顶层、冻结底层，可以利用&quot;反向传播耗时是前向的 6 倍&quot;这一硬件特性实现 110%+ 的加速。CompoundGrow（2021）将增长扩展到深度、宽度、序列长度三个维度。bert2BERT（2022）提出 Advanced Knowledge Initialization（AKI），把小模型的知识更完整地注入大模型的初始化中。</p>
+<p>这一阶段的共同假设是：<strong>层复制是一种中性的优化热启动手段</strong>，复制哪些层并不重要，重要的是保持函数连续性和训练稳定性。</p>
+<h2>第二阶段：从&quot;怎么复制&quot;到&quot;复制哪里&quot;（2022–2024）</h2>
+<p>随着模型规模从 BERT-Base 扩展到 7B+ LLM，研究者开始发现层的位置确实有影响。</p>
+<p><strong>Staged Training</strong>（2022）引入 scaling law 视角，用 loss 预测来确定最优增长时机——模型不应该在训练初期就增长，而应在小模型 &quot;充分收敛&quot; 后再扩展。<strong>LiGO</strong>（2023）走了另一条路：不手动选择复制哪些层，而是<strong>学习</strong>一个从小模型到大模型的线性映射。<strong>MSG</strong>（2024）通过外部掩码实现严格函数保持，使得新参数可以用任意初始化而不影响扩展瞬间的函数输出。<strong>LEMON</strong>（2024）关注扩展后的学习率调度，发现加速衰减的 LR scheduler 对扩展模型至关重要。</p>
+<p><strong>SOLAR</strong>（2024）和 <strong>LLaMA Pro</strong>（2024）是两个面向已训练 LLM 的实用方案。SOLAR 的 Depth Up-Scaling 通过移除接缝处附近的层来降低堆叠拼接的不连续性，从 Llama 2 7B 构建出 10.7B 模型。LLaMA Pro 通过在固定间隔处插入 identity-initialized 新块、冻结原始块只训练新块，实现领域知识注入（代码、数学）而不破坏通用能力。</p>
+<h2>第三阶段：层位置即 Inductive Bias（2024）</h2>
+<p><strong>GStack</strong>（NeurIPS 2024 Spotlight）做了迄今最系统的 layer stacking 研究。核心发现：</p>
+<ol>
+<li>把整个小模型作为单元堆叠（<span class="math inline">G_{\text{stack}}</span>）优于交错式复制（<span class="math inline">G_{\text{direct}}</span>），因为前者保留了相邻层的计算连接。</li>
+<li><strong>Partial stacking 消融</strong>揭示了位置的重要性：只堆叠前端层效果最差，堆叠中间+后端或全部堆叠效果最好。</li>
+<li>在 7B 规模上，<span class="math inline">G_{\text{stack}}</span> 只需 194B tokens 即可达到 scratch 训练 300B tokens 的 loss，实现 54.6% 加速。</li>
+</ol>
+<p><strong>MIDAS</strong>（NeurIPS 2024）将 GStack 的经验发现提升为一个理论主张：<strong>复制中间层块（而非末尾层块）会引入一种偏向&quot;迭代计算&quot;的 inductive bias，与算法推理所需的多步重复操作天然匹配。</strong> 三个关键观察支撑这一结论：</p>
+<ul>
+<li>Gradual stacking 后，被复制的层块之间保持高余弦相似度 → 堆叠模型本质上接近 looped model</li>
+<li>Looped model（如 ALBERT）的层间功能相似性在<strong>中间</strong>最高、首尾最低</li>
+<li>因此，复制中间层能更好地模拟 looped model 的迭代计算结构</li>
+</ul>
+<p>实验结果震撼：在 2B 规模上，MIDAS 的数学推理准确率达到 38.3%，而 baseline 仅 27.1%；在 8B 规模上为 43.1% vs 34.9%——这个差距<strong>远超 perplexity 差异所能解释的</strong>。MIDAS 彻底改变了 layer stacking 的叙事：从&quot;优化加速工具&quot;变成了&quot;控制模型计算先验的旋钮&quot;。</p>
+<h2>补充视角</h2>
+<p><strong>SLayer</strong>（2024）从另一个角度提供佐证：通过角距离分析和 QA 消融发现，浅层编码了更多可复用的事实知识，而许多深层可以被修剪。这与 MIDAS 关于&quot;不同层有不同功能角色&quot;的主张一致。</p>
+<p><strong>Wang et al. 2025</strong> 回到增长时机问题，通过效果转换率理论估计最优增长点，提供了约 1.5× 的加速。</p>
+<h2>Inductive Bias 分类法</h2>
+<p>从层复制规则可以提炼出以下 bias 家族：</p>
+<table>
+<thead>
+<tr>
+<th>Bias 家族</th>
+<th>层复制规则</th>
+<th>代表论文</th>
+<th>核心假设</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优化热启动</td>
+<td>复制全部层</td>
+<td>StackBERT, CompoundGrow</td>
+<td>已学表征可复用</td>
+</tr>
+<tr>
+<td>函数保持</td>
+<td>Identity 初始化新层</td>
+<td>Net2Net, bert2BERT, LEMON, MSG</td>
+<td>扩展不应改变函数</td>
+</tr>
+<tr>
+<td>Top-layer / few-shot</td>
+<td>复制顶层</td>
+<td>GradStack</td>
+<td>顶层是 few-shot 学习器</td>
+</tr>
+<tr>
+<td>中间层迭代计算</td>
+<td>复制中间层</td>
+<td><strong>MIDAS</strong></td>
+<td>中间重复 → loop-like 推理</td>
+</tr>
+<tr>
+<td>邻接连续性</td>
+<td>整体堆叠</td>
+<td>GStack, SOLAR</td>
+<td>保留层间计算电路</td>
+</tr>
+<tr>
+<td>领域注入</td>
+<td>插入 identity 块</td>
+<td>LLaMA Pro</td>
+<td>新容量吸收领域知识</td>
+</tr>
+<tr>
+<td>浅层知识</td>
+<td>扩展浅层</td>
+<td>SLayer</td>
+<td>浅层编码事实知识</td>
+</tr>
+<tr>
+<td>学习映射</td>
+<td>学习线性变换</td>
+<td>LiGO</td>
+<td>跨尺度几何可学习</td>
+</tr>
+</tbody>
+</table>
+<h2>开放问题</h2>
+<ol>
+<li><strong>最优复制位置是否依赖架构？</strong> MIDAS 的中间层结论在 decoder-only LLM 上验证，但在 MoE、vision model 等架构上是否成立？</li>
+<li><strong>推理 bias 的机制</strong>：MIDAS 给出了 looped model 的直觉解释，但缺乏严格的理论证明。loop 结构为什么有利于推理？</li>
+<li><strong>组合策略</strong>：能否将不同位置的 stacking 策略组合，同时获得推理 bias 和训练效率？</li>
+<li><strong>与 post-training 的交互</strong>：stacking 引入的 inductive bias 在 SFT/RLHF 后是否仍然保持？</li>
+</ol>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- Section 2: Per-paper details -->
+<div class="cat-header" style="border-left:4px solid #6c8cff;padding-left:16px;margin:48px 0 24px"><h2 style="color:#6c8cff">Category A: 函数保持 / 优化热启动</h2></div>
+<article class="paper-article" id="1511.05641-net2net"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/1511.05641" target="_blank">https://arxiv.org/abs/1511.05641</a> · <a href="#1511.05641-net2net">README source</a></div><div class="paper-body"><h1>Net2Net — 通过函数保持变换加速大模型训练</h1>
+<blockquote>
+<p><strong>Net2Net: Accelerating Learning via Knowledge Transfer</strong>
+Tianqi Chen, Ian Goodfellow, Jonathon Shlens | Google Inc. | ICLR 2016</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>在实际的深度学习工作流中，研究者需要反复迭代模型设计：在上一个模型的基础上增加宽度或深度，然后<strong>从头训练</strong>新模型。对于大型模型（如 Inception），一次训练可能耗时数周甚至一个月，导致模型探索极其缓慢。</p>
+<p>此前的知识迁移方法（如 FitNets、Cascade Correlation）在扩展网络时要么改变了网络表示的函数，导致<strong>性能暂时下降</strong>；要么需要冻结旧层使新旧部分无法协同优化。作者希望找到一种方法，让新模型<strong>一开始就和旧模型性能一致</strong>，再在此基础上继续优化。</p>
+<h2>核心想法</h2>
+<p><strong>函数保持变换（Function-Preserving Transformation）</strong>：将小（teacher）网络的知识迁移到大（student）网络时，初始化 student 使其与 teacher 计算<strong>完全相同的函数</strong>，即</p>
+<div class="math block">
+\forall \mathbf{x},\; f(\mathbf{x}; \boldsymbol{\theta}) = g(\mathbf{x}; \boldsymbol{\theta}')
+</div>
+<p>然后继续正常训练 student，使其利用更大的容量进一步提升。这保证了扩展操作不会带来性能回退。</p>
+<h2>方法细节</h2>
+<h3>Net2WiderNet — 加宽</h3>
+<p>将第 <span class="math inline">i</span> 层从 <span class="math inline">n</span> 个输出单元扩展到 <span class="math inline">q &gt; n</span> 个。核心思路是<strong>复制已有单元</strong>并在下一层补偿权重。</p>
+<p>引入随机映射函数 <span class="math inline">g: \{1, \ldots, q\} \to \{1, \ldots, n\}</span>：</p>
+<div class="math block">
+g(j) = \begin{cases} j &amp; j \leq n \\ \text{random sample from } \{1, \ldots, n\} &amp; j &gt; n \end{cases}
+</div>
+<p>新权重矩阵 <span class="math inline">\mathbf{U}</span> 由旧权重 <span class="math inline">\mathbf{W}</span> 构造：</p>
+<div class="math block">
+\mathbf{U}^{(i)}_{k,j} = \mathbf{W}^{(i)}_{k,\, g(j)}, \quad \mathbf{U}^{(i+1)}_{j,h} = \frac{1}{|\{x \mid g(x) = g(j)\}|} \mathbf{W}^{(i+1)}_{g(j),\, h}
+</div>
+<ul>
+<li>前 <span class="math inline">n</span> 列直接复制，新增列通过随机选择已有列进行<strong>有放回复制</strong></li>
+<li>下一层对应的行权重要<strong>除以复制因子</strong>，确保输出值不变</li>
+<li>对于卷积网络，在 channel 维度上操作即可</li>
+<li>不使用 dropout 时需添加少量噪声打破对称性</li>
+</ul>
+<p>推广到任意 DAG 计算图时，需要一致的映射推断（remapping inference），确保 batch normalization 的缩放参数、层间拼接（concatenation）的偏移量等与随机映射一致。</p>
+<h3>Net2DeeperNet — 加深</h3>
+<p>在第 <span class="math inline">i</span> 层之后插入一个新层，将原来的</p>
+<div class="math block">
+\mathbf{h}^{(i)} = \phi(\mathbf{W}^{(i)\top} \mathbf{h}^{(i-1)})
+</div>
+<p>变为</p>
+<div class="math block">
+\mathbf{h}^{(i)} = \phi\!\left(\mathbf{U}^{(i)\top}\, \phi\!\left(\mathbf{W}^{(i)\top} \mathbf{h}^{(i-1)}\right)\right)
+</div>
+<p>新矩阵 <span class="math inline">\mathbf{U}</span> 初始化为<strong>单位矩阵</strong>。当激活函数 <span class="math inline">\phi</span> 满足</p>
+<div class="math block">
+\phi(\mathbf{I}\, \phi(\mathbf{v})) = \phi(\mathbf{v})
+</div>
+<p>时，变换是严格函数保持的。<strong>ReLU</strong> 天然满足此性质（<span class="math inline">\text{ReLU}(\text{ReLU}(v)) = \text{ReLU}(v)</span>）。对卷积层则使用 identity filter。</p>
+<p>对于 Batch Normalization，需要额外设置新层的输出 scale 和 bias 以抵消归一化效果（需用训练数据估计激活统计量）。</p>
+<h3>两种操作的组合</h3>
+<p>Net2DeeperNet 只能添加与下层等宽的新层，但可以先 Deeper 再 Wider，因此可添加任意宽度 <span class="math inline">\geq</span> 下层宽度的隐藏层。</p>
+<h3>超参数</h3>
+<p>Student 网络的初始学习率应约为 teacher 的 <span class="math inline">1/10</span>——因为 student 相当于从 teacher 训练中途接手，此时学习率通常已降低。</p>
+<h2>关键结果</h2>
+<p>所有实验基于 Inception-BN 网络 + ImageNet 数据集。</p>
+<h3>Net2WiderNet 实验</h3>
+<p>Teacher 网络的每层 Inception module 通道数缩小为标准版的 <span class="math inline">\sqrt{0.3}</span> 倍（参数量约 30%），训练完成后用 Net2WiderNet 初始化标准大小的 student：</p>
+<ul>
+<li>Net2WiderNet 在约 <span class="math inline">3 \times 10^6</span> 个 minibatch 后收敛到最终精度</li>
+<li>随机初始化的 baseline 需要额外 <span class="math inline">\sim 2 \times 10^6</span> 个 minibatch 才能达到同样精度</li>
+<li><strong>最终精度一致</strong>——模型容量决定精度上限，不因初始化来自小模型而降低</li>
+</ul>
+<h3>Net2DeeperNet 实验</h3>
+<p>在标准 Inception 的每个 module 中插入额外的垂直-水平卷积层对（配置为 identity）：</p>
+<ul>
+<li>训练精度和验证精度均比随机初始化收敛快得多</li>
+</ul>
+<h3>模型探索实验</h3>
+<ul>
+<li>将 Inception 加宽 <span class="math inline">\sqrt{2}</span> 倍 + 每个 module 加深 4 对卷积层</li>
+<li>取得了 <strong>78.5%</strong> 的 ImageNet 验证集准确率（当时新 SOTA）</li>
+<li>Net2Net 初始化的大模型甚至比标准模型收敛更快</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>函数保持变换对 student 架构有约束——必须是 teacher 的加宽或加深版本，不支持任意架构迁移</li>
+<li>Net2DeeperNet 的 identity 初始化仅适用于 ReLU 等满足幂等性的激活函数，不适用于 sigmoid 等</li>
+<li>对复杂计算图（如 Inception）需要手动设计 remapping inference 规则</li>
+</ul>
+<p><strong>延伸阅读：</strong></p>
+<ul>
+<li><strong>StackBERT (Gong et al., 2019)</strong>：将 Net2Net 的 depth growth 思想应用到 BERT，通过复制层参数进行 progressive stacking</li>
+<li><strong>CompoundGrow (Gu et al., 2021)</strong>：在 depth、width、length 三个维度同时进行渐进式增长</li>
+<li><strong>EfficientNet (Tan &amp; Le, 2019)</strong>：compound scaling 思想的源头，启发了后续在训练阶段进行多维度增长的工作</li>
+<li><strong>LiGO (Wang et al., 2023)</strong>：用线性映射而非简单复制来实现更灵活的模型增长</li>
+</ul>
+</div></article>
+<article class="paper-article" id="gong2019-stackbert"><div class="paper-meta-bar"><a href="http://proceedings.mlr.press/v97/gong19a.html" target="_blank">http://proceedings.mlr.press/v97/gong19a.html</a> · <a href="#gong2019-stackbert">README source</a></div><div class="paper-body"><h1>StackBERT — 通过渐进层堆叠加速 BERT 训练</h1>
+<blockquote>
+<p><strong>Efficient Training of BERT by Progressively Stacking</strong>
+Linyuan Gong, Di He, Zhuohan Li, Tao Qin, Liwei Wang, Tie-Yan Liu | Peking University &amp; Microsoft Research | ICML 2019</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>BERT 等预训练语言模型参数量巨大（BERT-Base 110M，BERT-Large 330M），在数十亿 token 上训练需要极大的算力。即使使用高性能硬件，训练效率仍然是实际应用的主要瓶颈。</p>
+<p>此前的知识迁移方法（如 Net2Net 的 function-preserving initialization）在简单前馈网络上有效，但直接应用于 Transformer 时效果不佳。例如，将新增层的最后线性变换初始化为零以实现 identity mapping，虽然保持了函数不变，但<strong>自注意力层的参数仍然随机</strong>，导致大量参数未被有效训练。</p>
+<p>作者寻找一种更适合 Transformer 结构特性的知识迁移方法。</p>
+<h2>核心想法</h2>
+<p>通过可视化训练好的 BERT 模型各层的自注意力分布，作者发现了一个关键现象：<strong>不同层的注意力分布高度相似</strong>。具体表现为：</p>
+<ol>
+<li>大多数 head 的注意力是两个分布的混合：一个聚焦于<strong>局部邻居位置</strong>，一个聚焦于<strong>句首 [CLS] token</strong></li>
+<li><strong>浅层和深层的注意力分布非常相似</strong></li>
+</ol>
+<p>这暗示 Transformer 各层的功能存在冗余，因此可以直接<strong>复制浅层模型的参数来初始化深层模型</strong>——这比随机初始化或 identity 初始化更能保留已学到的知识。</p>
+<h2>方法细节</h2>
+<h3>BERT 架构回顾</h3>
+<p>BERT 基于多层 Transformer encoder，每层由多头自注意力子层和前馈子层组成，均含残差连接。核心的多头自注意力计算为：</p>
+<div class="math block">
+\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right) \cdot V
+</div>
+<p>其中 <span class="math inline">Q \in \mathbb{R}^{n_q \times d_k}</span>，<span class="math inline">K \in \mathbb{R}^{n_e \times d_k}</span>，<span class="math inline">V \in \mathbb{R}^{n_e \times d_v}</span>。</p>
+<p>多头版本：</p>
+<div class="math block">
+\text{MultiHeadAtt}(X) = \text{Concat}(h_1, \ldots, h_H)\, W^O
+</div>
+<div class="math block">
+h_i = \text{Attention}(X W^Q_i,\, X W^K_i,\, X W^V_i)
+</div>
+<p>其中 <span class="math inline">W^Q_i, W^K_i, W^V_i \in \mathbb{R}^{d \times d/H}</span>，<span class="math inline">W^O \in \mathbb{R}^{d \times d}</span>。</p>
+<h3>Stacking 算法</h3>
+<p>给定一个已训练好的 <span class="math inline">L</span> 层 BERT，构造 <span class="math inline">2L</span> 层 BERT：</p>
+<div class="math block">
+\text{对于 } i \leq L: \quad \theta_{i}^{\text{new}} = \theta_{i}^{\text{old}}, \quad \theta_{i+L}^{\text{new}} = \theta_{i}^{\text{old}}
+</div>
+<p>即：第 <span class="math inline">i</span> 层和第 <span class="math inline">(i+L)</span> 层均复制原始第 <span class="math inline">i</span> 层的参数。这不是严格的函数保持变换，但基于注意力分布的相似性观察，复制后的参数为深层网络提供了一个良好的热启动。</p>
+<h3>Progressive Stacking</h3>
+<p>通过递归应用 stacking 来逐步构建深层模型：</p>
+<pre><code>M'_0 ← InitBERT(L / 2^k)        // 初始化最浅模型
+M_0  ← Train(M'_0)               // 从头训练最浅模型
+for i = 1 to k:
+    M'_i ← Stack(M_{i-1})        // 层数翻倍
+    M_i  ← Train(M'_i)           // 继续训练
+return M_k                        // 最终模型
+</code></pre>
+<p>具体到 BERT-Base（12 层）：</p>
+<ol>
+<li>训练 3 层模型 50,000 步</li>
+<li>Stack 为 6 层，训练 70,000 步</li>
+<li>Stack 为 12 层，训练 280,000 步</li>
+<li>总步数 = 400,000（与 baseline 相同）</li>
+</ol>
+<p>训练过程中，在 stack 切换点<strong>重置 Adam 优化器状态</strong>（动量估计），但保持学习率不变。</p>
+<h3>与 Identity 初始化的对比</h3>
+<p>两种 baseline 方法：</p>
+<ul>
+<li><strong>Identity</strong>：新增层的最后线性变换初始化为零，形成严格 identity mapping</li>
+<li><strong>Identity + noise</strong>：在此基础上添加 <span class="math inline">\sigma = 0.03</span> 的高斯噪声</li>
+</ul>
+<p>实验表明这两种方法都不如 stacking 有效——因为它们保留了函数值但<strong>自注意力层的参数仍是随机的</strong>，导致收敛缓慢。</p>
+<h2>关键结果</h2>
+<h3>预训练加速</h3>
+<ul>
+<li>Progressive stacking 达到与 baseline 相同的验证损失，训练时间减少约 <strong>25%</strong>（338 小时 vs. 441 小时，4 × P40 GPU）</li>
+<li>Identity 和 identity+noise 方法收敛慢得多，无法有效缩短训练时间</li>
+</ul>
+<h3>下游任务表现</h3>
+<p>GLUE 测试集结果（与 BERT-Base 原版对比）：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>CoLA</th>
+<th>SST-2</th>
+<th>MRPC</th>
+<th>STS-B</th>
+<th>QQP</th>
+<th>MNLI</th>
+<th>QNLI</th>
+<th>RTE</th>
+<th>GLUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Base (原版)</td>
+<td>52.1</td>
+<td>93.5</td>
+<td>88.9/84.8</td>
+<td>87.1/85.8</td>
+<td>71.2/89.2</td>
+<td>84.6/83.4</td>
+<td>90.5</td>
+<td>66.4</td>
+<td>78.3</td>
+</tr>
+<tr>
+<td>Stacking</td>
+<td><strong>56.2</strong></td>
+<td><strong>93.9</strong></td>
+<td>88.2/83.9</td>
+<td>84.2/82.5</td>
+<td>70.4/88.7</td>
+<td>84.4/84.2</td>
+<td>90.1</td>
+<td><strong>67.0</strong></td>
+<td><strong>78.4</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在大多数任务上与 baseline 可比，CoLA 任务上甚至显著优于 baseline（56.2 vs. 52.1）</li>
+<li>虽然训练时间更短，但下游任务表现不降反升</li>
+</ul>
+<h3>消融实验</h3>
+<ul>
+<li>存在一个切换阈值 <span class="math inline">\theta</span>：当 stacking 时机 <span class="math inline">t &lt; \theta</span> 时可获得加速，<span class="math inline">t &gt; \theta</span> 时则无加速收益</li>
+<li>越深的模型，阈值 <span class="math inline">\theta</span> 越大，从 progressive stacking 中获益越多</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>加速比有限（~25%），因为 stacking 后仍需训练<strong>全部参数</strong>，后期阶段模型很深时训练效率下降</li>
+<li>仅在深度维度增长，未探索宽度或序列长度维度</li>
+<li>stacking 的最优切换时机需要实验调优</li>
+</ul>
+<p><strong>延伸阅读：</strong></p>
+<ul>
+<li><strong>Net2Net (Chen et al., 2016)</strong>：本文的直接前序工作，提出了函数保持变换的一般框架</li>
+<li><strong>MSLT (Yang et al., 2021)</strong>：Progressive Stacking 2.0，在 stacking 后<strong>冻结底层只训练新增顶层</strong>，将加速比从 25% 提升到 110%+</li>
+<li><strong>CompoundGrow (Gu et al., 2021)</strong>：在深度、宽度、序列长度三个维度同时增长，进一步提升加速比</li>
+<li><strong>Universal Transformer (Dehghani et al., 2018)</strong>：跨深度共享参数的 Transformer，理论上支持了 stacking 的合理性</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2110.07143-bert2bert"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2110.07143" target="_blank">https://arxiv.org/abs/2110.07143</a> · <a href="#2110.07143-bert2bert">README source</a></div><div class="paper-body"><h1>bert2BERT — 通过参数复用加速大模型预训练</h1>
+<blockquote>
+<p><strong>bert2BERT: Towards Reusable Pretrained Language Models</strong>
+Chen et al. | ACL 2022 | arXiv 2110.07143</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>训练大规模预训练语言模型（PLM）的计算成本极高。例如 GPT-3 使用了 310 万 GPU 小时，花费约 460 万美元。当前的做法是每个更大的模型都从随机初始化开始训练，完全没有复用已训练好的小模型中的知识——这是巨大的浪费。</p>
+<p>作者通过实验观察到，不同大小的 PLM 在同一层的注意力模式（attention pattern）具有很高的相似性（如下图），说明大小模型之间存在可复用的知识。</p>
+<p><img src="../papers/2110.07143-bert2bert/raw/pic/attention_maps_compare.webp" alt="大小模型的注意力模式高度相似" /></p>
+<p>之前的模型增长方法如 StackBERT（progressive stacking）和 MSLT 虽然能节省一定计算，但：</p>
+<ul>
+<li>StackBERT 通过层复制增加深度，不满足 function-preserving</li>
+<li>两者都没有从宽度维度复用参数</li>
+<li>缺乏系统的知识转移策略</li>
+</ul>
+<h2>核心想法</h2>
+<p><strong>将已训练好的小模型参数通过 function-preserving initialization（FPI）和 advanced knowledge initialization（AKI）初始化大模型，再辅以两阶段预训练策略加速收敛。</strong> AKI 的关键 insight 是：利用上层的参数来打破 FPI 带来的对称性，虽然不严格 function-preserving，但收敛更快。</p>
+<h2>方法细节</h2>
+<p>bert2BERT 包含三个步骤：宽度扩展（width-wise expansion）、深度扩展（depth-wise expansion）和两阶段预训练。</p>
+<h3>问题定义</h3>
+<p>给定已训练的源模型 <span class="math inline">\mathcal{S}(L^s, D^s)</span> 和目标模型 <span class="math inline">\mathcal{T}(L^t, D^t)</span>（<span class="math inline">L^s \leq L^t</span>，<span class="math inline">D^s \leq D^t</span>），目标是用 <span class="math inline">\mathcal{S}</span> 的参数初始化 <span class="math inline">\mathcal{T}</span>，使 <span class="math inline">\mathcal{T}</span> 的预训练收敛更快。</p>
+<h3>宽度扩展：Function Preserving Initialization（FPI）</h3>
+<p><img src="../papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v2.webp" alt="FPI 的矩阵扩展过程" /></p>
+<p>FPI 来自 Net2Net，核心是使初始化后的大模型与源模型有相同的输出函数。通过两个索引映射函数 <span class="math inline">g_{\rm in}</span> 和 <span class="math inline">g_{\rm out}</span> 控制参数复用。对权重矩阵 <span class="math inline">\bm{W} \in \mathbb{R}^{d_{\rm in}^w \times d_{\rm out}^w}</span> 扩展为 <span class="math inline">\bm{U} \in \mathbb{R}^{d_{\rm in}^u \times d_{\rm out}^u}</span>：</p>
+<p><strong>In-dimension 扩展</strong>（保持输出不变，复制并归一化输入维度）：</p>
+<div class="math block">
+C_{g_{\rm in}(i)} = \sum_{i'=1}^{d_{\rm in}^u} \mathbb{1}(g_{\rm in}(i') = g_{\rm in}(i)), \quad \widetilde{\bm{U}}_{(i,*)} = \frac{1}{C_{g_{\rm in}(i)}} \bm{W}_{(g_{\rm in}(i), *)}
+</div>
+<p><strong>Out-dimension 扩展</strong>（复制输出维度）：</p>
+<div class="math block">
+\bm{U}_{(*,j)} = \widetilde{\bm{U}}_{(*, g_{\rm out}(j))}
+</div>
+<p>对 MHA 模块进行 head-wise 扩展，对 FFN 模块做标准矩阵扩展，embedding 仅做 out-dimension 扩展。各模块的映射函数需满足维度一致性约束。</p>
+<h3>宽度扩展：Advanced Knowledge Initialization（AKI）</h3>
+<p><img src="../papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v3.webp" alt="AKI 同时利用当前层和上一层的参数" /></p>
+<p>FPI 的问题是新增参数与原有参数完全对称，抑制收敛。AKI 的改进是：<strong>新增部分使用上一层的参数</strong>而非当前层的复制。</p>
+<div class="math block">
+\bm{U}^l = \text{EXPN}(\bm{W}^l, \bm{W}^{l+1}; g_{\rm in}, g_{\rm out})
+</div>
+<p>具体地，先对 <span class="math inline">\bm{W}^l</span> 和 <span class="math inline">\bm{W}^{l+1}</span> 分别做 in-dimension 扩展，然后拼接：</p>
+<div class="math block">
+\bm{U}^l_{(*,j)} = \begin{cases} \widetilde{\bm{U}}^l_{(*,j)} &amp; j \in [1, d_{\rm out}^s] \\ \widetilde{\bm{U}}^{l+1}_{(*, g_{\rm out}^{l+1}(j))} &amp; j \in (d_{\rm out}^s, d_{\rm out}^t] \end{cases}
+</div>
+<p>AKI 有两个优势：（1）打破 FPI 的对称性；（2）上层参数作为 &quot;advanced knowledge&quot; 可以引导更快收敛。</p>
+<h3>深度扩展</h3>
+<p>完成宽度扩展后，通过反复堆叠宽化后的模型来增加深度：</p>
+<div class="math block">
+\mathcal{T}_t(L^s \cdot t, D^t) \leftarrow \text{stack } \mathcal{T}_1 \text{ on top of } \mathcal{T}_{t-1}
+</div>
+<p>直到层数达到 <span class="math inline">L^t</span>。</p>
+<h3>两阶段预训练</h3>
+<ol>
+<li><strong>子模型训练阶段</strong>（<span class="math inline">E_b</span> 个 epoch）：构建多个子模型（底部 <span class="math inline">l_b</span>、<span class="math inline">2l_b</span>、…、<span class="math inline">L^t</span> 层），每步随机采样一个子模型，只更新其顶部 <span class="math inline">l_b</span> 层和共享分类头</li>
+<li><strong>全模型训练阶段</strong>（<span class="math inline">E_b</span> 到 <span class="math inline">E</span>）：正常的全模型训练</li>
+</ol>
+<p>子模型训练以较低的计算成本建立稳定的中间表示状态。</p>
+<h2>关键结果</h2>
+<p><img src="../papers/2110.07143-bert2bert/raw/pic/mlm_loss_bert_base_report_paper_bincode_page1_flops.webp" alt="bert2BERT 及各基线的预训练 loss 曲线" /></p>
+<h3>BERT 实验</h3>
+<p><span class="math inline">\mathcal{S}(12, 512) \rightarrow \mathcal{T}(12, 768)</span>，即 BERT-BASE（110M 参数）：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>FLOPs (×1e19)</th>
+<th>计算节省</th>
+<th>GLUE Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-BASE 从头训练</td>
+<td>7.3</td>
+<td>0%</td>
+<td>85.5</td>
+</tr>
+<tr>
+<td>StackBERT</td>
+<td>5.5</td>
+<td>24.3%</td>
+<td>86.0</td>
+</tr>
+<tr>
+<td>FPI</td>
+<td>5.1</td>
+<td>30.4%</td>
+<td>86.0</td>
+</tr>
+<tr>
+<td>AKI</td>
+<td>4.5</td>
+<td>38.4%</td>
+<td>86.0</td>
+</tr>
+<tr>
+<td><strong>bert2BERT (AKI + 两阶段)</strong></td>
+<td><strong>4.0</strong></td>
+<td><strong>45.2%</strong></td>
+<td>85.7</td>
+</tr>
+</tbody>
+</table>
+<h3>GPT 实验</h3>
+<p><span class="math inline">\mathcal{S}(12, 512) \rightarrow \mathcal{T}(12, 768)</span>：</p>
+<p><img src="../papers/2110.07143-bert2bert/raw/pic/loss_gpt_report_paper_bincode_flops.webp" alt="GPT 预训练 loss 曲线" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>FLOPs (×1e19)</th>
+<th>计算节省</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT 从头训练</td>
+<td>4.9</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><strong>bert2BERT</strong></td>
+<td><strong>2.6</strong></td>
+<td><strong>47%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>bert2BERT 在 GPT 上同样有效，节省 47% 计算，证明方法的通用性。</p>
+<h3>关键发现</h3>
+<ul>
+<li>AKI 虽然初始 loss 略高于 FPI，但收敛速度更快</li>
+<li>两阶段预训练中，<span class="math inline">E_b = 5</span> 是最优的子模型训练 epoch 数</li>
+<li>源模型越接近目标模型大小（如 54M vs 110M），节省越多</li>
+<li>即使源模型显著更小（35M vs 110M），bert2BERT 仍能节省 23.9%</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>仅测试了 BERT 和 GPT 两种架构，未扩展到更大规模模型</li>
+<li>AKI 不严格 function-preserving，理论保证有限</li>
+<li>两阶段预训练的超参数（<span class="math inline">E_b</span>, <span class="math inline">l_b</span>）需要调优</li>
+<li>LayerNorm 扩展无法严格保持 function-preserving（均值和方差会变化），虽然实际影响很小</li>
+</ul>
+<p><strong>相关工作：</strong></p>
+<ul>
+<li><strong>Net2Net</strong>（Chen et al., 2015）：FPI 的基础，但只用于 CNN</li>
+<li><strong>StackBERT</strong>（Gong et al., 2019）：层复制增加深度，但不 function-preserving</li>
+<li><strong>Staged Training</strong>（Shen et al., 2022）：从 scaling law 角度优化训练调度</li>
+<li><strong>LiGO</strong>（Wang et al., 2023）：学习线性增长算子，统一宽度和深度增长</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2310.07999-lemon"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2310.07999" target="_blank">https://arxiv.org/abs/2310.07999</a> · <a href="#2310.07999-lemon">README source</a></div><div class="paper-body"><h1>LEMON — 无损模型扩展与优化学习率调度</h1>
+<blockquote>
+<p><strong>LEMON: Lossless Model Expansion</strong>
+Wang et al., ICLR 2024
+arXiv: 2310.07999</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>扩大 Transformer 模型规模（增加宽度和深度）是提升性能的主要手段，但通常做法是从头训练大模型，完全浪费了小模型已获取的知识。训练 GPT-3 需要约 460 万美元——如果能复用小模型的权重来初始化大模型，就能大幅节省训练成本。</p>
+<p>已有的模型扩展方法存在几个关键问题：</p>
+<ol>
+<li><strong>对称性破缺失败</strong>：Net2Net 等方法复制神经元时使 fan-out 权重相等（<span class="math inline">\alpha = \beta = 1/2</span>），导致复制的神经元在后续训练中始终计算相同的值，无法独立贡献；</li>
+<li><strong>LayerNorm 兼容性差</strong>：部分复制神经元会改变输入的均值和方差，破坏 LayerNorm 的输出，导致扩展不再无损；</li>
+<li><strong>宽度不可整除时无解</strong>：将 hidden_dim 从 512 扩展到 768 这种不可整除的情况，已有方法无法处理。</li>
+</ol>
+<p><img src="../papers/2310.07999-lemon/raw/plots/illustrations/overview-thin.webp" alt="Overview: 模型扩展 vs 从头训练" /></p>
+<h2>核心想法</h2>
+<p>LEMON 提出一套<strong>完全无损</strong>的模型扩展算法：通过巧妙设置 fan-out 权重的不等分配（<span class="math inline">\alpha \neq \beta</span>, <span class="math inline">\alpha + \beta = 1</span>）同时实现无损扩展和对称性破缺；通过 average expansion 处理 LayerNorm 的不可整除宽度问题。再配合专为扩展模型设计的学习率调度器（保持默认最大学习率，但加速衰减），实现大幅训练加速。</p>
+<h2>方法细节</h2>
+<h3>无损宽度扩展与对称性破缺</h3>
+<p>对于全连接层，LEMON 以循环方式复制神经元（类似 Net2Net），但关键差异在于 fan-out 权重<strong>不设为相等</strong>。</p>
+<p>以单隐层 MLP 为例，将隐层从 2 个神经元扩展到 4 个：复制 <span class="math inline">h_1 \to h_1^*</span>, <span class="math inline">h_2 \to h_2^*</span>，对原始 fan-out 权重 <span class="math inline">v_{1,1}</span>，设置扩展后的权重为 <span class="math inline">\alpha v_{1,1}</span> 和 <span class="math inline">\beta v_{1,1}</span>，其中 <span class="math inline">\alpha + \beta = 1</span> 且 <span class="math inline">\alpha \neq \beta</span>。这保证了输出不变（无损），同时破缺了对称性。</p>
+<p>对于不可整除的情况（如从 2 扩展到 5），某些神经元被复制两次，需满足 <span class="math inline">\alpha + \beta + \gamma = 1</span> 且 <span class="math inline">\alpha \neq \beta \neq \gamma</span>。</p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/illustrations/whole-45.webp" alt="MLP 和 MHA 的宽度扩展" /></p>
+<h3>Multi-Head Attention 扩展</h3>
+<p>直接以循环方式复制整个注意力头（包括 Q/K/V 投影矩阵），然后在 projection 层的 fan-out 权重上实现对称性破缺。</p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/illustrations/whole-MHA_v3.webp" alt="MHA 扩展示意" /></p>
+<h3>Average Expansion 处理 LayerNorm</h3>
+<p>当宽度增量不可整除时（如 <span class="math inline">D_S = 512 \to D_T = 768</span>），LEMON 使用 <strong>average expansion</strong>：新增的神经元权重设为已有权重的均值，使全连接层的输出被其均值填充。对于后续的 LayerNorm 层，调整 affine 参数：</p>
+<div class="math block">
+\text{LN}(\mathbf{x}^*; \bm{\mu}^*, \mathbf{b}^*) = [\text{LN}(\mathbf{x}; \bm{\mu}, \mathbf{b}),\ \mathbf{0}]
+</div>
+<p>其中 <span class="math inline">\bm{\mu}^* = [\eta \bm{\mu},\ \bm{\zeta}]</span>, <span class="math inline">\mathbf{b}^* = [\mathbf{b},\ \mathbf{0}]</span>，缩放因子 <span class="math inline">\eta = \sqrt{D_S / D_T}</span>。</p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/illustrations/whole-nondivisible.webp" alt="Average Expansion 处理 LayerNorm" /></p>
+<h3>无损深度扩展</h3>
+<p>新增的 Transformer block 放置在源 block 的紧邻位置。LEMON 提供两种方式让新 block 初始化为恒等映射：</p>
+<ul>
+<li><strong>Type-1</strong>：将 MLP 和 MHA 模块最后一层全连接的权重设为零（<span class="math inline">\alpha = \beta = 0</span>），残差分支无贡献；</li>
+<li><strong>Type-2</strong>：利用复制神经元的 fan-out 权重相消（<span class="math inline">\alpha = -\beta \neq 0</span>），输出强制为零。</li>
+</ul>
+<p><img src="../papers/2310.07999-lemon/raw/plots/illustrations/whole-depth.webp" alt="深度扩展的两种方式" /></p>
+<h3>学习率调度优化</h3>
+<p>LEMON 发现扩展模型的训练不能简单沿用从头训练的 recipe，关键发现有两点：</p>
+<ol>
+<li><strong>保持默认最大学习率</strong>：较小的学习率虽然训练 loss 更低，但会损害泛化能力；</li>
+<li><strong>加速学习率衰减</strong>：扩展模型已继承小模型的知识，起始 loss 较低，更接近局部最优，因此需要更快衰减的学习率。</li>
+</ol>
+<div class="math block">
+\text{推荐策略：保持最大 LR 不变，减少总 epoch 数}
+</div>
+<p><img src="../papers/2310.07999-lemon/raw/plots/lr_study.webp" alt="学习率和调度器的影响" /></p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/sched_study.webp" alt="不同调度器下的验证准确率" /></p>
+<h2>关键结果</h2>
+<h3>ViT 实验</h3>
+<p>在 ImageNet-1k 上，LEMON 将 DeiT(6,384) → DeiT(12,768) 和 DeiT(6,512) → DeiT(12,768) 的训练成本分别降低了 <strong>56.7%</strong>，仅需 130 个 epoch 即可恢复从头训练 300 epoch 的性能。</p>
+<h3>BERT 实验</h3>
+<p>在 English Wiki 上，LEMON 将 BERT(6,384) → BERT(12,768) 和 BERT(6,512) → BERT(12,768) 的训练成本分别降低了 <strong>25.5%</strong> 和 <strong>33.2%</strong>。</p>
+<p>下游 GLUE 任务性能与从头训练的模型相当甚至更优。</p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/fig_vit_L6H384.webp" alt="主要实验结果：ViT 和 BERT" /></p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/fig_bert_L6H512.webp" alt="BERT 扩展结果" /></p>
+<h3>与其他方法的对比</h3>
+<p>即使其他 baseline（bert2BERT-FPI、bert2BERT-AKI、KI）使用相同的优化学习率调度，LEMON 仍然表现最优，说明无损扩展本身的优势独立于训练策略。</p>
+<p><img src="../papers/2310.07999-lemon/raw/plots/fig_vit_L6H384_AS.webp" alt="使用相同训练策略的对比" /></p>
+<h2>局限与延伸阅读</h2>
+<ul>
+<li><strong>训练 epoch 需调优</strong>：最优的总 epoch 数（学习率衰减速度）需要针对不同设置调整；</li>
+<li><strong>评估规模受限</strong>：受计算资源限制，未在十亿级 LLM 上验证；</li>
+<li><strong>自由参数选择</strong>：<span class="math inline">(\alpha, \beta)</span> 的最优选取尚未深入研究。</li>
+</ul>
+<p><strong>相关工作</strong>：</p>
+<ul>
+<li><strong>Net2Net</strong> (Chen et al., 2015)：最早的模型扩展方法，但有对称性问题；</li>
+<li><strong>bert2BERT</strong> (Chen et al., 2021)：将 Net2Net 应用于 Transformer，但非严格无损；</li>
+<li><strong>Staged Training</strong> (Shen et al., 2022)：支持无损扩展但仅限于宽度翻倍且仅支持 Pre-LN；</li>
+<li><strong>LiGO</strong> (Wang et al., 2023)：数据驱动的权重映射方法，训练效率好但非无损；</li>
+<li><strong>MSG</strong> (Yao et al., 2024)：通过掩码机制实现严格函数保持，与 LEMON 思路互补。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2305.02869-msg"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2305.02869" target="_blank">https://arxiv.org/abs/2305.02869</a> · <a href="#2305.02869-msg">README source</a></div><div class="paper-body"><h1>MSG — 基于掩码的严格函数保持结构增长</h1>
+<blockquote>
+<p><strong>Masked Structural Growth for 2x Faster Language Model Pre-training</strong>
+Yao et al., ICLR 2025
+arXiv: 2305.02869</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>渐进式增长（progressive growth）是加速大模型预训练的一种直觉方法：先训练一个小模型，再逐步扩展到目标大小。这里有两个核心问题：</p>
+<ol>
+<li><strong>增长调度（Growth Schedule）</strong>：何时增长、增长哪个维度？已有工作只探索了层数和 FFN 宽度，4 个可扩展维度（<code>hidden_dim</code>、<code>ffn_dim</code>、<code>head_num</code>、<code>layer_num</code>）的系统性调度尚未被研究；</li>
+<li><strong>增长算子（Growth Operator）</strong>：如何在增长时继承小模型的知识？函数保持（function preservation）是理论上的重要性质——扩展后的大模型对任意输入应产生与小模型相同的输出。然而已有方法只能实现<strong>非严格</strong>的函数保持。</li>
+</ol>
+<p>已有算子的两大缺陷：</p>
+<ul>
+<li><strong>LayerNorm 困境</strong>：Net2Net 复制部分神经元后改变了均值和方差，破坏 LayerNorm 输出。唯一解法是每次宽度翻倍，严重限制灵活性；</li>
+<li><strong>深度扩展不保函数</strong>：直接堆叠或插入复制层不保函数。Staged Training 对 GPT 通过零化 LN 权重实现保函数，但对 BERT 的 Post-LN 架构会输出全零。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:center">layer_num</th>
+<th style="text-align:center">hidden_dim</th>
+<th style="text-align:center">ffn_dim</th>
+<th style="text-align:center">head_num</th>
+<th style="text-align:center">任意初始化</th>
+<th style="text-align:center">加速比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stacking</td>
+<td style="text-align:center">○</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">1.65x</td>
+</tr>
+<tr>
+<td>CompoundGrow</td>
+<td style="text-align:center">○</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">□</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">1.82x</td>
+</tr>
+<tr>
+<td>bert2BERT</td>
+<td style="text-align:center">○</td>
+<td style="text-align:center">□</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">✗</td>
+<td style="text-align:center">1.82x</td>
+</tr>
+<tr>
+<td><strong>MSG (ours)</strong></td>
+<td style="text-align:center"><strong>✓</strong></td>
+<td style="text-align:center"><strong>✓</strong></td>
+<td style="text-align:center"><strong>✓</strong></td>
+<td style="text-align:center"><strong>✓</strong></td>
+<td style="text-align:center"><strong>✓</strong></td>
+<td style="text-align:center"><strong>2.2x</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>核心想法</h2>
+<p><strong>最安全的增长是改变容量而不改变当前函数。</strong> MSG 通过外部掩码（mask）完全消除新结构对模型输出的影响，实现任意维度扩展下的<strong>严格函数保持</strong>，且<strong>不依赖新权重的初始化策略</strong>——新权重可以随机初始化，自然解决了对称性问题。</p>
+<h2>方法细节</h2>
+<h3>全连接层的 MSG 算子</h3>
+<p>扩展输出维度从 <span class="math inline">d_2</span> 到 <span class="math inline">d_2'</span> 时，引入掩码向量 <span class="math inline">\mathbf{c} = [\mathbf{1}_{d_2}; \mathbf{0}_{d_2'-d_2}]</span>。已有权重被保留，新权重可设为<strong>任意值</strong>：</p>
+<div class="math block">
+\mathbf{y}' = \mathbf{c} \odot \sigma(\mathbf{W}' \cdot \mathbf{x}) = [\mathbf{y}; \mathbf{0}_{d_2'-d_2}]
+</div>
+<p>旧神经元输出不变，新神经元被掩码为零。当输入维度也扩展时，由于前一层的输出已被零填充（<span class="math inline">\mathbf{x}' = [\mathbf{x}; \mathbf{0}]</span>），新权重对输出无影响：</p>
+<div class="math block">
+\mathbf{y}' = \sigma(\mathbf{W}' \cdot \mathbf{x}') = \sigma(\mathbf{W} \cdot \mathbf{x}) = \mathbf{y}
+</div>
+<p><img src="../papers/2305.02869-msg/raw/figure-2.webp" alt="MSG vs Net2Net 在全连接层扩展中的对比" /></p>
+<h3>LayerNorm 解决方案</h3>
+<p>在 LayerNorm 内部引入同样的掩码。扩展特征维度从 <span class="math inline">d</span> 到 <span class="math inline">d'</span> 时，重新定义均值和方差的计算：</p>
+<div class="math block">
+\mu' = (\mathbf{x}' \cdot \mathbf{c}) / \text{sum}(\mathbf{c}), \quad (\sigma')^2 = ((\mathbf{x}' - \mu')^2 \cdot \mathbf{c}) / \text{sum}(\mathbf{c})
+</div>
+<p>新神经元对均值和方差零贡献。最终：</p>
+<div class="math block">
+\mathbf{c} \odot \text{LN}^*(\mathbf{x}') = [\text{LN}(\mathbf{x}); \mathbf{0}_{d'-d}]
+</div>
+<p>这使得 MSG 在<strong>任意</strong> <span class="math inline">d</span> 和 <span class="math inline">d'</span> 下都严格保函数，不再受限于宽度翻倍。</p>
+<h3>注意力头增长</h3>
+<p>将每个头视为一个&quot;神经元&quot;，对新增头的 value 向量施加全零掩码：</p>
+<div class="math block">
+\mathbf{v}_i' = \mathbf{c} \odot (\mathbf{V}_i' \cdot \mathbf{x}) = \mathbf{0}, \quad n_1 &lt; i \leq n_2
+</div>
+<p>新头的注意力输出为零，不影响整体输出。</p>
+<h3>深度增长</h3>
+<p>对新增 Transformer 层引入残差掩码：</p>
+<div class="math block">
+\mathbf{x}_n = \mathbf{c} \odot \text{Layer}_n(\mathbf{x}_{n-1}) + (\mathbf{1} - \mathbf{c}) \odot \mathbf{x}_{n-1}
+</div>
+<p>掩码为零时整层被跳过（保函数），掩码渐增至 1 后等价于标准 Transformer。这种方法<strong>不依赖具体的 Transformer 变体</strong>（Pre-LN 或 Post-LN 均适用）。</p>
+<h3>增长调度设计</h3>
+<p>MSG 通过 grid search 研究每个维度对&quot;预训练速率&quot; <span class="math inline">\gamma</span> 的影响：</p>
+<div class="math block">
+\gamma \triangleq \frac{\Delta\text{loss}}{\Delta t} = \frac{\Delta\text{loss}}{\Delta\text{step}} \cdot \frac{\Delta\text{step}}{\Delta t} \triangleq \alpha \cdot \tau
+</div>
+<p>关键启发式规则（以 BERT 为例）：</p>
+<ul>
+<li><strong>layer_num</strong> 大幅拖慢 <span class="math inline">\tau</span>，但 <span class="math inline">\alpha</span> 增益有限 → 留到后期增长</li>
+<li><strong>hidden_dim</strong> 大时浅层模型的 <span class="math inline">\gamma</span> 显著更好 → 从较大值起步</li>
+<li><strong>ffn_dim</strong> 自身平衡 <span class="math inline">\alpha</span> 和 <span class="math inline">\tau</span> → 影响较小</li>
+<li><strong>head_num</strong> 稍小时深层模型更优 → 可晚增长</li>
+</ul>
+<p><img src="../papers/2305.02869-msg/raw/grid_larger_text.webp" alt="各维度对预训练速率的影响" /></p>
+<p>基于以上规则，MSG 构造每阶段只扩展一个维度的多阶段调度。以 BERT-base 为例：</p>
+<table>
+<thead>
+<tr>
+<th>步数</th>
+<th>结构 (hidden, ffn, head, layer)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–200k</td>
+<td>(512, 768, 8, 3)</td>
+</tr>
+<tr>
+<td>200k–400k</td>
+<td>(512, <strong>3072</strong>, 8, 3)</td>
+</tr>
+<tr>
+<td>400k–500k</td>
+<td>(512, 3072, 8, <strong>6</strong>)</td>
+</tr>
+<tr>
+<td>500k–600k</td>
+<td>(<strong>768</strong>, 3072, 8, 6)</td>
+</tr>
+<tr>
+<td>600k–700k</td>
+<td>(768, 3072, <strong>12</strong>, 6)</td>
+</tr>
+<tr>
+<td>700k–900k</td>
+<td>(768, 3072, 12, <strong>12</strong>)</td>
+</tr>
+</tbody>
+</table>
+<h3>掩码强度</h3>
+<p>定义 <span class="math inline">\phi</span> 为掩码从 0 线性增至 1 的步数。实验表明 <span class="math inline">\phi \geq 500</span> 即可保证训练稳定。</p>
+<h2>关键结果</h2>
+<h3>BERT 实验</h3>
+<p>在相同数据和目标模型下，MSG 达到最高加速比：</p>
+<table>
+<thead>
+<tr>
+<th>目标模型</th>
+<th>调度</th>
+<th>算子</th>
+<th>Wall Time</th>
+<th>GLUE Avg.</th>
+<th>SQuAD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Large</td>
+<td>Full</td>
+<td>-</td>
+<td>70h 48min</td>
+<td>82.2</td>
+<td>80.2/87.9</td>
+</tr>
+<tr>
+<td>BERT-Large</td>
+<td>Sch1-L</td>
+<td>bert2BERT</td>
+<td><strong>32h 10min</strong></td>
+<td>82.1</td>
+<td>80.0/87.6</td>
+</tr>
+<tr>
+<td>BERT-Large</td>
+<td>Sch1-L</td>
+<td><strong>MSG</strong></td>
+<td><strong>32h 10min</strong></td>
+<td><strong>83.2</strong></td>
+<td><strong>81.3/88.4</strong></td>
+</tr>
+<tr>
+<td>BERT-Base</td>
+<td>Sch1-B</td>
+<td><strong>MSG</strong></td>
+<td><strong>14h 36min</strong></td>
+<td><strong>81.0</strong></td>
+<td><strong>79.6/87.2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>MSG 在 BERT-Large 上实现 <strong>2.2x 加速</strong>，BERT-Base 上实现 <strong>1.8x 加速</strong>，且下游性能<strong>超越</strong>从头训练。</p>
+<h3>GPT-2 实验</h3>
+<table>
+<thead>
+<tr>
+<th>目标模型</th>
+<th>调度</th>
+<th>算子</th>
+<th>Wall Time</th>
+<th>PPL-zs</th>
+<th>PPL-ft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-2</td>
+<td>Full</td>
+<td>-</td>
+<td>53h 1min</td>
+<td>41.31</td>
+<td>23.90</td>
+</tr>
+<tr>
+<td>GPT-2</td>
+<td>Sch1-G</td>
+<td><strong>MSG</strong></td>
+<td><strong>37h 59min</strong></td>
+<td><strong>41.20</strong></td>
+<td>24.14</td>
+</tr>
+</tbody>
+</table>
+<p>GPT-2 上实现 <strong>1.4x 加速</strong>，零样本困惑度与 baseline 相当。</p>
+<h3>函数保持的重要性</h3>
+<p>消融实验（去掉掩码，仅随机初始化）表明：在快速增长调度下，函数保持显著提升训练稳定性。</p>
+<p><img src="../papers/2305.02869-msg/raw/ablation.webp" alt="MSG vs No Mask 在快速增长调度下的训练 loss" /></p>
+<h3>扩展到 100B 规模</h3>
+<p>MSG 的算子已被用于 FLM-101B 的训练（16B → 51B → 101B），在 100B+ 规模下展现了稳定的训练动态。</p>
+<p><img src="../papers/2305.02869-msg/raw/whole-loss-vs-tokens.webp" alt="101B 模型的训练曲线" /></p>
+<h3>训练 Loss 曲线</h3>
+<p><img src="../papers/2305.02869-msg/raw/bert_large_grow_curve.webp" alt="MSG vs Full 在 BERT 和 GPT 上的训练 loss 曲线" /></p>
+<h2>局限与延伸阅读</h2>
+<ul>
+<li><strong>调度空间未完全探索</strong>：目前每阶段只扩展一个维度，多维度组合的调度尚未研究；</li>
+<li><strong>自适应调度困难</strong>：最优的增长时机需要事后分析才能确定；</li>
+<li><strong>初始化策略</strong>：虽然验证了随机初始化优于 Net2Net，但更优的策略（如 GradMax 在 Transformer 上的推广）仍是开放问题。</li>
+</ul>
+<p><strong>相关工作</strong>：</p>
+<ul>
+<li><strong>Stacking</strong> (Gong et al., 2019)：每阶段深度翻倍，1.65x 加速；</li>
+<li><strong>CompoundGrow</strong> (Gu et al., 2020)：在 Stacking 基础上加入 FFN 扩展，1.82x；</li>
+<li><strong>LEMON</strong> (Wang et al., 2024)：通过不等 fan-out 权重实现无损扩展与对称性破缺，与 MSG 思路互补；</li>
+<li><strong>FLM-101B</strong> (Li et al., 2023)：MSG 算子在 100B 规模 LLM 训练中的成功应用。</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #4ecdc4;padding-left:16px;margin:48px 0 24px"><h2 style="color:#4ecdc4">Category B: 训练策略 / 增长调度</h2></div>
+<article class="paper-article" id="2011.13635-mslt"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2011.13635" target="_blank">https://arxiv.org/abs/2011.13635</a> · <a href="#2011.13635-mslt">README source</a></div><div class="paper-body"><h1>MSLT — 多阶段分层训练实现 BERT 110%+ 加速</h1>
+<blockquote>
+<p><strong>Progressively Stacking 2.0: A Multi-stage Layerwise Training Method for BERT Training Speedup</strong>
+Cheng Yang, Shengnan Wang, Chao Yang, Yuechuan Li, Ru He, Jingqiao Zhang | Alibaba Group | OpenReview (ICLR 2021 submission)</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>BERT 预训练极其昂贵（BERT-Base 至少 $7k），加速训练是关键问题。已有方法：</p>
+<ul>
+<li><strong>LAMB 大 batch 优化</strong>：用 1024 TPUv3 将训练缩至 76 分钟，但需要天价硬件</li>
+<li><strong>ALBERT</strong>：参数共享减少通信开销，但计算量几乎不变</li>
+<li><strong>Progressive Stacking</strong>（Gong et al., 2019）：从浅到深训练，约 <strong>25%</strong> 加速</li>
+</ul>
+<p>Progressive stacking 的核心瓶颈在于：stacking 后仍然<strong>更新所有层</strong>的参数。随着模型变深，后期阶段的训练效率不断下降。而作者通过可视化注意力分布发现了一个关键事实：</p>
+<blockquote>
+<p><strong>底层在 stacking 之后几乎不再发生实质性变化。</strong> 6 层模型 stack 成 12 层后，继续训练时底层的注意力分布与 stacking 前几乎一致——花在更新底层的反向传播计算是一种浪费。</p>
+</blockquote>
+<h2>核心想法</h2>
+<p>既然底层参数在早期就已趋于稳定，那么在每个增长阶段<strong>只训练新增的顶层，冻结已训练好的底层</strong>。底层只做前向计算（提供输入特征），不参与反向传播。由于 BERT 训练中反向计算（含梯度同步）的耗时约为前向计算的 <strong>6 倍</strong>，冻结底层可以大幅节省计算和通信开销。</p>
+<h2>方法细节</h2>
+<h3>注意力分布观察</h3>
+<p>作者可视化了一系列注意力分布并得到三个发现：</p>
+<ol>
+<li><strong>注意力分布的典型模式</strong>：大多数 head 的注意力集中在三个位置——局部邻居、[CLS] token 和 [SEP] token</li>
+<li><strong>顶层与底层相似</strong>：12 层 BERT 中，某些顶层 head 的注意力分布与对应的底层 head 高度相似</li>
+<li><strong>底层在 stacking 后不再变化</strong>：将训练好的 6 层模型 stack 成 12 层后继续训练，底层注意力分布与 stacking 前的 6 层模型几乎完全一致，说明后续训练并未为底层带来实质优化</li>
+</ol>
+<h3>MSLT 训练流程</h3>
+<p>训练一个 <span class="math inline">N</span> 层 BERT，分解为 <span class="math inline">k</span> 个阶段：</p>
+<p><strong>阶段 1</strong>：训练 <span class="math inline">N/k</span> 层的小模型，更新所有参数</p>
+<p><strong>阶段 <span class="math inline">i</span>（<span class="math inline">i = 2, \ldots, k</span>）</strong>：</p>
+<ol>
+<li>在模型顶部（输出层下方）新增 <span class="math inline">N/k</span> 层</li>
+<li>新层参数用上一阶段模型的<strong>顶部 <span class="math inline">N/k</span> 层参数</strong>初始化（类似 progressive stacking）</li>
+<li><strong>只更新新增顶层 + 输出层</strong>的参数</li>
+<li>底层（已训练层）仅参与前向计算，参数固定</li>
+</ol>
+<p><strong>最终阶段</strong>：所有层解冻，联合微调约 <span class="math inline">10\%\sim 20\%</span> 的总步数</p>
+<p>具体到 BERT-Base（<span class="math inline">N=12</span>，<span class="math inline">k=4</span>），每阶段训练 3 层 encoder，共 1,000,000 步：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>层数</th>
+<th>训练步数</th>
+<th>更新范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stage 1</td>
+<td>3 层</td>
+<td>200K</td>
+<td>所有参数</td>
+</tr>
+<tr>
+<td>Stage 2</td>
+<td>6 层</td>
+<td>200K</td>
+<td>顶部 3 层 + 输出层</td>
+</tr>
+<tr>
+<td>Stage 3</td>
+<td>9 层</td>
+<td>200K</td>
+<td>顶部 3 层 + 输出层</td>
+</tr>
+<tr>
+<td>Stage 4</td>
+<td>12 层</td>
+<td>200K</td>
+<td>顶部 3 层 + 输出层</td>
+</tr>
+<tr>
+<td>Retrain</td>
+<td>12 层</td>
+<td>200K</td>
+<td>所有参数</td>
+</tr>
+</tbody>
+</table>
+<h3>效率分析</h3>
+<p>设前向计算时间为 <span class="math inline">T_f</span>，反向计算时间（含梯度同步）为 <span class="math inline">T_b \approx 6 T_f</span>。</p>
+<ul>
+<li><strong>原始方法</strong>每步耗时 <span class="math inline">\propto T_f + T_b</span>（所有层的前向 + 反向）</li>
+<li><strong>MSLT</strong> 在中间阶段，大部分层只做前向，仅顶部少量层做反向，耗时远小于全模型反向</li>
+</ul>
+<p>与 progressive stacking 对比：stacking 后需要用约 <strong>70%</strong> 的总步数训练完整深度模型；MSLT 最终联合微调只需约 <strong>20%</strong> 的总步数。</p>
+<h3>与交替优化的关系</h3>
+<p>MSLT 可以理解为一种**交替优化（Alternating Optimization）**策略：每次只优化一小组变量（新增顶层），固定其他变量（已训练底层）。这种策略对于&quot;更新部分变量远比更新全部变量容易&quot;的问题特别有效。</p>
+<h3>学习率矛盾的解决</h3>
+<p>Progressive stacking 中，底层已接近最优（需要小学习率），而新增顶层远离最优（需要大学习率）。MSLT 通过冻结底层自然避免了这一矛盾：只优化未训练的顶层，可以放心使用较大学习率。</p>
+<h3>扩展到 ALBERT</h3>
+<p>ALBERT 跨层共享参数，无法直接冻结部分层。MSLT 的解法是将 encoder 层分为 <span class="math inline">k</span> 组，<strong>组内共享参数，组间独立</strong>，然后按 MSLT 策略逐组训练。代价是参数量增加（12M → 32M），但训练时间大幅减少。</p>
+<h2>关键结果</h2>
+<h3>相同步数对比（1M 步）</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练时间</th>
+<th>MNLI</th>
+<th>QNLI</th>
+<th>SST-2</th>
+<th>MRPC</th>
+<th>SQuAD 1.1</th>
+<th>SQuAD 2.0</th>
+<th>Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Base (原始)</td>
+<td>85h</td>
+<td>84.4</td>
+<td>91.5</td>
+<td>92.7</td>
+<td>89.7</td>
+<td>89.5/82.7</td>
+<td>77.7/73.9</td>
+<td>86.7</td>
+</tr>
+<tr>
+<td>BERT-Base (stacking)</td>
+<td>63h</td>
+<td>84.6</td>
+<td>91.6</td>
+<td>92.1</td>
+<td>91.2</td>
+<td>89.4/82.5</td>
+<td>77.3/74.2</td>
+<td>86.9</td>
+</tr>
+<tr>
+<td><strong>BERT-Base (MSLT)</strong></td>
+<td><strong>40h</strong></td>
+<td>84.3</td>
+<td>91.2</td>
+<td>92.2</td>
+<td>91.2</td>
+<td>89.2/82.3</td>
+<td>77.8/74.1</td>
+<td>86.8</td>
+</tr>
+<tr>
+<td>BERT-Large (原始)</td>
+<td>188h</td>
+<td>86.5</td>
+<td>93.0</td>
+<td>93.6</td>
+<td>91.7</td>
+<td>91.9/85.2</td>
+<td>81.5/79.1</td>
+<td>88.9</td>
+</tr>
+<tr>
+<td><strong>BERT-Large (MSLT)</strong></td>
+<td><strong>84h</strong></td>
+<td>86.2</td>
+<td>92.6</td>
+<td>93.2</td>
+<td>92.2</td>
+<td>91.6/84.8</td>
+<td>81.6/79.2</td>
+<td>88.8</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>BERT-Base：<strong>40h vs. 85h</strong>，加速 <strong>112.5%</strong>，性能几乎无损</li>
+<li>BERT-Large：<strong>84h vs. 188h</strong>，加速 <strong>123.8%</strong>，性能几乎无损</li>
+</ul>
+<h3>相同时间对比</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>步数</th>
+<th>时间</th>
+<th>MNLI</th>
+<th>QNLI</th>
+<th>SST-2</th>
+<th>STS-B</th>
+<th>MRPC</th>
+<th>RTE</th>
+<th>Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Base (MSLT)</td>
+<td>1M</td>
+<td>40h</td>
+<td><strong>84.3</strong></td>
+<td><strong>91.2</strong></td>
+<td><strong>92.2</strong></td>
+<td><strong>89.5</strong></td>
+<td><strong>91.2</strong></td>
+<td><strong>69.3</strong></td>
+<td><strong>86.3</strong></td>
+</tr>
+<tr>
+<td>BERT-Base (原始)</td>
+<td>480K</td>
+<td>41h</td>
+<td>83.3</td>
+<td>90.6</td>
+<td>91.2</td>
+<td>89.2</td>
+<td>89.2</td>
+<td>68.9</td>
+<td>85.4</td>
+</tr>
+</tbody>
+</table>
+<p>相同训练时间下，MSLT 在所有任务上均优于原始方法。</p>
+<h3>联合微调的影响</h3>
+<p>去掉最后的联合微调阶段会导致性能下降约 1-2 个百分点，表明少量的全层联合训练对最终性能仍然重要。但因模型已接近最优，仅需 ~20% 步数即可。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>底层完全冻结的假设在所有任务上是否最优未被充分验证——某些任务可能需要深层底层适配</li>
+<li>未探索宽度维度和序列长度维度的增长</li>
+<li>最终联合微调阶段仍需全模型反向传播，无法完全避免深模型的训练开销</li>
+<li>ICLR 2021 审稿被拒——reviewers 认为方法的理论分析不够深入</li>
+</ul>
+<p><strong>延伸阅读：</strong></p>
+<ul>
+<li><strong>Progressive Stacking (Gong et al., 2019)</strong>：本文的直接前序，仅做 depth stacking 不冻结底层</li>
+<li><strong>CompoundGrow (Gu et al., 2021)</strong>：在 depth/width/length 三个维度组合增长</li>
+<li><strong>Net2Net (Chen et al., 2016)</strong>：函数保持变换的开山之作</li>
+<li><strong>Gradual Layer Freezing</strong>：逐层冻结训练技巧在微调阶段的应用，与 MSLT 冻结思路相关</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2010.12562-compound-grow"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2010.12562" target="_blank">https://arxiv.org/abs/2010.12562</a> · <a href="#2010.12562-compound-grow">README source</a></div><div class="paper-body"><h1>CompoundGrow — 多维度复合增长加速 BERT 预训练</h1>
+<blockquote>
+<p><strong>On the Transformer Growth for Progressive BERT Training</strong>
+Xiaotao Gu, Liyuan Liu, Hongkun Yu, Jing Li, Chen Chen, Jiawei Han | UIUC &amp; Google Research | NAACL 2021</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>大规模预训练的计算成本过高，渐进式训练（progressive training）——从小模型逐步增长到大模型——是一条有效的加速路径。然而，已有方法只在<strong>单一维度</strong>上进行增长：</p>
+<ul>
+<li><strong>深度维度</strong>：Progressive Stacking (Gong et al., 2019) 通过层堆叠逐步加深</li>
+<li><strong>长度维度</strong>：BERT 原版训练先用 128-token 短序列，再切换到 512-token</li>
+</ul>
+<p>受 EfficientNet 的 compound scaling 启发，作者提出一个核心问题：<strong>在相同的计算预算下，同时在多个维度（深度、宽度、序列长度）上增长是否比单一维度更好？</strong></p>
+<h2>核心想法</h2>
+<p><strong>Compound Effect（复合效应）</strong>：类似于 NAS 中的 compound scaling，progressive training 中同时在多个维度上增长可以更好地分配计算节省，获得比单维度增长更优的性能-效率权衡。一个小模型可以先学到有用的动态特征，然后通过多维度增长迁移到大模型中。</p>
+<h2>方法细节</h2>
+<h3>渐进式训练框架</h3>
+<p>渐进式训练的通用流程为：</p>
+<div class="math block">
+\min_{g_t \in \mathcal{G}}\; \mathcal{L}(f_T) \quad \text{s.t.} \quad f_t = \text{opt}(g_t(f_{t-1}),\, \mathcal{D})
+</div>
+<p>每个阶段 <span class="math inline">t</span> 应用增长算子 <span class="math inline">g_t</span> 将模型 <span class="math inline">f_{t-1}</span> 增长为 <span class="math inline">f_t</span>，然后继续训练。两个核心组件：</p>
+<ul>
+<li><strong>增长调度器（Growth Scheduler）</strong>：何时增长</li>
+<li><strong>增长算子（Growth Operator）</strong>：如何增长</li>
+</ul>
+<h3>复合效应的理论直觉</h3>
+<p>现有单维度方法限制了增长算子的搜索空间 <span class="math inline">\mathcal{G}</span>。引入多维度增长后，搜索空间扩大为 <span class="math inline">\mathcal{G} \cup \mathcal{G}^+</span>，使得：</p>
+<div class="math block">
+\min_{g \in \mathcal{G}}\; \mathcal{L}(f_T) \;\geq\; \min_{g \in \mathcal{G} \cup \mathcal{G}^+}\; \mathcal{L}(f_T)
+</div>
+<p>即复合增长的最优值不会比单维度更差。这与 EfficientNet 的目标类似：</p>
+<div class="math block">
+\max_{d, w, r}\; \text{Accuracy}(\mathcal{N}(d, w, r)) \quad \text{s.t.} \quad \text{Resource\_cost}(\mathcal{N}) \leq \text{target\_budget}
+</div>
+<p>其中 <span class="math inline">d, w, r</span> 分别缩放深度、宽度和分辨率。</p>
+<h3>三个维度的增长算子</h3>
+<h4>1. 长度维度：Embedding Pooling vs. Data Truncation</h4>
+<p><strong>Data Truncation</strong>（BERT 原版方案）：直接截断输入序列至较短长度（如 128 token）。问题在于<strong>高位置的 position embedding 得不到训练</strong>，增长后需要从头学习。</p>
+<p><strong>Embedding Pooling</strong>（本文方案）：对未被 mask 的 token 的 embedding 做均值池化，降低序列长度但保留完整输入。具体做法：</p>
+<ul>
+<li>对第一个自注意力层的 <strong>query</strong> 向量做 <span class="math inline">k</span>-pooling，key/value 保持不变</li>
+<li>所有 position embedding 都能得到更新</li>
+</ul>
+<p>实验表明 embedding pooling 在 SQuAD v2.0 上显著优于 data truncation。</p>
+<h4>2. 宽度维度：Parameter Sharing vs. Matrix Factorization</h4>
+<p>目标是在训练前期使用较小的 FFN 模块，后期恢复到完整宽度。FFN 形式为 <span class="math inline">f(xW_1)W_2</span>，其中 <span class="math inline">W_1 \in \mathbb{R}^{D \times H}</span>，<span class="math inline">W_2 \in \mathbb{R}^{H \times D}</span>。</p>
+<p><strong>Matrix Factorization</strong>：用 <span class="math inline">W_{i1} \in \mathbb{R}^{m \times h}</span> 和 <span class="math inline">W_{i2} \in \mathbb{R}^{h \times n}</span>（<span class="math inline">h \ll n</span>）的乘积近似原权重矩阵。</p>
+<p><strong>Parameter Sharing</strong>（本文方案）：用小矩阵 <span class="math inline">W'_1 \in \mathbb{R}^{D \times H/k}</span> 替代 <span class="math inline">W_1</span>，增长时沿隐藏维度复制 <span class="math inline">k</span> 次：</p>
+<div class="math block">
+f(x W_1) W_2 = f(x\, [W'_1, \ldots, W'_1])\begin{bmatrix} W'_2/k \\ \vdots \\ W'_2/k \end{bmatrix} = f(x W'_1) W'_2
+</div>
+<p>这保证了增长前后输出一致（函数保持）。Dropout 提供的随机性使共享副本在后续训练中产生不同梯度，逐渐分化。</p>
+<p>实验表明 parameter sharing（<span class="math inline">k=4</span>）显著优于 matrix factorization（<span class="math inline">h=0.2D</span>）。</p>
+<h4>3. 深度维度：Progressive Stacking</h4>
+<p>沿用 Gong et al. (2019) 的层堆叠方法，将小模型的层参数复制到大模型的对应位置。</p>
+<h3>CompoundGrow 具体配置</h3>
+<p>三个维度的增长算子组合使用，在 1M 训练步内的调度如下：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>步数</th>
+<th>深度</th>
+<th>宽度</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stage 1</td>
+<td>200K</td>
+<td><span class="math inline">L/4</span> 层</td>
+<td>FFN 共享 (<span class="math inline">k=2</span>)</td>
+<td>Pooling (<span class="math inline">k=2</span>)</td>
+</tr>
+<tr>
+<td>Stage 2</td>
+<td>200K</td>
+<td><span class="math inline">L/2</span> 层</td>
+<td>FFN 共享 (<span class="math inline">k=2</span>)</td>
+<td>Pooling (<span class="math inline">k=2</span>)</td>
+</tr>
+<tr>
+<td>Stage 3</td>
+<td>300K</td>
+<td><span class="math inline">L</span> 层</td>
+<td>FFN 共享 (<span class="math inline">k=2</span>)</td>
+<td>Pooling (<span class="math inline">k=2</span>)</td>
+</tr>
+<tr>
+<td>Stage 4</td>
+<td>300K</td>
+<td><span class="math inline">L</span> 层</td>
+<td>完整宽度</td>
+<td>完整长度</td>
+</tr>
+</tbody>
+</table>
+<p>实现上，复合增长相比单纯的 progressive stacking 几乎不增加工程复杂度：深度增长是参数复制，宽度增长也是参数复制，长度增长只需移除 pooling 层。</p>
+<h2>关键结果</h2>
+<h3>预训练加速与下游性能</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>FLOPs 加速</th>
+<th>Wall-time 加速</th>
+<th>MNLI (M/MM)</th>
+<th>SQuAD v1.1 (EM/F1)</th>
+<th>SQuAD v2.0 (EM/F1)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Base</td>
+<td>—</td>
+<td>—</td>
+<td>84.4/84.4</td>
+<td>83.3/90.2</td>
+<td>77.4/80.4</td>
+</tr>
+<tr>
+<td>Stack-Base</td>
+<td>+68.7%</td>
+<td>+64.9%</td>
+<td>84.5/84.9</td>
+<td>83.5/90.5</td>
+<td>77.1/80.3</td>
+</tr>
+<tr>
+<td><strong>Compound-Base</strong></td>
+<td><strong>+107.1%</strong></td>
+<td><strong>+73.6%</strong></td>
+<td>84.7/84.7</td>
+<td>83.8/90.3</td>
+<td>77.0/80.0</td>
+</tr>
+<tr>
+<td>BERT-Large</td>
+<td>—</td>
+<td>—</td>
+<td>86.3/86.4</td>
+<td>86.2/92.7</td>
+<td>81.0/84.3</td>
+</tr>
+<tr>
+<td>Stack-Large</td>
+<td>+70.7%</td>
+<td>+69.7%</td>
+<td>86.9/87.3</td>
+<td>86.3/92.6</td>
+<td>81.7/84.7</td>
+</tr>
+<tr>
+<td><strong>Compound-Large</strong></td>
+<td><strong>+111.4%</strong></td>
+<td><strong>+82.2%</strong></td>
+<td>87.3/86.8</td>
+<td>85.8/92.4</td>
+<td>82.4/85.3</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>BERT-Base wall-time 加速 <strong>73.6%</strong>，BERT-Large 加速 <strong>82.2%</strong></li>
+<li>FLOPs 加速更高（107%/111%），wall-time 加速低于 FLOPs 加速是因为存在非计算开销</li>
+<li>下游任务性能与原始 BERT <strong>持平或略优</strong></li>
+</ul>
+<h3>GLUE 测试集</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>CoLA</th>
+<th>SST-2</th>
+<th>MRPC</th>
+<th>STS-B</th>
+<th>QQP</th>
+<th>MNLI</th>
+<th>QNLI</th>
+<th>RTE</th>
+<th>GLUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-Base</td>
+<td>52.1</td>
+<td>93.5</td>
+<td>88.9/84.8</td>
+<td>87.1/85.8</td>
+<td>71.2/89.2</td>
+<td>84.6/83.4</td>
+<td>90.5</td>
+<td>66.4</td>
+<td>78.3</td>
+</tr>
+<tr>
+<td>Compound-Base</td>
+<td>50.1</td>
+<td>92.6</td>
+<td>89.1/85.2</td>
+<td>85.4/83.9</td>
+<td>70.9/88.9</td>
+<td>84.6/83.6</td>
+<td>91.3</td>
+<td>70.1</td>
+<td>78.3</td>
+</tr>
+<tr>
+<td>BERT-Large</td>
+<td>60.5</td>
+<td>94.9</td>
+<td>89.3/85.4</td>
+<td>87.6/86.5</td>
+<td>72.1/89.3</td>
+<td>86.7/85.9</td>
+<td>92.7</td>
+<td>70.1</td>
+<td>80.5</td>
+</tr>
+<tr>
+<td>Compound-Large</td>
+<td>61.2</td>
+<td>94.2</td>
+<td>90.2/86.7</td>
+<td>86.4/85.7</td>
+<td>71.4/89.2</td>
+<td>87.2/86.1</td>
+<td>93.6</td>
+<td>73.3</td>
+<td>81.1</td>
+</tr>
+</tbody>
+</table>
+<p>GLUE 平均分持平（Base）或更优（Large），在节省大量训练时间的同时未牺牲性能。</p>
+<h3>增长算子对比</h3>
+<p>受控实验（700K 小模型 + 300K 完整模型）中的对比：</p>
+<ul>
+<li><strong>长度</strong>：Embedding Pooling &gt; Data Truncation（尤其在 SQuAD v2.0 上）</li>
+<li><strong>宽度</strong>：Parameter Sharing &gt; FFN Factorization（在 Base 和 Large 上均更优）</li>
+<li><strong>复合 &gt; 单一</strong>：在多种步数设置和指标下，复合增长一致优于或至少持平</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>CoLA 等小数据集上表现波动较大，可能受随机方差影响</li>
+<li>增长调度（各阶段步数分配）仍需手动调优</li>
+<li>embedding pooling 改变了自注意力的计算方式，对某些下游任务的影响未充分分析</li>
+<li>仅在 BERT 上验证，未扩展到 GPT 等自回归模型</li>
+</ul>
+<p><strong>延伸阅读：</strong></p>
+<ul>
+<li><strong>EfficientNet (Tan &amp; Le, 2019)</strong>：compound scaling 思想的源头，将多维度缩放应用于网络架构搜索</li>
+<li><strong>Progressive Stacking (Gong et al., 2019)</strong>：本文的直接 baseline，仅在深度维度增长</li>
+<li><strong>MSLT (Yang et al., 2021)</strong>：冻结底层只训练顶层，是 stacking 在&quot;减少反向传播&quot;方向的改进</li>
+<li><strong>Net2Net (Chen et al., 2016)</strong>：函数保持变换的开山之作，本文的 parameter sharing 增长在概念上延续了 Net2WiderNet 的思路</li>
+<li><strong>Multigrid Training (Wu et al., 2020)</strong>：视觉领域的多分辨率训练，启发了本文的 embedding pooling 设计</li>
+<li><strong>LiGO (Wang et al., 2023)</strong>：用学习到的线性映射替代简单的参数复制/共享</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2203.06211-staged-training"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2203.06211" target="_blank">https://arxiv.org/abs/2203.06211</a> · <a href="#2203.06211-staged-training">README source</a></div><div class="paper-body"><h1>Staged Training — 用 scaling law 指导模型逐阶段增长以节省训练计算</h1>
+<blockquote>
+<p><strong>Staged Training for Transformer Language Models</strong>
+Shen et al. | ICML 2022 | arXiv 2203.06211</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>训练大型 Transformer 语言模型的标准做法是：为每种模型大小选择随机初始化，然后从头训练到收敛。然而 scaling law 揭示了一个有趣的现象——<strong>小模型在训练初期的计算效率高于大模型</strong>（单位 FLOPs 带来的 loss 下降更快），但最终只能收敛到较高的 loss。本文的核心动机就是利用这一性质：先在小模型上进行高效训练，再通过增长算子（growth operator）将其扩展为大模型继续训练，从而复用前序阶段的计算量。</p>
+<p>之前的模型增长方法（如 progressive stacking、Net2Net）存在以下不足：</p>
+<ul>
+<li>没有考虑优化器状态的增长，导致增长后训练动态不稳定</li>
+<li>没有原则性的方法来决定何时增长、增长到多大</li>
+<li>增长后学习率的设置缺乏理论依据</li>
+</ul>
+<h2>核心想法</h2>
+<p><strong>增长算子必须同时满足两个性质——保持 loss（loss-preserving）和保持训练动态（training-dynamics-preserving）。</strong> 在此基础上，利用 scaling law 的数学形式推导出最优的分阶段训练调度（何时增长、增长多少），使计算节省最大化。</p>
+<h2>方法细节</h2>
+<h3>增长算子的两大性质</h3>
+<p><strong>1. Loss-preserving（保持 loss）：</strong> 增长前后模型的输出不变：</p>
+<div class="math block">
+\textit{loss}(\mathbb{G}(\mathcal{M})(\mathbf{x}), \mathbf{y}) = \textit{loss}(\mathcal{M}(\mathbf{x}), \mathbf{y})
+</div>
+<p><strong>2. Training-dynamics-preserving（保持训练动态）：</strong> 增长后的模型其 loss 下降速率应与从头训练的同规模目标模型一致：</p>
+<div class="math block">
+\frac{\partial}{\partial C} \mathcal{L}(\mathbb{G}(\mathcal{M}_{orig}), C) = \frac{\partial}{\partial C} \mathcal{L}(\mathcal{M}_{target}, C)
+</div>
+<p><img src="../papers/2203.06211-staged-training/raw/figs/figure1_v2.webp" alt="Staged training 概念图：先训练小模型到拐点，再增长为大模型继续训练" /></p>
+<h3>宽度增长算子</h3>
+<p>将模型的隐藏维度翻倍（参数量约增 4 倍）。对前馈层权重 <span class="math inline">W \in \mathbb{R}^{n \times m}</span>：</p>
+<div class="math block">
+\mathbb{G}(W) = \begin{pmatrix} W &amp; Z \\ Z &amp; W \end{pmatrix}
+</div>
+<p>其中 <span class="math inline">Z</span> 是同维的零矩阵。LayerNorm 和 bias 则直接复制：<span class="math inline">\mathbb{G}(W) = [W, W]</span>。最后一个线性层的权重需要除以 2 以保持输出不变。</p>
+<h3>深度增长算子</h3>
+<p>层数翻倍（非 embedding 参数量增 2 倍）。在每一层后插入一个<strong>恒等层</strong>。利用 GPT2 的残差结构：</p>
+<div class="math block">
+\mathbf{x}' = \mathbf{x} + \text{Attention}(\text{LN}(\mathbf{x})), \quad \mathbf{y} = \mathbf{x}' + \text{FFN}(\text{LN}(\mathbf{x}'))
+</div>
+<p>将恒等层中 LayerNorm 的 scale 和 bias 均设为 0，使 <span class="math inline">\text{LN}(\mathbf{x}) = \mathbf{0}</span>，从而 Attention 和 FFN 输出为零，整层退化为恒等映射。</p>
+<p><img src="../papers/2203.06211-staged-training/raw/figs/main_gpt2large_width_token.webp" alt="宽度和深度增长算子均保持 loss 和训练动态" /></p>
+<h3>优化器状态的增长</h3>
+<p>仅增长模型参数是不够的——<strong>优化器状态（Adam 的一阶矩 <span class="math inline">m</span> 和二阶矩 <span class="math inline">v</span>）也必须按兼容方式增长</strong>，否则训练动态会严重不稳定。增长算子 <span class="math inline">\mathbb{G}_m</span>、<span class="math inline">\mathbb{G}_v</span> 需满足：</p>
+<div class="math block">
+g(\mathbb{G}_m(\mathcal{M})) = \mathbb{G}_m(g(\mathcal{M})), \quad g^2(\mathbb{G}_v(\mathcal{M})) = \mathbb{G}_v(g^2(\mathcal{M}))
+</div>
+<p>即&quot;增长后求梯度&quot;和&quot;求梯度后增长&quot;应等价。增长后的学习率也需与目标模型的对应点匹配，而非从头重置。</p>
+<h3>最优调度</h3>
+<p>利用 scaling law <span class="math inline">L(N, S) = (N_c/N)^{\alpha_N} + (S_c/S)^{\alpha_S}</span> 来确定最佳增长时机。实际操作中只需估算三个关键点：</p>
+<ul>
+<li><strong>@growth 点</strong>：loss 曲线斜率达到阈值 <span class="math inline">\tau_{\mathbb{G}}</span> 时增长</li>
+<li><strong>@target 点</strong>：用 <span class="math inline">S_{\text{@target}} = \rho \times S_{\text{@growth}}</span> 确定增长后的学习率起点</li>
+<li><strong>@optimality 点</strong>：loss 曲线斜率达到 <span class="math inline">\tau_{opt}</span> 时停止训练</li>
+</ul>
+<p>阈值 <span class="math inline">\tau</span> 和比例 <span class="math inline">\rho</span> 与模型大小无关，可以用小模型估算后直接外推到大模型。</p>
+<h2>关键结果</h2>
+<p>在 GPT2-base 和 GPT2-large 上的实验结果：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>模型</th>
+<th>Validation Loss 计算节省</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2×depth (1 stage)</td>
+<td>GPT2-large</td>
+<td>最高 37%</td>
+</tr>
+<tr>
+<td>2×2×depth (2 stages)</td>
+<td>GPT2-large</td>
+<td>最高 30%</td>
+</tr>
+<tr>
+<td>2×depth (1 stage)</td>
+<td>GPT2-base</td>
+<td>最高 ~25%</td>
+</tr>
+<tr>
+<td>2×2×depth (2 stages)</td>
+<td>GPT2-base</td>
+<td>最高 ~33%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>深度增长算子在同等增长比例下优于宽度增长算子</li>
+<li>两阶段增长（2×2×depth）在长期训练中表现最佳，最高可节省约 <strong>22% 的计算量</strong></li>
+<li>增长后的模型在 Wikitext-103 和 LAMBADA 上的 zero-shot 表现与从头训练的模型相当</li>
+<li>与 GPT2-base 训练到收敛的结果相比，2×2×depth 增长的 GPT2-large 模型仅用 15% 的计算就达到相同的 Wikitext-103 PPL</li>
+</ul>
+<h3>消融实验</h3>
+<p><img src="../papers/2203.06211-staged-training/raw/figs/figure_gpt2base_ffn_token.webp" alt="与先前方法和消融对比：不增长优化器状态会导致严重不稳定" /></p>
+<ul>
+<li>不增长优化器状态（zero_opt）：训练极度不稳定</li>
+<li>重置学习率（如 Gopher 做法）：训练动态不匹配目标模型</li>
+<li>增长过早/过晚：仍保持两大性质，但计算节省下降</li>
+<li>先前工作（Gu et al. 的 FFN-only width、Gong et al. 的 copy-stacking）不满足 loss-preserving</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>仅在 GPT2 系列自回归模型上验证，未测试 encoder-only 或 encoder-decoder 架构</li>
+<li>计算节省主要在训练到 optimality 时体现，训练到完全收敛时节省较少</li>
+<li>最优调度的三个关键点仍需手动识别，未完全自动化</li>
+<li>未与 batch size warmup、sequence length curriculum 等正交方法结合</li>
+</ul>
+<p><strong>相关工作：</strong></p>
+<ul>
+<li><strong>Net2Net</strong>（Chen et al., 2015）：最早的 function-preserving 增长，但未处理优化器状态</li>
+<li><strong>Progressive Stacking</strong>（Gong et al., 2019）：通过复制层来增加深度，但不 loss-preserving</li>
+<li><strong>bert2BERT</strong>（Chen et al., 2022）：扩展 Net2Net 到 Transformer，提出 AKI 初始化</li>
+<li><strong>LiGO</strong>（Wang et al., 2023）：学习线性增长算子，而非手工设计</li>
+</ul>
+</div></article>
+<article class="paper-article" id="reddi2023-gradual-stacking"><div class="paper-meta-bar"><a href="https://proceedings.mlr.press/v202/j-reddi23a.html" target="_blank">https://proceedings.mlr.press/v202/j-reddi23a.html</a> · <a href="#reddi2023-gradual-stacking">README source</a></div><div class="paper-body"><h1>Gradual Stacking — 用 few-shot learning 视角理解和改进 progressive stacking</h1>
+<blockquote>
+<p><strong>Efficient Training of Language Models using Few-Shot Learning</strong>
+Reddi et al. | ICML 2023</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>大型语言模型训练极其昂贵。Progressive stacking（Gong et al., 2019）提供了一个有趣的方向：从浅层模型开始训练，每个阶段将网络堆叠翻倍（如 3→6→12 层），最终训练完整模型。然而 progressive stacking 存在两个问题：</p>
+<ol>
+<li><strong>网络大小指数增长</strong>：每次翻倍意味着大部分训练时间集中在最后一个阶段（网络最大时），限制了加速收益</li>
+<li><strong>缺乏理论基础</strong>：之前的工作主要用 &quot;注意力矩阵跨层相似&quot; 来解释 stacking 的有效性，但这并不充分</li>
+</ol>
+<p>其他增长方法（如 Staged Training、Gu et al.）关注 function-preserving 的增长算子，但本文认为<strong>训练后快速学习的能力（即 few-shot learning 能力）才是 stacking 成功的关键因素</strong>，而非简单地保持 loss 不变。</p>
+<h2>核心想法</h2>
+<p><strong>在好的小语言模型上堆叠一个好的 few-shot learner，就能为更大模型提供好的初始化。</strong> 模型的上层天然扮演 &quot;task-conditioned few-shot learner&quot; 的角色——给定下层产生的好表示，上层只需少量训练就能适应。基于此 insight，本文提出 <strong>gradual stacking</strong>：每次只堆叠固定大小的一小块（而非翻倍），使网络线性增长而非指数增长。</p>
+<h2>方法细节</h2>
+<h3>Few-Shot Stacking 框架</h3>
+<p>训练目标是 masked language model（MLM），loss 定义为：</p>
+<div class="math block">
+L_{Q_\Phi}(f) = \mathbb{E}_{x \sim P_W} \mathbb{E}_{i \sim [m]} -\mathbf{1}_{x_i}^\top \log[\Gamma(f \circ \Phi(M_i(x)))]_i
+</div>
+<p>其中 <span class="math inline">\Phi</span> 是输入编码函数，<span class="math inline">M_i</span> 是 masking 操作，<span class="math inline">\Gamma</span> 是 softmax 输出。</p>
+<p><strong>核心算法（Algorithm 1 — Few-Shot Stacking）：</strong></p>
+<ol>
+<li>训练初始小模型 <span class="math inline">f_0</span>（<span class="math inline">\Delta_0</span> 层）</li>
+<li>对每个阶段 <span class="math inline">p = 1, \dots, k</span>：
+<ul>
+<li>训练 few-shot learner <span class="math inline">h_p</span>（<span class="math inline">\Delta_p</span> 层）</li>
+<li>堆叠：<span class="math inline">f_p^0 = h_p \circ f_{p-1}</span></li>
+<li>用优化器 <span class="math inline">A</span> 训练 <span class="math inline">f_p^0</span> 共 <span class="math inline">t_p</span> 步</li>
+</ul>
+</li>
+</ol>
+<h3>理论基础</h3>
+<p>本文定义了三个关键概念：</p>
+<p><strong>Distribution Distortion</strong>：衡量编码函数 <span class="math inline">\Phi</span> 的输出分布与原始词分布的距离：</p>
+<div class="math block">
+\mathbb{E}_{i \sim [m]} \mathbb{E}_{x_{-i} \sim P_W^{-i}} \| [\Gamma(\Phi(M_i(x_{-i})))]_i - P_W^{|x_{-i}} \|_{TV} \leq \epsilon
+</div>
+<p><strong>Good Few-Shot Learner</strong>：<span class="math inline">h</span> 是 <span class="math inline">(\epsilon, \delta, c)</span>-good 的，如果对任何 <span class="math inline">\epsilon</span>-distortion 的 <span class="math inline">\Phi</span>，<span class="math inline">h</span> 只需 <span class="math inline">c</span> 步优化就能达到 <span class="math inline">\delta</span>-optimal。</p>
+<p><strong>主定理（Theorem 3.6）</strong>：如果 <span class="math inline">h_p</span> 是 <span class="math inline">(\sqrt{2(L_{Q_1}(f_{p-1}) - L^*)}, \delta, c)</span>-good 的 few-shot learner，且优化器 <span class="math inline">A</span> &quot;effective&quot;，则 <span class="math inline">c</span> 步训练后 <span class="math inline">f_p^c</span> 是 <span class="math inline">\delta</span>-optimal 的初始化。</p>
+<p>这揭示了一个权衡：如果 <span class="math inline">f_{p-1}</span> 的语言模型性能较差（<span class="math inline">L_{Q_1}(f_{p-1}) - L^*</span> 大），则需要更强的 few-shot learner <span class="math inline">h_p</span>；反之，弱 few-shot learner 就够了。</p>
+<h3>Gradual Stacking 的两种变体</h3>
+<p><strong>Post-stack（优选）</strong>：复制顶部层并堆叠到顶部。如 <span class="math inline">f_2 \circ f_1</span> 变为 <span class="math inline">f_2 \circ f_2 \circ f_1</span>。</p>
+<p><strong>Pre-stack</strong>：复制底部层并堆叠到底部。如 <span class="math inline">f_2 \circ f_1</span> 变为 <span class="math inline">f_2 \circ f_1 \circ f_1</span>。</p>
+<p>Post-stack 在实验中一致优于 pre-stack，因为顶层作为 few-shot learner 的质量更高。</p>
+<h3>其他变体</h3>
+<p><strong>Single-shot Stacking</strong>：训练一个小块，然后一次性堆叠多份到目标大小。但实验表明效果不如 gradual stacking。</p>
+<p><strong>Independent Stacking</strong>：分别训练语言模型和 few-shot learner，然后堆叠。实验显示可进一步超越 gradual stacking，类似于 ensembling 的效果。</p>
+<h2>关键结果</h2>
+<h3>主要性能对比</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>BERT-BASE 加速</th>
+<th>预训练 Loss</th>
+<th>BERT-LARGE 加速</th>
+<th>预训练 Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline</td>
+<td>1×</td>
+<td>1.739</td>
+<td>1×</td>
+<td>1.443</td>
+</tr>
+<tr>
+<td>Progressive Stacking</td>
+<td>1.29×</td>
+<td>1.737</td>
+<td>1.24×</td>
+<td>1.403</td>
+</tr>
+<tr>
+<td><strong>Gradual Stacking</strong></td>
+<td><strong>1.50×</strong></td>
+<td><strong>1.689</strong></td>
+<td><strong>1.64×</strong></td>
+<td><strong>1.384</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Gradual stacking 在速度和质量上同时优于 progressive stacking。</p>
+<h3>消融实验：步数分配策略</h3>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>BERT-LARGE 加速</th>
+<th>预训练 Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equal（等分）</td>
+<td>1.64×</td>
+<td>1.384</td>
+</tr>
+<tr>
+<td>Proportional</td>
+<td>1.35×</td>
+<td>1.416</td>
+</tr>
+<tr>
+<td>Inv. Proportional</td>
+<td>2.11×</td>
+<td>1.435</td>
+</tr>
+</tbody>
+</table>
+<p>等分策略在速度和质量间取得最佳平衡。Inv. proportional 虽然最快（2.11×），但质量略有下降。</p>
+<h3>消融实验：堆叠块大小</h3>
+<p>BERT-LARGE 上，stack size = 4 时效果最佳（1.64× 加速，loss 1.384）。过小（如 1）虽快但质量差；过大（如 12，即 progressive stacking）则加速有限。</p>
+<h3>下游任务</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>MNLI</th>
+<th>SQuAD 2.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-BASE Baseline</td>
+<td>0.8407</td>
+<td>0.8962</td>
+</tr>
+<tr>
+<td>BERT-BASE Gradual</td>
+<td>0.8463</td>
+<td>0.8952</td>
+</tr>
+<tr>
+<td>BERT-LARGE Baseline</td>
+<td>0.8637</td>
+<td>0.9210</td>
+</tr>
+<tr>
+<td>BERT-LARGE Gradual</td>
+<td>0.8721</td>
+<td>0.9247</td>
+</tr>
+</tbody>
+</table>
+<p>预训练的加速没有损害下游性能，部分情况下甚至有所提升。</p>
+<h3>Few-Shot 质量与 Stacking 质量的相关性</h3>
+<p>实验验证了理论预测：更好的 few-shot learner（用 MNLI/SQuAD 下游性能衡量）在堆叠后产生更好的初始化（用堆叠后 25K 步的预训练 loss 衡量），且这种相关性超越了单纯的模型大小带来的提升。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>仅在 BERT 架构上验证，未测试自回归模型（GPT 系列）</li>
+<li>没有图片和可视化可供复现参考（论文来自 ICML 会议，非 arxiv 格式）</li>
+<li>Independent stacking 的潜力尚未充分探索</li>
+<li>未与宽度增长方法结合</li>
+<li>理论分析依赖于 &quot;effective optimizer&quot; 假设，实际中可能不严格成立</li>
+</ul>
+<p><strong>与其他方法的关系：</strong></p>
+<ul>
+<li><strong>Progressive Stacking</strong>（Gong et al., 2019）：可视为 gradual stacking 的特例（堆叠整个网络）</li>
+<li><strong>Staged Training</strong>（Shen et al., 2022）：从 scaling law 角度优化调度，关注 function-preserving</li>
+<li><strong>bert2BERT</strong>（Chen et al., 2022）：关注 function-preserving 的参数初始化</li>
+<li><strong>LiGO</strong>（Wang et al., 2023）：学习线性增长算子，可统一深度和宽度增长</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2303.00980-ligo"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2303.00980" target="_blank">https://arxiv.org/abs/2303.00980</a> · <a href="#2303.00980-ligo">README source</a></div><div class="paper-body"><h1>LiGO — 学习线性增长算子以加速 Transformer 训练</h1>
+<blockquote>
+<p><strong>Learning to Grow Pretrained Models for Efficient Transformer Training</strong>
+Wang et al. | ICLR 2023 | arXiv 2303.00980</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>Transformer 模型的规模化已成为范式：更大的模型定期被训练和发布。然而每个更大的模型通常都从头训练，完全没有利用其小规模前身中已隐含的知识。现有的模型增长方法（如 StackBERT、Net2Net、bert2BERT）存在两个根本问题：</p>
+<ol>
+<li><strong>深度和宽度增长是分别手工设计的</strong>，无法联合优化</li>
+<li><strong>增长算子没有学习组件</strong>——它们依赖固定的规则（复制层、复制神经元），而最优的跨尺度参数映射不一定是简单复制</li>
+</ol>
+<p>本文提出：<strong>跨尺度的参数几何结构是可以学习的，最优的初始化器不必是字面上的复制。</strong></p>
+<h2>核心想法</h2>
+<p><strong>用一个可学习的线性映射 <span class="math inline">M</span> 将小模型参数变换为大模型参数的初始化。</strong> 通过将 <span class="math inline">M</span> 分解为深度增长和宽度增长的乘积，并进一步用 Kronecker 分解压缩参数，使学习变得可行。仅需约 100 步 SGD 即可学出 <span class="math inline">M</span>，计算开销可忽略。</p>
+<h2>方法细节</h2>
+<h3>问题形式化</h3>
+<p>小模型参数 <span class="math inline">\boldsymbol{\Theta}_{L_1, D_1}</span>，大模型参数 <span class="math inline">\boldsymbol{\Theta}^{(new)}_{L_2, D_2}</span>，增长算子 <span class="math inline">M: \mathbb{R}^{L_1 D_1 \times D_1} \to \mathbb{R}^{L_2 D_2 \times D_2}</span>。学习目标：</p>
+<div class="math block">
+\argmin_M \mathbb{E}_{\mathbf{x} \sim \mathcal{D}} \mathcal{L}(\mathbf{x}; \boldsymbol{\Theta}^{(new)}), \quad \text{s.t. } \boldsymbol{\Theta}^{(new)} = M(\boldsymbol{\Theta})
+</div>
+<p>将 <span class="math inline">M</span> 简化为线性变换：<span class="math inline">\text{vec}(\boldsymbol{\Theta}^{(new)}) = \boldsymbol{M} \cdot \text{vec}(\boldsymbol{\Theta})</span>，其中 <span class="math inline">\boldsymbol{M} \in \mathbb{R}^{L_2 D_2^2 \times L_1 D_1^2}</span>。</p>
+<h3>深度-宽度分解</h3>
+<p>将 <span class="math inline">\boldsymbol{M}</span> 分解为 <span class="math inline">\boldsymbol{M} = \boldsymbol{L}_{depth} \cdot \boldsymbol{R}_{width}</span>：</p>
+<div class="math block">
+\boldsymbol{M} = \underbrace{\begin{bmatrix} \text{diag}(\boldsymbol{\ell}_{1,1}) &amp; \cdots &amp; \text{diag}(\boldsymbol{\ell}_{1,L_1}) \\ \vdots &amp; \ddots &amp; \vdots \\ \text{diag}(\boldsymbol{\ell}_{L_2,1}) &amp; \cdots &amp; \text{diag}(\boldsymbol{\ell}_{L_2,L_1}) \end{bmatrix}}_{\boldsymbol{L}_{depth}} \underbrace{\begin{bmatrix} \boldsymbol{R}_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \boldsymbol{R}_{L_1} \end{bmatrix}}_{\boldsymbol{R}_{width}}
+</div>
+<ul>
+<li><span class="math inline">\boldsymbol{R}_{width}</span>（块对角）：每层独立做宽度扩展</li>
+<li><span class="math inline">\boldsymbol{L}_{depth}</span>（对角矩阵阵列）：沿深度方向线性组合各层</li>
+</ul>
+<p>复杂度从 <span class="math inline">O(D_1^2 L_1 D_2^2 L_2)</span> 降到 <span class="math inline">O(D_1^2 D_2^2 L_1)</span>。</p>
+<p><img src="../papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/lego.webp" alt="LiGO 方法概览：深度扩展（左）和宽度扩展（右）" /></p>
+<h3>Kronecker 分解进一步压缩</h3>
+<p><strong>深度算子</strong>：令 <span class="math inline">\text{diag}(\boldsymbol{\ell}_{i,j}) = w_{i,j} \boldsymbol{I}</span>，则 <span class="math inline">\boldsymbol{L}_{depth} = \boldsymbol{w} \otimes \boldsymbol{I}</span>，其中 <span class="math inline">\boldsymbol{w} \in \mathbb{R}^{L_2 \times L_1}</span> 的每个元素 <span class="math inline">w_{i,j}</span> 表示小模型第 <span class="math inline">j</span> 层对大模型第 <span class="math inline">i</span> 层的混合权重。参数量降至 <span class="math inline">O(L_1 L_2)</span>。</p>
+<p><strong>宽度算子</strong>：令 <span class="math inline">\boldsymbol{R}_l = \boldsymbol{A}_l \otimes \boldsymbol{B}_l</span>（<span class="math inline">\boldsymbol{A}_l, \boldsymbol{B}_l \in \mathbb{R}^{D_2 \times D_1}</span>），则宽度扩展等价于：</p>
+<div class="math block">
+\boldsymbol{W}_l^{(new)} = \boldsymbol{B}_l \boldsymbol{W}_l \boldsymbol{A}_l^\top
+</div>
+<p><span class="math inline">\boldsymbol{B}_l</span> 做 out-dimension 扩展，<span class="math inline">\boldsymbol{A}_l</span> 做 in-dimension 扩展——每个新行/列都是原矩阵行/列的线性组合。参数量降至 <span class="math inline">O(L_1 D_1 D_2)</span>。</p>
+<h3>最终形式</h3>
+<div class="math block">
+\boldsymbol{M} = \underbrace{\left(\begin{bmatrix} w_{1,1} &amp; \cdots &amp; w_{1,L_1} \\ \vdots &amp; \ddots &amp; \vdots \\ w_{L_2,1} &amp; \cdots &amp; w_{L_2,L_1} \end{bmatrix} \otimes \boldsymbol{I}\right)}_{\text{Depth expansion}} \underbrace{\left(\begin{bmatrix} \boldsymbol{A}_1 \otimes \boldsymbol{B}_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \boldsymbol{A}_{L_1} \otimes \boldsymbol{B}_{L_1} \end{bmatrix}\right)}_{\text{Width expansion}}
+</div>
+<h3>Transformer 适配</h3>
+<ul>
+<li><strong>Embedding 层</strong>：只学 <span class="math inline">\boldsymbol{B}^{(emb)}</span> 做 out-dimension 扩展</li>
+<li><strong>Attention 层</strong>：<span class="math inline">\boldsymbol{A}_l^Q = \boldsymbol{A}_l^K = \boldsymbol{A}_l^V = (\boldsymbol{B}^{(emb)})^\top</span>，<span class="math inline">\boldsymbol{A}_l^O = (\boldsymbol{B}_l^V)^\top</span>，<span class="math inline">\boldsymbol{B}_l^O = \boldsymbol{B}^{(emb)}</span>（考虑残差连接）</li>
+<li><strong>FFN 层</strong>：类似参数绑定</li>
+<li>大量参数共享使得可学参数极少，100 步 SGD 即可学出</li>
+</ul>
+<h3>与 Monarch 矩阵的联系</h3>
+<p>LiGO 的深度-宽度分解与 Monarch 矩阵（一种结构化稀疏矩阵族）结构一致，后者推广了 butterfly 矩阵，具有良好的表达能力。这从理论上保证了分解后的表达力。</p>
+<h3>统一性</h3>
+<p>StackBERT、Interpolation、Net2Net 都是 LiGO 的特例——对应 <span class="math inline">\boldsymbol{L}_{depth}</span> 和 <span class="math inline">\boldsymbol{R}_{width}</span> 的特定取值。</p>
+<h2>关键结果</h2>
+<h3>BERT 实验</h3>
+<p><img src="../papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/bert_ppl_vs_flops.webp" alt="BERT-Small → BERT-Base 训练曲线" /></p>
+<p>BERT-Small(6, 512) → BERT-Base(12, 768)：</p>
+<ul>
+<li>LiGO 节省 <strong>44.7% FLOPs</strong>，<strong>40.7% wall time</strong></li>
+<li>对比 StackBERT（+10.6% FLOPs 改进）、bert2BERT（+14.7% 改进）</li>
+<li>KI（知识蒸馏）因额外计算开销反而没有节省</li>
+</ul>
+<p>BERT → BERT-Large：</p>
+<ul>
+<li>从 BERT-Base 出发节省 <strong>45.2%</strong> FLOPs</li>
+<li>从 BERT-Small 出发节省 <strong>30.3%</strong> FLOPs</li>
+</ul>
+<h3>RoBERTa 和 GPT2</h3>
+<p><img src="../papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/roberta_ppl_vs_flops.webp" alt="RoBERTa 和 GPT2 训练曲线" /></p>
+<ul>
+<li>RoBERTa-Small → RoBERTa-Base：同样有效，表明对超参数（大 batch、高学习率）鲁棒</li>
+<li>GPT2-Base → GPT2-Medium：节省 <strong>22.5%</strong> 计算</li>
+</ul>
+<h3>Vision Transformers</h3>
+<p><img src="../papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/deit_acc_vs_flops.webp" alt="DeiT-S → DeiT-B 训练曲线" /></p>
+<ul>
+<li>DeiT-S → DeiT-B：节省 <strong>55.4% FLOPs</strong>，<strong>52% wall time</strong></li>
+<li>LiGO 初始化后的模型（仅 100 步 SGD）即可达到 72% ImageNet 准确率</li>
+<li>CaiT-XS → CaiT-S：节省 <strong>52.6% FLOPs</strong>，<strong>46.1% wall time</strong></li>
+</ul>
+<h3>与正交方法结合</h3>
+<p><img src="../papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/bert_staged_training.webp" alt="LiGO 与 layer dropping、token dropping、staged training 结合" /></p>
+<p>LiGO 可与 layer dropping（+4.7%）、token dropping（+7.4%）、staged training（+8.2%）等正交策略叠加使用。</p>
+<h3>消融实验</h3>
+<ul>
+<li><strong>仅深度扩展</strong> BERT(6,768)→BERT(12,768)：LiGO 的学习型深度算子优于 StackBERT 和 Interpolation</li>
+<li><strong>仅宽度扩展</strong> BERT(12,512)→BERT(12,768)：LiGO 优于 direct copy、FPI、AKI</li>
+</ul>
+<p><img src="../papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/bert_depth_ppl_vs_flops.webp" alt="深度和宽度消融" /></p>
+<ul>
+<li><strong>学习步数</strong>：100 步已足够，1000 步内效果相同，&gt;10000 步后总节省反而下降</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限：</strong></p>
+<ul>
+<li>线性映射假设可能不是最优的——非线性映射可能捕捉更复杂的跨尺度关系</li>
+<li>100 步学习虽快，但需要小模型参数和一小批数据作为输入</li>
+<li>主要在中等规模模型上验证（最大到 BERT-Large / GPT2-Medium），未测试 billion-scale</li>
+<li>Kronecker 分解带来的参数共享可能在某些架构上限制表达力</li>
+</ul>
+<p><strong>相关工作：</strong></p>
+<ul>
+<li><strong>Net2Net</strong>（Chen et al., 2015）：LiGO 的宽度算子推广了 Net2Net 的 neuron 复制</li>
+<li><strong>StackBERT</strong>（Gong et al., 2019）：LiGO 的深度算子推广了 StackBERT 的层复制</li>
+<li><strong>bert2BERT</strong>（Chen et al., 2022）：AKI/FPI 是 LiGO 宽度算子的特例</li>
+<li><strong>Staged Training</strong>（Shen et al., 2022）：可与 LiGO 正交结合，额外节省 8.2%</li>
+<li><strong>Monarch Matrices</strong>（Dao et al., 2022）：LiGO 的分解结构与之等价，提供表达力保证</li>
+</ul>
+</div></article>
+<article class="paper-article" id="wang2025-progressive-growth"><div class="paper-meta-bar"><a href="https://proceedings.mlr.press/v260/wang25a.html" target="_blank">https://proceedings.mlr.press/v260/wang25a.html</a> · <a href="#wang2025-progressive-growth">README source</a></div><div class="paper-body"><h1>Wang et al. 2025 — 何时、如何增长：渐进式模型增长的时机与操作</h1>
+<blockquote>
+<p><strong>When and How to Grow? On Efficient Pre-training via Model Growth</strong>
+Jikai Wang, Juntao Li, Min Zhang, Zechang Li, Qingrong Xia, Xinyu Duan, Zhefeng Wang, Baoxing Huai
+PMLR / ACML 2024 · Soochow University &amp; Huawei Cloud</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>渐进式预训练（progressive pre-training / staged pre-training）利用小模型收敛快的特性来加速大模型训练，但面临两个核心问题：</p>
+<ol>
+<li>
+<p><strong>何时增长（Growth Schedule）</strong>：已有方法（StackBERT、MSG 等）大多采用启发式的增长时间点，未从理论上分析最优增长时机。增长太早会浪费小模型快速收敛的优势；增长太晚会让小模型在接近性能上限后做无效训练。</p>
+</li>
+<li>
+<p><strong>如何增长（Growth Operation）</strong>：增长操作需要同时满足两个关键属性：</p>
+<ul>
+<li><strong>Function preserving</strong>：增长后模型对任何输入的 loss 不变</li>
+<li><strong>Good training dynamics</strong>：增长后 loss 曲线能快速恢复到大模型正常训练的轨迹</li>
+</ul>
+</li>
+</ol>
+<p>已有方法在这两个属性上各有不足——MSG 实现了 function preserving 但训练动态欠佳，Staged Training 有良好动态但不严格保函数。</p>
+<h2>核心想法</h2>
+<p><strong>增长应当发生在小模型已经充分提取价值、进入收敛阶段之后；同时增长操作必须在保持函数不变的前提下尽量减少对训练动态的干扰。</strong> 论文通过效果转换率（effect conversion rate）理论估计最优增长点，并提出了宽度维度的渐进维度增长和深度维度的冗余层两种新操作。</p>
+<h2>方法细节</h2>
+<h3>最优增长点的理论估计</h3>
+<p>定义<strong>效果转换率</strong> <span class="math inline">E</span> 来衡量继续训练小模型的收益：</p>
+<div class="math block">
+V(N_s, N_t) = \hat{N}_t, \quad \text{s.t. } L(N_s, N_t) = L(\hat{N}_t)
+</div>
+<div class="math block">
+E(N_s, N_t) = \frac{\partial V(N_s, N_t)}{\partial N_s}
+</div>
+<p>其中 <span class="math inline">N_s</span> 是小模型训练步数，<span class="math inline">N_t</span> 是增长后大模型训练步数，<span class="math inline">\hat{N}_t</span> 是大模型从头训练达到相同 loss 所需步数。</p>
+<p>当以下条件成立时，继续训练小模型比立即扩展到大模型更划算：</p>
+<div class="math block">
+E(G_b, N_t) &gt; \frac{F_s}{F_t}
+</div>
+<p>其中 <span class="math inline">F_s / F_t</span> 是小模型与大模型每步 FLOPs 的比值。</p>
+<p>关键发现：<strong>即使小模型已进入收敛阶段（loss 几乎不再下降），上式仍然成立</strong>。这意味着可以在小模型收敛后再执行增长操作，充分利用小模型的快速收敛优势。</p>
+<h3>渐进维度增长（Progressive Dimensionality Growth）</h3>
+<p>宽度增长通过全局 mask <span class="math inline">C = [c_1, c_2, \ldots, c_{d_t}]</span> 渐进激活新维度：</p>
+<div class="math block">
+c_i = \begin{cases} 1, &amp; i \leq d_s + r \times (N - G_b) \\ 0, &amp; i &gt; d_s + r \times (N - G_b) \end{cases}
+</div>
+<p>增长速率 <span class="math inline">r = \frac{d_t - d_s}{G_e - G_b}</span>。</p>
+<p>在 <span class="math inline">[G_b, G_e]</span> 区间内，每层的计算变为：</p>
+<div class="math block">
+\text{ATT}(Q, K, V) = \text{softmax}\left(\frac{(Q \circ C_d)(K^T \circ C_d)}{\sqrt{d}}\right)(V \circ C_d)
+</div>
+<div class="math block">
+h'_i = \text{FFN}(\text{ATT}(\text{LN}(h_{i-1}) \circ C) \circ C) \circ C + h_{i-1}
+</div>
+<p>mask 仅在增长窗口 <span class="math inline">[G_b, G_e]</span> 内使用，额外计算开销不到 0.01%。这种方式严格保持 function preserving，同时<strong>平滑了宽度增长带来的 loss 突变</strong>。</p>
+<h3>冗余层（Redundant Layer）</h3>
+<p>深度增长通过在原模型中均匀插入<strong>冗余层</strong>实现。冗余层的构造：</p>
+<ol>
+<li>将 LayerNorm 的参数和所有 bias 设为 0 → 确保 <span class="math inline">I(h_{i-1}) = h_{i-1}</span>（function preserving）</li>
+<li>将相邻层的 FFN 和 ATT 权重<strong>复制</strong>到冗余层 → 继承原模型的核心参数</li>
+</ol>
+<p>由于 LayerNorm 为零，ATT 和 FFN 初始时不激活；随着训练进行，LayerNorm 参数更新后这些模块自适应激活。</p>
+<p>与纯 identity 层（Staged Training 方法）相比，冗余层<strong>在保持 function preserving 的同时继承了原始模型的参数信息</strong>，使新层的功能更接近原层，从而改善训练动态。</p>
+<h3>联合增长操作</h3>
+<p>宽度和深度增长同时执行：</p>
+<ul>
+<li>深度增长（冗余层插入）在步骤 <span class="math inline">G_b</span> 瞬间完成</li>
+<li>宽度增长（渐进维度）在 <span class="math inline">[G_b, G_e]</span> 窗口内渐进完成</li>
+<li>复制参数时同时复制优化器状态</li>
+</ul>
+<h3>与其他方法的对比</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>Width FP</th>
+<th>Depth FP</th>
+<th>新参数初始化策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FPI (Net2Net)</td>
+<td>✓</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>AKI (bert2BERT)</td>
+<td>✗</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Stack (StackBERT)</td>
+<td>—</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>MSG</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗ (随机)</td>
+</tr>
+<tr>
+<td><strong>本文</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>✓</strong></td>
+<td><strong>✓</strong> (继承)</td>
+</tr>
+</tbody>
+</table>
+<h2>关键结果</h2>
+<h3>主实验：125M → 355M</h3>
+<p>在 GPT-Neo-125M → GPT-Neo-355M 的两阶段训练中：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>验证集 PPL</th>
+<th>LAMBADA PPL</th>
+<th>LAMBADA Acc</th>
+<th>PIQA Acc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-Neo-355M 从头训练 (45k steps)</td>
+<td>17.92</td>
+<td>35.20</td>
+<td>38.79</td>
+<td>61.26</td>
+</tr>
+<tr>
+<td>Direct Copy</td>
+<td>18.09</td>
+<td>34.11</td>
+<td>37.59</td>
+<td>60.88</td>
+</tr>
+<tr>
+<td>FPI+Stack</td>
+<td>18.08</td>
+<td>36.03</td>
+<td>36.99</td>
+<td>60.83</td>
+</tr>
+<tr>
+<td>MSG</td>
+<td>18.01</td>
+<td>33.35</td>
+<td>37.61</td>
+<td>60.94</td>
+</tr>
+<tr>
+<td><strong>本文方法</strong></td>
+<td><strong>17.92</strong></td>
+<td><strong>32.15</strong></td>
+<td><strong>38.75</strong></td>
+<td><strong>61.26</strong></td>
+</tr>
+</tbody>
+</table>
+<p>本文方法在仅用 72k+6k 步（FLOPs 为从头训练的 <span class="math inline">1/1.48</span>）后达到了与从头训练 45k 步相同的验证集 PPL，<strong>加速比约 1.48×</strong>。</p>
+<h3>Scaling Study：125M → 774M</h3>
+<p>更大倍率（~6×）的扩展实验：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>步数</th>
+<th>FLOPs</th>
+<th>加速比</th>
+<th>验证集 PPL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-Neo-774M 从头训练</td>
+<td>26k</td>
+<td>4.64e19</td>
+<td>1.0×</td>
+<td>17.98</td>
+</tr>
+<tr>
+<td>本文方法 (125M→774M)</td>
+<td>72k+6k</td>
+<td>3.07e19</td>
+<td><strong>1.51×</strong></td>
+<td>17.98</td>
+</tr>
+</tbody>
+</table>
+<p>即使一次性放大 6 倍，方法仍然有效，实现了<strong>约 1.5× 的加速</strong>。</p>
+<h3>消融实验</h3>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>验证集 PPL</th>
+<th>LAMBADA Acc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完整方法</td>
+<td>17.92</td>
+<td>38.75</td>
+</tr>
+<tr>
+<td>去掉渐进维度增长</td>
+<td>17.99</td>
+<td>38.25</td>
+</tr>
+<tr>
+<td>去掉冗余层（用随机层）</td>
+<td>18.09</td>
+<td>37.90</td>
+</tr>
+</tbody>
+</table>
+<p>冗余层的贡献大于渐进维度增长，两者结合效果最佳。</p>
+<h3>增长时机对比</h3>
+<p>在 GPT-Neo-125M 的 loss 曲线上选择三个不同增长点：</p>
+<ul>
+<li>过早增长：未充分利用小模型快速收敛</li>
+<li>过晚增长：浪费计算在已收敛的小模型上</li>
+<li><strong>收敛阶段增长</strong>（72k 步）：最优，与理论预测一致</li>
+</ul>
+<h3>1.3B → 2.5B 实验</h3>
+<p>利用已有的预训练 GPT-Neo-1.3B 扩展到 2.5B，loss 在增长后显著下降，验证了方法在复用现有预训练模型场景下也有效。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>实验规模较小（GPT-Neo 125M/355M/774M），未在 7B+ 模型上验证</li>
+<li>效果转换率的理论估计需要已知大模型的 loss 曲线，实践中需要近似</li>
+<li>仅验证了两阶段增长，未探索多阶段渐进训练</li>
+<li>与 <span class="math inline">G_{\text{stack}}</span>、MIDAS 等更大规模实验相比，说服力有限</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong><span class="math inline">G_{\text{stack}}</span> (Du et al., NeurIPS 2024)</strong>：在 7B 规模上系统验证 stacking 的有效性，并给出 growth timing 和 growth factor 的经验公式，与本文的理论估计互补</li>
+<li><strong>MIDAS (Saunshi et al., NeurIPS 2024)</strong>：揭示了堆叠位置对 inductive bias 的影响，发现中间层堆叠有利于推理</li>
+<li><strong>MSG (Yao et al., 2023)</strong>：mask-based 渐进激活的增长方法，本文在其基础上改进了训练动态</li>
+<li><strong>Staged Training (Shen et al., 2022)</strong>：首次强调增长操作的训练动态属性，但不满足严格 function preserving</li>
+<li><strong>StackBERT (Gong et al., 2019)</strong>：最早的层堆叠工作，本文和 <span class="math inline">G_{\text{stack}}</span> 都将其作为基础对比</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #ff8a5c;padding-left:16px;margin:48px 0 24px"><h2 style="color:#ff8a5c">Category C: 层位置 / Inductive Bias</h2></div>
+<article class="paper-article" id="2405.15319-gstack"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2405.15319" target="_blank">https://arxiv.org/abs/2405.15319</a> · <a href="#2405.15319-gstack">README source</a></div><div class="paper-body"><h1><span class="math inline">G_{\text{stack}}</span> — 系统研究深度堆叠加速 LLM 预训练</h1>
+<blockquote>
+<p><strong>Stacking Your Transformers: A Closer Look at Model Growth for Efficient LLM Pre-Training</strong>
+Wenyu Du, Tongxu Luo, Zihan Qiu, Zeyu Huang, Yikang Shen, Reynold Cheng, Yike Guo, Jie Fu
+NeurIPS 2024 Spotlight</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>LLM 预训练的计算成本极高（如 Llama-3 消耗 770 万 GPU 小时、排放 2290 吨 CO₂），因此利用<strong>小模型加速大模型训练</strong>（model growth）一直是有吸引力的方向。然而，已有的 model growth 方法面临三大障碍：</p>
+<ol>
+<li><strong>O1 — 缺少全面评估</strong>：大多数方法仅在 BERT 上验证，未在 decoder-only LLM 上系统比较。</li>
+<li><strong>O2 — 可扩展性未经验证</strong>：不清楚这些方法在扩展到 7B+ 规模和 750B+ tokens 时是否仍然有效。</li>
+<li><strong>O3 — 缺少实用指南</strong>：何时增长（growth timing）和增长多少（growth factor）没有可操作的公式。</li>
+</ol>
+<h2>核心想法</h2>
+<p><strong>Transformer 的层堆叠是一个相互连接的计算电路；把整个小模型作为一个单元直接堆叠（而非交错或随机插入层）能最好地保留相邻层的连接关系，从而显著加速训练。</strong> 这个简单的 depthwise stacking 操作 <span class="math inline">G_{\text{stack}}</span> 在所有增长算子中一致胜出。</p>
+<h2>方法细节</h2>
+<h3>四种原子增长算子</h3>
+<p>论文首先将已有 model growth 方法归纳为四种<strong>原子增长算子</strong>，每种可沿宽度或深度方向操作：</p>
+<ul>
+<li><strong><span class="math inline">G_{\text{direct}}</span></strong>：直接复制/分裂已有参数（深度方向即 stacking）</li>
+<li><strong><span class="math inline">G_{\text{learn}}</span></strong>：通过学习线性映射矩阵从小模型参数生成大模型参数（如 LiGO）</li>
+<li><strong><span class="math inline">G_{\text{zero}}</span></strong>：新参数初始化为零以保持 function preserving</li>
+<li><strong><span class="math inline">G_{\text{random}}</span></strong>：新参数随机初始化并通过 mask 渐进激活（如 MSG）</li>
+</ul>
+<p><img src="../papers/2405.15319-gstack/raw/grow_operators/op.webp" alt="四种增长算子示意图" /></p>
+<h3><span class="math inline">G_{\text{stack}}</span> 算子定义</h3>
+<p><span class="math inline">G_{\text{stack}}</span> 是 <span class="math inline">G_{\text{direct}}</span> 的深度方向实例：给定一个训练了 <span class="math inline">d</span> 个 token 的小模型 <span class="math inline">M</span>（<span class="math inline">l</span> 层），通过直接堆叠 <span class="math inline">g</span> 次得到目标模型：</p>
+<div class="math block">
+\mathcal{M} = \underbrace{M \circ M \circ \cdots \circ M}_{g \times M}
+</div>
+<p>整个过程分两阶段：</p>
+<ol>
+<li>训练小模型 <span class="math inline">M</span>（<span class="math inline">n = N/g</span> 参数）<span class="math inline">d</span> 个 token</li>
+<li>堆叠为大模型 <span class="math inline">\mathcal{M}</span>（<span class="math inline">N</span> 参数），继续预训练 <span class="math inline">D</span> 个 token</li>
+</ol>
+<h3>标准化评估流程</h3>
+<p>以 400M → 1.1B（<span class="math inline">g=4</span>, <span class="math inline">d=10B</span> tokens）为标准实验设置，在训练 loss 和 8 项 NLP 基准上全面对比。<strong>发现深度方向的 <span class="math inline">G_{\text{direct}}^{\uparrow}</span>（即 <span class="math inline">G_{\text{stack}}</span>）在所有指标上一致胜出</strong>，speedup 达 49.1%。宽度方向的增长未带来显著优势。</p>
+<p><img src="../papers/2405.15319-gstack/raw/sec2_results.webp" alt="1.1B 评估结果" /></p>
+<h3>Growth Timing 与 Growth Factor 的经验公式</h3>
+<p><strong>确定 growth timing <span class="math inline">d</span></strong>：通过 IsoFLOP 实验（在 410M、1.1B、3B 三个规模上扫描 <span class="math inline">d \in \{0,1,5,10,20,50\}B</span>），发现最优 <span class="math inline">d</span> 服从对数关系：</p>
+<div class="math block">
+\log_{10}(d) = a \cdot \log_{10}(N) + \frac{b}{\log_{10}(C)} + c
+</div>
+<p>拟合得 <span class="math inline">a=0.88</span>, <span class="math inline">b=163.27</span>, <span class="math inline">c=-5.74</span>。</p>
+<p><strong>确定 growth factor <span class="math inline">g</span></strong>：IsoFLOP 实验显示最优 <span class="math inline">g</span> 在 2 到 4 之间。即使 <span class="math inline">g=16</span>（2 层 base model → 32 层）也能获得显著加速，但 <span class="math inline">g=1</span>（单层 base）则失效。实践建议 <span class="math inline">g=4</span>。</p>
+<h3>Partial Stacking 消融</h3>
+<p>论文还探索了<strong>部分堆叠</strong>：只堆叠小模型的特定层。结论明确：</p>
+<p><strong>all &gt; middle ≈ back ≫ front</strong></p>
+<table>
+<thead>
+<tr>
+<th>组别</th>
+<th>方法</th>
+<th>堆叠部分</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一组（最优）</td>
+<td>123456*4</td>
+<td>all</td>
+<td>最佳</td>
+</tr>
+<tr>
+<td>第一组</td>
+<td>12-3456*5-56</td>
+<td>middle-back</td>
+<td>接近最佳</td>
+</tr>
+<tr>
+<td>第一组</td>
+<td>123-456*7</td>
+<td>back</td>
+<td>接近最佳</td>
+</tr>
+<tr>
+<td>第二组</td>
+<td>12-34*10-56</td>
+<td>middle</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>第三组（最差）</td>
+<td>123*7-456</td>
+<td>front</td>
+<td>比 baseline 更差</td>
+</tr>
+</tbody>
+</table>
+<h3>Function Preserving 不是唯一关键</h3>
+<p><span class="math inline">G_{\text{stack}}</span> 并不满足严格的 function preserving（<span class="math inline">\forall x, f(x;\Theta^{(s)}) = f(x;\Theta^{(l)}_{\text{init}})</span>），但它是所有算子中表现最好的。消融实验还发现在严格 FP 的 <span class="math inline">G_{\text{direct}}^{\to}</span> 上添加 20% 噪声反而提升了性能：</p>
+<div class="math block">
+W_{\text{noise}} \gets (1-\alpha)W + \alpha \epsilon, \quad \epsilon \sim \mathcal{N}\left(0, \frac{1}{d \times l^2}\right)
+</div>
+<p>这说明<strong>加速大模型训练和严格保持函数不变可能是两个重叠但不同的研究方向</strong>。</p>
+<h2>关键结果</h2>
+<h3>7B 规模实验</h3>
+<p><span class="math inline">G_{\text{stack}}</span> 从 1.75B base model（<span class="math inline">g=4</span>）堆叠到 7B，训练 300B tokens：</p>
+<ul>
+<li>在 194B tokens 时达到 scratch 训练 300B tokens 的同等 loss → <strong>54.6% speedup</strong></li>
+<li>在 NLP benchmark 平均准确率上始终优于 scratch</li>
+</ul>
+<p><img src="../papers/2405.15319-gstack/raw/sp/main_sp.webp" alt="7B 训练 loss" /></p>
+<h3>750B Tokens 长训练实验</h3>
+<p>在 410M 模型上训练 750B tokens（超过 Chinchilla 推荐量 ~100 倍），<span class="math inline">G_{\text{stack}}</span> 的优势依然显著：</p>
+<ul>
+<li>400B tokens 处加速 53.1%</li>
+<li>700B tokens 处仍有 31.0% 加速</li>
+<li>Loss 差拟合曲线表明加速效果在 8T+ tokens 后仍然可观</li>
+</ul>
+<p><img src="../papers/2405.15319-gstack/raw/sp/410M_1T_loss.webp" alt="410M 750B tokens 训练 loss" /></p>
+<p><img src="../papers/2405.15319-gstack/raw/loss_diff.webp" alt="Loss 差值拟合" /></p>
+<h3>Scaling Law 估计</h3>
+<p>基于 410M、1.1B、3B、7B 四个模型，拟合 <span class="math inline">G_{\text{stack}}</span> 的 scaling power law <span class="math inline">L_C = aC^b</span>，显示在相同目标 loss 下 <span class="math inline">G_{\text{stack}}</span> 所需 FLOPs 大幅低于从头训练的 scaling law。</p>
+<p><img src="../papers/2405.15319-gstack/raw/scaling_law.webp" alt="Scaling law 对比" /></p>
+<h3>与开源 LLM 对比</h3>
+<p><span class="math inline">G_{\text{stack}}</span>-7B 在 130B tokens 时的表现优于同期训练的 Pythia-6.9B、OLMo-7B 和 Amber-7B（平均准确率 57.79 vs 56.56 / 50.43 / 54.16）。</p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>计算资源限制了 growth factor 公式的精确拟合</li>
+<li>仅探索简单的单步增长算子，未涉及多步渐进增长或动态学习率调整</li>
+<li>缺少对 <span class="math inline">G_{\text{stack}}</span> 成功的理论解释</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>MIDAS (Saunshi et al., NeurIPS 2024)</strong>：发现堆叠<strong>中间层</strong>（而非全部）会引入有利于推理的 inductive bias，是对 <span class="math inline">G_{\text{stack}}</span> partial stacking 发现的理论深化</li>
+<li><strong>StackBERT (Gong et al., 2019)</strong>：原始的渐进堆叠方法；<span class="math inline">G_{\text{stack}}</span> 的单步堆叠比渐进堆叠表现更好</li>
+<li><strong>LiGO (Wang et al., 2023)</strong>：学习线性映射的增长方法，但在 LLM 规模上不如 <span class="math inline">G_{\text{stack}}</span></li>
+<li><strong>SOLAR (Kim et al., 2023)</strong> 和 <strong>LlamaPro (Wu et al., 2024)</strong>：探索了部分堆叠用于 LLM 继续训练</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2409.19044-midas"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2409.19044" target="_blank">https://arxiv.org/abs/2409.19044</a> · <a href="#2409.19044-midas">README source</a></div><div class="paper-body"><h1>MIDAS — 中间层堆叠引入有利于推理的 Inductive Bias</h1>
+<blockquote>
+<p><strong>On the Inductive Bias of Stacking Towards Improving Reasoning</strong>
+Nikunj Saunshi, Stefani Karp, Shankar Krishnan, Sobhan Miryoosefi, Sashank J. Reddi, Sanjiv Kumar
+Google Research · NeurIPS 2024</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>Gradual stacking（渐进堆叠）通过逐阶段增加模型深度来加速语言模型预训练，但其对模型泛化行为的影响几乎未被探索。已有工作（如 <span class="math inline">G_{\text{stack}}</span>）关注的是堆叠的<strong>训练效率</strong>，而忽略了一个根本性问题：<strong>堆叠式训练策略会给模型引入什么样的 inductive bias？</strong> 特别是，不同的堆叠位置（末尾 vs 中间）是否会导致模型学到不同的能力？</p>
+<h2>核心想法</h2>
+<p><strong>复制中间层块（而非末尾层块）进行渐进堆叠，不仅更高效，还会引入一种偏向&quot;迭代计算&quot;的 inductive bias，显著提升下游推理任务（阅读理解、数学）的表现——即使预训练 perplexity 相同。</strong> 这种 bias 来源于堆叠与 looped model（权重共享模型）之间的深层联系。</p>
+<h2>方法细节</h2>
+<h3>从 Gradual Stacking 到 MIDAS 的三个观察</h3>
+<p><strong>观察 1：Gradual stacking 破坏了层的自然角色。</strong>
+Gradual stacking 复制末尾 <span class="math inline">b</span> 层进行堆叠。但 Transformer 的首尾层承担着与中间层不同的功能角色——首尾层更&quot;线性&quot;，中间层更非线性。复制末尾层会破坏这种自然结构。</p>
+<p><img src="../papers/2409.19044-midas/raw/Media/linearity_bert_base.webp" alt="BERT 各层的非线性程度" /></p>
+<p><strong>观察 2：堆叠后模型类似于 looped model。</strong>
+训练后的 gradual stacking 模型中，被堆叠的层块之间保持着很高的余弦相似度——这意味着堆叠模型本质上接近于 looped model（如 ALBert、Universal Transformer）。但 gradual stacking 的相似性结构偏向模型末端。</p>
+<p><strong>观察 3：Looped model 的自然相似性出现在中间。</strong>
+训练 ALBert（所有层共享参数）后发现，尽管参数完全共享，层之间的功能相似性<strong>在中间最高、首尾最低</strong>。</p>
+<p><img src="../papers/2409.19044-midas/raw/Media/albert_similarity.webp" alt="层间相似性对比" /></p>
+<p><img src="../papers/2409.19044-midas/raw/Media/last_stacking_blk4_ffn_layer1.linear.w.webp" alt="Gradual stacking 层间余弦相似度" /></p>
+<p><img src="../papers/2409.19044-midas/raw/Media/middle_stacking_blk4_ffn_layer1.linear.w.webp" alt="MIDAS 层间余弦相似度" /></p>
+<h3>MIDAS 算法</h3>
+<p>基于上述观察，MIDAS 在每个阶段<strong>复制中间层块</strong>进行堆叠。形式化定义增长算子：</p>
+<div class="math block">
+\mathcal{M}(f, b) = f_{1,b} \circ \cdots \circ \underbrace{f_{\lceil n/2 \rceil, b} \circ f_{\lceil n/2 \rceil, b}}_{\text{复制}} \circ \cdots \circ f_{n,b}
+</div>
+<p>其中 <span class="math inline">n = \#(f)/b</span> 是网络中大小为 <span class="math inline">b</span> 的层块数。每次操作将网络深度增加 <span class="math inline">b</span> 层。</p>
+<p>MIDAS 是 <span class="math inline">k</span> 阶段训练框架的实例化：</p>
+<ol>
+<li><strong>深度</strong> <span class="math inline">d(i) = \frac{L \cdot i}{k}</span>，线性增长</li>
+<li><strong>时间分配</strong>：使用 <span class="math inline">\text{Prop}(\alpha)</span> schedule，第 <span class="math inline">i</span> 阶段分配 <span class="math inline">T_i \propto i^\alpha</span> 步</li>
+<li><strong>初始化</strong>：使用上述 <span class="math inline">\mathcal{M}</span> 算子复制中间 <span class="math inline">L/k</span> 层</li>
+</ol>
+<div class="math block">
+T_i = \frac{i^\alpha}{\sum_{j=1}^k j^\alpha} \cdot T
+</div>
+<p><img src="../papers/2409.19044-midas/raw/Media/stacking_graphic_new.webp" alt="MIDAS 与 Gradual Stacking 对比示意" /></p>
+<h3>关键训练设置</h3>
+<ul>
+<li>24 层 decoder-only 模型，1.5B 参数</li>
+<li>UL2 训练目标（60% causal LM + 20% prefix LM + 20% span corruption）</li>
+<li>C4 57% + Wikipedia 17% + Github 17% + Arxiv 9%</li>
+<li>所有方法训练相同的 500B tokens、相同数据顺序</li>
+<li>在 1B、2B、8B 三种规模上验证</li>
+</ul>
+<h2>关键结果</h2>
+<h3>训练效率</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>方法</th>
+<th>Schedule</th>
+<th>Speedup</th>
+<th>Val Loss</th>
+<th>Open Book QA</th>
+<th>Math WP</th>
+<th>All Avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1B</td>
+<td>Baseline</td>
+<td>—</td>
+<td>1×</td>
+<td><strong>1.996</strong></td>
+<td>33.3</td>
+<td>23.5</td>
+<td>24.0</td>
+</tr>
+<tr>
+<td>1B</td>
+<td>GradStack</td>
+<td>Prop(1)</td>
+<td>1.39×</td>
+<td>2.045</td>
+<td>31.4</td>
+<td>23.5</td>
+<td>22.6</td>
+</tr>
+<tr>
+<td>1B</td>
+<td>MIDAS</td>
+<td>Prop(1)</td>
+<td>1.39×</td>
+<td>2.028</td>
+<td>34.5</td>
+<td>30.3</td>
+<td>26.7</td>
+</tr>
+<tr>
+<td>1B</td>
+<td>MIDAS</td>
+<td>Prop(2)</td>
+<td>1.24×</td>
+<td>2.009</td>
+<td>36.3</td>
+<td>29.0</td>
+<td>26.8</td>
+</tr>
+<tr>
+<td>2B</td>
+<td>Baseline</td>
+<td>—</td>
+<td>1×</td>
+<td><strong>1.926</strong></td>
+<td>39.1</td>
+<td>27.1</td>
+<td>28.0</td>
+</tr>
+<tr>
+<td>2B</td>
+<td>MIDAS</td>
+<td>Prop(2)</td>
+<td>1.24×</td>
+<td>1.929</td>
+<td><strong>40.2</strong></td>
+<td><strong>38.2</strong></td>
+<td><strong>32.9</strong></td>
+</tr>
+<tr>
+<td>8B</td>
+<td>Baseline</td>
+<td>—</td>
+<td>1×</td>
+<td><strong>1.841</strong></td>
+<td>39.6</td>
+<td>34.9</td>
+<td>32.8</td>
+</tr>
+<tr>
+<td>8B</td>
+<td>MIDAS</td>
+<td>Prop(2)</td>
+<td>1.26×</td>
+<td>1.844</td>
+<td><strong>40.0</strong></td>
+<td><strong>43.1</strong></td>
+<td><strong>36.4</strong></td>
+</tr>
+</tbody>
+</table>
+<p>核心发现：<strong>MIDAS 在相近甚至略差的 perplexity 下，下游任务表现大幅优于 baseline，尤其是推理类任务。</strong></p>
+<h3>Inductive Bias：推理 vs 记忆</h3>
+<p>通过 isoplot 分析（在相同 perplexity 下对比下游准确率），清晰展示了 MIDAS 的 inductive bias：</p>
+<ul>
+<li><strong>Closed-book QA</strong>（依赖记忆）：MIDAS 与 baseline 差异不大</li>
+<li><strong>Open-book QA</strong>（依赖上下文推理）：MIDAS 显著更好</li>
+<li><strong>数学推理</strong>：MIDAS 大幅领先</li>
+</ul>
+<p><img src="../papers/2409.19044-midas/raw/Media/iso_taskgroup_openbookqa.webp" alt="不同任务组的 Isoplot" /></p>
+<p><img src="../papers/2409.19044-midas/raw/Media/hist_memorization_reasoning.webp" alt="记忆 vs 推理任务对比" /></p>
+<h3>数学任务表现</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>方法</th>
+<th>Math WPs (w/o calc)</th>
+<th>Math WPs (w/ calc)</th>
+<th>GSM8k Fine-tune</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2B</td>
+<td>Baseline</td>
+<td>15.4</td>
+<td>27.1</td>
+<td>5.3</td>
+</tr>
+<tr>
+<td>2B</td>
+<td>MIDAS</td>
+<td>22.5</td>
+<td><strong>38.3</strong></td>
+<td><strong>10.4</strong></td>
+</tr>
+<tr>
+<td>8B</td>
+<td>Baseline</td>
+<td>27.3</td>
+<td>34.9</td>
+<td>12.3</td>
+</tr>
+<tr>
+<td>8B</td>
+<td>MIDAS</td>
+<td>32.9</td>
+<td><strong>43.1</strong></td>
+<td><strong>15.2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>使用外部计算器后差距更大，因为<strong>算术运算接近记忆任务，而表达式推导才是推理</strong>。</p>
+<h3>Reasoning Primitives</h3>
+<p>为了更精准地隔离推理能力，论文构造了三类合成推理基元任务：</p>
+<ol>
+<li><strong>Induction Copying</strong>：从序列中找到匹配子序列并输出下一个元素</li>
+<li><strong>Variable Assignment</strong>：变量赋值的多步追踪（depth 0/1/2）</li>
+<li><strong>Pre-school Math (PSM)</strong>：简单变量代入计算</li>
+</ol>
+<p><img src="../papers/2409.19044-midas/raw/Media/primitives_summary_bar_chart.webp" alt="Reasoning primitives 结果" /></p>
+<p>MIDAS 在几乎所有 primitive 上显著优于 baseline，特别是在 fine-tuning 后（仅 64 个样本），Variable Assignment depth-2 的差距超过 20%。</p>
+<h3>与 Looped Model 的联系</h3>
+<p>堆叠每个阶段都复制层块，使得这些层块从共同初始化出发训练。训练结束后层间余弦相似度依然很高，说明堆叠模型本质上接近于 looped model。Looped model 已被证明可以模拟可编程计算机、拥有寻找迭代解的 inductive bias——这解释了 MIDAS 在推理任务上的优势。</p>
+<p><img src="../papers/2409.19044-midas/raw/Media/summary_plot_1b_2b_8b.webp" alt="MIDAS 各维度准确率提升" /></p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>Inductive bias 的理论解释仍停留在猜想层面（与 looped model 的联系）</li>
+<li>仅在 UL2 目标上验证（虽然也在 GPT-style autoregressive 上观察到类似趋势）</li>
+<li>Reasoning primitives 虽然提供了更干净的证据，但与真实推理任务的关系仍需进一步研究</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong><span class="math inline">G_{\text{stack}}</span> (Du et al., NeurIPS 2024)</strong>：最系统的 layer stacking 效率研究，发现 partial stacking 中 middle/back 优于 front，与 MIDAS 的发现一致</li>
+<li><strong>Gradual Stacking (Reddi et al., 2023)</strong>：MIDAS 的前身，复制末尾层块，效率不如 MIDAS</li>
+<li><strong>ALBert (Lan et al., 2019)</strong> 和 <strong>Universal Transformer (Dehghani et al., 2018)</strong>：权重共享的 looped model，是理解 MIDAS inductive bias 的关键参照</li>
+<li><strong>Looped Transformers (Giannou et al., 2023; Yang et al., 2023)</strong>：证明 looped model 可以模拟迭代算法，为 MIDAS 的推理优势提供理论基础</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2410.10928-slayer"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2410.10928" target="_blank">https://arxiv.org/abs/2410.10928</a> · <a href="#2410.10928-slayer">README source</a></div><div class="paper-body"><h1>Llama SLayer 8B — 浅层蕴含知识，选择性扩展构建更强模型</h1>
+<blockquote>
+<p><strong>Llama SLayer 8B: Shallow Layers Hold Knowledge</strong>
+Zhimin Chen, Chenming Zhang, Jiahao Ying, Junfeng Fang, Tianyu Pang, Chao Du, Min Lin, Zhenguo Li, Jian Pei
+arXiv 2410.10928 · EMNLP 2024 Findings</p>
+</blockquote>
+<hr />
+<h2>问题动机</h2>
+<p>大模型的不同层承担着不同的角色：浅层（前半部分）通常被认为编码了基础的语言知识和语义表示，而深层（后半部分）更多负责任务特定的调整。然而，主流的模型压缩和层扩展方法往往<strong>低估了浅层的价值</strong>：</p>
+<ul>
+<li>层剪枝（layer pruning）通常移除中间或深层，但对哪些层真正&quot;重要&quot;缺少系统研究</li>
+<li>层堆叠方法（如 <span class="math inline">G_{\text{stack}}</span>、SOLAR）通常均匀堆叠所有层或堆叠末尾层</li>
+<li>已有工作未充分利用浅层富含可复用知识的特性</li>
+</ul>
+<p>核心问题：<strong>能否通过选择性地扩展浅层、裁剪低效深层来构建更强的模型？</strong></p>
+<h2>核心想法</h2>
+<p><strong>浅层编码的可复用知识比通常认为的更丰富；选择性扩展浅层并合并冗余深层，可以在保持或提升 QA 导向性能的同时构建更高效的模型。</strong></p>
+<h2>方法细节</h2>
+<h3>层重要性分析</h3>
+<p>论文首先通过<strong>层级重要性分析</strong>揭示不同层对模型输出的贡献：</p>
+<ul>
+<li>使用 Block Influence (BI) 等指标衡量各层的重要性</li>
+<li>发现浅层（前半部分）和最后一层的 BI 分数较高，中深层（后半部分的中间区域）重要性相对较低</li>
+<li>这与 MIDAS 的发现一致：中间层功能相似性高、首尾层角色独特</li>
+</ul>
+<h3>选择性浅层扩展与合并</h3>
+<p>SLayer 的构建分为三步：</p>
+<p><strong>Step 1：浅层扩展（Shallow Layer Expansion）</strong></p>
+<p>选择重要性高的浅层进行复制和扩展。具体地，对前半部分的关键层进行堆叠，增加模型在&quot;知识编码&quot;部分的容量。同时保留最终层以维持输出分布。</p>
+<p><strong>Step 2：深层裁剪（Deep Layer Removal）</strong></p>
+<p>移除重要性较低的深层。通过 BI 指标识别贡献最小的层并删除，使模型整体参数保持在目标范围内。</p>
+<p><strong>Step 3：针对性微调（Targeted Fine-tuning）</strong></p>
+<p>对重构后的模型进行短时间的微调以恢复性能。由于保留了富含知识的浅层和关键的末层，微调收敛很快。</p>
+<p>整个流程可概括为：</p>
+<div class="math block">
+M_{\text{SLayer}} = \text{FineTune}\left(\text{Remove}_{\text{deep}}(\text{Expand}_{\text{shallow}}(M_{\text{base}}))\right)
+</div>
+<h3>与其他层操作方法的对比</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>操作方式</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">G_{\text{stack}}</span></td>
+<td>整体堆叠</td>
+<td>加速预训练</td>
+</tr>
+<tr>
+<td>SOLAR</td>
+<td>移除中间层，拼接两份完整模型</td>
+<td>post-hoc 模型构建</td>
+</tr>
+<tr>
+<td>LlamaPro</td>
+<td>在特定位置插入新层</td>
+<td>领域适配</td>
+</tr>
+<tr>
+<td><strong>SLayer</strong></td>
+<td>扩展浅层 + 裁剪深层</td>
+<td>构建更强 QA 模型</td>
+</tr>
+</tbody>
+</table>
+<p>SLayer 的独特之处在于它<strong>不是简单的堆叠或裁剪，而是基于层重要性分析的选择性重构</strong>。</p>
+<h2>关键结果</h2>
+<h3>从 Llama 构建 SLayer 8B</h3>
+<p>以 Llama 3 8B 为基础模型，通过选择性浅层扩展和层合并构建 SLayer 8B。</p>
+<p><strong>QA 和知识任务</strong>：</p>
+<ul>
+<li>在 TriviaQA、NaturalQuestions 等知识密集型任务上，SLayer 8B 相比原始 Llama 3 8B 有提升</li>
+<li>浅层扩展增强了模型的知识召回能力</li>
+</ul>
+<p><strong>推理任务</strong>：</p>
+<ul>
+<li>在部分推理任务上表现与原始模型接近或略有提升</li>
+<li>证明了浅层不仅存储知识，也参与推理计算链</li>
+</ul>
+<h3>层重要性的发现</h3>
+<p>论文的层重要性分析揭示了几个关键观察：</p>
+<ol>
+<li><strong>最浅的几层和最深的一层</strong>最为重要——它们分别负责输入编码和输出生成</li>
+<li><strong>中深层存在较高冗余</strong>——这些层的移除对模型性能影响最小</li>
+<li><strong>浅层的知识密度高于深层</strong>——扩展浅层比扩展深层更有效</li>
+</ol>
+<p>这些观察与 layer stacking 文献中的其他发现形成有趣呼应：</p>
+<ul>
+<li><span class="math inline">G_{\text{stack}}</span> 发现 partial stacking 中 front 最差、middle/back 更好</li>
+<li>MIDAS 发现中间层相似性最高</li>
+<li>SLayer 则从<strong>知识密度</strong>角度论证了浅层的价值</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>实验规模限于 8B，未验证更大模型</li>
+<li>层重要性指标的选择（如 BI）可能因任务不同而变化</li>
+<li>没有在预训练场景中测试（仅作为 post-hoc 模型重构）</li>
+<li>缺少与 <span class="math inline">G_{\text{stack}}</span>、MIDAS 等方法在相同设置下的直接对比</li>
+</ul>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong><span class="math inline">G_{\text{stack}}</span> (Du et al., NeurIPS 2024)</strong>：全面的 layer stacking 效率研究，partial stacking 实验与 SLayer 的层重要性发现互补</li>
+<li><strong>MIDAS (Saunshi et al., NeurIPS 2024)</strong>：从 inductive bias 角度解释为什么中间层堆叠对推理有益</li>
+<li><strong>SOLAR 10.7B (Kim et al., 2023)</strong>：另一种层操作方法——移除中间层拼接两份模型</li>
+<li><strong>ShortGPT (Men et al., 2024)</strong>：通过 BI 指标分析层冗余并进行剪枝</li>
+<li><strong>LaCo (Yang et al., 2024)</strong>：基于层折叠的模型压缩方法</li>
+</ul>
+</div></article>
+<div class="cat-header" style="border-left:4px solid #ffe66d;padding-left:16px;margin:48px 0 24px"><h2 style="color:#ffe66d">Category D: 预训练 LLM 深度扩展</h2></div>
+<article class="paper-article" id="2312.15166-solar"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2312.15166" target="_blank">https://arxiv.org/abs/2312.15166</a> · <a href="#2312.15166-solar">README source</a></div><div class="paper-body"><h1>SOLAR 10.7B — 简单高效的深度上扩展</h1>
+<blockquote>
+<p><strong>SOLAR 10.7B: Scaling Large Language Models with Simple yet Effective Depth Up-Scaling</strong>
+Kim et al., NAACL 2024
+arXiv: 2312.15166</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>随着 scaling law 的推动，训练更大的 LLM 成为提升性能的主要路径。已有的高效扩展方法主要依赖 Mixture-of-Experts（MoE），但 MoE 需要专门的训练框架（如 gating network、动态专家选择）和定制 CUDA kernel 才能高效推理，这<strong>阻碍了广泛应用</strong>。</p>
+<p>核心需求：能否在不引入额外模块和复杂性的前提下，利用已有预训练权重高效地扩展 LLM？</p>
+<h2>核心想法</h2>
+<p><strong>相邻层的连续性很重要。</strong> 简单地将模型层数翻倍会在拼接处（seam）产生最大的层间差异，不利于继续预训练恢复性能。Depth Up-Scaling（DUS）通过移除拼接处附近的层来减小 seam 处的不连续性，使继续预训练能快速恢复性能。</p>
+<h2>方法细节</h2>
+<h3>Depth Up-Scaling（DUS）</h3>
+<p>DUS 由两步组成：<strong>Depthwise Scaling</strong>（深度扩展）和 <strong>Continued Pretraining</strong>（继续预训练）。</p>
+<p><img src="../papers/2312.15166-solar/raw/images/dus_final.webp" alt="DUS 流程总览" /></p>
+<h4>Step 1: Depthwise Scaling</h4>
+<p>给定一个 <span class="math inline">n</span> 层的基础模型，目标扩展到 <span class="math inline">s</span> 层：</p>
+<ol>
+<li>将基础模型复制一份；</li>
+<li>从原始副本中移除最后 <span class="math inline">m</span> 层，从复制副本中移除最前 <span class="math inline">m</span> 层；</li>
+<li>将两部分拼接，得到 <span class="math inline">s = 2(n - m)</span> 层的扩展模型。</li>
+</ol>
+<p>具体参数：</p>
+<ul>
+<li>基础模型：<span class="math inline">n = 32</span> 层（Llama 2 架构，使用 Mistral 7B 权重初始化）</li>
+<li>目标层数：<span class="math inline">s = 48</span> 层（硬件约束下的最优选择，模型参数约 10.7B）</li>
+<li>移除层数：<span class="math inline">m = 8</span>（每端各移除 8 层）</li>
+</ul>
+<h4>为什么不简单翻倍？</h4>
+<p>简单地将 <span class="math inline">n</span> 层重复为 <span class="math inline">2n</span> 层时，只有第 <span class="math inline">n</span> 层和第 <span class="math inline">n+1</span> 层之间存在不连续——但这恰好是<strong>最大</strong>的层间距（layer distance = <span class="math inline">n</span>），对继续预训练来说修复代价太高。</p>
+<p>DUS 牺牲中间的 <span class="math inline">2m</span> 层，将 seam 处的层间距降低到 <span class="math inline">n - m</span>（从 32 降到 24），使不连续性更容易被继续预训练修复。</p>
+<div class="math block">
+\text{Layer distance at seam} = n - m \quad \text{(DUS)} \quad \text{vs} \quad n \quad \text{(naive doubling)}
+</div>
+<h4>Step 2: Continued Pretraining</h4>
+<p>Depthwise scaling 后模型性能会下降，但通过继续预训练可以<strong>快速恢复</strong>。作者将此归因于 DUS 有效控制了扩展模型中的异质性（heterogeneity）。</p>
+<h3>与 MoE 方法的对比</h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>DUS</th>
+<th>MoE 扩展</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>额外模块</td>
+<td>无</td>
+<td>需要 gating network</td>
+</tr>
+<tr>
+<td>训练框架</td>
+<td>标准框架即可</td>
+<td>需要专门框架</td>
+</tr>
+<tr>
+<td>推理效率</td>
+<td>无需定制 kernel</td>
+<td>需要专用 CUDA kernel</td>
+</tr>
+<tr>
+<td>HuggingFace 兼容</td>
+<td>直接兼容</td>
+<td>需要适配</td>
+</tr>
+</tbody>
+</table>
+<h3>训练流程</h3>
+<p>DUS + 继续预训练之后，SOLAR 进行两阶段微调：</p>
+<ol>
+<li><strong>Instruction Tuning</strong>：使用 Alpaca-GPT4、OpenOrca 和合成数学数据集（Synth. Math-Instruct）；</li>
+<li><strong>Alignment Tuning</strong>：使用 sDPO（改进的 DPO）配合 Ultrafeedback Cleaned 和合成数学对齐数据集。</li>
+</ol>
+<p>最终通过 <strong>Model Merging</strong>（加权平均/SLERP）融合不同超参数训练的候选模型。</p>
+<h2>关键结果</h2>
+<h3>Open LLM Leaderboard</h3>
+<p>SOLAR 10.7B-Instruct 在 H6 平均分上达到 <strong>74.20</strong>，超越了参数量远大于自身的模型：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>参数量</th>
+<th>类型</th>
+<th>H6 Avg.</th>
+<th>ARC</th>
+<th>MMLU</th>
+<th>GSM8K</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SOLAR 10.7B-Instruct</strong></td>
+<td><strong>~11B</strong></td>
+<td><strong>Alignment</strong></td>
+<td><strong>74.20</strong></td>
+<td><strong>71.08</strong></td>
+<td>66.21</td>
+<td>64.75</td>
+</tr>
+<tr>
+<td>Qwen 72B</td>
+<td>~72B</td>
+<td>Pretrained</td>
+<td>73.60</td>
+<td>65.19</td>
+<td><strong>77.37</strong></td>
+<td><strong>70.43</strong></td>
+</tr>
+<tr>
+<td>Mixtral 8x7B-Instruct</td>
+<td>~47B</td>
+<td>Instruction</td>
+<td>72.62</td>
+<td>70.22</td>
+<td>71.16</td>
+<td>60.73</td>
+</tr>
+<tr>
+<td>Llama 2 70B</td>
+<td>~70B</td>
+<td>Pretrained</td>
+<td>67.87</td>
+<td>67.32</td>
+<td>69.83</td>
+<td>54.06</td>
+</tr>
+<tr>
+<td>Falcon 180B</td>
+<td>~180B</td>
+<td>Pretrained</td>
+<td>67.85</td>
+<td>69.45</td>
+<td>70.50</td>
+<td>45.94</td>
+</tr>
+<tr>
+<td>SOLAR 10.7B (base)</td>
+<td>~11B</td>
+<td>Pretrained</td>
+<td>66.04</td>
+<td>61.95</td>
+<td>65.48</td>
+<td>55.50</td>
+</tr>
+<tr>
+<td>Mistral 7B</td>
+<td>~7B</td>
+<td>Pretrained</td>
+<td>60.97</td>
+<td>59.98</td>
+<td>64.16</td>
+<td>37.83</td>
+</tr>
+</tbody>
+</table>
+<p>一个 11B 的模型在对齐微调后击败了 72B 的 Qwen 和 47B 的 Mixtral 8x7B-Instruct。</p>
+<h3>关键消融发现</h3>
+<ul>
+<li><strong>合成数学数据有效</strong>：添加 Synth. Math-Instruct 使 GSM8K 从 52.24 提升到 64.14；</li>
+<li><strong>Model Merging 有效</strong>：融合不同特长的模型（有/无 OpenOrca）可以兼得各自优势；</li>
+<li><strong>对齐阶段</strong>：添加 Synth. Math-Alignment 可缓解 DPO 导致的数学能力下降（GSM8K 从 58.83 回升到 60.27）；</li>
+<li><strong>Merge 方法鲁棒</strong>：不同的融合方法（加权平均、SLERP）对最终 H6 分数影响不大。</li>
+</ul>
+<h2>局限与延伸阅读</h2>
+<ul>
+<li><strong>移除层数未优化</strong>：<span class="math inline">m = 8</span> 的选择主要受硬件限制，最优值尚未确定；</li>
+<li><strong>继续预训练成本高</strong>：无法进行全面的超参数搜索；</li>
+<li><strong>方法适用范围</strong>：理论上 DUS 适用于所有 Transformer 架构，但仅在 Llama 2 架构上验证；</li>
+<li><strong>训练数据偏差</strong>：与所有 ML 模型一样，训练数据中的偏差可能导致不公平的输出。</li>
+</ul>
+<p><strong>相关工作</strong>：</p>
+<ul>
+<li><strong>Komatsuzaki et al. (2022)</strong>：使用 MoE 进行模型扩展，DUS 的灵感来源之一；</li>
+<li><strong>EfficientNet</strong> (Tan &amp; Le, 2019)：复合缩放的思路启发了 depthwise scaling；</li>
+<li><strong>LLaMA Pro</strong> (Wu et al., 2024)：同样基于深度扩展，但采用 identity block 插入策略，保持初始输出不变并冻结旧层训练新层；</li>
+<li><strong>社区并行方法</strong>：HuggingFace 社区（Undi95/Mistral-11B-v0.1）独立发现了相同的 depthwise scaling 操作。</li>
+</ul>
+</div></article>
+<article class="paper-article" id="2401.02415-llama-pro"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2401.02415" target="_blank">https://arxiv.org/abs/2401.02415</a> · <a href="#2401.02415-llama-pro">README source</a></div><div class="paper-body"><h1>LLaMA Pro — 通过块扩展实现领域知识注入</h1>
+<blockquote>
+<p><strong>LLaMA Pro: Progressive LLaMA with Block Expansion</strong>
+Wu et al., arXiv 2024
+arXiv: 2401.02415</p>
+</blockquote>
+<h2>问题动机</h2>
+<p>人类学习新技能时通常不会忘记旧技能，但 LLM 恰好相反：当对 LLaMA 做代码领域适配得到 CodeLLaMA 时，通用语言能力会显著下降（<strong>灾难性遗忘</strong>）。已有的领域适配方法面临一个根本矛盾：</p>
+<ul>
+<li><strong>全量微调</strong>：能学到领域知识，但严重损害通用能力；</li>
+<li><strong>LoRA 等参数高效方法</strong>：保护通用能力，但对新领域分布的建模能力不足（训练 loss 下降困难）；</li>
+<li><strong>从头训练</strong>：计算资源需求巨大，不现实。</li>
+</ul>
+<p>需要一种方法，能<strong>注入新的领域知识</strong>同时<strong>保护已有的通用能力</strong>。</p>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/pipeline.webp" alt="训练流程概览" /></p>
+<h2>核心想法</h2>
+<p><strong>新增容量吸收领域技能，冻结旧容量保护通用能力。</strong> 通过在预训练 LLM 中插入 identity block（初始化为恒等映射的 Transformer 块），仅训练新增块上的领域数据，同时冻结原有块。扩展后的模型在初始化时输出与原模型完全一致，训练后在领域任务上提升而不损害通用性能。</p>
+<h2>方法细节</h2>
+<h3>LLaMA Block 回顾</h3>
+<p>LLaMA block 的结构为：</p>
+<div class="math block">
+x' = x + \text{MHSA}(\text{RMSNorm}(x))
+</div>
+<div class="math block">
+y = x' + \text{FFN}(\text{RMSNorm}(x'))
+</div>
+<p>其中 MHSA（Multi-Head Self-Attention）为标准注意力机制：</p>
+<div class="math block">
+\text{MHSA}(Q, K, V) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) W^O
+</div>
+<div class="math block">
+\text{head}_i = \text{Softmax}\left(\frac{Q_i K_i^T}{\sqrt{d_k}}\right) V_i
+</div>
+<p>FFN 使用 SwiGLU 激活：</p>
+<div class="math block">
+\text{FFN}(x) = (\text{SiLU}(xW_1) \otimes (xW_2)) W_3
+</div>
+<p>关键特点：LLaMA block 中 MHSA 和 FFN 的线性层<strong>没有 bias 项</strong>，并且使用<strong>残差连接</strong>。</p>
+<h3>Block Expansion</h3>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/identity_copy.webp" alt="Block Expansion 与 Identity Block" /></p>
+<p>给定 <span class="math inline">L</span> 层的原始模型，需扩展到 <span class="math inline">L'</span> 层：</p>
+<ol>
+<li>将 <span class="math inline">L</span> 层分成 <span class="math inline">N</span> 组，每组 <span class="math inline">L/N</span> 层；</li>
+<li>对每组取顶部的 <span class="math inline">P</span> 层进行复制，创建 identity block；</li>
+<li>将 identity block 以<strong>交错方式</strong>堆叠在对应组的顶部。</li>
+</ol>
+<p><strong>Identity Block 的构造</strong>：需要 <span class="math inline">\phi_{id}(x) = x</span>。由于 LLaMA block 的残差结构，只需让 MHSA 和 FFN 的输出为零即可：</p>
+<div class="math block">
+\text{MHSA}(\text{RMSNorm}(x)) = \mathbf{0} \quad \text{且} \quad \text{FFN}(\text{RMSNorm}(x')) = \mathbf{0}
+</div>
+<p>具体做法：将 identity block 中 <span class="math inline">W^O</span>（注意力输出投影）和 <span class="math inline">W_3</span>（FFN 最后一层）初始化为<strong>零矩阵</strong>。由于无 bias 且有残差连接，整个块退化为恒等映射。</p>
+<p><strong>为什么不零化 RMSNorm 权重？</strong> Staged Training 的做法（零化 Norm 权重）在 LLaMA 架构下会导致梯度为零：</p>
+<div class="math block">
+\frac{\partial L}{\partial w} = \frac{\partial L}{\partial y} \cdot \frac{\partial \text{FFN}(\text{RMSNorm}(x'))}{\partial \text{RMSNorm}(x')} \cdot \frac{\partial \text{RMSNorm}(x')}{\partial w} = 0
+</div>
+<p>当 <span class="math inline">\text{RMSNorm}(x') = 0</span> 时，RMSNorm 的权重永远无法被训练。</p>
+<h3>训练策略</h3>
+<ul>
+<li><strong>预训练阶段</strong>：冻结原有块，仅训练新增的 identity block，使用领域数据（代码 + 数学）；</li>
+<li><strong>SFT 阶段</strong>：全量微调所有块（包括原有块和新增块）。</li>
+</ul>
+<p>具体配置（LLaMA2-7B → LLaMA Pro-8.3B）：</p>
+<ul>
+<li>原始 32 层 → 扩展到 40 层（<span class="math inline">N=8</span> 组，每组 <span class="math inline">P=1</span> 层，共新增 8 个 identity block）；</li>
+<li>预训练数据：80B tokens（Python 代码 + Proof-pile-2 数学数据）；</li>
+<li>训练成本：约 2830 H800 GPU 小时（16 块 H800，约 7 天）。</li>
+</ul>
+<h3>块添加位置的消融</h3>
+<table>
+<thead>
+<tr>
+<th>添加位置</th>
+<th>通用性能</th>
+<th>领域性能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bottom</td>
+<td>差（破坏模型基础，错误传播）</td>
+<td>差</td>
+</tr>
+<tr>
+<td>Top</td>
+<td>保持</td>
+<td>较低</td>
+</tr>
+<tr>
+<td><strong>Interleaved（交错）</strong></td>
+<td><strong>保持</strong></td>
+<td><strong>最优</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>关键结果</h2>
+<h3>预训练性能</h3>
+<p>LLaMA Pro 有效平衡了通用语言和代码/数学能力：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练 tokens</th>
+<th>通用 Avg.</th>
+<th>HumanEval</th>
+<th>MBPP</th>
+<th>GSM8K</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLaMA2-7B</td>
+<td>2T</td>
+<td>基线</td>
+<td>13.05</td>
+<td>20.60</td>
+<td>14.48</td>
+</tr>
+<tr>
+<td>CodeLLaMA-7B</td>
+<td>+500B</td>
+<td>下降</td>
+<td><strong>33.50</strong></td>
+<td><strong>41.40</strong></td>
+<td>20.02</td>
+</tr>
+<tr>
+<td><strong>LLaMA Pro-8.3B</strong></td>
+<td><strong>+80B</strong></td>
+<td><strong>提升</strong></td>
+<td>27.44</td>
+<td>35.00</td>
+<td>22.06</td>
+</tr>
+</tbody>
+</table>
+<p>LLaMA Pro 仅用 1/6 的额外训练数据就达到了与 CodeLLaMA 可比的代码性能，且<strong>通用性能不降反升</strong>。</p>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/pretrain_scatter.webp" alt="模型在通用 vs 代码性能空间中的分布" /></p>
+<h3>SFT 性能（LLaMA Pro-Instruct）</h3>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/radar.webp" alt="Radar 图：LLaMA Pro-Instruct 的多维性能" /></p>
+<p>LLaMA Pro-Instruct 作为单一 SFT 模型，在通用、代码和数学三方面均达到 SOTA：</p>
+<ul>
+<li>相比 LLaMA2-7B-chat 平均性能提升 <strong>13.81%</strong>；</li>
+<li>相比 CodeLLaMA-7B-Instruct 平均性能提升 <strong>14.50%</strong>；</li>
+<li>在 MT-Bench 和 MINT-Bench 等实际对话/工具使用评测中超越同族模型。</li>
+</ul>
+<h3>可扩展性验证</h3>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/scaling_law.webp" alt="不同新增块数的训练 loss" /></p>
+<p>训练 loss 随新增块数增加持续下降，且更大模型下降更快，表明方法具有良好的<strong>可扩展性</strong>。</p>
+<p>添加 8 个块在成本和性能间取得最优平衡。MoE 扩展的性能大致等价于添加 4 个块。</p>
+<h3>训练策略对比</h3>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/strategy_difference.webp" alt="LoRA vs Fine-tuning vs Block Expansion" /></p>
+<ul>
+<li><strong>LoRA</strong>：保护通用能力好，但新领域训练 loss 难以下降；</li>
+<li><strong>Full Fine-tuning</strong>：领域任务好，但通用性能大幅下降；</li>
+<li><strong>Block Expansion</strong>：两者兼得。</li>
+</ul>
+<h3>Token 分布分析</h3>
+<p><img src="../papers/2401.02415-llama-pro/raw/figure/token_shift.webp" alt="LLaMA vs LLaMA Pro 的 token 分布偏移" /></p>
+<p>对通用问题（Alpaca 数据集），LLaMA Pro 与原始 LLaMA 的 token 分布偏移极小，验证了通用能力的保持。</p>
+<h3>Mistral-Pro 验证</h3>
+<p>Block Expansion 在 Mistral-7B 上同样有效：GSM8K 从 77.7 提升到 78.4，MATH 从 28.2 提升到 30.3。</p>
+<h2>局限与延伸阅读</h2>
+<ul>
+<li><strong>领域限制</strong>：当前仅在代码和数学领域验证，生物医学、金融等领域尚未探索；</li>
+<li><strong>推理成本增加</strong>：模型参数从 7B 增至 8.3B，推理时间和内存相应增加；</li>
+<li><strong>冻结策略固定</strong>：预训练阶段冻结原有块、SFT 阶段全量微调的策略是否最优尚未充分验证；</li>
+<li><strong>块数和位置</strong>：交错方式是启发式选择，最优的块插入策略可能因任务而异。</li>
+</ul>
+<p><strong>相关工作</strong>：</p>
+<ul>
+<li><strong>Staged Training</strong> (Shen et al., 2022)：零化 Norm 权重构建恒等层，但在 LLaMA 架构下梯度为零；</li>
+<li><strong>SOLAR 10.7B</strong> (Kim et al., 2024)：同样基于深度扩展 Llama，但策略不同——SOLAR 移除中间层后拼接再全量继续预训练，不做冻结；</li>
+<li><strong>LoRA</strong> (Hu et al., 2021)：参数高效微调，保护通用能力但领域适配受限，与 Block Expansion 形成互补；</li>
+<li><strong>MoE</strong> (Fedus et al., 2022)：通过专家混合扩展容量，性能约等于 Block Expansion 添加 4 个块；</li>
+<li><strong>Continual Learning</strong> (de Masson d'Autume et al., 2021)：灾难性遗忘问题的系统性研究。</li>
+</ul>
+</div></article>
+
+</div>
+
+<footer>
+  <p>Generated by build_survey.py · Source: papers/*/README.md</p>
+</footer>
+
+<script>
+document.querySelectorAll('.math.inline,.math.block').forEach(function(el){
+  try { katex.render(el.textContent, el, {displayMode: el.classList.contains('block'), throwOnError: false}); }
+  catch(e) {}
+});
+</script>
+<section class="public-attribution">本站内容为个人学习笔记与论文解读。论文、图表、实验结果和引用材料的版权归原作者及原出版方所有；本站仅为学习、研究和非商业分享用途。若需要引用原始成果，请以论文原文和官方发布版本为准。</section>
+</body>
+</html>

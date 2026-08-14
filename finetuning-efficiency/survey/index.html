@@ -239,56 +239,174 @@ footer {
 
 <div class="overview">
 <h1>综述：预训练模型的下游学习效率</h1>
-<h2>问题怎么问</h2>
-<p>给定一个已经训好的语言模型，我们真正想知道的往往不是「它最终能到多少分」，而是：<strong>再给它多少下游数据／多少步更新，它才能学会这个任务</strong>。把这个问题写清楚，需要同时指定自变量和因变量。</p>
-<p>自变量有两个自然选择：模型大小 <span class="math inline">N</span>，以及预训练程度——可以用 token 数 <span class="math inline">D_{\text{pre}}</span>，也可以用预训练 loss <span class="math inline">L_{\text{pre}}</span>。因变量也有两格：下游<strong>终点表现</strong>，以及下游<strong>学习速度</strong>（达到阈值 <span class="math inline">\tau</span> 所需的数据量或更新步数 <span class="math inline">T</span>）。</p>
-<p>文献的密度极不均匀。<span class="math inline">(N, \text{终点})</span> 这一格从 Kaplan / Hernandez 起就被反复测量；<span class="math inline">(D_{\text{pre}}, \text{终点})</span> 从 2024 年起变成公开争议；<span class="math inline">(N, \text{速度})</span> 几乎只出现在记忆任务上；<span class="math inline">(D_{\text{pre}}, \text{速度})</span> 以及完整的 <span class="math inline">T(N, D_{\text{pre}})</span> 二维场，基本是空的。</p>
-<h2>骨架：把预训练折算成数据</h2>
-<p>Hernandez et al. (2021) 给出了本题最干净的会计单位。固定模型大小，比较「从零训到同一 loss 需要多少目标域数据」和「预训练后再微调需要多少」，差值定义为有效转移数据量</p>
-<div class="math block">
-D_T = k\, D_F^{\alpha}\, N^{\beta}.
-</div>
-<p><span class="math inline">\beta&gt;0</span> 直接支持 Q1：更大的模型从同一份预训练里「转移」出更多等效数据。<span class="math inline">\alpha&lt;1</span> 意味着预训练相当于给微调集乘了一个随 <span class="math inline">D_F</span> 递减的倍数。Mikami 的 syn2real 律是同一函数形式在视觉里的先驱；Barnett (2024) 把它改写成</p>
-<div class="math block">
-L(p,f)=(A p^{-\alpha}+G)\,f^{-\beta}+E,
-</div>
-<p>其中 <span class="math inline">G</span> 是无限预训练也补不上的 transfer gap。Zhang et al. (2024) 在 1B–16B 上拟合乘性联合律，结论是微调从<strong>模型规模</strong>获益大于从<strong>预训练数据</strong>获益（<span class="math inline">\alpha_m&gt;\alpha_p</span>）。Lin et al. (2024) 发现微调曲线在 power phase 之前还有一段 <strong>pre-power phase</strong>，用「已预学数据量」<span class="math inline">D_l</span> 参数化相变，并据此做模型选择。</p>
-<p>Isik et al. (2025) 是骨架上最重要的警告：任务与预训练分布的对齐度必须是显式自变量。对齐充分时下游 CE 和翻译质量都单调、可用 log-law 预测；中度不对齐时 BLEU 会波动甚至变差，而下游 CE 仍单调。指标选择会翻转结论。</p>
-<h2>Q1：更大通常更快，但要看对齐的是什么</h2>
-<p>Tirumala et al. (2022) 是最贴近「学习速度」的实证。他们显式定义 <span class="math inline">T(N,\tau)</span>（达到记忆阈值所需 epoch）和 <span class="math inline">T_{\text{update}}(N,\tau)</span>，在 125M–13B 上发现：大模型记得更快、能在过拟合前记住更大比例、遗忘更少；固定学习率后结论不变。Aghajanyan et al. (2021) 给出机制：固定预训练步数下，更大模型的内在维度反而更低。Allen-Zhu &amp; Li 的容量侧估计约 2 bits/参数，但需要每条知识曝光约 1000 次才达峰值。</p>
-<p>这些研究<strong>都没有控制预训练 loss</strong>。它们比较的是不同大小模型在各自训练轨迹上的表现。一旦按 <span class="math inline">L_{\text{pre}}</span> 对齐，Du et al. 会说 <span class="math inline">N</span> 不重要。这不是矛盾，是问的不是同一个问题。</p>
-<h2>Q2 的两段：prompting 单调，SFT 之后不必单调</h2>
-<p>Du et al. (2024) 训练 1.5B/6B/32B 分别到 3T/3T/2.5T tokens，每约 43B tokens 存一个 checkpoint，在 12 个数据集上评测。结论：预训练 loss 相同、模型与数据大小不同的模型，下游表现相同；某些任务只在 loss 降到约 2.2 之后才离开随机水平。他们据此把涌现改写成「更低 loss 才出现、无法从更高 loss 外推」的能力。<strong>测量口径是 base model + zero/few-shot / CoT，完全没有微调。</strong></p>
-<p>Springer et al. (2025) 站在另一段。OLMo-1B 预训练到 3T 再做 Anthropic-HH 指令微调，AlpacaEval 比 2.3T 的中间 checkpoint 差约 3%，ARC 差约 2%。拐点大约在 2.5T。机制是 <strong>progressive sensitivity</strong>：同等幅度的参数修改下，预训练更久的模型遗忘更多。同设定下 OLMo-7B 在 3T 以内未出现该现象——拐点位置可能是 <span class="math inline">N</span> 的函数。固定超参微调会显著放大退化；学习率越大越明显。因此任何 <span class="math inline">N\times D_{\text{pre}}</span> 网格实验都必须每个 cell 独立调 LR。</p>
-<p>Liu et al. (2023) 从另一侧反驳「loss 是充分统计量」：相同最小预训练 loss 下，flatness（Hessian 迹）仍能解释下游差异。他们的 regime 是收敛后继续预训练；Du 的 regime 是 web-scale 远未收敛区。Chang et al. (2024) 则在事实知识上给出更强的否定：更多预训练数据对获取和保持事实<strong>无显著提升</strong>，但 7B 的 effectivity 高于 1B——扩模型与扩 token 机制不同。</p>
-<p>把两段放在同一张图上：沿 iso-loss 等高线，若 base prompted 表现相同（复现 Du）但 SFT 后表现不同，即证明 <span class="math inline">L_{\text{pre}}</span> 不是下游<strong>可塑性</strong>的充分统计量。这个实验还没有人做过。</p>
-<p>可塑性这条线比 LLM 过训练更老。Ash &amp; Adams (NeurIPS 2020) 证明 warm-start 能把训练误差打到零但测试更差，shrink-and-perturb 靠缩小权重、拉平新旧样本梯度来补上泛化。Dohare et al. (Nature 2024) 把它做成持续学习的教科书演示：Continual ImageNet 二分类从 <span class="math inline">89\%</span> 掉到第 2000 个任务的 <span class="math inline">77\%</span>，continual backpropagation 按效用重初始化低贡献单元。Deng et al. (ICCV 2023) 在视觉轨迹上给出中间最优：冻结特征提取器吃主谱，中途 checkpoint 更好；全参微调还能用残差谱，更满的预训练往往更好。Kumar et al. (ICLR 2022) 的 LP-FT 说明全参微调会只在 ID 子空间扭曲预训练特征，OOD 上可以输给线性探针——Springer 把它列为缓解 overtraining 的候选。</p>
-<p>2026 年的几篇把同一机制推到更细的边界。Nwemadji et al. 在 single-index + LoRA 里证明：即使源任务与下游对齐，预训练对齐 <span class="math inline">\mu\to 1</span> 也会让逃出 search phase 的时间发散——预测的是微调<strong>速度</strong>。Hernandez-Garcia et al. 给可塑性丧失 onset 一条亚线性律 <span class="math inline">T\propto P^{0.83}</span>，外推 1B 约 1.8T、7B 约 9T，与 Springer 的 1B 有 / 7B 无 对齐；平稳多语混合里同样出现。Liu et al. 把可塑性再推到 <strong>SFT→RL</strong>：OverSFT（32 epoch）熵塌到 <span class="math inline">0.024</span>，RL 梯度大、步长短，融合 + 神经元重置可以事后恢复。</p>
-<p>固定规模下用预训练指标预测 SFT 也不成立。Zeng et al. 的 50 个 1B 变体上，因果 LM perplexity 的 pairwise 错误率 <span class="math inline">&gt;60\%</span>（比乱猜差），span-corruption PPL 和 k-shot RAG 能砍掉一半。Lourie et al. (ACL 2025) 重读 Gadre 的 46 个下游任务，可预测线性只占 <span class="math inline">39\%</span>；换验证语料或实验实现就能把趋势反转。Du 的 iso-loss 在受控 prompting 设定里成立，不能未经诊断地外推到任意任务、任意配方、更不能外推到 SFT。</p>
-<h2>「能不能预测」是第三条轴</h2>
-<p>Bhagia 的 model ladders、Brandfonbrener 的 loss-to-loss、Mayilvahanan 的「数据主导 loss-to-loss」、Gadre 的过训练 testbed、Chen 的 FLP（FLOPs→Loss→Performance）、Ruan 的 observational scaling、Snell 的「LoRA rank=1 就能移动 emergence 点」——这一支回答的是可预测性，而不是 <span class="math inline">N</span> 或 <span class="math inline">D_{\text{pre}}</span> 谁更重要。共同教训：loss→loss 比 loss→accuracy 容易得多；单任务预测噪声远大于任务平均。</p>
-<p>视觉/NLP 的 transferability estimation（LEEP、LogME、NCE）几乎没被 LLM scaling 文献引用。Schulz et al. 已警告：全参数微调后 LogME 精度明显下降，因为它作用于冻结表征。用这类廉价代理预测微调<strong>速度</strong>（而非终点）仍是空地。</p>
-<p>AutoML 社区对学习曲线外推研究了三十年（Domhan 的参数化曲线族、Klein 的贝叶斯 NN、Mohr &amp; van Rijn 的决策框架综述、LCDB）。术语上必须分开 sample-wise（还要多少数据）和 iteration-wise（还要多少步）；early discarding 问的是「能不能赢过 incumbent」，不是「自己还涨不涨」。Hestness (2017) 把幂律搬进深度学习，经验指数远浅于理论的 <span class="math inline">-1/2</span>；Rosenfeld et al. (ICLR 2020) 第一次把模型大小与数据大小写进同一张可外推误差面。Multi-Power Law 则把 Chinchilla 的 <span class="math inline">T</span> 换成累计学习率，用来预测不同 LR schedule 下的整条预训练损失曲线——CPT 的 rewarm/redecay 正好踩在这条 schedule 轴上。LCDB 1.1 的反转尤其重要：1.0 说曲线大多单调凸，更高分辨率后约 15% 显著非良态。不要默认微调曲线是良态的。</p>
-<h2>记忆动力学：记一个 trace 要多少遍</h2>
-<p>Zucchet et al. 在合成事实任务上看到三阶段：performance plateau 与注意力回忆电路同时形成，幻觉与知识同时涌现，用微调注入新知识会快速破坏已有参数化记忆。Muennighoff 的 datablations：重复 4 epochs 内几乎无损，约 16 epochs 后收益显著递减。Michaud 的 quantization model 给出预训练侧的理论版本——若能估计某技能在语料中的频率，就能预测它何时出现。Schaeffer et al. 是方法论防御：阈值型指标会人为制造阶跃，<span class="math inline">T(N,\tau)</span> 必须同时报告连续指标。</p>
-<h2>持续预训练：混合比、schedule、以及 <span class="math inline">\mathrm{ptpp}</span> 条件变量</h2>
-<p>领域 CPT 把 Q2 从「预训练多久」改写成「已经训完的模型再吃新分布」。D-CPT Law 在 Chinchilla 上加混合比 <span class="math inline">r</span>，并用 Domain-Learnability Coefficient <span class="math inline">K</span> 做跨域迁移。CMR Scaling Law 不最小化领域损失，而是在通用损失约束下取<strong>最大可行领域比例</strong>；更大模型的 CMR 略高。Gupta 的 rewarm 论文和 Ibrahim et al. 的大规模后续把另一根轴钉死：cosine 终点 LR 太小则适应不动，rewarm+redecay 必要，但短预算内会先伤旧域；弱偏移 5% replay、德语强偏移 25% 即可匹配全量重训。Predictable HP-CPT 把 checkpoint 在目标域的验证损失反演成 equivalent pre-training compute，从而零样本给出 <span class="math inline">LR</span> 和 batch size。</p>
-<p>PTPP-aware adaptation laws 是目前最接近 Q2 的 CPT 版本：用 <span class="math inline">\mathrm{ptpp}\in\{15,31\}</span> 拟合，预测未见过的 <span class="math inline">\mathrm{ptpp}=279</span> 上的适应损失，gated-exponent+floor 优于无 <span class="math inline">\mathrm{ptpp}</span> 的 D-CPT 迁移。它预测的仍是适应<strong>损失</strong>不是 SFT 学习速度，但函数形式已经把预训练预算写成条件变量。Luo et al. 在 1B–7B 持续指令微调上看到通用知识遗忘随规模加重；Representation Collapse 把同一现象推进到 hidden-state 有效秩——目标分可以单调升，未来任务的固定预算适应分单调降。</p>
-<h2>实验上能立刻用的东西</h2>
+<h2>一、这 65 篇论文在回答什么问题</h2>
+<p>现在训一个大语言模型的流程通常分两步：先在海量通用语料上<strong>预训练</strong>，再在具体任务上<strong>微调</strong>。大家自然会问：</p>
+<blockquote>
+<p>给定一个已经预训练好的模型，它学会一个新任务需要多少数据、多少步？</p>
+</blockquote>
+<p>这个问题看似简单，实际上有两个容易混淆的角度：</p>
 <ul>
-<li><strong>Pythia</strong>：全尺寸同一数据顺序，iso-loss 配对的前提。Barnett 用的就是它。</li>
-<li><strong>OLMo / OLMo-2</strong>：复现 catastrophic overtraining 的轨迹。</li>
-<li><strong>mlfoundations/scaling</strong>：现成的 <span class="math inline">N\times D_{\text{pre}}</span> 网格，可先做零训练探索。</li>
-<li><strong>Lin et al. 的微调曲线数据</strong>：30 模型 × 3 数据集 × 多个子集大小。</li>
-<li><strong>PTPP-aware adaptation laws</strong> 与最优超参 scaling law：分别处理「预训练程度作为条件变量」和「LR 混淆」。</li>
+<li><strong>终点表现</strong>：模型微调到最好能到多少分？</li>
+<li><strong>学习速度</strong>：模型微调到某个及格线需要多长时间？</li>
 </ul>
-<h2>可预注册的假设</h2>
+<p>绝大部分文献回答的是第一个问题。第二个问题——特别是把它和模型大小 <span class="math inline">N</span>、预训练充分程度 <span class="math inline">D_{\text{pre}}</span> 联合起来看——几乎是空白。这就是本主题的核心关切。</p>
+<p>影响下游学习效率的自变量也有两个自然选择：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>终点表现（文献密集）</th>
+<th>学习速度（文献稀缺）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>模型大小 <span class="math inline">N</span></strong></td>
+<td>广泛研究，结论较一致</td>
+<td>只在记忆类任务上有少量实证</td>
+</tr>
+<tr>
+<td><strong>预训练程度 <span class="math inline">D_{\text{pre}}</span></strong></td>
+<td>2024 年起出现公开争议</td>
+<td><strong>基本空白——机会所在</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>二、基础框架：预训练到底&quot;值&quot;多少数据</h2>
+<p>要回答「预训练有多大帮助」，首先需要一把尺。Hernandez et al. (2021) 给出了最直观的度量方式：固定模型大小，比较同一个模型「从零训练」和「预训练后微调」达到相同 loss 所需的目标域数据量，差值就是预训练「等价地多给了多少数据」。他们发现这个等效数据量服从一个简洁的幂律：</p>
+<div class="math block">
+D_T = k \cdot D_F^{\alpha} \cdot N^{\beta}
+</div>
+<p>其中 <span class="math inline">D_F</span> 是微调数据量，<span class="math inline">N</span> 是模型参数量。<span class="math inline">\beta &gt; 0</span> 说明<strong>模型越大，从预训练中&quot;转移&quot;出的等效数据越多</strong>。<span class="math inline">\alpha &lt; 1</span> 说明<strong>微调数据越少，预训练的杠杆越大</strong>——预训练本质上是给微调集乘了一个倍数，但这个倍数随数据增多而递减。</p>
+<p>后续工作不断给这个框架加维度：</p>
 <ul>
-<li><strong>H1（截距）</strong>：微调曲线的横向平移量（pre-learned data size）主要由 <span class="math inline">L_{\text{pre}}</span> 与任务对齐度决定，与 <span class="math inline">N</span> 弱相关。</li>
-<li><strong>H2（斜率）</strong>：微调曲线的斜率主要由 <span class="math inline">N</span> 决定，且对 <span class="math inline">D_{\text{pre}}</span> 呈 U 型，拐点随 <span class="math inline">N</span> 右移。</li>
-<li><strong>H3（可预测性）</strong>：微调前若干步的 loss 下降速率 / 初始梯度对齐度 / Hessian 迹能预测整条曲线。</li>
+<li><strong>Barnett (2024)</strong> 把预训练步数 <span class="math inline">p</span> 也写进公式，并引入 transfer gap <span class="math inline">G</span>——即使预训练无限久也补不上的分布差距。</li>
+<li><strong>Zhang et al. (2024)</strong> 同时拟合模型规模和预训练数据规模的效果，发现<strong>模型变大的收益 &gt; 预训练数据变多的收益</strong>。</li>
+<li><strong>Lin et al. (2024)</strong> 发现微调曲线不是一上来就呈幂律下降的，前面还有一段斜率逐渐变陡的 &quot;pre-power phase&quot;，用一个参数 <span class="math inline">D_l</span>（模型已经「预学」了多少下游数据）来刻画这个相变。</li>
+<li><strong>Isik et al. (2025)</strong> 提出关键警告：任务与预训练分布的对齐程度必须是显式变量。对齐好时一切都单调可预测；对齐差时，BLEU 可以变差，但交叉熵仍在变好——<strong>选什么指标就能得到什么结论</strong>。</li>
 </ul>
-<p>核心判定图：沿 iso-loss 等高线画 prompted 终点、SFT 终点、以及 <span class="math inline">T(N,D_{\text{pre}},\tau)</span>。若第一条线平、后两条线不平，Q2 的争议就从「谁对谁错」变成「测的是哪一段」。</p>
+<hr />
+<h2>三、模型越大学得越快吗？（Q1：结论较一致）</h2>
+<p>在「模型大小如何影响下游效率」这个问题上，现有文献给出了相当一致的答案：<strong>更大的模型确实学得更快</strong>。</p>
+<p>Tirumala et al. (2022) 做了最直接的测量。他们定义了「达到记忆阈值 <span class="math inline">\tau</span> 所需的 epoch 数」<span class="math inline">T(N,\tau)</span>，在 125M 到 13B 的模型上发现：大模型记忆更快、能在过拟合之前记住更大比例的数据、遗忘也更少。即使固定学习率（排除 &quot;大模型 LR 更优&quot; 的混淆因素），结论不变。</p>
+<p>Aghajanyan et al. (2021) 从机制层面给出了解释：固定预训练步数时，更大的模型在微调任务上的<strong>内在维度</strong>反而更低——也就是说，微调只需要在更少的有效方向上做调整。Allen-Zhu &amp; Li 则从知识容量角度估计：每个参数大约能存 2 bits 的知识，但需要每条知识在训练中出现约 1000 次才能达到峰值存储效率。</p>
+<p><strong>但有一个重要的注意事项</strong>：以上研究都没有控制预训练 loss。它们比较的是不同大小的模型在各自自然训练轨迹上的表现——大模型本身就训到了更低的 loss。如果按预训练 loss 对齐（见下一节），结论会变得不同。</p>
+<hr />
+<h2>四、预训练越久越好吗？（Q2：文献中最有张力的争议）</h2>
+<p>这是本主题最核心的争议，也是最容易被误读的地方。争论的双方看似矛盾，但实际上<strong>测的根本不是同一件事</strong>。</p>
+<h3>正方：预训练 loss 是充分统计量</h3>
+<p>Du et al. (2024) 训练了 1.5B / 6B / 32B 三种大小的模型，各自训到数万亿 token，每隔约 43B token 保存一个 checkpoint。他们发现：<strong>如果两个模型的预训练 loss 相同（哪怕一个是 6B 训 1T token、另一个是 32B 训 0.3T token），它们在 12 个下游任务上的表现几乎一样。</strong> 某些任务（MMLU、GSM8K 等）只有在 loss 降到约 2.2 以下时才开始离开随机水平——这就是从 loss 视角重新定义的「涌现」。</p>
+<p>听起来很干净。但必须注意：<strong>Du 测的是 base model + prompting（zero-shot / few-shot / CoT），全程没有做任何微调。</strong></p>
+<h3>反方：预训练太久反而让微调变差</h3>
+<p>Springer et al. (2025) 在 OLMo-1B 上做了一个惊人的实验：把模型从各个中间 checkpoint（0.5T 到 3T token）取出来，分别做指令微调（Anthropic-HH），然后评测。结果发现：</p>
+<ul>
+<li>Base model 的 prompted 表现随预训练 token 单调上升（和 Du 一致）；</li>
+<li><strong>但微调后的表现在约 2.5T token 处开始下降</strong>——训到 3T 的模型微调后反而比训到 2.3T 的差了约 3%。</li>
+</ul>
+<p>他们把这个现象叫做 <strong>catastrophic overtraining</strong>。机制是 <strong>progressive sensitivity</strong>：预训练越久，模型参数对任何等幅度修改都越敏感，遗忘也越严重。微调本身就是一种参数修改——当遗忘的增量超过预训练带来的收益时，拐点出现。</p>
+<p>更有意思的是，<strong>OLMo-7B 在 3T 以内没有出现这个拐点</strong>。这暗示拐点位置可能是 <span class="math inline">N</span> 的递增函数——模型越大，能承受的预训练越长。</p>
+<h3>关键洞察：两拨人测的不是同一个量</h3>
+<p>把两组结论放在一起看就清楚了：</p>
+<ul>
+<li><strong>Du 测的是 prompting 口径下的终点表现</strong> → loss 是充分统计量 ✓</li>
+<li><strong>Springer 测的是 SFT 之后的终点表现</strong> → loss 不是充分统计量 ✗</li>
+</ul>
+<p>它们<strong>完全可以同时成立</strong>：同一个模型沿预训练轨迹走，base prompted 表现一路变好，但 SFT 之后的表现先好后坏。目前还没有人做过一个把两者画在同一张图上的实验：沿 iso-loss 等高线（Du 的设定），同时测 prompted 终点和 SFT 终点。如果前者平、后者不平，就能把争议从「谁对谁错」变成「两段机制不同」。</p>
+<h3>更多反方证据</h3>
+<ul>
+<li><strong>Liu et al. (2023)</strong>：即使两个模型达到了相同的最低预训练 loss，loss 景观的平坦度（Hessian 迹）仍然不同，下游表现也不同。注意他们的设定是「训练收敛后继续练」，和 Du 的「远未收敛」不同。</li>
+<li><strong>Chang et al. (2024)</strong>：在事实知识任务上，更多预训练数据对知识获取和保持没有显著帮助，但 7B 的效率高于 1B——说明扩大模型和增加预训练数据是两种不同的机制。</li>
+<li><strong>理论工作 (2026)</strong>：在简化模型上数学证明，过度预训练会让 LoRA 微调收敛变慢，且可塑性丧失的起始点服从亚线性律 <span class="math inline">T \propto P^{0.83}</span>。</li>
+</ul>
+<hr />
+<h2>五、可塑性衰减：一条跨越三十年的线索</h2>
+<p>Springer 的发现并不孤立，它属于一条更长的研究脉络——<strong>可塑性丧失（loss of plasticity）</strong>。</p>
+<p>这条线的起点是 Ash &amp; Adams (NeurIPS 2020)：用已训好的权重 warm-start 一个新任务，训练 loss 可以打到零，但测试表现反而不如从零开始。Dohare et al. (Nature 2024) 把它做成了大规模演示：在 ImageNet 上连续做 2000 个二分类任务，准确率从 89% 掉到 77%——和浅层网络一个水平。他们的解决方案是 continual backpropagation：不断重新初始化利用率低的神经元。</p>
+<p>在视觉迁移中，Deng et al. (ICCV 2023) 发现中间 checkpoint 有时比完全训好的模型迁移更好。Kumar et al. (ICLR 2022) 揭示了全参数微调会扭曲预训练特征：ID 子空间里的特征被改掉，正交方向没动，导致分布偏移下表现变差。他们提出 LP-FT（先线性探测再全量微调），本质就是减少微调对已有特征的破坏。</p>
+<p>2026 年的新工作把这条线推到了 SFT→RL 的交接处：过度 SFT 的 checkpoint 输出熵极低、参数景观尖锐，后续 RL 梯度大但有效更新小，几乎推不动。</p>
+<hr />
+<h2>六、能不能提前预测下游表现？</h2>
+<p>另一条相对独立的线索是：不去争论 <span class="math inline">N</span> 和 <span class="math inline">D_{\text{pre}}</span> 谁更重要，而是直接问<strong>能不能用小实验预测大模型的下游表现</strong>。</p>
+<h3>两段式预测（loss 作为中间桥梁）</h3>
+<p>多项工作发现，直接从计算量预测准确率很难，但可以分两步走：先预测 loss，再从 loss 预测准确率。</p>
+<ul>
+<li><strong>Bhagia et al. (2024)</strong> 用只花 1% 算力的 &quot;ladder&quot; 模型预测 7B/13B 的任务表现，误差 &lt;2 个百分点。</li>
+<li><strong>Brandfonbrener et al. (2024)</strong> 发现 loss-to-loss 关系（一个数据集的 loss 预测另一个的 loss）比 loss-to-accuracy 稳定得多，可以外推到 20 倍 FLOP。</li>
+<li><strong>Gadre et al. (2024)</strong> 在 104 个模型（11M–6.9B）上验证：用 1/20 的算力可以预测 17 个任务的平均 top-1 error，但<strong>单个任务的预测噪声远大于平均</strong>。</li>
+</ul>
+<h3>但可预测性远非普遍</h3>
+<p>Lourie et al. (2025) 重新审视了 Gadre 的 46 个下游任务，发现<strong>只有 39% 呈现平滑可预测的改善</strong>。其余 61% 呈现反向趋势、非单调、高噪声、无趋势或突变（emergence）。更麻烦的是，换一套验证数据或改变实验细节，同一任务的曲线可以发生<strong>定性反转</strong>——从上升变成无趋势。</p>
+<h3>两个被忽视的方法论储备</h3>
+<p><strong>迁移性估计</strong>：视觉和 NLP 社区发展了一系列不需要训练就能估计迁移效果的指标（LEEP、LogME 等），但 LLM scaling law 文献几乎没有引用它们。这些指标预测的是终点表现而非学习速度，且在全参数微调后精度明显下降——因为它们作用在冻结表征上。用这类廉价代理预测微调速度仍是空地。</p>
+<p><strong>学习曲线外推</strong>：AutoML 社区研究学习曲线已有三十年（参数化曲线族、贝叶斯神经网络、LCDB 数据库等），但几乎没有被 LLM 文献引用。特别值得注意的是 LCDB 1.1 的发现：之前认为学习曲线大多单调且凸，但提高采样密度后发现约 15% 的曲线明显不符合这个假设。<strong>不要默认微调曲线是良好行为的。</strong></p>
+<hr />
+<h2>七、记忆动力学：模型需要看多少遍才能学会一个事实</h2>
+<p>一个更微观的视角是：模型到底需要多少次训练曝光才能记住一条知识？</p>
+<ul>
+<li><strong>Zucchet et al. (2025)</strong> 在合成事实任务上观察到三阶段学习：先是一段表现停滞的 plateau，与注意力回忆电路的形成同步；然后知识和幻觉同时涌现。他们还发现用微调注入新知识会快速破坏已有的参数化记忆。</li>
+<li><strong>Muennighoff et al. (2023)</strong> 用 400 次实验发现：重复训练 4 个 epoch 以内几乎没有损失；约 16 个 epoch 后收益明显递减；40 个 epoch 后完全归零。</li>
+<li><strong>Michaud et al. (2023)</strong> 提出量化模型：知识和技能是离散的「量子」，按频率降序被学习。如果能估计某种能力在语料中的出现频率，就能预测它何时被习得。</li>
+<li><strong>Schaeffer et al. (2023)</strong> 提供了重要的方法论警告：阈值型指标（如准确率）会人为制造出阶跃式的「涌现」——在测量学习速度时必须同时报告连续指标。</li>
+</ul>
+<hr />
+<h2>八、持续预训练：模型已经训好了，再喂新数据会怎样</h2>
+<p>持续预训练（continual pretraining）把 Q2 从「预训练多久最好」推广到「已经训完的模型再吃新分布会怎样」。核心挑战是新旧知识的平衡：</p>
+<ul>
+<li><strong>D-CPT Law</strong> 给出了通用语料与领域语料的最优混合比公式，并引入 &quot;领域可学性系数&quot; 来做跨域迁移。</li>
+<li>实操上，学习率必须重新加热（rewarm + redecay），否则 cosine schedule 的终点 LR 太小、模型适应不了新数据。弱偏移场景下 5% 的旧数据重放就够，强偏移需要 25%。</li>
+<li><strong>PTPP-aware laws</strong> 是目前最接近 Q2 的持续预训练版本：把 tokens-per-parameter（模型被训了多&quot;满&quot;）写成 scaling law 的显式条件变量，用两个 PTPP 值拟合后可以预测未见过的第三个值上的适应 loss。</li>
+</ul>
+<p>一个贯穿持续预训练和可塑性衰减的隐忧是 <strong>representation collapse</strong>：目标域的表现可以一直上升，但模型对未来新任务的适应能力在持续下降——hidden state 的有效秩在逐步缩小。</p>
+<hr />
+<h2>九、可复现的实验资源</h2>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>核心价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pythia</strong> (70M–12B)</td>
+<td>所有尺寸在完全相同的数据和顺序上训练，是做 iso-loss 配对的最佳选择</td>
+</tr>
+<tr>
+<td><strong>OLMo / OLMo-2</strong> (1B–32B)</td>
+<td>完整开放 checkpoint，可复现 catastrophic overtraining</td>
+</tr>
+<tr>
+<td><strong>LLM360 Amber</strong> (7B)</td>
+<td>360 个中间 checkpoint，密度最高</td>
+</tr>
+<tr>
+<td><strong>mlfoundations/scaling</strong></td>
+<td>104 个模型的完整 loss 和 46 个任务的评测结果，可直接下载做零训练探索</td>
+</tr>
+<tr>
+<td><strong>Lin et al. 微调曲线</strong></td>
+<td>30 个模型 × 3 个数据集 × 多个数据量级的微调表现，现成的学习曲线数据</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>十、文献空白与可验证的假设</h2>
+<p>本次综述识别出的主要空白：</p>
+<ol>
+<li><strong>iso-loss 配对 + SFT 口径</strong>：Du 做了 iso-loss 但只测 prompting；Springer 做了 SFT 但没有 iso-loss。两者的交叉实验没人做过。</li>
+<li><strong>iso-loss 配对 + 学习速度口径</strong>：完全空白。</li>
+<li><strong><span class="math inline">T(N, D_{\text{pre}})</span> 的完整二维场</strong>：Barnett 有 <span class="math inline">D_{\text{pre}}</span> 轴但没有 <span class="math inline">N</span> 轴；Tirumala 有 <span class="math inline">N</span> 轴但没有 <span class="math inline">D_{\text{pre}}</span> 变化。</li>
+<li><strong>Catastrophic overtraining 拐点与 <span class="math inline">N</span> 的关系</strong>：Springer 观察到 1B 有拐点、7B 没有，但还没有人拟合这条曲线。</li>
+<li><strong>迁移性估计 × LLM scaling law</strong>：用 LogME 等廉价指标预测微调速度（而非终点），两个社区几乎不互相引用。</li>
+</ol>
+<p><strong>可预注册的假设</strong>：</p>
+<ul>
+<li><strong>H1</strong>：微调曲线的起始位置（从哪开始学）主要由预训练 loss 和任务对齐度决定，和 <span class="math inline">N</span> 关系较弱。</li>
+<li><strong>H2</strong>：微调曲线的斜率（学得多快）主要由 <span class="math inline">N</span> 决定，而对 <span class="math inline">D_{\text{pre}}</span> 呈 U 形——先变好、后变差，拐点随 <span class="math inline">N</span> 右移。</li>
+<li><strong>H3</strong>：微调前几步的 loss 下降速率就能预测整条学习曲线。</li>
+</ul>
+<p><strong>核心判定图</strong>：沿 iso-loss 等高线，同时画三条曲线——prompted 终点、SFT 终点、学习速度 <span class="math inline">T</span>。如果第一条是平的（复现 Du）但后两条不平，争议就不再是「谁对谁错」，而是「prompting 和 SFT 是两段不同的物理过程」。</p>
 
 </div>
 

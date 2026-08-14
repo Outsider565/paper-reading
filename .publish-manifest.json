@@ -18,42 +18,42 @@
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.png",
       "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.webp",
-      "width": 1236,
+      "width": 1311,
       "height": 1600,
-      "bytes": 151848,
-      "cached": "true"
+      "bytes": 193290,
+      "quality": 82
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.png",
       "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.webp",
-      "width": 1236,
+      "width": 1058,
       "height": 1600,
-      "bytes": 217036,
-      "cached": "true"
+      "bytes": 250054,
+      "quality": 82
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.png",
       "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.webp",
-      "width": 1236,
+      "width": 1058,
       "height": 1600,
-      "bytes": 145094,
-      "cached": "true"
+      "bytes": 161580,
+      "quality": 82
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.png",
       "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.webp",
-      "width": 1236,
+      "width": 1058,
       "height": 1600,
-      "bytes": 166876,
-      "cached": "true"
+      "bytes": 190744,
+      "quality": 82
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.png",
       "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.webp",
-      "width": 1236,
+      "width": 1058,
       "height": 1600,
-      "bytes": 191290,
-      "cached": "true"
+      "bytes": 216724,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2310.04408-recomp/raw/figs/recomp_part_1.png",
@@ -83,9 +83,9 @@
       "source": "compaction/papers/2310.05736-llmlingua/raw/figures/framework_LLMlingua.png",
       "output": "publish/paper-reading/compaction/papers/2310.05736-llmlingua/raw/figures/framework_LLMlingua.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 99256,
-      "cached": "true"
+      "height": 906,
+      "bytes": 145586,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2310.05736-llmlingua/raw/figures/compression_ratio_performance_gsm8k.png",
@@ -123,9 +123,9 @@
       "source": "compaction/papers/2310.06839-longllmlingua/raw/figures/LongLLMLingua_framework.png",
       "output": "publish/paper-reading/compaction/papers/2310.06839-longllmlingua/raw/figures/LongLLMLingua_framework.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 111616,
-      "cached": "true"
+      "height": 748,
+      "bytes": 129392,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2310.06839-longllmlingua/raw/figures/recall_distribution.png",
@@ -139,9 +139,9 @@
       "source": "compaction/papers/2310.06839-longllmlingua/raw/figures/recovery_case_crop.png",
       "output": "publish/paper-reading/compaction/papers/2310.06839-longllmlingua/raw/figures/recovery_case_crop.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 22958,
-      "cached": "true"
+      "height": 190,
+      "bytes": 38590,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2310.06839-longllmlingua/raw/figures/longllmlingua_4x_gpt3.5_lost_in_the_middle.png",
@@ -258,34 +258,34 @@
     {
       "source": "compaction/papers/2409.01579-adacomp/raw/picture_1.png",
       "output": "publish/paper-reading/compaction/papers/2409.01579-adacomp/raw/picture_1.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 87002,
-      "cached": "true"
+      "width": 1176,
+      "height": 1207,
+      "bytes": 157408,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2409.01579-adacomp/raw/confusion_matrix.png",
       "output": "publish/paper-reading/compaction/papers/2409.01579-adacomp/raw/confusion_matrix.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 24556,
-      "cached": "true"
+      "height": 1276,
+      "bytes": 33940,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2409.01579-adacomp/raw/picture_2.png",
       "output": "publish/paper-reading/compaction/papers/2409.01579-adacomp/raw/picture_2.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 39708,
-      "cached": "true"
+      "height": 861,
+      "bytes": 52312,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2409.01579-adacomp/raw/case_study.png",
       "output": "publish/paper-reading/compaction/papers/2409.01579-adacomp/raw/case_study.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 88286,
-      "cached": "true"
+      "width": 1515,
+      "height": 986,
+      "bytes": 169766,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2409.12468-favicomp/raw/images/method.png",
@@ -323,9 +323,9 @@
       "source": "compaction/papers/2304.08467-gist-tokens/raw/decoder_only_mask_horiz.png",
       "output": "publish/paper-reading/compaction/papers/2304.08467-gist-tokens/raw/decoder_only_mask_horiz.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 15704,
-      "cached": "true"
+      "height": 1148,
+      "bytes": 23966,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2304.08467-gist-tokens/raw/all_metrics_llama.png",
@@ -363,33 +363,33 @@
       "source": "compaction/papers/2307.06945-icae/raw/figures/icae_usecase.png",
       "output": "publish/paper-reading/compaction/papers/2307.06945-icae/raw/figures/icae_usecase.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 96240,
-      "cached": "true"
+      "height": 878,
+      "bytes": 148956,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2307.06945-icae/raw/figures/ae_learning.png",
       "output": "publish/paper-reading/compaction/papers/2307.06945-icae/raw/figures/ae_learning.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 37070,
-      "cached": "true"
+      "height": 816,
+      "bytes": 42136,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2307.06945-icae/raw/figures/icae_ft.png",
       "output": "publish/paper-reading/compaction/papers/2307.06945-icae/raw/figures/icae_ft.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 36814,
-      "cached": "true"
+      "height": 759,
+      "bytes": 39598,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2307.06945-icae/raw/figures/icae_concat_demo.png",
       "output": "publish/paper-reading/compaction/papers/2307.06945-icae/raw/figures/icae_concat_demo.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 10562,
-      "cached": "true"
+      "width": 1473,
+      "height": 1306,
+      "bytes": 30468,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2307.06945-icae/raw/figures/result-llama.png",
@@ -514,18 +514,18 @@
     {
       "source": "compaction/papers/2405.17062-uniicl/raw/images/compress.png",
       "output": "publish/paper-reading/compaction/papers/2405.17062-uniicl/raw/images/compress.webp",
-      "width": 617,
-      "height": 762,
-      "bytes": 13654,
-      "cached": "true"
+      "width": 523,
+      "height": 626,
+      "bytes": 13800,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2405.17062-uniicl/raw/images/generate.png",
       "output": "publish/paper-reading/compaction/papers/2405.17062-uniicl/raw/images/generate.webp",
-      "width": 620,
-      "height": 470,
-      "bytes": 9634,
-      "cached": "true"
+      "width": 520,
+      "height": 394,
+      "bytes": 9390,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2405.17062-uniicl/raw/images/db.png",
@@ -611,25 +611,25 @@
       "source": "compaction/papers/2406.13618-in-context-former/raw/pic/model.png",
       "output": "publish/paper-reading/compaction/papers/2406.13618-in-context-former/raw/pic/model.webp",
       "width": 1600,
-      "height": 1131,
-      "bytes": 41326,
-      "cached": "true"
+      "height": 507,
+      "bytes": 58486,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2406.13618-in-context-former/raw/pic/training.png",
       "output": "publish/paper-reading/compaction/papers/2406.13618-in-context-former/raw/pic/training.webp",
-      "width": 1600,
-      "height": 1131,
-      "bytes": 38800,
-      "cached": "true"
+      "width": 1232,
+      "height": 466,
+      "bytes": 56572,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2406.13618-in-context-former/raw/pic/divide-and-conquer.png",
       "output": "publish/paper-reading/compaction/papers/2406.13618-in-context-former/raw/pic/divide-and-conquer.webp",
       "width": 1600,
-      "height": 1131,
-      "bytes": 41574,
-      "cached": "true"
+      "height": 443,
+      "bytes": 45844,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2407.02043-tool-compress/raw/fig_task.png",
@@ -803,17 +803,17 @@
       "source": "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/main.png",
       "output": "publish/paper-reading/compaction/papers/2502.13374-task-agnostic-pc/raw/figures/main.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 47852,
-      "cached": "true"
+      "height": 719,
+      "bytes": 57034,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/RL.png",
       "output": "publish/paper-reading/compaction/papers/2502.13374-task-agnostic-pc/raw/figures/RL.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 26928,
-      "cached": "true"
+      "width": 1219,
+      "height": 799,
+      "bytes": 32280,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/bannar.png",
@@ -843,17 +843,17 @@
       "source": "compaction/papers/2507.02259-memagent/raw/figs/method.png",
       "output": "publish/paper-reading/compaction/papers/2507.02259-memagent/raw/figs/method.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 53822,
-      "cached": "true"
+      "height": 646,
+      "bytes": 64734,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2507.02259-memagent/raw/figs/arch.png",
       "output": "publish/paper-reading/compaction/papers/2507.02259-memagent/raw/figs/arch.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 54370,
-      "cached": "true"
+      "height": 726,
+      "bytes": 58940,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2507.02259-memagent/raw/figs/algo.png",
@@ -915,9 +915,9 @@
       "source": "compaction/papers/2509.13313-resum/raw/images/ReSum-RL.png",
       "output": "publish/paper-reading/compaction/papers/2509.13313-resum/raw/images/ReSum-RL.webp",
       "width": 1600,
-      "height": 610,
-      "bytes": 29900,
-      "cached": "true"
+      "height": 386,
+      "bytes": 50222,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2509.13313-resum/raw/images/websailor_30b_reward_full.png",
@@ -1051,9 +1051,9 @@
       "source": "compaction/papers/2308.15022-recursive-summary/raw/model.png",
       "output": "publish/paper-reading/compaction/papers/2308.15022-recursive-summary/raw/model.webp",
       "width": 1600,
-      "height": 1131,
-      "bytes": 48888,
-      "cached": "true"
+      "height": 600,
+      "bytes": 70298,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2308.15022-recursive-summary/raw/ours.png",
@@ -1082,26 +1082,26 @@
     {
       "source": "compaction/papers/2310.08560-memgpt/raw/images/memgpt_system_flow_2.png",
       "output": "publish/paper-reading/compaction/papers/2310.08560-memgpt/raw/images/memgpt_system_flow_2.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 38202,
-      "cached": "true"
+      "width": 1243,
+      "height": 480,
+      "bytes": 47788,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_correction.png",
       "output": "publish/paper-reading/compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_correction.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 42664,
-      "cached": "true"
+      "height": 329,
+      "bytes": 42524,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_search.png",
       "output": "publish/paper-reading/compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_search.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 42664,
-      "cached": "true"
+      "height": 329,
+      "bytes": 42524,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2503.08026-rmm/raw/img/pr1.png",
@@ -1123,17 +1123,17 @@
       "source": "compaction/papers/2511.21726-sumer/raw/fig1.png",
       "output": "publish/paper-reading/compaction/papers/2511.21726-sumer/raw/fig1.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 53292,
-      "cached": "true"
+      "height": 953,
+      "bytes": 67902,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2511.21726-sumer/raw/fig2.png",
       "output": "publish/paper-reading/compaction/papers/2511.21726-sumer/raw/fig2.webp",
       "width": 1600,
-      "height": 640,
-      "bytes": 38642,
-      "cached": "true"
+      "height": 648,
+      "bytes": 45006,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2511.21726-sumer/raw/fig3.png",
@@ -1178,10 +1178,10 @@
     {
       "source": "compaction/papers/2203.08913-memorizing-transformer/raw/figures/batching.png",
       "output": "publish/paper-reading/compaction/papers/2203.08913-memorizing-transformer/raw/figures/batching.webp",
-      "width": 1400,
-      "height": 200,
-      "bytes": 12792,
-      "cached": "true"
+      "width": 967,
+      "height": 177,
+      "bytes": 12806,
+      "quality": 82
     },
     {
       "source": "compaction/papers/2203.08913-memorizing-transformer/raw/figures/scaling_plot.png",
@@ -1491,25 +1491,25 @@
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 35082,
-      "cached": "true"
+      "height": 493,
+      "bytes": 37366,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 53912,
-      "cached": "true"
+      "width": 1592,
+      "height": 646,
+      "bytes": 78620,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 23892,
-      "cached": "true"
+      "width": 988,
+      "height": 458,
+      "bytes": 30062,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.png",
@@ -2634,34 +2634,34 @@
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 27536,
-      "cached": "true"
+      "width": 1483,
+      "height": 606,
+      "bytes": 35978,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 59794,
-      "cached": "true"
+      "width": 1528,
+      "height": 700,
+      "bytes": 82884,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 44008,
-      "cached": "true"
+      "height": 375,
+      "bytes": 51044,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 52872,
-      "cached": "true"
+      "width": 1491,
+      "height": 638,
+      "bytes": 74584,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/fine_tuning_theory_diagram_original.png",
@@ -3066,10 +3066,10 @@
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.webp",
-      "width": 1600,
-      "height": 800,
-      "bytes": 25594,
-      "cached": "true"
+      "width": 1375,
+      "height": 755,
+      "bytes": 26912,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/double_10_v2.png",
@@ -3122,10 +3122,10 @@
     {
       "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.webp",
-      "width": 1146,
+      "width": 848,
       "height": 250,
-      "bytes": 18028,
-      "cached": "true"
+      "bytes": 18058,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/parameters-steps-data-emergence-and-scaling-scalingtop.png",
@@ -3218,10 +3218,10 @@
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.webp",
-      "width": 1500,
-      "height": 844,
-      "bytes": 42054,
-      "cached": "true"
+      "width": 1310,
+      "height": 412,
+      "bytes": 56428,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure1.png",
@@ -3234,10 +3234,10 @@
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.webp",
-      "width": 1500,
-      "height": 844,
-      "bytes": 36048,
-      "cached": "true"
+      "width": 1310,
+      "height": 329,
+      "bytes": 36290,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure2.png",
@@ -3450,10 +3450,10 @@
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.webp",
-      "width": 959,
-      "height": 719,
-      "bytes": 24692,
-      "cached": "true"
+      "width": 812,
+      "height": 571,
+      "bytes": 23938,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_error_models.png",
@@ -3946,10 +3946,10 @@
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.webp",
-      "width": 1131,
-      "height": 1600,
-      "bytes": 39880,
-      "cached": "true"
+      "width": 1228,
+      "height": 411,
+      "bytes": 49592,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_general.png",
@@ -4147,9 +4147,9 @@
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.webp",
       "width": 1600,
-      "height": 1067,
-      "bytes": 26730,
-      "cached": "true"
+      "height": 1117,
+      "bytes": 30752,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/memorized_sequences.png",
@@ -4163,17 +4163,17 @@
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.webp",
       "width": 1600,
-      "height": 1067,
-      "bytes": 36716,
-      "cached": "true"
+      "height": 1043,
+      "bytes": 44664,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.png",
       "output": "publish/paper-reading/finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.webp",
-      "width": 1236,
-      "height": 1600,
-      "bytes": 43550,
-      "cached": "true"
+      "width": 930,
+      "height": 433,
+      "bytes": 42992,
+      "quality": 82
     },
     {
       "source": "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/4_plots.png",
@@ -4258,50 +4258,50 @@
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.png",
       "output": "publish/paper-reading/gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.webp",
-      "width": 1600,
-      "height": 1200,
-      "bytes": 22204,
-      "cached": "true"
+      "width": 1203,
+      "height": 1075,
+      "bytes": 37286,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig2.png",
       "output": "publish/paper-reading/gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig2.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 35216,
-      "cached": "true"
+      "height": 406,
+      "bytes": 33852,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig3.png",
       "output": "publish/paper-reading/gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig3.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 63252,
-      "cached": "true"
+      "height": 378,
+      "bytes": 62066,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig4.png",
       "output": "publish/paper-reading/gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig4.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 60412,
-      "cached": "true"
+      "height": 399,
+      "bytes": 58836,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig5.png",
       "output": "publish/paper-reading/gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig5.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 50738,
-      "cached": "true"
+      "height": 378,
+      "bytes": 49006,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig6.png",
       "output": "publish/paper-reading/gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig6.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 51936,
-      "cached": "true"
+      "height": 377,
+      "bytes": 50538,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1312.6120-deep-linear-networks/raw/network.png",
@@ -4331,9 +4331,9 @@
       "source": "gradient-flow/papers/1312.6120-deep-linear-networks/raw/DynamCrit.png",
       "output": "publish/paper-reading/gradient-flow/papers/1312.6120-deep-linear-networks/raw/DynamCrit.webp",
       "width": 1600,
-      "height": 918,
-      "bytes": 68186,
-      "cached": "true"
+      "height": 913,
+      "bytes": 85950,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1312.6120-deep-linear-networks/raw/mnist_depth_dependence.png",
@@ -4395,9 +4395,9 @@
       "source": "gradient-flow/papers/1901.09321-fixup/raw/figures/zeroinit_denormalize.png",
       "output": "publish/paper-reading/gradient-flow/papers/1901.09321-fixup/raw/figures/zeroinit_denormalize.webp",
       "width": 1600,
-      "height": 1200,
-      "bytes": 50442,
-      "cached": "true"
+      "height": 848,
+      "bytes": 53954,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1901.09321-fixup/raw/figures/depth_cifar10.png",
@@ -4643,41 +4643,41 @@
       "source": "gradient-flow/papers/2206.00330-b2t-connection/raw/loss_curve_18layer.png",
       "output": "publish/paper-reading/gradient-flow/papers/2206.00330-b2t-connection/raw/loss_curve_18layer.webp",
       "width": 1600,
-      "height": 586,
-      "bytes": 22380,
-      "cached": "true"
+      "height": 629,
+      "bytes": 30170,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/2206.00330-b2t-connection/raw/overview_of_lns.png",
       "output": "publish/paper-reading/gradient-flow/papers/2206.00330-b2t-connection/raw/overview_of_lns.webp",
       "width": 1600,
-      "height": 586,
-      "bytes": 50478,
-      "cached": "true"
+      "height": 809,
+      "bytes": 69810,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/2206.00330-b2t-connection/raw/grad_norm_each_layer.png",
       "output": "publish/paper-reading/gradient-flow/papers/2206.00330-b2t-connection/raw/grad_norm_each_layer.webp",
       "width": 1600,
-      "height": 586,
-      "bytes": 21252,
-      "cached": "true"
+      "height": 584,
+      "bytes": 25702,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/2206.00330-b2t-connection/raw/gradient_of_each_part_withTransformer.png",
       "output": "publish/paper-reading/gradient-flow/papers/2206.00330-b2t-connection/raw/gradient_of_each_part_withTransformer.webp",
-      "width": 1600,
-      "height": 586,
-      "bytes": 14790,
-      "cached": "true"
+      "width": 1096,
+      "height": 1033,
+      "bytes": 26760,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/2206.00330-b2t-connection/raw/heatmap.png",
       "output": "publish/paper-reading/gradient-flow/papers/2206.00330-b2t-connection/raw/heatmap.webp",
       "width": 1600,
-      "height": 586,
-      "bytes": 19878,
-      "cached": "true"
+      "height": 837,
+      "bytes": 29062,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/2206.00330-b2t-connection/raw/training_curve_exclude_postln.png",
@@ -4818,18 +4818,18 @@
     {
       "source": "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_10.png",
       "output": "publish/paper-reading/gradient-flow/papers/1803.09327-spectral-rnn/raw/page_10.webp",
-      "width": 1131,
+      "width": 1172,
       "height": 1600,
-      "bytes": 115222,
-      "cached": "true"
+      "bytes": 183694,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_11.png",
       "output": "publish/paper-reading/gradient-flow/papers/1803.09327-spectral-rnn/raw/page_11.webp",
-      "width": 1131,
+      "width": 1176,
       "height": 1600,
-      "bytes": 113910,
-      "cached": "true"
+      "bytes": 179458,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/2507.13338-lipschitz-transformers/raw/figures/method.png",
@@ -5346,26 +5346,26 @@
     {
       "source": "layer-stacking/papers/2110.07143-bert2bert/raw/pic/attention_maps_compare.png",
       "output": "publish/paper-reading/layer-stacking/papers/2110.07143-bert2bert/raw/pic/attention_maps_compare.webp",
-      "width": 1600,
-      "height": 500,
-      "bytes": 22974,
-      "cached": "true"
+      "width": 1268,
+      "height": 397,
+      "bytes": 22906,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v2.png",
       "output": "publish/paper-reading/layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v2.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 44528,
-      "cached": "true"
+      "width": 1496,
+      "height": 775,
+      "bytes": 79750,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v3.png",
       "output": "publish/paper-reading/layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v3.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 21804,
-      "cached": "true"
+      "width": 1516,
+      "height": 609,
+      "bytes": 34688,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2110.07143-bert2bert/raw/pic/mlm_loss_bert_base_report_paper_bincode_page1_flops.png",
@@ -5506,10 +5506,10 @@
     {
       "source": "layer-stacking/papers/2203.06211-staged-training/raw/figs/figure1_v2.png",
       "output": "publish/paper-reading/layer-stacking/papers/2203.06211-staged-training/raw/figs/figure1_v2.webp",
-      "width": 1236,
-      "height": 1600,
-      "bytes": 30316,
-      "cached": "true"
+      "width": 1600,
+      "height": 1171,
+      "bytes": 39574,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2203.06211-staged-training/raw/figs/main_gpt2large_width_token.png",
@@ -5643,17 +5643,17 @@
       "source": "layer-stacking/papers/2409.19044-midas/raw/Media/last_stacking_blk4_ffn_layer1.linear.w.png",
       "output": "publish/paper-reading/layer-stacking/papers/2409.19044-midas/raw/Media/last_stacking_blk4_ffn_layer1.linear.w.webp",
       "width": 1600,
-      "height": 1067,
-      "bytes": 43316,
-      "cached": "true"
+      "height": 1135,
+      "bytes": 46568,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2409.19044-midas/raw/Media/middle_stacking_blk4_ffn_layer1.linear.w.png",
       "output": "publish/paper-reading/layer-stacking/papers/2409.19044-midas/raw/Media/middle_stacking_blk4_ffn_layer1.linear.w.webp",
       "width": 1600,
-      "height": 1067,
-      "bytes": 44204,
-      "cached": "true"
+      "height": 1135,
+      "bytes": 47810,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2409.19044-midas/raw/Media/stacking_graphic_new.png",
@@ -5714,10 +5714,10 @@
     {
       "source": "layer-stacking/papers/2401.02415-llama-pro/raw/figure/identity_copy.png",
       "output": "publish/paper-reading/layer-stacking/papers/2401.02415-llama-pro/raw/figure/identity_copy.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 35620,
-      "cached": "true"
+      "width": 969,
+      "height": 1371,
+      "bytes": 58228,
+      "quality": 82
     },
     {
       "source": "layer-stacking/papers/2401.02415-llama-pro/raw/figure/pretrain_scatter.png",
@@ -6010,10 +6010,10 @@
     {
       "source": "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/rep_analysis.png",
       "output": "publish/paper-reading/loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/rep_analysis.webp",
-      "width": 296,
-      "height": 119,
-      "bytes": 4812,
-      "cached": "true"
+      "width": 292,
+      "height": 115,
+      "bytes": 4736,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/c1_all_similarity.png",
@@ -6050,10 +6050,10 @@
     {
       "source": "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/skipping_layer.png",
       "output": "publish/paper-reading/loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/skipping_layer.webp",
-      "width": 209,
-      "height": 116,
-      "bytes": 1304,
-      "cached": "true"
+      "width": 205,
+      "height": 111,
+      "bytes": 1370,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/layer_interventions_all.png",
@@ -6186,34 +6186,34 @@
     {
       "source": "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page2.png",
       "output": "publish/paper-reading/loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page2.webp",
-      "width": 1131,
+      "width": 1070,
       "height": 1600,
-      "bytes": 275432,
-      "cached": "true"
+      "bytes": 334298,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page3.png",
       "output": "publish/paper-reading/loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page3.webp",
-      "width": 1131,
+      "width": 1068,
       "height": 1600,
-      "bytes": 259894,
-      "cached": "true"
+      "bytes": 312044,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page4.png",
       "output": "publish/paper-reading/loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page4.webp",
-      "width": 1131,
+      "width": 1075,
       "height": 1600,
-      "bytes": 257582,
-      "cached": "true"
+      "bytes": 311926,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page5.png",
       "output": "publish/paper-reading/loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page5.webp",
-      "width": 1131,
+      "width": 1068,
       "height": 1600,
-      "bytes": 262584,
-      "cached": "true"
+      "bytes": 318334,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.21999-ut-need-memory/raw/fig_init_trap.png",
@@ -6362,34 +6362,34 @@
     {
       "source": "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_unitf.png",
       "output": "publish/paper-reading/loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_unitf.webp",
-      "width": 1236,
+      "width": 1186,
       "height": 1600,
-      "bytes": 179054,
-      "cached": "true"
+      "bytes": 220404,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalparam.png",
       "output": "publish/paper-reading/loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalparam.webp",
-      "width": 1236,
+      "width": 1186,
       "height": 1600,
-      "bytes": 236256,
-      "cached": "true"
+      "bytes": 285474,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_hpsearch.png",
       "output": "publish/paper-reading/loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_hpsearch.webp",
-      "width": 1236,
+      "width": 1187,
       "height": 1600,
-      "bytes": 262700,
-      "cached": "true"
+      "bytes": 312788,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalflops.png",
       "output": "publish/paper-reading/loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalflops.webp",
-      "width": 1236,
+      "width": 1186,
       "height": 1600,
-      "bytes": 305492,
-      "cached": "true"
+      "bytes": 378426,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.11791-mechanistic-analysis-looped-lm/raw/figures/splash_trajectory.png",
@@ -6507,9 +6507,9 @@
       "source": "loop-models/papers/2604.07822-loop-think-generalize/raw/images/recurrent_model.png",
       "output": "publish/paper-reading/loop-models/papers/2604.07822-loop-think-generalize/raw/images/recurrent_model.webp",
       "width": 1600,
-      "height": 223,
-      "bytes": 15028,
-      "cached": "true"
+      "height": 191,
+      "bytes": 15608,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.07822-loop-think-generalize/raw/images/dataset.png",
@@ -6826,10 +6826,10 @@
     {
       "source": "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/first_figure.png",
       "output": "publish/paper-reading/loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/first_figure.webp",
-      "width": 1067,
-      "height": 1600,
-      "bytes": 29998,
-      "cached": "true"
+      "width": 1600,
+      "height": 477,
+      "bytes": 47982,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/arxiv_loop.png",
@@ -6931,25 +6931,25 @@
       "source": "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/lego_blocks_v3.png",
       "output": "publish/paper-reading/loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/lego_blocks_v3.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 32038,
-      "cached": "true"
+      "height": 1068,
+      "bytes": 67006,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/OISC.png",
       "output": "publish/paper-reading/loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/OISC.webp",
-      "width": 1444,
-      "height": 322,
-      "bytes": 12224,
-      "cached": "true"
+      "width": 1376,
+      "height": 238,
+      "bytes": 11958,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/Unified_Framework_rev.png",
       "output": "publish/paper-reading/loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/Unified_Framework_rev.webp",
       "width": 1600,
-      "height": 1236,
-      "bytes": 51832,
-      "cached": "true"
+      "height": 710,
+      "bytes": 51940,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.26106-looped-diffusion-lm/raw/figure/fig1.png",
@@ -7067,9 +7067,9 @@
       "source": "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/depth_breadth_scaling_pareto_heatmap.png",
       "output": "publish/paper-reading/loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/depth_breadth_scaling_pareto_heatmap.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 26204,
-      "cached": "true"
+      "height": 669,
+      "bytes": 28872,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/sudoku1k_accuracy_vs_nfe.png",
@@ -7083,9 +7083,9 @@
       "source": "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/test_time_scaling_convergence.png",
       "output": "publish/paper-reading/loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/test_time_scaling_convergence.webp",
       "width": 1600,
-      "height": 1600,
-      "bytes": 61878,
-      "cached": "true"
+      "height": 1320,
+      "bytes": 76732,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/breadth_scaling_efficiency_curves.png",
@@ -7291,17 +7291,17 @@
       "source": "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/attractor_model.png",
       "output": "publish/paper-reading/loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/attractor_model.webp",
       "width": 1600,
-      "height": 1600,
-      "bytes": 53394,
-      "cached": "true"
+      "height": 780,
+      "bytes": 63250,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/fig5.png",
       "output": "publish/paper-reading/loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/fig5.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 27442,
-      "cached": "true"
+      "height": 411,
+      "bytes": 28434,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/trajectory_comparison.png",
@@ -7331,9 +7331,9 @@
       "source": "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/flops.png",
       "output": "publish/paper-reading/loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/flops.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 29926,
-      "cached": "true"
+      "height": 601,
+      "bytes": 31334,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/memory_vs_T_large.png",
@@ -7963,9 +7963,9 @@
       "source": "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/learning_dynamics.png",
       "output": "publish/paper-reading/loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/learning_dynamics.webp",
       "width": 1600,
-      "height": 1244,
-      "bytes": 56450,
-      "cached": "true"
+      "height": 829,
+      "bytes": 56794,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2603.04971-moue-mixture-universal-experts/raw/figures/obs2.png",
@@ -8050,10 +8050,10 @@
     {
       "source": "loop-models/papers/2603.01914-adaponderlm/raw/fig/adaponder_framework.png",
       "output": "publish/paper-reading/loop-models/papers/2603.01914-adaponderlm/raw/fig/adaponder_framework.webp",
-      "width": 1131,
-      "height": 1600,
-      "bytes": 23596,
-      "cached": "true"
+      "width": 912,
+      "height": 370,
+      "bytes": 35406,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2603.01914-adaponderlm/raw/inference.png",
@@ -8106,26 +8106,26 @@
     {
       "source": "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p4.png",
       "output": "publish/paper-reading/loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p4.webp",
-      "width": 1279,
-      "height": 1600,
-      "bytes": 60234,
-      "cached": "true"
+      "width": 1567,
+      "height": 573,
+      "bytes": 72972,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p5.png",
       "output": "publish/paper-reading/loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p5.webp",
-      "width": 1279,
-      "height": 1600,
-      "bytes": 53002,
-      "cached": "true"
+      "width": 1551,
+      "height": 1001,
+      "bytes": 64096,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p1.png",
       "output": "publish/paper-reading/loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p1.webp",
-      "width": 1279,
-      "height": 1600,
-      "bytes": 48728,
-      "cached": "true"
+      "width": 1560,
+      "height": 997,
+      "bytes": 57342,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2602.11451-loopformer/raw/assets/architecture.png",
@@ -8475,25 +8475,25 @@
       "source": "loop-models/papers/2511.08577-think-at-hard/raw/figure/idea.png",
       "output": "publish/paper-reading/loop-models/papers/2511.08577-think-at-hard/raw/figure/idea.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 34880,
-      "cached": "true"
+      "height": 212,
+      "bytes": 40638,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2511.08577-think-at-hard/raw/figure/arch.png",
       "output": "publish/paper-reading/loop-models/papers/2511.08577-think-at-hard/raw/figure/arch.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 21256,
-      "cached": "true"
+      "width": 1382,
+      "height": 288,
+      "bytes": 35310,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2511.08577-think-at-hard/raw/figure/duo_attention_expand.png",
       "output": "publish/paper-reading/loop-models/papers/2511.08577-think-at-hard/raw/figure/duo_attention_expand.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 20732,
-      "cached": "true"
+      "width": 1108,
+      "height": 685,
+      "bytes": 32058,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2511.08577-think-at-hard/raw/figure/eval_loss_0_6.png",
@@ -8514,10 +8514,10 @@
     {
       "source": "loop-models/papers/2511.08577-think-at-hard/raw/figure/flow.png",
       "output": "publish/paper-reading/loop-models/papers/2511.08577-think-at-hard/raw/figure/flow.webp",
-      "width": 1600,
-      "height": 900,
-      "bytes": 28468,
-      "cached": "true"
+      "width": 1253,
+      "height": 573,
+      "bytes": 47334,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2511.08577-think-at-hard/raw/figure/experiment/attention.png",
@@ -8531,9 +8531,9 @@
       "source": "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/retrofitting_explainer.png",
       "output": "publish/paper-reading/loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/retrofitting_explainer.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 37100,
-      "cached": "true"
+      "height": 1345,
+      "bytes": 54560,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/which_layers.png",
@@ -8611,25 +8611,25 @@
       "source": "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/radar.png",
       "output": "publish/paper-reading/loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/radar.webp",
       "width": 1600,
-      "height": 1441,
-      "bytes": 66760,
-      "cached": "true"
+      "height": 654,
+      "bytes": 76760,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/main_figure1_cropped.png",
       "output": "publish/paper-reading/loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/main_figure1_cropped.webp",
       "width": 1600,
-      "height": 1442,
-      "bytes": 28812,
-      "cached": "true"
+      "height": 989,
+      "bytes": 40792,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/training_process.png",
       "output": "publish/paper-reading/loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/training_process.webp",
       "width": 1600,
-      "height": 1143,
-      "bytes": 29126,
-      "cached": "true"
+      "height": 206,
+      "bytes": 28340,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/reasoning_benchmark.png",
@@ -8755,9 +8755,9 @@
       "source": "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/Architecture_new.png",
       "output": "publish/paper-reading/loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/Architecture_new.webp",
       "width": 1600,
-      "height": 1131,
-      "bytes": 42226,
-      "cached": "true"
+      "height": 633,
+      "bytes": 43172,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/gen_nll_vs_steps.png",
@@ -9011,9 +9011,9 @@
       "source": "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/analysis/hierarchical_dimensionality.png",
       "output": "publish/paper-reading/loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/analysis/hierarchical_dimensionality.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 55046,
-      "cached": "true"
+      "height": 745,
+      "bytes": 65822,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/2025-06-03-opening-figure.png",
@@ -9034,10 +9034,10 @@
     {
       "source": "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/implicit_jacobian_check.png",
       "output": "publish/paper-reading/loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/implicit_jacobian_check.webp",
-      "width": 1120,
-      "height": 900,
-      "bytes": 63400,
-      "cached": "true"
+      "width": 881,
+      "height": 781,
+      "bytes": 63612,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/2025-01-30-duality.png",
@@ -9075,9 +9075,9 @@
       "source": "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/arch.png",
       "output": "publish/paper-reading/loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/arch.webp",
       "width": 1600,
-      "height": 900,
-      "bytes": 25538,
-      "cached": "true"
+      "height": 407,
+      "bytes": 25756,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/data_pie_chart.png",
@@ -9387,9 +9387,9 @@
       "source": "loop-models/papers/2310.10845-cotformer/raw/cot_v2.png",
       "output": "publish/paper-reading/loop-models/papers/2310.10845-cotformer/raw/cot_v2.webp",
       "width": 248,
-      "height": 314,
-      "bytes": 4686,
-      "cached": "true"
+      "height": 206,
+      "bytes": 4676,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2310.10845-cotformer/raw/cotformer.png",
@@ -9515,25 +9515,25 @@
       "source": "loop-models/papers/2006.08656-multiscale-deq/raw/images/mdeq_full.png",
       "output": "publish/paper-reading/loop-models/papers/2006.08656-multiscale-deq/raw/images/mdeq_full.webp",
       "width": 1600,
-      "height": 1236,
-      "bytes": 63720,
-      "cached": "true"
+      "height": 719,
+      "bytes": 73100,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2006.08656-multiscale-deq/raw/images/residual.png",
       "output": "publish/paper-reading/loop-models/papers/2006.08656-multiscale-deq/raw/images/residual.webp",
       "width": 1600,
-      "height": 1236,
-      "bytes": 34918,
-      "cached": "true"
+      "height": 995,
+      "bytes": 41814,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2006.08656-multiscale-deq/raw/images/cmp.png",
       "output": "publish/paper-reading/loop-models/papers/2006.08656-multiscale-deq/raw/images/cmp.webp",
       "width": 1600,
-      "height": 1236,
-      "bytes": 38406,
-      "cached": "true"
+      "height": 555,
+      "bytes": 46532,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2006.08656-multiscale-deq/raw/images/cifar_plot.png",
@@ -9547,9 +9547,9 @@
       "source": "loop-models/papers/2006.08656-multiscale-deq/raw/images/efficiency.png",
       "output": "publish/paper-reading/loop-models/papers/2006.08656-multiscale-deq/raw/images/efficiency.webp",
       "width": 1600,
-      "height": 1236,
-      "bytes": 49474,
-      "cached": "true"
+      "height": 922,
+      "bytes": 60856,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2006.08656-multiscale-deq/raw/images/normdiff_vs_iter_imagenet.png",
@@ -9586,18 +9586,18 @@
     {
       "source": "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/equm_vs_dnn.png",
       "output": "publish/paper-reading/loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/equm_vs_dnn.webp",
-      "width": 1600,
-      "height": 1236,
-      "bytes": 42118,
-      "cached": "true"
+      "width": 1461,
+      "height": 809,
+      "bytes": 58058,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/fp_onefig.png",
       "output": "publish/paper-reading/loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/fp_onefig.webp",
-      "width": 1600,
-      "height": 1236,
-      "bytes": 21698,
-      "cached": "true"
+      "width": 815,
+      "height": 711,
+      "bytes": 28026,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/result/iter_vs_epoch.png",
@@ -9970,18 +9970,18 @@
     {
       "source": "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/samson_abundances.png",
       "output": "publish/paper-reading/loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/samson_abundances.webp",
-      "width": 1236,
-      "height": 1600,
-      "bytes": 53954,
-      "cached": "true"
+      "width": 1257,
+      "height": 458,
+      "bytes": 80196,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/apex_abundances.png",
       "output": "publish/paper-reading/loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/apex_abundances.webp",
-      "width": 1236,
-      "height": 1600,
-      "bytes": 103404,
-      "cached": "true"
+      "width": 1214,
+      "height": 564,
+      "bytes": 169130,
+      "quality": 82
     },
     {
       "source": "loop-models/papers/2602.07845-rd-vla/raw/figures/fig1.jpeg",
@@ -10144,7 +10144,7 @@
   "files": {
     "registry.json": "5cbafc2f301f44d6770ab5638ae05e07f9474262c9234cc7fa444bc7bb1e7a19",
     "index.html": "83a9e22dc4d4c582e62d7b32b2fc8eb836761c83e0fa67b96235375e29d90227",
-    ".publish-manifest.json": "fcf8e3098e403c2983b3538f09ab869f9cc41f2e0c116e492f6415b3b94c62aa",
+    ".publish-manifest.json": "72b7596a06d700e63a161a933d56b2ab2cc544f9c7bcc42ee3c56cb3e62c95d5",
     "404.html": "83a9e22dc4d4c582e62d7b32b2fc8eb836761c83e0fa67b96235375e29d90227",
     "README.md": "83611cd4fa8cdd490171336d01783a0fe4780185834d314005cf4451868c85e0",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -10168,14 +10168,14 @@
     "layer-stacking/papers/2310.07999-lemon/raw/plots/illustrations/whole-MHA_v3.webp": "cc6b0a60c682ab1f311ecdc21df6bd1df57228c297e0e8ca3948d0d452259877",
     "layer-stacking/papers/2310.07999-lemon/raw/plots/illustrations/whole-depth.webp": "9ac797ea011e82f11f98f2273a807e1084f7356890ab4958affd0d2d06a3b945",
     "layer-stacking/papers/2409.19044-midas/raw/Media/iso_taskgroup_openbookqa.webp": "3918c6fd2c661a3195aab85cca67e37e354c5bc5a728bcffc633813123fbe18a",
-    "layer-stacking/papers/2409.19044-midas/raw/Media/last_stacking_blk4_ffn_layer1.linear.w.webp": "37ddf5638e8c0581da4437678439d55e12dbd6370b3f7b8c697dcdebb5e129b1",
+    "layer-stacking/papers/2409.19044-midas/raw/Media/last_stacking_blk4_ffn_layer1.linear.w.webp": "0d4d4d6a844a2317a375d52d97e2ccf50bb5aedb38ec321004a8c82c6658a976",
     "layer-stacking/papers/2409.19044-midas/raw/Media/primitives_summary_bar_chart.webp": "3d23fd3793f17f4e5cc9a2e15e658b419821f5e8c37a9ea90f362579a2eb85ee",
     "layer-stacking/papers/2409.19044-midas/raw/Media/linearity_bert_base.webp": "55c6c0f39f16ae0eddb781c881c700043b2058a12fe33b7ff147f62bae888dce",
     "layer-stacking/papers/2409.19044-midas/raw/Media/stacking_graphic_new.webp": "1757b51c37d4030a4c8c9077915b58fd45102dc2dd14455ab007f739aa3db386",
     "layer-stacking/papers/2409.19044-midas/raw/Media/albert_similarity.webp": "0dbd9c57c1deaaf24354b582ba39d8ac7640f42da38f4529585a020848272fe4",
     "layer-stacking/papers/2409.19044-midas/raw/Media/hist_memorization_reasoning.webp": "f5d1ccfb3a750696d388a4c3cda75fef6b358b4401e882abd89c92170bde736f",
     "layer-stacking/papers/2409.19044-midas/raw/Media/summary_plot_1b_2b_8b.webp": "b9ce2d0ab4e3b2976f6bb38754c2eae39f8f35d51c96b4e172298ba727667a04",
-    "layer-stacking/papers/2409.19044-midas/raw/Media/middle_stacking_blk4_ffn_layer1.linear.w.webp": "c0093287900a956da517bf4cceabfe509cb934afde66c5e781ef690d7762274f",
+    "layer-stacking/papers/2409.19044-midas/raw/Media/middle_stacking_blk4_ffn_layer1.linear.w.webp": "24e01b2596499c36400d1914d9912d75145a9cf5fdab3a861827c6fb1dd89667",
     "layer-stacking/papers/2305.02869-msg/raw/whole-loss-vs-tokens.webp": "4fbdba827634e585a6f8794baa1037c7858513b352e496d0815efb934bc39df1",
     "layer-stacking/papers/2305.02869-msg/raw/grid_larger_text.webp": "4fa14761d301585832e3232dc6169ccf1c304fe9d98c6d8ec02457236e2f4ba2",
     "layer-stacking/papers/2305.02869-msg/raw/figure-2.webp": "16bedd9b79b7f7aa164400bf8f9e4a711baea5b7841290772d22f75c463595c0",
@@ -10195,19 +10195,19 @@
     "layer-stacking/papers/2303.00980-ligo/raw/ICLR2023/CameraReady/figures/pdfs/bert_staged_training.webp": "bcefe0b8f7f602bafb316892f668d3cfb7aef4f312fc11b5e899ff4c4148e69a",
     "layer-stacking/papers/2401.02415-llama-pro/raw/figure/pipeline.webp": "54982d69ac437b7e260e234d3a3025a5045c4a98150ab3e24e01f70ed9942c4f",
     "layer-stacking/papers/2401.02415-llama-pro/raw/figure/radar.webp": "581e5c6007dd68b5b996070f1a2c7fda0edd31707876669ac02a67ab2f054498",
-    "layer-stacking/papers/2401.02415-llama-pro/raw/figure/identity_copy.webp": "f22ff72231113cbe07fbf528f9bc213b782f5e59f5ed47c15f39685d6aa44795",
+    "layer-stacking/papers/2401.02415-llama-pro/raw/figure/identity_copy.webp": "e09e6539635b61e2286337e81a7131532caa21e6b631eee271f4bb1225f7f707",
     "layer-stacking/papers/2401.02415-llama-pro/raw/figure/pretrain_scatter.webp": "7eeab20db7085ef166c81610af4691442736f395e508e7c1da9e938baca861b0",
     "layer-stacking/papers/2401.02415-llama-pro/raw/figure/token_shift.webp": "648c0bcaf50bbe2c96d8da4b5bd824ff6cc8a0d6b72602e2c8db53aedfe28c2b",
     "layer-stacking/papers/2401.02415-llama-pro/raw/figure/scaling_law.webp": "027f4fcc9034fa843016671f98dc32a9399ba0416058a791c49b55c01e271e92",
     "layer-stacking/papers/2401.02415-llama-pro/raw/figure/strategy_difference.webp": "7000457ddff3053d74028d6945b83c1ddcb2f68c2cc50e156320c042e70228a7",
     "layer-stacking/papers/2203.06211-staged-training/raw/figs/figure_gpt2base_ffn_token.webp": "220f1533a41aa7ba7614285465cd75bcbd8df1960c3f7c57fa4019498c65819b",
     "layer-stacking/papers/2203.06211-staged-training/raw/figs/main_gpt2large_width_token.webp": "9c4acb9fd4d5a59cc61fdbf9631a20a46b7e61036ef9fcf72864658b2eb803aa",
-    "layer-stacking/papers/2203.06211-staged-training/raw/figs/figure1_v2.webp": "f00e2b08eb4598acd878399ff00fd7d4cc30c7ff1fda00db58a2de1db14075f5",
+    "layer-stacking/papers/2203.06211-staged-training/raw/figs/figure1_v2.webp": "bc674bbb363386a4838b77801da74eab3d58fc79ec66a87609368ea1d6b36f1a",
     "layer-stacking/papers/2110.07143-bert2bert/raw/pic/loss_gpt_report_paper_bincode_flops.webp": "a8cb63c7ce1429f7b65ce4f15314562a4d52d4998c016d605c400952ef62fa73",
     "layer-stacking/papers/2110.07143-bert2bert/raw/pic/mlm_loss_bert_base_report_paper_bincode_page1_flops.webp": "897c0fd1dbe5be9289e53903b439322e6d9bfa19223fef0cf33d60ac3b421924",
-    "layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v3.webp": "58af9eebe09b6e230e685c4bd3baa4146ee41bc325e98e5ec036d67198d36913",
-    "layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v2.webp": "e92f1720862d9ad88f6661e000932d715420301408ff33c90553ed35b29499e2",
-    "layer-stacking/papers/2110.07143-bert2bert/raw/pic/attention_maps_compare.webp": "ca92ae50806d29e821d70548e54aa48ae2a93dec4725377ee45916d1eaaff96f",
+    "layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v3.webp": "48fa0eec057f41a26bf03ebb0294c3ef6473aac2d7618468299576f7a4452ec2",
+    "layer-stacking/papers/2110.07143-bert2bert/raw/pic/matrix_expansion_v2.webp": "79441a0eedf5d23be59654ca4615df5bb9c3c9948baa52e5b9a9244028d64402",
+    "layer-stacking/papers/2110.07143-bert2bert/raw/pic/attention_maps_compare.webp": "1945077f82dc457ab0d255fc78a829d77de5458d28002b2310f311be66982e6c",
     "compaction/survey/index.html": "35ef0ffb7a596640f060b2742cd9fa2b36e949aabec139b0f4eac992ef200d14",
     "compaction/papers/2310.06201-selective-context/raw/pic/task.webp": "d38dc6c3f3aaa1dcd5b32085958c16ced60daf87f82918bec2179f3bf28cc477",
     "compaction/papers/2310.06201-selective-context/raw/pic/manual.webp": "0230cbb2ac5dcb131b969fea71bdd20a65edc8f96848700b2e68158299141587",
@@ -10216,9 +10216,9 @@
     "compaction/papers/2406.06110-rcc/raw/img0-crop.webp": "7a1532c10e30cad21023543d646626009283e3285df65b4fc7b4e9db9c43beb2",
     "compaction/papers/2406.06110-rcc/raw/img1-crop.webp": "0a7b28c85dab27d4bf4bd9ac28e60eb553eab9e3eb5037274940847c02288676",
     "compaction/papers/2406.06110-rcc/raw/overview2-crop.webp": "c72cec6cc91fe43f3e841deaf54db872a895fc6b179032826eb66ca548039e5a",
-    "compaction/papers/2507.02259-memagent/raw/figs/arch.webp": "199acb105bbb4a2d94cb3412c72cedb0203a1a57c985014201674dbc440b8abe",
+    "compaction/papers/2507.02259-memagent/raw/figs/arch.webp": "d591a59fc7202b57db57be0ff9cc9311806079db3a6cd07a62362b68ee797a32",
     "compaction/papers/2507.02259-memagent/raw/figs/algo.webp": "48d3e933ef8fbeeda48348cbf853459f11841234a8ce00dba7dc65c9e5e3f595",
-    "compaction/papers/2507.02259-memagent/raw/figs/method.webp": "bfd35b64593719b0bdf2428fc980eeb3f50549f574f23bc032fde5edd3653ba5",
+    "compaction/papers/2507.02259-memagent/raw/figs/method.webp": "18f860ed8f5f7dae93503936af254e5f99f83cb8043d18adb0128fa6c41051dd",
     "compaction/papers/2507.02259-memagent/raw/figs/ablation.webp": "2e88b765d8868491eb6a4471ea483dd4ded554e18fe746a241f985a976dfa65d",
     "compaction/papers/2507.02259-memagent/raw/figs/main_result.webp": "c28f75e4f4af697d99a2b5713f60ec8102027e1a6294cc0963f0ee2b0b8afddf",
     "compaction/papers/2408.00167-finch/raw/assets/squad_v2_plot_new.webp": "b698e86d18db933beb727e4f7e9c840601379ab64c3210dea240dd2e364ff8ba",
@@ -10226,7 +10226,7 @@
     "compaction/papers/2408.00167-finch/raw/assets/diagram_finch.webp": "665341e812869e211cf2d08ae28b2e88b7aeacc5e0e5f56294099dfda31907ed",
     "compaction/papers/2408.00167-finch/raw/assets/attention_layer_viz.webp": "ea82b1d94cdf0523effe26ab443ee201615f683cec365221c3ac4ad2aeb7cfc6",
     "compaction/papers/2408.00167-finch/raw/assets/method_diagram_new_1.webp": "076f21af285b4ae387b924fe7414c7659dc4f38d53bfa959585923278345cf22",
-    "compaction/papers/2304.08467-gist-tokens/raw/decoder_only_mask_horiz.webp": "4d435bbbf1dcfa3210bc48fe5cc9ee8fabf1f0e4fa423bd51a5e7ec8d517eb47",
+    "compaction/papers/2304.08467-gist-tokens/raw/decoder_only_mask_horiz.webp": "a38d7339b18577dc286f2ccb893c9b530af128e5ca4968fe7207129e3cd6eb57",
     "compaction/papers/2304.08467-gist-tokens/raw/gisting_overview_horiz.webp": "9fa32f691fd61d87adad99d9a80773598959292a034bea7806c6965b6b7919d1",
     "compaction/papers/2304.08467-gist-tokens/raw/all_metrics_llama.webp": "6c500f4dbfc5985e44ef6fa757f7e4d9081c28b898a2fd625bd0a9d1cac1f1b2",
     "compaction/papers/2605.23296-parallel-compaction/raw/hotpot_in_detail_thr5.webp": "756ea1da2389b3058894b8cb6761a66913d6b3ad14d7d5649b640a87bbf275a0",
@@ -10235,9 +10235,9 @@
     "compaction/papers/2605.23296-parallel-compaction/raw/hotpot_scaling_stacked.webp": "12f38dc6081351d70f1f46ab62bf6e257f10f6a6540f21a35607c389d6e0204c",
     "compaction/papers/2605.23296-parallel-compaction/raw/paralell_prefix_v2.webp": "6a6c8ae414ab802897f492cbd94137183c15a8cf6b52c065dba0d5b0e162dcc1",
     "compaction/papers/2511.21726-sumer/raw/fig3.webp": "9ffeed7099920ae5fbe5ffc405b8ec19084eb3bb13279082e7631334f570dbe8",
-    "compaction/papers/2511.21726-sumer/raw/fig2.webp": "97a07a09616c116821698297b91f07d1c395db83920d06349246d32566fb387f",
+    "compaction/papers/2511.21726-sumer/raw/fig2.webp": "b0188f45e457be8188e85184bbc036212d6b89b434e32c5dd1218e6788105e31",
     "compaction/papers/2511.21726-sumer/raw/fig4.webp": "8eddccd587e957af741d6f66940cf6e744462df32b90d7307519209192be77bc",
-    "compaction/papers/2511.21726-sumer/raw/fig1.webp": "858b17a683de23d73a060fae6c7c61ec6244f43efdc5975f4bafbb07dc903852",
+    "compaction/papers/2511.21726-sumer/raw/fig1.webp": "a7ad1c2db7379654a78ec2f72cfc1c31221c6678ad01387a997264cae190a0d4",
     "compaction/papers/2601.01885-agemem/raw/results/fig_ablation_components.webp": "051a9bb0f275adb4e02b4948652899c0b133edc4e099010434ade6e60e5c1290",
     "compaction/papers/2601.01885-agemem/raw/results/fig_memory_quality.webp": "dd34e8d47f9378d8c6b4935435433e6580d61ccfb71045295a5d6b6640083cb9",
     "compaction/papers/2601.01885-agemem/raw/sections/pics/framework_new_addmode.webp": "a039a3ac7c3da4e568c75e9bb5bc622f82e6fccf3b1bb4221c9f9e14a96e844d",
@@ -10247,11 +10247,11 @@
     "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/example.webp": "d69dfcb40684028a7d7da9a0a27271077caea589c3536fed256fcf6861476eb7",
     "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/bannar.webp": "823b2d025992f0b3362922d1f7bb3a31b50f1a72db89135a881c29895302147c",
     "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/plot_iter_rl.webp": "f414df179a42a6550341e5e2ab6094e165d49e49932239b7942e831894998760",
-    "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/main.webp": "3e98ca0dd9d24c6bf5b5c3ab3e54e2c77972caf561bd6d9d930b38d3663db6d0",
-    "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/RL.webp": "96046eb7bc8c9afa9c1f731baf4f0a41922d81fd691ae75d5f46c33dafd875c8",
+    "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/main.webp": "48449ebdd868cf8cf6936a5c7c84f45b05ed80b7165742de52a103702c8fe7d2",
+    "compaction/papers/2502.13374-task-agnostic-pc/raw/figures/RL.webp": "28e6be4d53a3341234f1ffc21f5c5875620263ba026aad748287d50351d657b3",
     "compaction/papers/2405.17062-uniicl/raw/efficiency.webp": "0d60b1b3eaf6c9ff654722b0187b504930a4f89aecfed97f8f27f82c0762f40b",
-    "compaction/papers/2405.17062-uniicl/raw/images/generate.webp": "427e54436b71bafa80ef8af4760f3bd6af6b11c6c317a3b750b0330dfaea9da9",
-    "compaction/papers/2405.17062-uniicl/raw/images/compress.webp": "198524b04f3d83b76b4bec5720eabbf7e125abba0ce971e51e497d147d1183b3",
+    "compaction/papers/2405.17062-uniicl/raw/images/generate.webp": "5b1df8778f18478277fb3e1c499b2db05ee39d450b8395d1a02be5f709361d94",
+    "compaction/papers/2405.17062-uniicl/raw/images/compress.webp": "e7bb91e32f23e19c1993624752527bd95f770be41d9bb96bc3ab52147a943099",
     "compaction/papers/2405.17062-uniicl/raw/images/db.webp": "ee9a62b0993614c1ed4ad8204671fe0489a7afdf4b90574787563f9f3f2c6865",
     "compaction/papers/2405.17062-uniicl/raw/images/diff.webp": "2935ca9d395cb9b809764d05abb716dd79a3d4cb40d9d1be72e0a36c7179443d",
     "compaction/papers/2510.00615-acon/raw/figures/files/06_distilled_agent_scatter.webp": "9c04857ba2344c5511d6cf0bafb92bafeafb46155c42923d3e10e9e8685c5f22",
@@ -10270,7 +10270,7 @@
     "compaction/papers/2404.07143-infini-attention/raw/imgs/Infini_attention.webp": "83566677f1f76af1f80751bfccb681d27139de447a2a7a8110723ad660f8a3c7",
     "compaction/papers/2404.07143-infini-attention/raw/imgs/Infini_Transformers.webp": "16f9d3752b02af7be76b7f3b90c1ac3f0212c6d799c4307300ecb39a193b0c9e",
     "compaction/papers/2310.05736-llmlingua/raw/figures/compression_ratio_performance_gsm8k.webp": "c658e087a6df0c90373fcf0b40f64bf3001a92049da19b6b1e1369f24a107b88",
-    "compaction/papers/2310.05736-llmlingua/raw/figures/framework_LLMlingua.webp": "d663bdbe464fa99ed9aa2ed71fe7f7a6259b4e2e133f7a8bd290ea72ccd2f5d8",
+    "compaction/papers/2310.05736-llmlingua/raw/figures/framework_LLMlingua.webp": "970ec2a518698c88376a5a7a98120d970790b0189c12a5beeb256cd6ec49cece",
     "compaction/papers/2404.07979-lloco/raw/lloco-pipeline.webp": "a2ed54c5a5a9baeb99bc9d95f6c2b1a84451d5f7a53782bfe1f3024e927d5711",
     "compaction/papers/2404.07979-lloco/raw/lloco-single-needle.webp": "b17c1b8817b48e3a4fe690149c7cbb9929b134786bf79891322c9f529e1e1947",
     "compaction/papers/2404.07979-lloco/raw/lloco-arch-new.webp": "b561fa88e5e7269db68afb3ad61bfa980d0d03d9a6d27c7ec30307c4003186b2",
@@ -10283,9 +10283,9 @@
     "compaction/papers/2605.08580-trajectory-validation/raw/figures/method/compaction_induced_silent_deviation.webp": "0c758198dfcf02cfe8c7ae53333d00dac9e50bced7a5c13c38dc6e58b05115dd",
     "compaction/papers/2310.06839-longllmlingua/raw/figures/recall_distribution.webp": "3f1e0c45289de94ac68520b615dcfbb9d7ab6c77dbe8c7b8fee46a50ca809c5a",
     "compaction/papers/2310.06839-longllmlingua/raw/figures/longllmlingua_4x_gpt3.5_lost_in_the_middle.webp": "853901542c24a5ed37c1d04c0795365680b7c461ff0851f278dfc17fb08b37f1",
-    "compaction/papers/2310.06839-longllmlingua/raw/figures/recovery_case_crop.webp": "6503188f3ddffecf4a12bd48a6e75273f5b4d1ea3fc00d95a5631f4d1a1c84f9",
-    "compaction/papers/2310.06839-longllmlingua/raw/figures/LongLLMLingua_framework.webp": "d58de6f43a7a484fe4437471447c36faa83a6df7862a9fcfa66df66977de2483",
-    "compaction/papers/2203.08913-memorizing-transformer/raw/figures/batching.webp": "55896ce6d0e5846aa6b832fd5ca89fc26a577c41d7fe9f8721074f93075e02ab",
+    "compaction/papers/2310.06839-longllmlingua/raw/figures/recovery_case_crop.webp": "2c54162b7f9f4b6ffb9c5fbdc0cb292a07aa792079e5f718fa86726bd91f9d94",
+    "compaction/papers/2310.06839-longllmlingua/raw/figures/LongLLMLingua_framework.webp": "ad6059edd5e265507840e336da18757c23beb599cc82d16140d54ee7d5f8f58c",
+    "compaction/papers/2203.08913-memorizing-transformer/raw/figures/batching.webp": "20c99101009abac3433af07279cb5904ba563d7ee377ac119d12f6bd4221d818",
     "compaction/papers/2203.08913-memorizing-transformer/raw/figures/system_diagram.webp": "d969dd5ae91b5a112ade095e9c97f1e9d846bec93f2262083be5cd74e62cbe87",
     "compaction/papers/2203.08913-memorizing-transformer/raw/figures/finetuning.webp": "b7dc85509927a235532c9edd1366ff1088591b4aab92a0e7c8c5b1f901c592c2",
     "compaction/papers/2203.08913-memorizing-transformer/raw/figures/scaling_plot.webp": "ecb8f03653bfd2127c5053cd744f673361ce91c3c6fd9daafb4268e7ae44ed84",
@@ -10300,13 +10300,13 @@
     "compaction/papers/2304.03442-generative-agents/raw/figures/figure_architecture2.webp": "e09a60835ac08c251e7ffc48bf4aaaedd336bad7b6f04dd417afe802955dc3a9",
     "compaction/papers/2304.03442-generative-agents/raw/figures/figure_retrieval2.webp": "9c53b0edbe6fc9f1b335a7cd471df8dd0efa87cca2d7d385fc983b6be5ceb8bd",
     "compaction/papers/2304.03442-generative-agents/raw/figures/figure_valentine3.webp": "35dbd52fb060edb8bff99e62e9fd91932e2546394f71c53a6ff2476e7241f21a",
-    "compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_search.webp": "7fd5624924731ae9989a6d6fb0df99ba0571cc061df519aa2e1abec1169bae27",
-    "compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_correction.webp": "7fd5624924731ae9989a6d6fb0df99ba0571cc061df519aa2e1abec1169bae27",
-    "compaction/papers/2310.08560-memgpt/raw/images/memgpt_system_flow_2.webp": "a9f0a1cd7bbb62709a6f2a2be8e36a71c3707e383620e5047e59b438c0c5f5b8",
-    "compaction/papers/2409.01579-adacomp/raw/picture_1.webp": "4160cb2cfee1f9bb2cb5174adf6e4873731856ca3a1c0cad37c7f039d7752720",
-    "compaction/papers/2409.01579-adacomp/raw/picture_2.webp": "92b57a0aff01fcf82ac29d0ab6be3585fd57a0ce13e84bed1d5dfc7ac025c989",
-    "compaction/papers/2409.01579-adacomp/raw/case_study.webp": "a5d79b20ad83991f19c48f19b4d4e01ba02cd1df941f7cfd57e77b9a428c25bd",
-    "compaction/papers/2409.01579-adacomp/raw/confusion_matrix.webp": "d39f0747b1d4bb57c2a0e34e34f1152735a2cbc9bf73dd5a7dd5de542622c47b",
+    "compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_search.webp": "28ef4f6e595ef21ae1d8830c7e9b6ff3515df68db0a84198fbf3505ff9d72877",
+    "compaction/papers/2310.08560-memgpt/raw/images/memgpt_diagrams_wide_memory_correction.webp": "28ef4f6e595ef21ae1d8830c7e9b6ff3515df68db0a84198fbf3505ff9d72877",
+    "compaction/papers/2310.08560-memgpt/raw/images/memgpt_system_flow_2.webp": "247650b8b4152350ce39974f9741beddd463bd568a888600c51697db563a16ff",
+    "compaction/papers/2409.01579-adacomp/raw/picture_1.webp": "73ef11224e1281bab30ceea27c5fcd3ef77967ed58a2e2ad953fb41ad61d2b6a",
+    "compaction/papers/2409.01579-adacomp/raw/picture_2.webp": "a56a3a31aea96a65490400d62cbdabe0ee1bd99b6fb689868a66c6436af81c6d",
+    "compaction/papers/2409.01579-adacomp/raw/case_study.webp": "16fe0dd4d18dd8e5c79e1dbb623ec176b2ce066e984def16853d670eb5768ca9",
+    "compaction/papers/2409.01579-adacomp/raw/confusion_matrix.webp": "c0023490d7bad5ecc7e9b3cef7c21052bc4e9d736fdcee733a6097b0b8f2b4a4",
     "compaction/papers/2407.09014-compact/raw/figures/motivation_figure.webp": "45876e63692a5a7f67a905327b684287782ab2013f5b95453da97813c2a22dc3",
     "compaction/papers/2407.09014-compact/raw/figures/GPT3.5.webp": "a59a6203215a70ce4e2a8768ee5e9e13f21440b6da7688e7442caa30fb774260",
     "compaction/papers/2407.09014-compact/raw/figures/completeness.webp": "80317321328596d84e2ba28193b75ac7f5c4fea5daa44b01abafc693d593a4ec",
@@ -10328,16 +10328,16 @@
     "compaction/papers/2502.06139-lcirc/raw/figures/QDRCC.webp": "72afef242e50c8d41469af82962d660046438e00864f257ddd920655f749a2bc",
     "compaction/papers/2509.13313-resum/raw/images/motivation.webp": "5c8b3c7c1490d54ca4271ad3d85437596f68bc35e204bb856b4cd584e2063c4b",
     "compaction/papers/2509.13313-resum/raw/images/websailor_30b_reward_full.webp": "97e1a97cb9a5508c4738ecbd056b255914a4ade07b2c9a5022400f71bd6a4b41",
-    "compaction/papers/2509.13313-resum/raw/images/ReSum-RL.webp": "7456f46dd8528ca5042ed7db063402dde7ca5bcd5e50144eadeb53f2c4032c83",
+    "compaction/papers/2509.13313-resum/raw/images/ReSum-RL.webp": "f26ea9cefa0cdd48427cfc1de34fffd697d4de4e1be4d47ec148c82f635c42b1",
     "compaction/papers/2503.08026-rmm/raw/img/pr1.webp": "7972109ca8c31341c8890d446a524c331e7798e97072f515acc1c7d71c2fc8d4",
     "compaction/papers/2503.08026-rmm/raw/img/retro.webp": "e7ddf1155dc45c51a0daadedad24cca87a9ccd4bd44fd052aa8ccbca7f6df90b",
     "compaction/papers/2510.06727-supo/raw/scaling.webp": "80d041618b10672e06ce61db4965dd792e4acb6a70c6309e3dac0a3d61cfcc02",
     "compaction/papers/2510.06727-supo/raw/training_curve.webp": "fee8d59c14cc9bb0a98664af65ffe2a18a5395e97666215a094e9c8b3eac96c8",
     "compaction/papers/2510.06727-supo/raw/is_success.webp": "f9faa8186421157ca5f72e9436b406f7600191c5437e33137b9f0602435dd8a4",
     "compaction/papers/2510.06727-supo/raw/summary.webp": "59283144f006c71e922122e59f7459adb88ca1f8ed2566b0a33976795f82ae76",
-    "compaction/papers/2406.13618-in-context-former/raw/pic/divide-and-conquer.webp": "0ac6ba0dcb1e593ebe8cf95017a32ae6b69ab210cef9090d952a2d017739af18",
-    "compaction/papers/2406.13618-in-context-former/raw/pic/training.webp": "0e9d42ff257a1ad9eccb9e2661c5f56869e2ecdc025946e882e8fd424d0f51b6",
-    "compaction/papers/2406.13618-in-context-former/raw/pic/model.webp": "8f51e26cc6ef5d624a2e78d90f96ac6b81839a1b4e719ca7314fb871c8af78ef",
+    "compaction/papers/2406.13618-in-context-former/raw/pic/divide-and-conquer.webp": "b1916d15b46e58d0125207fb200aefdf035de9733b42ed6b2b1855cf1e95074c",
+    "compaction/papers/2406.13618-in-context-former/raw/pic/training.webp": "6cc3158c24cf78726142c2f9d9e58c653a5480131bab5c93df1ae79ec836c9aa",
+    "compaction/papers/2406.13618-in-context-former/raw/pic/model.webp": "1e9d51ec510958d307ee7a1c41d2d302f3adcaa1eb120669f9ed0f34b8af3b10",
     "compaction/papers/2308.08758-pcrl/raw/model_arch.webp": "04029af0cd22c133d48c96a1c8abc7029f4b64536c2e0da1bfa7708a714869f1",
     "compaction/papers/2308.08758-pcrl/raw/precedure.webp": "dfbd5d7ec181ef8be285e72220dc2b42305c1600bf108781fbe8f8c4addbb709",
     "compaction/papers/2308.08758-pcrl/raw/yerr.webp": "d02e29cc73b2998c77bc6b2246c2625cf65498a0d1b25444c76025682bffdccb",
@@ -10352,7 +10352,7 @@
     "compaction/papers/2207.06881-rmt/raw/imgs/mem_operations.webp": "f7374c3c6dcbc7040b0bc82c3ab9092d656d4e47ac6eadc6433933caf569828f",
     "compaction/papers/2308.15022-recursive-summary/raw/ours.webp": "6a17dd9158ce107a8ffc47ee2fdd50ed0466abd5a60f7584815fb94effc3fc48",
     "compaction/papers/2308.15022-recursive-summary/raw/win_rate_5.webp": "acb7bce64fdb7100d42e266dc526de77bad05bd8e5eea271a903bc6c60383f19",
-    "compaction/papers/2308.15022-recursive-summary/raw/model.webp": "f02c0a86bef9b242688e78813d282875bf10d32264d2bec762d3f9328d2bdd44",
+    "compaction/papers/2308.15022-recursive-summary/raw/model.webp": "3c281c52f42293e30e5ddcf90f71b688d3def1f286f8795ad1b8be53c42788cd",
     "compaction/papers/2308.15022-recursive-summary/raw/ave_resp_tokens.webp": "c3cf5cc58c478944159bb46f992761b32f36d08b770043c0947b5e45bd0cd458",
     "compaction/papers/2304.11062-rmt-1m/raw/imgs/_paper_MT-simple_small_p1.webp": "cc89d2b4e576a2f269b3e41c7b0261f54cc237387fd5d63aa314fbf28a0d4c82",
     "compaction/papers/2304.11062-rmt-1m/raw/imgs/extrapolate_long_log+tok_linear.webp": "fd2aefe8a12d8d9026745969a79e5b00e5562e12254d914fcb14be8d8a23ca70",
@@ -10365,11 +10365,11 @@
     "compaction/papers/2405.13792-xrag/raw/figs/effectiveness.webp": "1b119e894a75c4bcdb91fead4fd6e4f42c9a6aa55c8f83a97fb3b2c1f1146b5f",
     "compaction/papers/2405.13792-xrag/raw/figs/robustness.webp": "7f42f7db86b5fd77c9f981c65fff9faf4bc1c57648fd592f107d09f3cd858bba",
     "compaction/papers/2405.13792-xrag/raw/figs/training.webp": "b9c6ba2f15f57b5d94b53f408711a0179e3f66ed0f550f081c9d0f5fa820ded4",
-    "compaction/papers/2307.06945-icae/raw/figures/ae_learning.webp": "5be2a029269c5034f3245a0e3a527cbc30fda4d0269e1c2356ed8ba64b6add27",
-    "compaction/papers/2307.06945-icae/raw/figures/icae_ft.webp": "31c6fcb0ee85b0557acf1d1c0513f86f96698e21760967146bd2cdacbbed82b7",
+    "compaction/papers/2307.06945-icae/raw/figures/ae_learning.webp": "bd3c79604cb4c0424695b300ba88958cf6a3b1c2353811ad7f340ac7f5f04033",
+    "compaction/papers/2307.06945-icae/raw/figures/icae_ft.webp": "f389633ba52fb54d369b2e26b47c76510da43a21d2f05b44126d397e0b1cf367",
     "compaction/papers/2307.06945-icae/raw/figures/result-llama.webp": "3e7dcf058af8e1e7598e13e1cdb6a874f77d6b1b477baf8f10279c15ace0350a",
-    "compaction/papers/2307.06945-icae/raw/figures/icae_usecase.webp": "954b4c3959ed68ab9a516c296d0e4c1d205a6a22d469d6c8744e1ff00255d344",
-    "compaction/papers/2307.06945-icae/raw/figures/icae_concat_demo.webp": "759d440e74e17611cfc4d983a5629ed830fbe4136749ec62de308a43218973f7",
+    "compaction/papers/2307.06945-icae/raw/figures/icae_usecase.webp": "83d6117b92c6aeb44e094a559ecb7903f95badfd77bddda1ef85efc5c30f0c96",
+    "compaction/papers/2307.06945-icae/raw/figures/icae_concat_demo.webp": "a807577881cbfae6cb2fcddf2359dc63dbf1b84063e806e17dcfcdf57d299d2f",
     "compaction/papers/2407.09252-cocom/raw/figures/cocom.webp": "ac50bf68ac3c40bf590feb02345e471194d357e5093ddbf1007b11c7da20a789",
     "compaction/papers/2407.09252-cocom/raw/figures/teaser_pareto.webp": "ee3260bcfd2d2cad2842d81bb8a0e86af6197f44f7f6a4cf4300d17c793a06a9",
     "compaction/papers/2407.09252-cocom/raw/figures/teaser_decoding_time.webp": "75725462018ca1937d102ec3f950306da908ea1b6d4601420b1e18cf80470d10",
@@ -10388,18 +10388,18 @@
     "compaction/papers/2409.04421-rlpf/raw/sections/figures/rlpf.webp": "e220fd2b157ad11913fe00629a68eb40472dfab8cdc502a4cc0d5ef4a91da332",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/average_attention_weight.webp": "d1cc41e3408422b69c65592e496ec1b5fd18bb10aac17ebf12d6f97936c3e138",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/model_simple_longer.webp": "03df5a735e7b170017f1c6c1e47b625ec3a42907750e54d288e8aae7de5b134a",
-    "multi-epoch/survey/index.html": "0e8e3620f9281795fdca55e8e14d2b64add1cddd5558867c2b4bd4668686e225",
+    "multi-epoch/survey/index.html": "bf3af7db50fa5c53d5e37c58faae8c4fbf9912a8aabf33e8cc21f54f3b427369",
     "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_smoothed_shaded.webp": "a99287f23b3757df89f178d4cf45bb3792e42b26b8fef01fee83fd3c51882ef3",
     "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/loss_over_step_improved_ws3_ratio0.75_alpha0.9_exp.webp": "76e3d8cfba33594fb3a01db3d6baaa34943418e3a1740faffd51ef5293747fa4",
     "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_avg_vs_N_log_wide_bold.webp": "ccc2e34f55ab9141e9fb9eb01adef9b907a2e7798a8dd3860a74e5ffd734991b",
     "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_KN_vs_N_ws3_ratio0.75_alpha0.9_exp.webp": "ccb4bc432a8cab7e098a2340d5a4b721c82b515216ea4200c42b6c6277d365de",
     "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_K_comparison_power.webp": "b286e982478e7a6b48b99e8e02bb0f9b2c5093799156fcd3ffed34f77933d36d",
     "multi-epoch/survey/assets/interactive.html": "5db4372ccf7186135fe90fcab70679bbefdb33e951aad33f40c546fe63e3bcd5",
-    "finetuning-efficiency/survey/index.html": "a9a42cdcf1036ad1a17f0b6a414935370e68dc56cbc2fe9b2c5e6ff2d62a3fe3",
-    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp": "66bbd74a023698bbe1f7786e037e175186cfeae052769ff692289a0409658b3c",
+    "finetuning-efficiency/survey/index.html": "206999741d63e16b99fed728fc54394a63828935dc88c0b690cda9e5a87fb7da",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp": "92e663b3d3b71abdb992463a1a7451ab4b7a7bf4142da61afbd18234a66f493c",
     "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.webp": "9dda4dddca2282e5d298bd172e08272fa684da2e217429a025125daec813504d",
-    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.webp": "703c1b2575b24b50d93601b7a6a54ef1a66d02073872fdf2d912baeca9979382",
-    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.webp": "79ad3ff06083ec79ab8c102c5a796b90cf8a03fc52fcdde56fdff13d38a91af5",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.webp": "325352cf10735efb909b0699983a9b97627b35a536e29303a6d884e0401f1d9b",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.webp": "5fa59314e6608dba1e729d18b886e4afc693e3f04baa45ac9766632c93109de1",
     "finetuning-efficiency/papers/2102.11005-logme/raw/nlp.webp": "28d5dc396d5e62a13bc97b06fd716b4a1708c3989b4de0b46af41fd5a43ce0cb",
     "finetuning-efficiency/papers/2102.11005-logme/raw/logme.webp": "ddd7fb58b82f8c14f3287b07fbee7cdb8e43cb7294af3be1a14fb2116f5471d6",
     "finetuning-efficiency/papers/2102.11005-logme/raw/graphical_model.webp": "95f9018a85f23d8d31eddea2714c72fc3f7923f254cadf21a20b27cc9805da99",
@@ -10472,8 +10472,8 @@
     "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/main/CIFAR10.webp": "c0c898089557d476c9ffde8f3299ee4fc37935236aa893b2339bfed61d3aeded",
     "finetuning-efficiency/papers/2304.01373-pythia/raw/main-figure0.webp": "380d40336a59b0555b102ba0ea05ea085ac044d9f6cedb03c31af0687e5c0da7",
     "finetuning-efficiency/papers/2304.01373-pythia/raw/media/memorized_sequences.webp": "1375525c4f23ef7ccad4d632b7ab1dc65d79aa2059fb46865be764840383a3d3",
-    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.webp": "fea47b77bfd01401fe80fdd01b7a4caad02091380e302bed00f0ece8b315a6f8",
-    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.webp": "6a269766462d06eee52676ce37067874e2d125242060e650fdc09a5c8c98cb78",
+    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.webp": "ce2060d967d00c5aeb4e658070e25e6ba9ab0b25f8428ef30ddfc2847156448a",
+    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.webp": "95f4ff59fe1d583412dd8cfd7fbf9bc536edaee1919109f3d073893a5ec5cce0",
     "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/model.layers.0.self_attn.v_proj.weight.webp": "d896726c53e9e84528947fa19d226adafbdb73184ed0ae1ff96e837139921133",
     "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/sft-rl_2.webp": "ddf5e7f611f055629396df3ad591f446df48f46ffa9e549fe7c0d8b80227ee2b",
     "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle.webp": "dd0af2030ca978418f15700fea323a4619f61bfa53a25fceed6e8908eea2a0f7",
@@ -10510,7 +10510,7 @@
     "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/metric.webp": "b96cb1da5ee981f779718d3d5bb880d8a9a567a62fabd63f6e08efd85dc74ca3",
     "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/dynamics.webp": "7e5e4b0f61e9a0526dfee1db83f7022249b511be06d0f7e8f7567f26c17556d5",
     "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/llama.webp": "ad6e90e318539b3d2225c5d168fe117e02946b571dabf4a7145e82d30f473ba5",
-    "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.webp": "4bbd1a14f14833f42cc35877c0e4375ec9c69d5aaff7e734de9026b6b1638a5d",
+    "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.webp": "d74a1ab803572e7c032eea8aeb88134faaa86279f7df5cce941414537b7c5845",
     "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/4_plots.webp": "dab4badb52bfa53831cbfda84a38b387ebf23c090fef0b1f16dc29491de817b3",
     "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/learning_rates_schematic.webp": "b9f470507d719dd03b756caf41ed96f424585af87a24cad13ece6c5d1eab3e04",
     "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/large_model_AnthropicHH_OLMo-1B.webp": "cd1b566b7ce9455985a0eb5ada6142258ffbf236168144208033762ed4bdf3fc",
@@ -10525,7 +10525,7 @@
     "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/mitigation_pareto.webp": "05918a65395f0d96916ba5ecab5a7abf0acd339c60fe2042a60c5119362237fd",
     "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/multi_model_results.webp": "b5810d1fca5b53288e72861c3b052463fe359e93eebadaeef58873c479b22ed5",
     "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_general.webp": "9533080d1163817e4c685a4c7eda79d8801875bd1b7950fdefc11deba472b6df",
-    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.webp": "11339b55f636af0afa06b460b8219603a4f07cd58e893f95f4db332fbd677a40",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.webp": "e0fad126b1cf241c97af2ef66943449386740ec4bf397e11113571f0c02703f4",
     "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/crosscptlaw_main.webp": "14f38fc588f5e55abcb8f857cef67ebb93d9f8adca45a6eef5ca23774f12bc50",
     "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/cptlaw_model_size_generailzability.webp": "6fda85833fa1d4ea685177c2be0e9bac61c024438b85ce5218dc70523ba1e37a",
     "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_domain.webp": "1edb7e84b8b57f0730d7946942b84853a519a47cdf26f0323ae58efda674ef93",
@@ -10540,16 +10540,16 @@
     "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/broken_copying.webp": "5846c783d79144161dffa8ef575c3e1f97edf7572b7e3bb8b9d2523408b845a0",
     "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/prefix_matching_score_multiplier.webp": "71d951f2219489ec83ca4e55f10fcda2b54fd7306daf40da1225441b2eed392b",
     "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/poor_scaling_emerge.webp": "21c23f5e578e4a5aeaf131b11a6aa024c988aee9d3cccd192b7fe58538a4115e",
-    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.webp": "cd2bdd05f01cb4a606afeda0dc65c9d44a78afd90a9adeb47fe2d5604f5036a7",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.webp": "fce046cc8d1750bf904745c0e9a12fa21f9aad4388f0abb428be20c795a55348",
     "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/ossification.webp": "74fdc43fa8beb67ef75fbc26b400f36107f5e33049e6b5bbbb428bbfd9f2cd5e",
     "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_tuned.webp": "715f167e5bdd2f7f37e5cb62d72e854bfdac2f0f16c1c05437d5148811b46868",
     "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_freeze.webp": "778d1e3b0d7bbd1173f895b7bc74f2d4b8c6ba94f4d6d5decf8390132129e70f",
     "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_freeze.webp": "8011b0caad6209a8d8d21f66c7a8611845b606c005e2547d776bba6bae6f1bb4",
     "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_tuned.webp": "41a670fbfc6fbac101ec3f2b434243ac2f4785082e0954e4eb31b02c7967c010",
-    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.webp": "499becf0bba045e69c9ef3e5061e2b0c4e887639d2c74b3e4ef7f1af37ca2c52",
-    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.webp": "a451e75c2b4dd6d174953098d644ba1814a396705bc25897e10b6c55dbf274cd",
-    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.webp": "f69ed67c46a60c687f4f5bff310d445dd1c111d1d1423e0ad82761a9dc090fca",
-    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.webp": "16f80b75fcdd687f9f188db53b3e548bfa4c0ea21456c192ec928471ef9fa830",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.webp": "7eaee3540020b23cb89a404bac8bef2b661b69b78a94a5c095ea6359c767a059",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.webp": "bd950af78bc38c5012f0f7d2f397bd2f3666ccc172787933cd2a2a56877f6547",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.webp": "1a7bd401dcbee943935c2f526eed7a7da74af9ab131eabedddb600971da3a4e6",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.webp": "a5859ab2388604c20ffd0c5844ced6c7c793e429c72f4708f6a667650f092eb4",
     "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_b.webp": "2920f1dfff91a0268476b0421f3c0bac5a624c3a4e43d5f3d59d35a74d73f217",
     "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_a.webp": "73c7fbe79952af652c3b32fc6f59e60e355159135094f3bcca647dcc337c7af8",
     "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_b.webp": "a68054619f48df0abe9b997f91cd0bd44da2d486fb3d595c64a2c9f82b29b6d9",
@@ -10599,9 +10599,9 @@
     "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_pred_params_both_apps_v5.webp": "6ef9005bd1d3ad06517a764f2904111a9b64e36c98dbd956dd51cf2e91c47013",
     "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/gsm8k_loss_x_axis_and_finetune_subsets_v3.webp": "18da76b4ebf16b577a41353cfc2e8e52bfe41224030c06d47ef23eb977f5ec81",
     "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure1.webp": "05a63fe18eb3beefbe18904d57cf71f27a109e1a6710614e967745ef1e9eb7f9",
-    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.webp": "ba078b64ea93bb79773c2ec27fff97a6cffdd22f3492ea224088d7d61d624559",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.webp": "b84f59a0b589dbb05df88260d7d56ed153f3e8c09ad12360c1e47fd34428021d",
     "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure2.webp": "285b1ce43acc7917582b19025052e8d04948f7dfd0c0871a02823e993fd09c5f",
-    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.webp": "758d2c5cf09b47467f24e6253f249a60b56a4c0f71250eabb2af23da1c2ec054",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.webp": "307e8783db09c5b6a12f6008059e02d461ec323de033fb50c001b134d5870993",
     "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure3.webp": "a7ef9ac5c19bd484ec780f1d3bc0e69d5e8a71ba38453de60d9293abd08a3c07",
     "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB2.webp": "8871f2f0a451784482281381ab4d36c1d52d6545b7fb779753d6efe6dcfc7f37",
     "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB1big.webp": "96e6151517166ec5262f2355693e453c3f2acacaf2d4efe388d2151018080513",
@@ -10664,7 +10664,7 @@
     "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step1_main.webp": "1698bb53f8607445be7c92abf2b348db49cd060de29859bc7551da4ba8603509",
     "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/pythia-scaling-tripanel.webp": "9fc27b25b6eb4140e9f2fc699524b89d020b37887aa36210219649da407ab657",
     "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/similarity-matrix-and-rank-frequency-envelope.webp": "7c156828564f92a1afdce2a0c716e086e9507b9c86e180d2b107cdba139d1ffb",
-    "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.webp": "8de9f2ca2d43b91117816241a994828379dfc7c6c2ce7739e25a5af6927c9152",
+    "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.webp": "0c8ff1783348e4b763a913df6a0c179c48e22f9524db6650c33e5f5895e5bdf6",
     "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/parameters-steps-data-emergence-and-scaling-scalingtop.webp": "d2491f829d4159b50e738372c540b44ade6dd5d2368a14c37eac401567c01891",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_error_models.webp": "f99114caba57622879c3fff7b3b6d42981887f30189556fd10e4221d096d69ee",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/speech_data_generalization.webp": "4de7c01479c62730a5c140ab5b1db64308dbd50b931a0129b1a8358cfc1dccf9",
@@ -10673,7 +10673,7 @@
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_model.webp": "98c3980c908f0f6c687a24a6fdf23dfd300c8a538b0168c2b677e214a6cedb1e",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_generalization.webp": "d3931e4b10d5b4879aa30ffe6779db85e24808d3eb0e9d481d9a003b2a9f0eac",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_generalization.webp": "69df73748b3218e57ff6c9dfdbd499bf332eadfc3efab707c2716672ed369d51",
-    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.webp": "de89643b774c806cd80009227db5611a73b73b8847df0f6b0af4a5bf951eee12",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.webp": "6c86a7bd8d645740e96804247cfcece50a46fdda3d9ce1e42291ade8d4793021",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_model.webp": "54a92a999583707e1c72266c028b7e280cecdd7bb2bdd1c7b7b97a296dea5b4a",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_generalization.webp": "90d76368051aa7674dedd540e6dd7da63ba05f39b1820f3da242983ef9cdbd1e",
     "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/ds2_data_generalization.webp": "589ea9169defe648bbe7f49cdba87d427449657a12de8e1fa2a13330e1d02e82",
@@ -10785,13 +10785,13 @@
     "gradient-flow/papers/2203.00555-deepnet/raw/pic/plot_grad.webp": "9c93ec4181540c27736693f033a6e35db173421b2930dbc0ebaaca1a88247249",
     "gradient-flow/papers/2203.00555-deepnet/raw/pic/plot_model_update_vs_depth.webp": "0d41824f6f010252d9afbbb5b5f395d1aabe88f4b1770756fdd82927ef806018",
     "gradient-flow/papers/2203.00555-deepnet/raw/pic/his_grad.webp": "55b19522c3405cab5f407351774f7d932758e82ed7025ee70eb8dc1cf19a1bff",
-    "gradient-flow/papers/2206.00330-b2t-connection/raw/gradient_of_each_part_withTransformer.webp": "67cb59cc62362162a2bedcf4cd59356d9a230f74a9097ac347989d42076a17e8",
+    "gradient-flow/papers/2206.00330-b2t-connection/raw/gradient_of_each_part_withTransformer.webp": "92deef754e9402e7aa60bdf0151d44295553f31d85258bc812431be97c88bad9",
     "gradient-flow/papers/2206.00330-b2t-connection/raw/training_curve_exclude_postln.webp": "ed40b5a9c2ac913f9cf3c6c64e495905f3d78ec446560435a14f76a72024a846",
     "gradient-flow/papers/2206.00330-b2t-connection/raw/100layer_valid_log.webp": "f33cd257b90b14651345389ea1ab6e65b721a7ef6314951883d603fe78d06b4b",
-    "gradient-flow/papers/2206.00330-b2t-connection/raw/grad_norm_each_layer.webp": "2912301e887bac42009410656a162cd3b3b540269d01d68171d314d14ca0ec0a",
-    "gradient-flow/papers/2206.00330-b2t-connection/raw/overview_of_lns.webp": "a9f76020649f20300742ff73e45e426d2ed55a5c97bd5c30001500fd03578946",
-    "gradient-flow/papers/2206.00330-b2t-connection/raw/heatmap.webp": "882087665c5ac00d5fd0c4d43fc8a64f491a9e5b3fe9c92ccdac3a812febbb39",
-    "gradient-flow/papers/2206.00330-b2t-connection/raw/loss_curve_18layer.webp": "2b25b5856fa7e45d8aa4d27db383cc6b3501c0f52e186a07463aa5c1ca428a4b",
+    "gradient-flow/papers/2206.00330-b2t-connection/raw/grad_norm_each_layer.webp": "7a7e1b36f4ebe74a8761dc9765f509d9fd84bb1530fa33da1ce6203d2820adc5",
+    "gradient-flow/papers/2206.00330-b2t-connection/raw/overview_of_lns.webp": "cabb43098c5cc1d9ba562ca8e1d0a40e1d08ef7eea7ecc1299c85e808c81f240",
+    "gradient-flow/papers/2206.00330-b2t-connection/raw/heatmap.webp": "38c9fd0b29db52fa9feacce0ccebee95c3630f706a681f9bc4c62ee645c26370",
+    "gradient-flow/papers/2206.00330-b2t-connection/raw/loss_curve_18layer.webp": "e4e83ca2e974fcfee444056bfaf3a07f638512315f3d388a3a0edfbb47807658",
     "gradient-flow/papers/2410.01131-ngpt/raw/newparamsmean.webp": "2745ea3d261ced89584ac75cdc2ce2234ce97f61f7744217209fe7bcdaeb0e42",
     "gradient-flow/papers/2410.01131-ngpt/raw/4Ktasks.webp": "d34ae323ec0069d4f395d0ac1d1a02c74806b9ebebe1ce6a9a24744223dfdb0f",
     "gradient-flow/papers/2410.01131-ngpt/raw/conv1B.webp": "41eaff7cf87f04d45f0fb6f7d14449b33b8b14056a59f3ed3356e93faa822c3b",
@@ -10845,14 +10845,14 @@
     "gradient-flow/papers/1906.01787-deep-transformer-mt/raw/decoder.webp": "af2787f567deab6a02d3182d7aa7468558c43cb5f197944804932fa882b87109",
     "gradient-flow/papers/1906.01787-deep-transformer-mt/raw/encoder.webp": "4f29fb6c0afd7f96370fdb44665825d7a1772661009a479a60d82c5e5ae86f6a",
     "gradient-flow/papers/1901.09321-fixup/raw/figures/imagenet_train.webp": "b32e58791b7fcf9e51d81ade51bf290737daccde5ace31a3bdd6610c2e6d0509",
-    "gradient-flow/papers/1901.09321-fixup/raw/figures/zeroinit_denormalize.webp": "3f36ba2ab0a74b313b08874a711130cdd34db77a0fd7f72bfb2bb59906863550",
+    "gradient-flow/papers/1901.09321-fixup/raw/figures/zeroinit_denormalize.webp": "340e6bdfaed149b55857af75fcc5bad88519b786a33d0b9ea81ea8ded7f2661f",
     "gradient-flow/papers/1901.09321-fixup/raw/figures/imagenet_mixup.webp": "dbaa05f03f52f7577d2d8e9d9c783cac8116aef75a137d026ce0a809fb27dd3c",
     "gradient-flow/papers/1901.09321-fixup/raw/figures/imagenet_test.webp": "fbdd09bb0af230e9ce9b85496c00fe4e71250062407cfe559065a75244db30a3",
     "gradient-flow/papers/1901.09321-fixup/raw/figures/depth_cifar10.webp": "6b564fc89a1c28ff321799e0ee2e91939feb45843d1f03ba455d753084ea7844",
     "gradient-flow/papers/1312.6120-deep-linear-networks/raw/FigNonSingVal.webp": "c2dab11b02612570842ad9b3f3c71ab75bf3ca71f1b1b7fe742806e0184dadbe",
     "gradient-flow/papers/1312.6120-deep-linear-networks/raw/mode_strength_trajectory_three_layer.webp": "fcc547f5e0b2278bc590750a3000f1d3760750ef0d7683575bdc763462c323b6",
     "gradient-flow/papers/1312.6120-deep-linear-networks/raw/network.webp": "99dec5b3ff2cc0d7bcc697692301bd6041e61765a623b348f08071d51b45bea7",
-    "gradient-flow/papers/1312.6120-deep-linear-networks/raw/DynamCrit.webp": "27b66935490805e7c074ebceadfce012e65617a482512e3a1ac403a124958eaa",
+    "gradient-flow/papers/1312.6120-deep-linear-networks/raw/DynamCrit.webp": "d027843ed3c0f57a14b647989a3f634f3b907af3d3e66bb344a13c4588c05a59",
     "gradient-flow/papers/1312.6120-deep-linear-networks/raw/vector_field.webp": "86af80b4514142323dfdc0aa799102b1aae5fcd0162080851f7ef993e1e4c5ed",
     "gradient-flow/papers/1312.6120-deep-linear-networks/raw/mnist_depth_dependence.webp": "a4e9cdc0833582cb5a52fbd6acecd10fa47ae3f6eccb224fa523b6f903e19e0f",
     "gradient-flow/papers/2004.08249-admin/raw/fig/Pre-Post-new.webp": "3e925123a7986e3d9569df4102d16c0a580a623c2f32d2d78c28dadcfd75516b",
@@ -10871,20 +10871,20 @@
     "gradient-flow/papers/2502.06742-gradient-multi-normalization/raw/figures/sinkhorn_throughput.webp": "91a3ca218a2c153e3172a258e7228d227d53ebb2eb3ead6a04fc9193a883f088",
     "gradient-flow/papers/2502.06742-gradient-multi-normalization/raw/figures/Sinkhorn_evaluation_ppl_comparison_1B_preview_3.webp": "34a8194ba23774b5002ee181bff6bc8c5b2abb226c0c66914a80224747687e49",
     "gradient-flow/papers/1804.04235-adafactor/raw/u.webp": "3e7cb0d9003336ff3197343de66857defe7ea322bf7d2fc7fe25a4ba3ee3548a",
-    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.webp": "76f5e043cb7e930747f8f1a83b21cf8998094d7e98895a03448270df5b789499",
-    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig6.webp": "05252c6cff48a089069b15271d9537d3d8a37ccbb9194273b3f0ac28909318c6",
-    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig5.webp": "6da563c08232d896d4ebeb993f22d324257e62491c98628eeffae2572d726910",
-    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig4.webp": "5220480ca35e2e3feadd7b014064a5aa20f67bfc696bc6eb1fc8b9e2243ce422",
-    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig3.webp": "d55e5bb7d43e3ffc77098b130335cb5b6fbdc16aa107b3a18591bd2851fef769",
-    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig2.webp": "190112deea733c06a81a5dae88a3191184f676b650840dcda9c261e8fb1cf8fe",
-    "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_10.webp": "2548fa233fe2ec708aa5a7d394f6f2f98a08db50cf41b035983bc6a2a9cab0d5",
-    "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_11.webp": "93da198d722ad05a3878d927ebc1882d3e3d489d18c7ffd741d5769bd2a85fa1",
+    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.webp": "7661dc14a4b3fd18f37d11c02e36bd9896a50ef76c8b29f9db7b66c2600e09c7",
+    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig6.webp": "e5d5cb63e399a8f8e8eb3cb0878a3f67cd6b0d45279cd8af193534217ba64dc9",
+    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig5.webp": "1442b916bf8d91efe02cf8bccb0a69a365e2eeaa59eb30674d78666b7afb3568",
+    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig4.webp": "0cded2519b829267b79904acc5a50d355b687528d6f169ddc63396eb576a799c",
+    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig3.webp": "b82f9653ff585510ded7edf2d538943ddf0507578a1f17db4cac7d9fc4c368d2",
+    "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig2.webp": "f4e15495525c5328f4fefa07dbc5376cfcf55e587f06b6579235e4a62312b45d",
+    "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_10.webp": "5ff1d6e3aaaead8d3eb62cf405457d9ae41cab69965bfd97d44cb96c7e780fbf",
+    "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_11.webp": "02107b4292e52f3aaffda0d476324d2108325bf327bc14e21ede8276dba4ee6f",
     "attn-res/survey/index.html": "1206ffa53d3a8ca63666d420a9ed68147797824283e1aded422bfed739ca4e5c",
-    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.webp": "1df5c941763e89672d53378e98dc0693e1e12e716ffc873ffc0950e2bfc05540",
-    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.webp": "b46ed2cfc9e376e00371a3e4eee246ae3b41db779a6f339fd03abd94bf7bf2ab",
-    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.webp": "654c14289ec1ebe57b6e23125dc521954989ab2e907473e13cb553c97737632c",
-    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.webp": "8b303532b32e7aff0ca0e73a56ab9128717ce5bbb4531d93c9fe3db7303af318",
-    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.webp": "52d595adb9d2776f01f85bfa1a9ff466620ecfd0e88942def403d16deaf6f559",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.webp": "28e19978b8167eb140b383a0c3119c0958d554a733bcf157e1d1d7eb11504cab",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.webp": "80bdcd05b8bf9701c6464966c5fd58ec0896745b9fc3177df1bd107e58491aa4",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.webp": "4866ce755de50155d4decc4a1eba2bdbf2185d6aaf4cd90457b30518681ee84e",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.webp": "403536bea9ccf0317f0d1784f96d265c70b4df79fbe55e2b08670694e4266b6a",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.webp": "7d165a65f33a425f5a830b5f8bb2eaba9f3485100f437373b8ef24c1cf34eb7a",
     "loop-models/survey/index.html": "6a75bc36a53c43613acdf3d8765caa485fd8f0163b21e1b7a4b98ac5ac5f8581",
     "loop-models/papers/2605.06609-looped-icl-logistic-regression/raw/trajectory_alpha_0.5.webp": "36f86427cf5bfc8d19b40e3dfa652bcd784581043cabb22ba368697e84f35c2b",
     "loop-models/papers/2605.06609-looped-icl-logistic-regression/raw/training_loss_alpha_1.webp": "0f8a5f79a3bb014e5edaa938067939e82e724af453810d02679439800dd799eb",
@@ -10900,7 +10900,7 @@
     "loop-models/papers/2603.01914-adaponderlm/raw/sec_5_3_horizonal.webp": "5d76551e8a981cc7630030031d87b403af0476347a2cc319c6012e2e3610c68d",
     "loop-models/papers/2603.01914-adaponderlm/raw/inference.webp": "dc116b53e4bba7e076a9a9a1704347d3f78ca92dd472854e3684bcea3ccc20fc",
     "loop-models/papers/2603.01914-adaponderlm/raw/fig/ablation_prune.webp": "75406168a8b919dbe19bd60479b775021fc9f2eaa856692971c4872cb4282614",
-    "loop-models/papers/2603.01914-adaponderlm/raw/fig/adaponder_framework.webp": "5b5f14c4ae4e355f14d5f4627d0fbead0fcf9be8a5e5f07fbffd9782a5666a8d",
+    "loop-models/papers/2603.01914-adaponderlm/raw/fig/adaponder_framework.webp": "7f15a2994dcb6ff9bdc280fb5f05833aecf447a9483254d8d972ab3d25209254",
     "loop-models/papers/2603.01914-adaponderlm/raw/fig/ablation_para.webp": "ebe07885f4768accb7b76540e3889611385272f5c5965048455ceb9bd2fb31a4",
     "loop-models/papers/2603.21676-thinking-deeper-not-longer/raw/fig/logic_results.webp": "7898c2384aae4f0f697755ec958d9cba19a4905898bc467fe2eb82c97d6be4c6",
     "loop-models/papers/2603.21676-thinking-deeper-not-longer/raw/fig/family_results.webp": "badba602d141d273c16bb6585e7c65e869c6cbe5920246f25dfbb53e391ca869",
@@ -10915,10 +10915,10 @@
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/c1_all_logistic_regression_roc_auc.webp": "fe652b1c984a7f4e4db93e5c605b2982403d158b56f70b9341fa72ca395b06e3",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/looped_transformer_per_dataset_c0.webp": "4b7cbb559d80ecd5d914daa1eed9c734ab92912516283bfd272f2802719153d2",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/stages_intro.webp": "cb54bf3c5d22ea789b3f63ddb3871a464051056423143f905d70b42fddf7dee7",
-    "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/rep_analysis.webp": "68268ed67c8b536cdfe1d8c2303d327f72a0b70e996ccfb1595d9d432693997e",
+    "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/rep_analysis.webp": "c95602d021d21747a904b3f43cdb50a284c94d81cebb6d5c1a2bdeeb6b2794c7",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/c1_all_similarity.webp": "b88b6ec9ea9b4e76a009db31087a488d24da67b8d8fe7917988d9ee72bb837ae",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/layer_interventions_all.webp": "280a8c1398641c2e2c23dd6e4ac3a1216882d080cbf93191b5bf643ca54cc0ff",
-    "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/skipping_layer.webp": "155f252bb9984ff5ca87d8e472ccccdc9b3e375249b840960ab59d06a7c1de28",
+    "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/skipping_layer.webp": "7f25c894f846bab4c89f586ee179d746c3ac72f9016bcf3deb83d4f2387e25c1",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/c2_skipping_layer_all.webp": "635bc0ca1bd469eb75893d5bd8da8f5862ef6f081e564d94a573f49ce0cde63e",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/c0_early_exit_all.webp": "cc8f8bfa6d67951aa2a1d8f33bf45f461818736cdf0f3f370837faf4810806ae",
     "loop-models/papers/2605.06510-is-one-layer-enough/raw/figures/looped_transformer_early_exit_both_c0.webp": "5ec33271757f4dac8d889c6e9547e0d41b2a92aa8cb1b91f833d50232ee0c164",
@@ -10934,7 +10934,7 @@
     "loop-models/papers/2405.16039-moeut/raw/figures/norm_grow.webp": "2a5e8503076ac19cd29a7a1a241955c0e970e0e60eb4807efcaab8f2e7c75a8d",
     "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/loss_comparison_compact.webp": "2cdb9a18708fb436c98d66cecf7825dfdaa15c93c875041005012b194b2de70e",
     "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/gen_nll_vs_steps.webp": "6e3b9c75bbbb2570aca93bc9cda1a3dd3ded02222ecb7ab1b0afae39ae5e61a3",
-    "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/Architecture_new.webp": "bbbb8d66e2b614abdd342b0685d89945b92c1a04895835881d051f91223ce6c7",
+    "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/Architecture_new.webp": "bd5ee4b6d7042e9600455e8088df6b2ae1f78b9344497d2cabef6e2ae7a76798",
     "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/Expressivity_Trainability_new.webp": "55aa21279e78671a73a3c9e5c03cda6dda144c79af1548080679913f9b8e940c",
     "loop-models/papers/2510.03206-coevolutionary-cd-diffusion/raw/Figures/Framework.webp": "207a0a776fbc58fc785167271becd53b6bd9a29b6e771d3e6f373f3aab8cb403",
     "loop-models/papers/2603.08391-adaptive-loops-memory/raw/figures/steps_vs_ce_allruns.webp": "b510eaed690b7438ab701b64dc190efc4a680a52713ea130344758c4ec1de743",
@@ -10965,7 +10965,7 @@
     "loop-models/papers/2510.24824-parallel-loop-transformer/raw/figures/phdv2_figures/figure1_activation_origin_loop.drawio.webp": "a6ca01c3440529f6737058d71b6fe73b73f644e59501e436f216c9a10ec79a81",
     "loop-models/papers/2510.24824-parallel-loop-transformer/raw/figures/phdv2_figures/main_graph.webp": "ae7264c540660241b82f9ede31d51d7fb074c800cb0ef5b416f8a0382bc0663a",
     "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/model_performance_summary.webp": "78e33a506c94da39509934c5d789bd43d9ca742c75c3b84ab78220174fa0ba1f",
-    "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/learning_dynamics.webp": "1d46c3416492f1331d21594c2e76814b5b5a3d55686090f823933c57ed56283d",
+    "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/learning_dynamics.webp": "e2c006d545233429364448d1547d99b6077af96dd34a51c5df07c5e41204e80b",
     "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/addition_task_position_accuracy.webp": "e15a6634679234609d08b34ffe747303e2aaf764e54bf185af5690851bc70cb8",
     "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/learning_bottleneck_comparison.webp": "0550a80f6a9a9e316897f91436aa5a3c14639e71b19a51f71f0af0d74aaf1437",
     "loop-models/papers/2603.08082-tiny-autoregressive-recursive/raw/images/fig1-trms.webp": "ba95309db95418ec323219ddd79d50f067f54f43b7fca159afd1c41df3c9a41c",
@@ -10985,11 +10985,11 @@
     "loop-models/papers/2605.07277-bifurcation-models/raw/base-data5.webp": "3bc745e295099a727c9779e06fe801f4d9912020da3bff20e20cf99c18fe8659",
     "loop-models/papers/2605.07277-bifurcation-models/raw/solution_count_hist.webp": "acaaf29a4206b14822c491d65ba4d009a2a70f3bcb7c816662c6cddc98370a39",
     "loop-models/papers/2006.08656-multiscale-deq/raw/images/multiscale_cifar.webp": "c2f0d57c39ae51afe229882828d31b3d222216b57f2d2d3b89c456ef1f8b16d0",
-    "loop-models/papers/2006.08656-multiscale-deq/raw/images/efficiency.webp": "bb0906c26b0cda0430803c0b6e6d21265d0aa27164224c919e03c81b1b7b8e95",
+    "loop-models/papers/2006.08656-multiscale-deq/raw/images/efficiency.webp": "6cce088dcf6497cba69f9eba809e501b9482aae819adff6102aced7e31845a99",
     "loop-models/papers/2006.08656-multiscale-deq/raw/images/normdiff_vs_iter_imagenet.webp": "6806d7a1b2c20f315552b05f948e38491d56d4b192e8c369b3b1f8c1de13f8ec",
-    "loop-models/papers/2006.08656-multiscale-deq/raw/images/residual.webp": "5083ea655ce2b693d5a619950731fd6ec75e7bb00ac653f26bafd063917ffc19",
-    "loop-models/papers/2006.08656-multiscale-deq/raw/images/mdeq_full.webp": "74dc57989aa823b2dd5d4371d2f5bdc1f5eca50aab36dcc85ccaeae2a247d0a6",
-    "loop-models/papers/2006.08656-multiscale-deq/raw/images/cmp.webp": "6575424743c750d957180d90268cda1d934a8be2ec51d3d90aa59ff9cd5437aa",
+    "loop-models/papers/2006.08656-multiscale-deq/raw/images/residual.webp": "a7c3aea32e036d1a38ca12b89b7cc997609abce275e8a553cde8d908290c77c3",
+    "loop-models/papers/2006.08656-multiscale-deq/raw/images/mdeq_full.webp": "d5c1d7eeacfb08d78ecbd8cc1fd281e8f1d103112e9c8dc4a26a785674d0262d",
+    "loop-models/papers/2006.08656-multiscale-deq/raw/images/cmp.webp": "a33cfe795a675951fd8b397c1e810e3d3d5c57474d8567643896cd431cfe3405",
     "loop-models/papers/2006.08656-multiscale-deq/raw/images/cifar_plot.webp": "e31ebc803a3f7d7afa17dd0dd7f6e58c3d8ae74ba435b7ee017daa8871174139",
     "loop-models/papers/2602.07845-rd-vla/raw/YAMtasks.webp": "5e1487b7d11bfdc7352b874521df1ff0f9ffc362a807cb864a0b39158bcbc903",
     "loop-models/papers/2602.07845-rd-vla/raw/figure2.webp": "1f3f8db23958de952dedca7d0200e074fcecedaebda3e5888ed57e7e2835be0a",
@@ -11015,9 +11015,9 @@
     "loop-models/papers/2507.10524-mixture-of-recursions/raw/figs/overview/overview_main3.webp": "4d1625945926e598ba65ecbd3da855394bae23c261c7772d2b3302833f30af6d",
     "loop-models/papers/2507.10524-mixture-of-recursions/raw/figs/overview/overview_main2.webp": "da94fbf3fa7c9a199cc00998f54cd740682fd81f86b16ab8c0c77de0b2c9b485",
     "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/breadth_scaling_efficiency_curves.webp": "a15102c22640a1d909794f1612a25be5820d19985d058238a7b0c68beb6a4eca",
-    "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/test_time_scaling_convergence.webp": "87a94296054cf161b656414ae85ec4db24ba9c46df8d9745eddf0133042702ec",
+    "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/test_time_scaling_convergence.webp": "b81f667eeb938c94f96dadb5dcdae83070bdccd8998e9f3e8872c36fe62e3dd9",
     "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/sudoku1k_accuracy_vs_nfe.webp": "c2020cd9e22ad120e4f616c76d3165aec611290115ab1d5c6688dd09a9b63185",
-    "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/depth_breadth_scaling_pareto_heatmap.webp": "3e4d8432560723b315834d7ff68e4a53114931ff7c48f8c184c708f0b73c41e4",
+    "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/depth_breadth_scaling_pareto_heatmap.webp": "7552697ca854fe210da068183846dcf42e853b74f0aa778e294f1e4a81ead2e2",
     "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/attractor_landscape_modes.webp": "bda3db57f066a0d30c95e76a6f417195f79c2bde4b91c90b820039b8dd2b546f",
     "loop-models/papers/2605.21488-equilibrium-reasoners/raw/figures/train-iterative-model-technique.webp": "3ccbf40075967428aed7575ed53bb94f3ce7493de0091e68eabfc31465bfb2d6",
     "loop-models/papers/2605.20670-lt2-linear-time-looped/raw/figures/linear_stability.webp": "39a3f6c2ed647c7e53e5070ef54f648a863200398618bacf3b41930963ac492b",
@@ -11034,16 +11034,16 @@
     "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/result/normdiff_vs_layer_trellisnet.webp": "d98f3cb3899966a3db5fb122ca634f590a24affd896e34ce1286b0bde02b2cb9",
     "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/result/iter_vs_epoch.webp": "79f0a9de07d3c1f22157e9492f53a6c76f4c830e4bd5a8edc1513f9d5f9205fd",
     "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/result/normdiff_vs_iter.webp": "61d587e30e4f67c73bdfed625dd5ff6d2f27792d6b2667908aef1d72a729a306",
-    "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/equm_vs_dnn.webp": "a84726cb2d4f955da4f9c706e2fe988ae8047cbfa8dfd6d8ecfee8916ea29bab",
-    "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/fp_onefig.webp": "017c0371ac3a679b6fbfab4241255a2e0dfb541ed8051f07b1e0bb351acef3c0",
+    "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/equm_vs_dnn.webp": "fd8b3ae04fa00ca39340959eb398dd63b934dfa2744a175668fd61c44f8bbc42",
+    "loop-models/papers/1909.01377-deep-equilibrium-models/raw/img/architecture/fp_onefig.webp": "92fe5e178cd497c0dc2357a870de7637f54390f72c2dd232d8d192735da7bfad",
     "loop-models/papers/2111.05177-phantom-gradient-implicit/raw/fig/toy_grad.webp": "06717a64d3492103e6585001e032963bcde407bb96e76031056a5a1de9ef33ff",
     "loop-models/papers/2111.05177-phantom-gradient-implicit/raw/fig/inv_U_exp_neu.webp": "9999b0ca0ab5adf3082f39ec0a1dfb484296b51c4b6b543330ead0899b893a3f",
     "loop-models/papers/2111.05177-phantom-gradient-implicit/raw/fig/solver.webp": "a9affa8780be1d4ea5272cad6de9a80565d9d76740ecfd903e7e64f4360a06db",
     "loop-models/papers/2111.05177-phantom-gradient-implicit/raw/fig/neu_bfgs_0.5_5.webp": "a4ad2d11cb0a339ee2eea888197651ba1bf9ac18ff0cba5377948345fbf45e2c",
-    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_hpsearch.webp": "a264ed7cf36f14f3d4f9f0ba6d1b46544215c3458e69b73a01caa752ae880cef",
-    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_unitf.webp": "91f909ebed15d0c2f354e29fd378d5a14ae8b0c5ab0162d4fb9b54abe95de5b5",
-    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalparam.webp": "bc65577625a87be840426d8e9958f56a3b4e549c22b5922e3d7f7637b6457815",
-    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalflops.webp": "44d5ee6f5c2abe8291b0fce50e0b0b0e1fca489ffcee0448857d6246cc1a38df",
+    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_hpsearch.webp": "b9c116e940c1948246781142025b887e8caa1ad7623d97d36abb30936bc1b50c",
+    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_unitf.webp": "c4dbcb8487db19928e6cc095a5996c4c800a65c3348323205025392f93bf493f",
+    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalparam.webp": "9b4bd012aa8f795475869bcffe48559f07381a5c84b566ce44bff99d21ece0f2",
+    "loop-models/papers/2604.14442-hierarchical-vs-flat-iteration/raw/fig_equalflops.webp": "2b30950c238347f37f61061f340b4bd973bdb3e68b10c734d1604057d0d8c871",
     "loop-models/papers/2605.20389-nonlocal-operator-fmri/raw/diagram_decoding_encoding.webp": "0fa65f77448d5f2efbcc4f2ce1e92d8c7c01abf846fa713244578d95133707da",
     "loop-models/papers/2605.20389-nonlocal-operator-fmri/raw/scatter_plot_model_t5.webp": "9967a99c077c75979d570469ec6c7009800e7d9730c0290413cb4c3b313a4034",
     "loop-models/papers/2605.20389-nonlocal-operator-fmri/raw/scatter_plot_raw_data_t5.webp": "8e75a91d03114b0bd70db332e178313009eaa3427a211df8b7820892c637d323",
@@ -11068,7 +11068,7 @@
     "loop-models/papers/2604.15259-stability-generalization-looped/raw/images/spectral_val.webp": "6e2bf1b64aee16a3f5c1ed38a9c8209f9a8b149a7197673880c46e0354f5adbc",
     "loop-models/papers/2604.15259-stability-generalization-looped/raw/images/external_spectral.webp": "ede176d3d931b8d45f2fda43a536581a8c92d3de53b68b42939350f30228157d",
     "loop-models/papers/2604.15259-stability-generalization-looped/raw/images/schoop_out_none.webp": "6efcf24e625a1de2e7da71182e08d046f662a377829985193d819637937d3b2f",
-    "loop-models/papers/2310.10845-cotformer/raw/cot_v2.webp": "5fc696855ec60043b31198b5c01369e39870be77927f67cf9465969eea32c974",
+    "loop-models/papers/2310.10845-cotformer/raw/cot_v2.webp": "d44e7fa4cfc90098baf25e4889095325a4aa99aac4b6b910c5747d5ec91ed38f",
     "loop-models/papers/2310.10845-cotformer/raw/density_change_repeat5.webp": "fb2cec553e1f0d3907ca41e5f20737ab051cc1f3d9679460b45442ffd7dc2204",
     "loop-models/papers/2310.10845-cotformer/raw/cotformer.webp": "3ae5be5e5d463e45c9d91e9c8b92764ec6fd2d1b644f160fed917f051898698b",
     "loop-models/papers/2310.10845-cotformer/raw/cot_vs_but_pareto_24layers.webp": "279f578c3d942e788f05ddecc02e87c5b75372b36bd99048be1a44f45d013f03",
@@ -11101,18 +11101,18 @@
     "loop-models/papers/2502.17416-reasoning-latent-thoughts/raw/Media/12L_closedQA.webp": "cdeb52b4b4402ea146ce75505d488edba7ce60d91ecca839a5908134d2e63b99",
     "loop-models/papers/2502.17416-reasoning-latent-thoughts/raw/Media/looping_illustration2.webp": "87c696a5d949c5db85170a9dc9ddc4a61c39d4f68ff7c07ccc58ba5e46c443b2",
     "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/TF_comp.webp": "01125a20f7adced987567c57c2d3bb3fd74932ef8f5736b4cff7ab9408ca56c1",
-    "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/lego_blocks_v3.webp": "285df430f996d51909487d754bd97e77d8225d8eb680986200b342951494adbf",
-    "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/OISC.webp": "a9bf5d9044fccd5ee2573087e9448f226a93a62f1fe778e5e8c5a58ae3c86e79",
-    "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/Unified_Framework_rev.webp": "9e50cd3d327cb7a06c45611b468471908ef6d7c28ddec36b1afdcdf28f45c5e3",
+    "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/lego_blocks_v3.webp": "2ec4689e2f1bcac5a53f6d4931d9403877ae23097a12e0510b6805b24b578073",
+    "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/OISC.webp": "5952ee4e03be5bcac402aa8c915c905057ae0fa2cfce4d21f951a5702d9de2c3",
+    "loop-models/papers/2301.13196-looped-tf-programmable-computers/raw/figures/Unified_Framework_rev.webp": "9d885cd14c791e68ca0ce03f3de8a75034d36cf768a35d85d7b62bd9a3a90216",
     "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/exact_match_avg_ckpt20000_vs_size.webp": "f9f22420cab4e73501cc9c0cffc370918735d9f2da97de6d9eb0db7c3d191474",
-    "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/radar.webp": "4962d966a533fd12f9797a98c370ba9299d4c8cd05c51fa39f31f64f4c50ce35",
+    "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/radar.webp": "d856e8f5a872552c4b4f817adf3b473f1ab6706efe906c4dae3e34124dddd19e",
     "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/ut_safety_full.webp": "a1c92ef951206243238f7a5425f2218c43fc7b6652bc512227c801ce5a7f0492",
     "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/knowledge_scaling.webp": "484d474ad7a3af0ae32b82d147e2a4373639282c5b0cc5315d35e7e51a9b621a",
     "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/reasoning_benchmark.webp": "ff8121f85dcbb20efc4b5950131e7cc0b51c833c540ff778d2c18344c282f225",
     "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/recurrent_depth_strategy.webp": "b68f825251f17bbb9919137183cfddcc38f508c265e905b74890029a45c04eda",
-    "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/training_process.webp": "9445c42268534ef123bbfd86e17059911735fd4d7f5050c2f5413f5e6fa01399",
-    "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/main_figure1_cropped.webp": "33d0944cb0b2b3311a9a47b1a41d736a90d3b2113e499fafb715d307e5311a16",
-    "loop-models/papers/2604.07822-loop-think-generalize/raw/images/recurrent_model.webp": "76a35925e32e75a1aa20143a4e8c16663095cd4c962ff873156581e22a6332d6",
+    "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/training_process.webp": "23f3539f186a1adfb9264cb83ccee089e3ca930a02762a0dd3cfea5ec863d60f",
+    "loop-models/papers/2510.25741-ouro-looped-lm/raw/figures/main_figure1_cropped.webp": "de0eb2894cfad39582edc198eaed565e20cd743268074c54a3f2461760b80fa4",
+    "loop-models/papers/2604.07822-loop-think-generalize/raw/images/recurrent_model.webp": "f359ebad25d7609adb9f27aaebed67ad310188e0eb270688ef172d1f6674a4d1",
     "loop-models/papers/2604.07822-loop-think-generalize/raw/images/dataset.webp": "40c18534e1f1458f737fa3ce1b2561e6f0892d1a10ff3989fe3a9e4adba10d8f",
     "loop-models/papers/2604.07822-loop-think-generalize/raw/images/dynamic_adaptive_steps_vs_complexity.webp": "e80c06d9a775ef08cdd05ded1e88a4261d5f619d3ba82245eaa8b803345aba37",
     "loop-models/papers/2604.07822-loop-think-generalize/raw/images/margin_grid_4models.webp": "958ec88e990646cf20a4e6884784c79f58f2c70f9971d8a82e8cc5c53532c306",
@@ -11184,7 +11184,7 @@
     "loop-models/papers/2402.13572-algoformer/raw/fig/Figure6_1_noise0.webp": "53f9df4df6ce415dc255203e2a1b007e7bd305621e82e72a746d23c642f57647",
     "loop-models/papers/2402.13572-algoformer/raw/fig/Figure2_2_deltaT=10.webp": "fdf47b7405543bbbc6fee45b91dc0d663abf8f74a0e6dff8e83f10b20e0a3fb4",
     "loop-models/papers/2402.13572-algoformer/raw/fig/Figure6_2_noise0.1.webp": "2a6128645aee7ff453b18dfbbf2eacd50e5a04b3d45fc954218c5b297987ea01",
-    "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/retrofitting_explainer.webp": "8798699760af65576238472cab63870c538407e3ccb81e524bb5e9eb848a7b2b",
+    "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/retrofitting_explainer.webp": "e9441da508954ef6ea5057f074b65aa6cd3e8da73b29b70d00d2eaa738500590",
     "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/which_layers.webp": "18d71de36161e7fe18a868302425de24851c7e9315b3668730e84ef905869f1d",
     "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/bar_plot.webp": "88e8742d5a0d4276b3857a655afbdc932533f5f2d9454020f4191452767f6855",
     "loop-models/papers/2511.07384-retrofitted-recurrence/raw/nov_figs/olmo/olmo_combined_plot_all_minerva_math_FLOPs_1e21_effective_params.webp": "031f7ed0ed23227719d0ea17bf1fc47bed64a751182edbbb62c502fc512212c0",
@@ -11199,7 +11199,7 @@
     "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/visualization/sudoku-hard-1.webp": "443a8a2a2b8016c43ea953b2dbb08419371ed24f3f820c99e6f5467d43905c35",
     "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/forward_res/trajectory_plot.webp": "7bd4d02f2d8a42d164793531744ef6ce91c692b087b6de87ebb7e6a7d1fb9c99",
     "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/depth_param_performance/depth_param_performance.webp": "675aa640e898908ac58649a2c7b3a3697239be53b98c5198ee4b5edd95639e1d",
-    "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/analysis/hierarchical_dimensionality.webp": "aab603bcaffcb28e061487bd42f45341d5bbb0ec0c99925533475f8dab548e31",
+    "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/analysis/hierarchical_dimensionality.webp": "45371192021ce3f98267d7a7df16613d7cd2d2000106ad46905f1c30d609eb3a",
     "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/act/act.webp": "bd48e6d8c2654f93b56d921873b76625ad6a0be0641282ef469e6d171d3f1f0a",
     "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/main_diagram/H-main-figure.webp": "4ff75e668b48b5f9d91f6ab97dac77bd328f0d7905f3f6f6563cf7c86ac2a010",
     "loop-models/papers/2506.21734-hierarchical-reasoning-model/raw/figures/pseudocode/HRMDiagram.webp": "00b990d55a4dbc4d9f8234199c041a01d64aae59ce6bc9c64ade3446cee5c8b7",
@@ -11213,7 +11213,7 @@
     "loop-models/papers/2604.21999-ut-need-memory/raw/fig_attention_heads.webp": "98c1aa439fcc6a55293dc1be54e33f2f9dcd4e44fe825bedaf4be7d6b60b4b36",
     "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/multi_benchmark_no_baselines.webp": "cc55646669f2352cf15191da344af425217b36ec48516f715b3eba4025451b28",
     "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/gsm8k_hella_swag_humaneval_tasks_performance_vs_semilogx_recurrence.webp": "05b1c162687488638e8f1ee93b6aa272a002120f8cd5776817e1df661db9685b",
-    "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/arch.webp": "f0f1215aea2a9778d78637991e46291176aac48367a3830dc125d66cf8fc17e1",
+    "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/arch.webp": "d06185e463f3a31bbca189d42021d9487c07bc750c5b07d12ae77e7dbb2682e3",
     "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/convergence_chart_range_I_74_103.webp": "b37ad9dd045b3efe24d8c61a637ea76233ac97b3e46da22d7a3ced49e8520850",
     "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/swirlie_highlight_C_167.webp": "09764f384e7932221d7d96527fb1900aaee1aa74e202d6c8bf69ae9074f98951",
     "loop-models/papers/2502.05171-huginn-recurrent-depth/raw/figures/ppl_over_recur.webp": "e44f5de85490e94051a3c84ec065771953397666a0eb5543435ca861261c03c7",
@@ -11277,7 +11277,7 @@
     "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/SparseLR_err_loop_vs_unloop.webp": "e3ff1f6047837df0c2e3b3dddcebda17dc21d78d0f02a5c5b67b654bdbd9bd18",
     "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/model_probe_grad.webp": "2fdb538f581dd224f6cc9bca5d784edc38ea75ad919bc4a6f048cd4d3ffecc03",
     "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/model_probe_Wols.webp": "de4eb732caaa3639fb995687e7778623d212d505b77d24f97e50f8c0fa17bc07",
-    "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/first_figure.webp": "c18b12b7e020c52cbb580e6d3ed208a03439c51c7aa9e202637143ef64b5dedb",
+    "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/first_figure.webp": "8a8f4d7ebb1089edf430cde88b6abe27dbd1ed46855e97d7ef8ebeb76ee7ca09",
     "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/arxiv_tying.webp": "07c21aa4692da6551bc419cf97dde7cc00fa3038e0295622a88bd73bddef5061",
     "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/relu2nn_err.webp": "18a57fcf2473875a81732a87bc17971205149e77cefdbb2e67baab6f39ebbbe4",
     "loop-models/papers/2311.12424-looped-tf-learning-algorithms/raw/Figures/DT_err.webp": "7f107ba7c97238577cee939d952af5269fd725a3addef84606e6915da2766bd4",
@@ -11302,9 +11302,9 @@
     "loop-models/papers/2603.19714-looprpt/raw/icml2026/figures/exit_thres.webp": "2c5d57f4aa8ace0097a2670c9d2a3994d2cd5521f0227fd70c7953e86bfbc6cd",
     "loop-models/papers/2603.19714-looprpt/raw/icml2026/figures/step_wise.webp": "a8ef6d49f7624769ce04af107e342ae07a3f0dd11d2a00d263466de83432f8a5",
     "loop-models/papers/2603.19714-looprpt/raw/icml2026/figures/force_depth.webp": "9fab421dae1bda4c79ea7911bca57474b9e2eaea4651a902189befa15fa36432",
-    "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p1.webp": "be76a6416ea4ce8184bb34aa8e604232cf95d3b6525a988619f72d2b81056cb3",
-    "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p5.webp": "4e33556528357e1241d7ff1e5b9b6cbe40d0b2ed98e2a0d06377ef91ed368902",
-    "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p4.webp": "8e649091eb8eeaa8b26f390654775d20e4038d89a4a85c14dd358a23023cc11c",
+    "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p1.webp": "5f569cfb7a891673bd7e8f0179bae8bb9966cbdfe19dd46a7933eec84096d101",
+    "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p5.webp": "ca8506db46d3f7c6d3a27018a73056ea7b363e9d78e6918c496ca59353759872",
+    "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_p4.webp": "9e3177b9dc45486fcc890074ca04f894396039e6e661ffcc47155908fba9a115",
     "loop-models/papers/2602.11698-spiralformer/raw/paper_fig_large_p1.webp": "4de02ccf90848bb2b49812403aed0239136f9bad60e1c894fd86cfbd2d412dc9",
     "loop-models/papers/2601.21582-depth-recurrent-attention-mixtures/raw/data/figures/ea-map-depth-prob.webp": "1f6c39cacc9120b198be5a2400605d94f35b967f3d15e084f1c50f84d1f632ff",
     "loop-models/papers/2601.21582-depth-recurrent-attention-mixtures/raw/data/figures/dreamer-illustration-unfolded.webp": "eb96b2242b528a929c57c1cb6fa4d286086f7c7862208f773eff4109b6f9413b",
@@ -11328,7 +11328,7 @@
     "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/exchange-for-loops.webp": "af2c0c2ae56127fb1eacd59d6b6a0911ab1e46d62baa28e9afbf0c1e0bf62a34",
     "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/ppl_per_token_position.webp": "cc4910ddd9fe52940caaa602d53fb9b38d8855a7af838e35307a6cbdc99d140d",
     "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/2025-01-28-deq.webp": "450aababceef4bc04dff9f7bb8a39e7667cf66b9dbd26de89b48ef0862cbf910",
-    "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/implicit_jacobian_check.webp": "c425a501c68cb96b0c3685b8a5cf034298d63d0c28e9bd17b3ad2fb7d9e9b0e1",
+    "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/implicit_jacobian_check.webp": "adb8b4f2a704f829cf5ad98a9fa743a084f55d48a9c205f1f034b19fce6deb61",
     "loop-models/papers/2502.07827-implicit-lm-are-rnns/raw/figures/monoid-task/word-problem.webp": "18445b5e2591778be7903b4340843173f7e8e13cb14405a2f4690657df02f15a",
     "loop-models/papers/2509.23314-two-scale-latent-dynamics/raw/figures/comparison_drift_loop_ratio.webp": "ae25c67c8e1e20dbeec2195300e9f2424c41e1dcbef1bdc8905375e7add6c302",
     "loop-models/papers/2509.23314-two-scale-latent-dynamics/raw/figures/media_images_ckpt_60_pca_trajectories_token_3_2D_first_prompt_218_8f6a85b508359ac2f1d7.webp": "444615f76358590eb31725b3886d4d13c489e69d8abcee329858c9eea49da281",
@@ -11370,12 +11370,12 @@
     "loop-models/papers/2602.11451-loopformer/raw/assets/trajectories.webp": "23f80d9653a1b3ba818e091032cb505985eaba3f802f91984a07f7e59707c69c",
     "loop-models/papers/2602.11451-loopformer/raw/assets/cosine_distance.webp": "9c1ce87cb7ac176b217154dec88ede8cc24e70dcae3c2de4a94f04e65070e7fa",
     "loop-models/papers/2602.11451-loopformer/raw/assets/perplexity_by_k.webp": "d066221a4acfeb19f1153eaee10ceffa1c40ab857d78d2ebae79e3b190fd26ac",
-    "loop-models/papers/2511.08577-think-at-hard/raw/figure/arch.webp": "913508b3d7231ff8522c3eea716782e4c74d4945cf88826327d53f6d0860757a",
+    "loop-models/papers/2511.08577-think-at-hard/raw/figure/arch.webp": "9c81cfd8993c8f5aefcd19b3daa90e2a566ba923aeec8347d825c30cb9e05322",
     "loop-models/papers/2511.08577-think-at-hard/raw/figure/iter_decider_acc.webp": "c8e06a2d6ddd9b3bb4af30f7ca821621c9f1255b203d51296fa148f851cf38de",
     "loop-models/papers/2511.08577-think-at-hard/raw/figure/eval_loss_0_6.webp": "ad48a4fae5d7ad5dbb527ca27286efc46738d5b08b0ef81e7802e0230bf37d65",
-    "loop-models/papers/2511.08577-think-at-hard/raw/figure/duo_attention_expand.webp": "953c4b48702a3b0124ea5075999151353498ea0875398e8d4e8de49817d8b396",
-    "loop-models/papers/2511.08577-think-at-hard/raw/figure/flow.webp": "2cb8e73938438eccfae63f8cf425be52c70689c372beff8016f4875cc337fcef",
-    "loop-models/papers/2511.08577-think-at-hard/raw/figure/idea.webp": "91abc2655eb24c9c2a79c8d5cc134979642ba12ac22ce78443c6de3059a7aeae",
+    "loop-models/papers/2511.08577-think-at-hard/raw/figure/duo_attention_expand.webp": "92800577a83e3113e7225ea7f27f0402fa6987246c85d285f2c967f13aabf508",
+    "loop-models/papers/2511.08577-think-at-hard/raw/figure/flow.webp": "6627811eb482b9c3471350d83a4da95666ff1e4b83b068751024e02bbdc6bad4",
+    "loop-models/papers/2511.08577-think-at-hard/raw/figure/idea.webp": "20ed780d3f9f904d8e569b68d6fa59b1e19a6959f3dde32c9f0872a0824790e7",
     "loop-models/papers/2511.08577-think-at-hard/raw/figure/experiment/attention.webp": "153c701608ad4bf4b048c54b871be6b78a24424a65023610c5e60070154aaa35",
     "loop-models/papers/1603.08983-adaptive-computation-time/raw/fig/sort_sequence_3_black.webp": "0d842ea967857c5b8b0bceee11323e12f721cdbad9802bf4c3bc522f57e679f4",
     "loop-models/papers/1603.08983-adaptive-computation-time/raw/fig/rnn_diagram_2_steps.webp": "dd2d4b3670deffccb741003850669ea24c74ff38ebf9a85823fefb15aa2edd68",
@@ -11405,22 +11405,22 @@
     "loop-models/papers/2604.11791-mechanistic-analysis-looped-lm/raw/figures/fixed_point/recurrencewise/successive_difference_norms.webp": "d6f5f1d4374a94e8a436afb309b0ff5735c1cd66a7d5663837ed3ca9ea92997a",
     "loop-models/papers/2604.11791-mechanistic-analysis-looped-lm/raw/figures/fixed_point/heatmaps/attention_weight_norms.webp": "4bdd433b1319a94e55a0f6ca786b75e4cbf02d1f039430bdf84130efc491c4ca",
     "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/DEQHU.webp": "cb837c150c432306db6c30543ca20f139887dc807e8d19dfc2d0b38a751ad94d",
-    "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/samson_abundances.webp": "aaf7421dce306e7d7d541a9445bdeac1fd038b93d375a6282461cdc9c8d50caf",
-    "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/apex_abundances.webp": "33fc15b60745e297a34b546a98857722789acb4a5bb3a21188b7a905dd250807",
+    "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/samson_abundances.webp": "260633fe4f538fdf273a2a768cbd6bccc0d43f0cfb74b5a108a73bac14c40e3e",
+    "loop-models/papers/2604.11279-deq-hyperspectral-unmixing/raw/Pic/apex_abundances.webp": "a891e59876f676ae2dab2eb6965c3ea532941e48f86758fa176bc14acb7717d3",
     "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page1.webp": "45e650b4a1f35344fe234ea092beed5481fc4b450e0bcaa7a5aa6048d6b30e21",
-    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page5.webp": "7978eff92b055db3b0fad6ac014c205bf9b84610411241a0d0d129a29351f7a9",
-    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page4.webp": "0f488b3f5b0cb87fc1aa70a23bdf40a296e053f47c7da8226cd85e890374b034",
-    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page3.webp": "df4d4a9d55ed75913dfe33489dc0d1202bff36da35bd5514107f283515232091",
-    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page2.webp": "6065fb5568699452351f4e91f0b8b4667e4fd4455a221ceb95799a8167fff74a",
+    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page5.webp": "7bb4bfffe8a6fd5fde6ddb957c1ee1a25a31ae4c05b51d08eda1f92744539b44",
+    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page4.webp": "4cad96c204356ed94f9c5f7fe892049d6bbd7f99b0b379457ee3155b5406bb3b",
+    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page3.webp": "4cc5f9a2bc6476d5eedfd3779dae72f3e6df54d381987732079f160b4f61cacd",
+    "loop-models/papers/2604.25551-halting-vs-converging-rgnn/raw/page2.webp": "daf0c6068b30b1120553cd7b0c8252e909317dcde35424755cc95135cbd0ae8d",
     "loop-models/papers/2510.04871-tiny-recursive-model/raw/TRM-Page-3.drawio.webp": "1490d8047c29d3e9f4a995981672ac75cf42fbe56c92cab1948e945fe5925d53",
     "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/accuracy_vs_T.webp": "ca41c376b29f78a370101e62615c6a230612100f5772d359c882b1b33745be72",
     "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/trajectory_comparison.webp": "1ca5cb59dd7eb97c81d920a64f8fde8b1538f2b3d81b9995b6b7ff2f9d0992a7",
     "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/sudoku_maze_no_legend.webp": "b19bd5376adaaf5024577ddeb82ed6b807816a605ad7afc65aac34e0c533977e",
-    "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/fig5.webp": "a6666d3e0cae6c19aec80802fe443be0fec01a953cac4473624f8445641b8ae2",
+    "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/fig5.webp": "c9f89bc8203a9ae896d38825e21e9a9f73ad33d5c1364721853a2392090e9965",
     "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/pareto_test_ppl_vs_flops.webp": "af40ae47d1a27145b908318016269a8437bbba6bdd57a34e9060bd225caa4ef9",
-    "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/flops.webp": "bce99fb26486daf616ed4d2fee7be48775d4b549f7b809a4002b13f8756c5843",
+    "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/flops.webp": "3d2d6d01a8cbdfda3b26f01eee01428027bbb5dba4469ee51d7e7aa6c63ebd69",
     "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/memory_vs_T_large.webp": "71f07b0e22dbe69d32f1ebc3cc14368bcad3ede8b5b6c2246dcdc1395aa0e761",
-    "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/attractor_model.webp": "994453da2ed51d86a1a6b949a8d2e985edd362dc32076f712722c030381c6384",
+    "loop-models/papers/2605.12466-solve-the-loop-attractor/raw/figs/attractor_model.webp": "d2f79dc251c6f3e439964259c4b18388589cd4adab5f747ccc07c7fc30ca1dc3",
     "loop-models/papers/2604.18839-denoising-recursion-models/raw/arxiv_figures/drm_arc_step_23240_task_45a5af55_test_0_preferred_correct.webp": "9ff73cb5abeaba56c25743dc8f0f0c1fda7d29c06e762c04b027599f6bf08a71",
     "loop-models/papers/2604.18839-denoising-recursion-models/raw/arxiv_figures/nooverfit.webp": "784f0962eb47e47c08049e4bca3787d53e7bdaaf56c7da66e9efdb2bd1b63413",
     "loop-models/papers/2604.18839-denoising-recursion-models/raw/arxiv_figures/performance_plot.webp": "b48dded774b4a8ea2ed9f49df965e17e1d8a4c1d5e17f6c0bb29fe78884bc82f",

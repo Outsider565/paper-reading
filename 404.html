@@ -130,18 +130,34 @@ h1 {
         <p>围绕机器学习系统、模型架构与训练机制整理的个人学习综述。每个主题由总览和逐篇论文解读组成，适合回看、分享和继续扩展。</p>
       </div>
       <div class="stats" aria-label="站点统计">
-        <div class="stat"><strong>4</strong><span>公开主题</span></div>
-        <div class="stat"><strong>179</strong><span>论文笔记</span></div>
+        <div class="stat"><strong>6</strong><span>公开主题</span></div>
+        <div class="stat"><strong>245</strong><span>论文笔记</span></div>
       </div>
     </section>
     <section class="topic-grid" aria-label="主题列表">
       
+      <a class="topic-card" href="attn-res/survey/">
+        <h2>attn-res</h2>
+        <p>Attention Residuals（深度维度注意力残差）：用 softmax attention 替代固定等权残差累加，实现 input-dependent 的深度信息选择性聚合。涵盖 Full AttnRes、Block AttnRes、time-depth duality、structured-matrix 统一视角。含 fla 库的 Triton 融合 kernel 实现解析。</p>
+        <div class="topic-meta">
+          <span>Survey</span>
+          <span>2026-06-25</span>
+        </div>
+      </a>
       <a class="topic-card" href="compaction/survey/">
         <h2>compaction</h2>
         <p>上下文压缩（Context Compaction / Prompt Compression）：硬文本压缩、软/潜空间压缩、RL 训练的压缩、Agent RL 压缩、Agent 记忆、记忆架构、部署评估。合并两份 paper list 去重后涵盖 50 篇论文（全部含中文 README 解读、图片和公式），核心 formulation：prefix → compact → suffix PPL / agent continuation reward。</p>
         <div class="topic-meta">
           <span>Survey</span>
           <span>2026-05-29</span>
+        </div>
+      </a>
+      <a class="topic-card" href="finetuning-efficiency/survey/">
+        <h2>finetuning-efficiency</h2>
+        <p>预训练模型的下游学习效率：给定预训练模型，能否预测学会下游任务所需的时间／数据量。Q1 = 模型大小，Q2 = 预训练程度。核心张力：prompting 口径下 loss 像充分统计量（Du），SFT 口径下出现 catastrophic overtraining（Springer）。覆盖迁移 scaling law、可塑性衰减、loss-to-loss、学习曲线外推（Hestness / Rosenfeld / Mohr / LCDB 1.1 / MPL）、持续预训练（D-CPT / CMR / rewarm / PTPP-aware）与 Pythia/OLMo/LLM360 实验床。</p>
+        <div class="topic-meta">
+          <span>Survey</span>
+          <span>2026-08-15</span>
         </div>
       </a>
       <a class="topic-card" href="gradient-flow/survey/">

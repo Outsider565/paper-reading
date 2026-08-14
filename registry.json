@@ -1,9 +1,21 @@
 [
   {
+    "slug": "attn-res",
+    "description": "Attention Residuals（深度维度注意力残差）：用 softmax attention 替代固定等权残差累加，实现 input-dependent 的深度信息选择性聚合。涵盖 Full AttnRes、Block AttnRes、time-depth duality、structured-matrix 统一视角。含 fla 库的 Triton 融合 kernel 实现解析。",
+    "updated": "2026-06-25",
+    "survey": "attn-res/survey/"
+  },
+  {
     "slug": "compaction",
     "description": "上下文压缩（Context Compaction / Prompt Compression）：硬文本压缩、软/潜空间压缩、RL 训练的压缩、Agent RL 压缩、Agent 记忆、记忆架构、部署评估。合并两份 paper list 去重后涵盖 50 篇论文（全部含中文 README 解读、图片和公式），核心 formulation：prefix → compact → suffix PPL / agent continuation reward。",
     "updated": "2026-05-29",
     "survey": "compaction/survey/"
+  },
+  {
+    "slug": "finetuning-efficiency",
+    "description": "预训练模型的下游学习效率：给定预训练模型，能否预测学会下游任务所需的时间／数据量。Q1 = 模型大小，Q2 = 预训练程度。核心张力：prompting 口径下 loss 像充分统计量（Du），SFT 口径下出现 catastrophic overtraining（Springer）。覆盖迁移 scaling law、可塑性衰减、loss-to-loss、学习曲线外推（Hestness / Rosenfeld / Mohr / LCDB 1.1 / MPL）、持续预训练（D-CPT / CMR / rewarm / PTPP-aware）与 Pythia/OLMo/LLM360 实验床。",
+    "updated": "2026-08-15",
+    "survey": "finetuning-efficiency/survey/"
   },
   {
     "slug": "gradient-flow",

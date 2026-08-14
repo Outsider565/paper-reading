@@ -6,12 +6,54 @@
     "format": "webp"
   },
   "topics": [
+    "attn-res",
     "compaction",
+    "finetuning-efficiency",
     "gradient-flow",
     "layer-stacking",
     "loop-models"
   ],
   "images": [
+    {
+      "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.png",
+      "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.webp",
+      "width": 1236,
+      "height": 1600,
+      "bytes": 151848,
+      "quality": 82
+    },
+    {
+      "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.png",
+      "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.webp",
+      "width": 1236,
+      "height": 1600,
+      "bytes": 217036,
+      "quality": 82
+    },
+    {
+      "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.png",
+      "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.webp",
+      "width": 1236,
+      "height": 1600,
+      "bytes": 145094,
+      "quality": 82
+    },
+    {
+      "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.png",
+      "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.webp",
+      "width": 1236,
+      "height": 1600,
+      "bytes": 166876,
+      "quality": 82
+    },
+    {
+      "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.png",
+      "output": "publish/paper-reading/attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.webp",
+      "width": 1236,
+      "height": 1600,
+      "bytes": 191290,
+      "quality": 82
+    },
     {
       "source": "compaction/papers/2310.04408-recomp/raw/figs/recomp_part_1.png",
       "output": "publish/paper-reading/compaction/papers/2310.04408-recomp/raw/figs/recomp_part_1.webp",
@@ -1443,6 +1485,2774 @@
       "height": 1382,
       "bytes": 73866,
       "cached": "true"
+    },
+    {
+      "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 35082,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 53912,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 23892,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.webp",
+      "width": 857,
+      "height": 559,
+      "bytes": 34580,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/effective_data_diagram.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/effective_data_diagram.webp",
+      "width": 855,
+      "height": 598,
+      "bytes": 29996,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/transfer_fits.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/transfer_fits.webp",
+      "width": 1442,
+      "height": 628,
+      "bytes": 68628,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/scaling_laws.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/scaling_laws.webp",
+      "width": 1428,
+      "height": 592,
+      "bytes": 76664,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/compute_curves_3e8.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/compute_curves_3e8.webp",
+      "width": 1432,
+      "height": 603,
+      "bytes": 66322,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/ossification.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/ossification.webp",
+      "width": 1453,
+      "height": 615,
+      "bytes": 65910,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/crosstask.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/crosstask.webp",
+      "width": 1050,
+      "height": 525,
+      "bytes": 34808,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_pretrain.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_pretrain.webp",
+      "width": 300,
+      "height": 300,
+      "bytes": 7456,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_finetune.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_finetune.webp",
+      "width": 300,
+      "height": 300,
+      "bytes": 5928,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/model.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/model.webp",
+      "width": 600,
+      "height": 450,
+      "bytes": 23612,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/complexity.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/complexity.webp",
+      "width": 600,
+      "height": 525,
+      "bytes": 25212,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/isoflop_7.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/isoflop_7.webp",
+      "width": 1600,
+      "height": 461,
+      "bytes": 39692,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/approach_3_v2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/approach_3_v2.webp",
+      "width": 1600,
+      "height": 693,
+      "bytes": 159922,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/combined_predictions_v9.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/combined_predictions_v9.webp",
+      "width": 1600,
+      "height": 844,
+      "bytes": 46154,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/mmlu_0.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/mmlu_0.webp",
+      "width": 1600,
+      "height": 830,
+      "bytes": 90070,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/intro-new.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/intro-new.webp",
+      "width": 1600,
+      "height": 343,
+      "bytes": 60320,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_1.webp",
+      "width": 1600,
+      "height": 492,
+      "bytes": 90910,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_2_under_log.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_2_under_log.webp",
+      "width": 1600,
+      "height": 636,
+      "bytes": 40392,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/llmselect.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/llmselect.webp",
+      "width": 474,
+      "height": 250,
+      "bytes": 16308,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/pareto.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/pareto.webp",
+      "width": 1600,
+      "height": 492,
+      "bytes": 33454,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_bleu.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_bleu.webp",
+      "width": 735,
+      "height": 573,
+      "bytes": 22450,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_ce.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_ce.webp",
+      "width": 749,
+      "height": 573,
+      "bytes": 17380,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_bleu.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_bleu.webp",
+      "width": 576,
+      "height": 432,
+      "bytes": 18458,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_ce_loss.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_ce_loss.webp",
+      "width": 576,
+      "height": 432,
+      "bytes": 17214,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_50_50_bleu.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_50_50_bleu.webp",
+      "width": 576,
+      "height": 432,
+      "bytes": 17048,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_bleu.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_bleu.webp",
+      "width": 576,
+      "height": 432,
+      "bytes": 16158,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_ce_loss.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_ce_loss.webp",
+      "width": 576,
+      "height": 432,
+      "bytes": 16222,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_model_size.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_model_size.webp",
+      "width": 1459,
+      "height": 496,
+      "bytes": 74032,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_enzh_model_size.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_enzh_model_size.webp",
+      "width": 1459,
+      "height": 496,
+      "bytes": 75890,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_pretrain.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_pretrain.webp",
+      "width": 1459,
+      "height": 496,
+      "bytes": 77152,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_prompt_scaling.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_prompt_scaling.webp",
+      "width": 1474,
+      "height": 496,
+      "bytes": 74608,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_lora_scaling.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_lora_scaling.webp",
+      "width": 1474,
+      "height": 494,
+      "bytes": 69502,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/transfer_learning_figure1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/transfer_learning_figure1.webp",
+      "width": 1157,
+      "height": 679,
+      "bytes": 21932,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_1.webp",
+      "width": 1500,
+      "height": 900,
+      "bytes": 30680,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_2.webp",
+      "width": 1500,
+      "height": 900,
+      "bytes": 21194,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_1.webp",
+      "width": 1500,
+      "height": 1050,
+      "bytes": 63730,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_2.webp",
+      "width": 1500,
+      "height": 1050,
+      "bytes": 56578,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/evolution_of_fine_tuning.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/evolution_of_fine_tuning.webp",
+      "width": 1500,
+      "height": 900,
+      "bytes": 59280,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_id.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_id.webp",
+      "width": 1600,
+      "height": 454,
+      "bytes": 56556,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_trajectory.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_trajectory.webp",
+      "width": 1600,
+      "height": 458,
+      "bytes": 36844,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_parameter_id.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_parameter_id.webp",
+      "width": 1600,
+      "height": 538,
+      "bytes": 18910,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_gen_eval_acc.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_gen_eval_acc.webp",
+      "width": 1600,
+      "height": 461,
+      "bytes": 31524,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/1_a.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/1_a.webp",
+      "width": 1517,
+      "height": 946,
+      "bytes": 17128,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/images_log_scale/1_b.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/images_log_scale/1_b.webp",
+      "width": 1508,
+      "height": 946,
+      "bytes": 38836,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_a.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_a.webp",
+      "width": 1516,
+      "height": 946,
+      "bytes": 34158,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_b.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_b.webp",
+      "width": 1516,
+      "height": 962,
+      "bytes": 31414,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_a.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_a.webp",
+      "width": 1536,
+      "height": 972,
+      "bytes": 25530,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_b.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_b.webp",
+      "width": 1536,
+      "height": 972,
+      "bytes": 25120,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/2-7B_baseline.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/2-7B_baseline.webp",
+      "width": 1535,
+      "height": 969,
+      "bytes": 34534,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/increase_baseline_model_scale.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/increase_baseline_model_scale.webp",
+      "width": 1576,
+      "height": 946,
+      "bytes": 28566,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/mix-analysis/bio7s.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/mix-analysis/bio7s.webp",
+      "width": 900,
+      "height": 600,
+      "bytes": 37482,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/general/mix-vs-QA-bio7.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/general/mix-vs-QA-bio7.webp",
+      "width": 1500,
+      "height": 600,
+      "bytes": 146010,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/QAgrid/bio7s.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/QAgrid/bio7s.webp",
+      "width": 1050,
+      "height": 300,
+      "bytes": 31734,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/Pprob/bio7-lora2-ftoken.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/Pprob/bio7-lora2-ftoken.webp",
+      "width": 1600,
+      "height": 444,
+      "bytes": 142518,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-double-bio7.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-double-bio7.webp",
+      "width": 1500,
+      "height": 600,
+      "bytes": 137736,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-1.webp",
+      "width": 1600,
+      "height": 1400,
+      "bytes": 237986,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-3.webp",
+      "width": 1600,
+      "height": 700,
+      "bytes": 117912,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-inverse-bio7.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-inverse-bio7.webp",
+      "width": 1500,
+      "height": 675,
+      "bytes": 184564,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB2.webp",
+      "width": 1500,
+      "height": 975,
+      "bytes": 108892,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB1big.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB1big.webp",
+      "width": 1500,
+      "height": 975,
+      "bytes": 110330,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/linear/linearK2_50.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/linear/linearK2_50.webp",
+      "width": 1600,
+      "height": 667,
+      "bytes": 106914,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/figure_intro_v2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/figure_intro_v2.webp",
+      "width": 1600,
+      "height": 1302,
+      "bytes": 51938,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/pretraining_results.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/pretraining_results.webp",
+      "width": 1600,
+      "height": 519,
+      "bytes": 40908,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/finetuning_results.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/finetuning_results.webp",
+      "width": 1600,
+      "height": 634,
+      "bytes": 67218,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/ft_hpt_effect.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/ft_hpt_effect.webp",
+      "width": 1600,
+      "height": 632,
+      "bytes": 68312,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Stagnates-None-0.1-ppl-xppl.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Stagnates-None-0.1-ppl-xppl.webp",
+      "width": 692,
+      "height": 481,
+      "bytes": 22026,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Increases-None-0.1-ppl-xFLOPs.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Increases-None-0.1-ppl-xFLOPs.webp",
+      "width": 685,
+      "height": 481,
+      "bytes": 21032,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/bigbench_all_tasks.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/bigbench_all_tasks.webp",
+      "width": 1600,
+      "height": 304,
+      "bytes": 30582,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_linearity_12.pt.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_linearity_12.pt.webp",
+      "width": 750,
+      "height": 600,
+      "bytes": 17144,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_breakthroughness_6.pt.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_breakthroughness_6.pt.webp",
+      "width": 750,
+      "height": 600,
+      "bytes": 19142,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/validation_ppl.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/validation_ppl.webp",
+      "width": 685,
+      "height": 442,
+      "bytes": 15704,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/themegraph.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/themegraph.webp",
+      "width": 1600,
+      "height": 477,
+      "bytes": 44416,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/pilot-exp-fig.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/pilot-exp-fig.webp",
+      "width": 1600,
+      "height": 471,
+      "bytes": 17292,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/train_loss_2series.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/train_loss_2series.webp",
+      "width": 1600,
+      "height": 527,
+      "bytes": 55628,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/dataset_level_prediction_du.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/dataset_level_prediction_du.webp",
+      "width": 1600,
+      "height": 739,
+      "bytes": 91064,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/final_predict_2_set.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/final_predict_2_set.webp",
+      "width": 1600,
+      "height": 638,
+      "bytes": 56958,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/nlpassuntil_vs_test_loss_one_fig.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/nlpassuntil_vs_test_loss_one_fig.webp",
+      "width": 1264,
+      "height": 1018,
+      "bytes": 57264,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_bbh.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_bbh.webp",
+      "width": 483,
+      "height": 375,
+      "bytes": 14654,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_mmlu.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_mmlu.webp",
+      "width": 495,
+      "height": 374,
+      "bytes": 15228,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/loss_landscape.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/loss_landscape.webp",
+      "width": 523,
+      "height": 381,
+      "bytes": 20634,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/increasing_holdout_bbh.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/increasing_holdout_bbh.webp",
+      "width": 476,
+      "height": 374,
+      "bytes": 15448,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_BBH.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_BBH.webp",
+      "width": 447,
+      "height": 354,
+      "bytes": 12334,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_MMLU.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_MMLU.webp",
+      "width": 447,
+      "height": 360,
+      "bytes": 9622,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_human_organs_sense.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_human_organs_sense.webp",
+      "width": 374,
+      "height": 307,
+      "bytes": 12036,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_english_proverbs.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_english_proverbs.webp",
+      "width": 389,
+      "height": 307,
+      "bytes": 12378,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_movie_recommendation.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_movie_recommendation.webp",
+      "width": 374,
+      "height": 307,
+      "bytes": 11722,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/per_task_error_vs_pt_ahead.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/per_task_error_vs_pt_ahead.webp",
+      "width": 488,
+      "height": 366,
+      "bytes": 9798,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/figure1_rpj_c4_val.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/figure1_rpj_c4_val.webp",
+      "width": 1600,
+      "height": 667,
+      "bytes": 54762,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/emperical.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/emperical.webp",
+      "width": 1600,
+      "height": 498,
+      "bytes": 62028,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_emperical.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_emperical.webp",
+      "width": 1600,
+      "height": 498,
+      "bytes": 38232,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/grid_full.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/grid_full.webp",
+      "width": 1600,
+      "height": 498,
+      "bytes": 36342,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/error.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/error.webp",
+      "width": 1600,
+      "height": 498,
+      "bytes": 75824,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_corr.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_corr.webp",
+      "width": 1500,
+      "height": 600,
+      "bytes": 51754,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/main.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/main.webp",
+      "width": 1600,
+      "height": 686,
+      "bytes": 50392,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_explained_variance.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_explained_variance.webp",
+      "width": 717,
+      "height": 570,
+      "bytes": 10404,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_mat.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_mat.webp",
+      "width": 1162,
+      "height": 723,
+      "bytes": 41996,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_scaling_per_model_pc_1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_scaling_per_model_pc_1.webp",
+      "width": 1600,
+      "height": 521,
+      "bytes": 74588,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_emerg_cap_main_tasks_forecast_pc_3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_emerg_cap_main_tasks_forecast_pc_3.webp",
+      "width": 1600,
+      "height": 429,
+      "bytes": 60850,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/agentbench_forecast.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/agentbench_forecast.webp",
+      "width": 1075,
+      "height": 639,
+      "bytes": 37364,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_post_training_gsm8k_forecast_pc_3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_post_training_gsm8k_forecast_pc_3.webp",
+      "width": 1600,
+      "height": 617,
+      "bytes": 67894,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/motivating.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/motivating.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 40122,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HellaSwag.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HellaSwag.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 34876,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HumanEval.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HumanEval.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 35366,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_ARC_challenge.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_ARC_challenge.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 30900,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/arc_challenge_performance_prediction.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/arc_challenge_performance_prediction.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 37076,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/HumanEval_performance_prediction.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/HumanEval_performance_prediction.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 41758,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/fig_1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/fig_1.webp",
+      "width": 1526,
+      "height": 588,
+      "bytes": 64720,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_transfer.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_transfer.webp",
+      "width": 1274,
+      "height": 700,
+      "bytes": 75216,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_function_transfer.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_function_transfer.webp",
+      "width": 1281,
+      "height": 699,
+      "bytes": 59636,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_transfer.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_transfer.webp",
+      "width": 1293,
+      "height": 699,
+      "bytes": 63784,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_to_test_down.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_to_test_down.webp",
+      "width": 1497,
+      "height": 553,
+      "bytes": 66094,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/translate_ours.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/translate_ours.webp",
+      "width": 1541,
+      "height": 479,
+      "bytes": 49204,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_extrapolation.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_extrapolation.webp",
+      "width": 1557,
+      "height": 479,
+      "bytes": 50124,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/graphical_fig1_final_v3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/graphical_fig1_final_v3.webp",
+      "width": 1600,
+      "height": 544,
+      "bytes": 51864,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_loss_x_axis_and_finetune_subsets_v3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_loss_x_axis_and_finetune_subsets_v3.webp",
+      "width": 1600,
+      "height": 659,
+      "bytes": 39194,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/gsm8k_loss_x_axis_and_finetune_subsets_v3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/gsm8k_loss_x_axis_and_finetune_subsets_v3.webp",
+      "width": 1600,
+      "height": 654,
+      "bytes": 38392,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_lora_ranks_all_v5.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_lora_ranks_all_v5.webp",
+      "width": 1600,
+      "height": 317,
+      "bytes": 34942,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_prefix_tuning_v3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_prefix_tuning_v3.webp",
+      "width": 1200,
+      "height": 900,
+      "bytes": 29998,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/max_liklihood_minimal_v4.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/max_liklihood_minimal_v4.webp",
+      "width": 1600,
+      "height": 1083,
+      "bytes": 111638,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_flops_v4.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_flops_v4.webp",
+      "width": 1600,
+      "height": 1174,
+      "bytes": 76502,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/v1_v_v2_c4_v3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/v1_v_v2_c4_v3.webp",
+      "width": 1600,
+      "height": 608,
+      "bytes": 36658,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_pred_params_both_apps_v5.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_pred_params_both_apps_v5.webp",
+      "width": 1600,
+      "height": 618,
+      "bytes": 54260,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/figure1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/figure1.webp",
+      "width": 1600,
+      "height": 535,
+      "bytes": 58070,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step1_main.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step1_main.webp",
+      "width": 1600,
+      "height": 698,
+      "bytes": 107882,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step2_main.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step2_main.webp",
+      "width": 1600,
+      "height": 774,
+      "bytes": 82810,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/chained_main.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/chained_main.webp",
+      "width": 1600,
+      "height": 698,
+      "bytes": 107880,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/intermediate_feature_comparison.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/intermediate_feature_comparison.webp",
+      "width": 1600,
+      "height": 1433,
+      "bytes": 88988,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig01-overview_rebuttal.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig01-overview_rebuttal.webp",
+      "width": 927,
+      "height": 804,
+      "bytes": 39526,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig02-l2l-abb_fineweb-edu_mamba_tiktoken_xfineweb-edu_20250529-115452.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig02-l2l-abb_fineweb-edu_mamba_tiktoken_xfineweb-edu_20250529-115452.webp",
+      "width": 997,
+      "height": 929,
+      "bytes": 57626,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig03-schematic_latest.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig03-schematic_latest.webp",
+      "width": 842,
+      "height": 546,
+      "bytes": 14532,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_pretr_fw_20250529-120709.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_pretr_fw_20250529-120709.webp",
+      "width": 1600,
+      "height": 718,
+      "bytes": 79220,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_token_fw_20250529-120620.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_token_fw_20250529-120620.webp",
+      "width": 1600,
+      "height": 726,
+      "bytes": 60432,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_archi_fw_20250529-121016.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_archi_fw_20250529-121016.webp",
+      "width": 1600,
+      "height": 726,
+      "bytes": 69880,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig07-intervention_size_FineWeb-Edu_val_latest.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig07-intervention_size_FineWeb-Edu_val_latest.webp",
+      "width": 995,
+      "height": 694,
+      "bytes": 27878,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig08-intervention_ctx_FineWeb-Edu_val_latest.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig08-intervention_ctx_FineWeb-Edu_val_latest.webp",
+      "width": 995,
+      "height": 694,
+      "bytes": 28088,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig09-intervention_optim_FineWeb-Edu_val_latest.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig09-intervention_optim_FineWeb-Edu_val_latest.webp",
+      "width": 997,
+      "height": 731,
+      "bytes": 44478,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/dynamics.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/dynamics.webp",
+      "width": 1600,
+      "height": 1226,
+      "bytes": 120226,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/scaling.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/scaling.webp",
+      "width": 1600,
+      "height": 1220,
+      "bytes": 111302,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/llama.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/llama.webp",
+      "width": 1600,
+      "height": 1108,
+      "bytes": 84622,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/metric.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/metric.webp",
+      "width": 1600,
+      "height": 1114,
+      "bytes": 99974,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 27536,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 59794,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 44008,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 52872,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/fine_tuning_theory_diagram_original.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/fine_tuning_theory_diagram_original.webp",
+      "width": 1600,
+      "height": 550,
+      "bytes": 37086,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/compressed_exec_10_datasets.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/compressed_exec_10_datasets.webp",
+      "width": 1600,
+      "height": 687,
+      "bytes": 55368,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/toy_limited_data.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/toy_limited_data.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 15432,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/main/CIFAR10.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/main/CIFAR10.webp",
+      "width": 640,
+      "height": 480,
+      "bytes": 17250,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/feature.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/feature.webp",
+      "width": 1314,
+      "height": 1164,
+      "bytes": 54210,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/evo_de_svd.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/evo_de_svd.webp",
+      "width": 1280,
+      "height": 960,
+      "bytes": 27198,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/cifar10_logme.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/cifar10_logme.webp",
+      "width": 565,
+      "height": 399,
+      "bytes": 12554,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_41.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_41.webp",
+      "width": 1377,
+      "height": 732,
+      "bytes": 36424,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle.webp",
+      "width": 1431,
+      "height": 963,
+      "bytes": 50742,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_235_hessian_C_new.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_235_hessian_C_new.webp",
+      "width": 1377,
+      "height": 732,
+      "bytes": 60888,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/implicitbias.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/implicitbias.webp",
+      "width": 1600,
+      "height": 321,
+      "bytes": 39844,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle_tr_new.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle_tr_new.webp",
+      "width": 1600,
+      "height": 909,
+      "bytes": 58002,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/imagenet_accuracy.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/imagenet_accuracy.webp",
+      "width": 1600,
+      "height": 584,
+      "bytes": 54910,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/backprop_summaries.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/backprop_summaries.webp",
+      "width": 1600,
+      "height": 499,
+      "bytes": 69704,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_no_cbp.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_no_cbp.webp",
+      "width": 1600,
+      "height": 958,
+      "bytes": 107390,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/cbp_mnist.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/cbp_mnist.webp",
+      "width": 1600,
+      "height": 1002,
+      "bytes": 131126,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_imagenet.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_imagenet.webp",
+      "width": 1600,
+      "height": 957,
+      "bytes": 74468,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/feature_util.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/feature_util.webp",
+      "width": 509,
+      "height": 444,
+      "bytes": 11844,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/example_annotated.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/example_annotated.webp",
+      "width": 1600,
+      "height": 503,
+      "bytes": 35726,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ1/experiments_step113000-unsharded_dup.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ1/experiments_step113000-unsharded_dup.webp",
+      "width": 1600,
+      "height": 239,
+      "bytes": 43444,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ2_effectivity/olmo-7b-effectivity.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ2_effectivity/olmo-7b-effectivity.webp",
+      "width": 1600,
+      "height": 640,
+      "bytes": 28592,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/experiments_step113000-unsharded_loss_regularized_duplication.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/experiments_step113000-unsharded_loss_regularized_duplication.webp",
+      "width": 1200,
+      "height": 750,
+      "bytes": 37878,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/tokens/experiments_step113000-unsharded_loss_regularized_duplication_tokens.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/tokens/experiments_step113000-unsharded_loss_regularized_duplication_tokens.webp",
+      "width": 1200,
+      "height": 750,
+      "bytes": 38944,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/overtraining.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/overtraining.webp",
+      "width": 502,
+      "height": 307,
+      "bytes": 15700,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/large_model_AnthropicHH_OLMo-1B.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/large_model_AnthropicHH_OLMo-1B.webp",
+      "width": 799,
+      "height": 473,
+      "bytes": 37854,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_gaussian.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_gaussian.webp",
+      "width": 691,
+      "height": 318,
+      "bytes": 21312,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_delta.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_delta.webp",
+      "width": 804,
+      "height": 349,
+      "bytes": 36490,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_ft_perplexity.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_ft_perplexity.webp",
+      "width": 1499,
+      "height": 529,
+      "bytes": 98664,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/learning_rates_schematic.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/learning_rates_schematic.webp",
+      "width": 871,
+      "height": 640,
+      "bytes": 46856,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/tuned_ft_pt_perplexity.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/tuned_ft_pt_perplexity.webp",
+      "width": 1506,
+      "height": 389,
+      "bytes": 47042,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/proxy_sft_error.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/proxy_sft_error.webp",
+      "width": 1600,
+      "height": 517,
+      "bytes": 28174,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/pointwise_obj_obj_acc.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/pointwise_obj_obj_acc.webp",
+      "width": 1600,
+      "height": 1317,
+      "bytes": 111768,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/feat-imp-lightGBM.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/feat-imp-lightGBM.webp",
+      "width": 1600,
+      "height": 474,
+      "bytes": 22456,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/bucket_accs.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/bucket_accs.webp",
+      "width": 1600,
+      "height": 361,
+      "bytes": 38392,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/hits_GT.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/hits_GT.webp",
+      "width": 1600,
+      "height": 1161,
+      "bytes": 112382,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/examples-of-scaling-behaviors-v1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/examples-of-scaling-behaviors-v1.webp",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 100848,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/distribution-of-scaling-behaviors.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/distribution-of-scaling-behaviors.webp",
+      "width": 626,
+      "height": 495,
+      "bytes": 12090,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/scaling-behaviors_predictable.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/scaling-behaviors_predictable.webp",
+      "width": 1511,
+      "height": 1211,
+      "bytes": 135288,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/example-of-effect-of-validation-corpus.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/example-of-effect-of-validation-corpus.webp",
+      "width": 611,
+      "height": 639,
+      "bytes": 28244,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/linear2_dynamics_plus_ie1_3panel.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/linear2_dynamics_plus_ie1_3panel.webp",
+      "width": 1600,
+      "height": 531,
+      "bytes": 47476,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/all_hermite_activation_and_square_numerics.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/all_hermite_activation_and_square_numerics.webp",
+      "width": 1600,
+      "height": 390,
+      "bytes": 52966,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/cifar10_svhn_pretrain_downstream_2x2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/cifar10_svhn_pretrain_downstream_2x2.webp",
+      "width": 1600,
+      "height": 1038,
+      "bytes": 97982,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/emnist_fashionmnist_pretrain_downstream_2x2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/emnist_fashionmnist_pretrain_downstream_2x2.webp",
+      "width": 1600,
+      "height": 1037,
+      "bytes": 91158,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/sft-rl_2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/sft-rl_2.webp",
+      "width": 1600,
+      "height": 667,
+      "bytes": 103132,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/model.layers.0.self_attn.v_proj.weight.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/model.layers.0.self_attn.v_proj.weight.webp",
+      "width": 1600,
+      "height": 901,
+      "bytes": 73704,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/continual_learning_problem_definition_light.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/continual_learning_problem_definition_light.webp",
+      "width": 1418,
+      "height": 1600,
+      "bytes": 70782,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/plasticity_loss_all_models_updated.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/plasticity_loss_all_models_updated.webp",
+      "width": 1421,
+      "height": 661,
+      "bytes": 53588,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/log_log_lop_model_updated_log_scale.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/log_log_lop_model_updated_log_scale.webp",
+      "width": 728,
+      "height": 638,
+      "bytes": 31234,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/stationary_lop_updated.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/stationary_lop_updated.webp",
+      "width": 1421,
+      "height": 638,
+      "bytes": 41470,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/12m_53m_106m_avg_mag_dormant_updated.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/12m_53m_106m_avg_mag_dormant_updated.webp",
+      "width": 1600,
+      "height": 558,
+      "bytes": 43662,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.webp",
+      "width": 1600,
+      "height": 800,
+      "bytes": 25594,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/double_10_v2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/double_10_v2.webp",
+      "width": 900,
+      "height": 600,
+      "bytes": 33926,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/dd_learning_curve.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/dd_learning_curve.webp",
+      "width": 938,
+      "height": 625,
+      "bytes": 29266,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/poor_scaling_emerge.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/poor_scaling_emerge.webp",
+      "width": 938,
+      "height": 625,
+      "bytes": 28178,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/prefix_matching_score_multiplier.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/prefix_matching_score_multiplier.webp",
+      "width": 938,
+      "height": 625,
+      "bytes": 33496,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/broken_copying.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/broken_copying.webp",
+      "width": 938,
+      "height": 625,
+      "bytes": 31696,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/ossification.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/ossification.webp",
+      "width": 938,
+      "height": 625,
+      "bytes": 23486,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.webp",
+      "width": 1146,
+      "height": 250,
+      "bytes": 18028,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/parameters-steps-data-emergence-and-scaling-scalingtop.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/parameters-steps-data-emergence-and-scaling-scalingtop.webp",
+      "width": 1600,
+      "height": 1018,
+      "bytes": 81960,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/pythia-scaling-tripanel.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/pythia-scaling-tripanel.webp",
+      "width": 1600,
+      "height": 668,
+      "bytes": 72248,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/similarity-matrix-and-rank-frequency-envelope.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/similarity-matrix-and-rank-frequency-envelope.webp",
+      "width": 1600,
+      "height": 727,
+      "bytes": 58784,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/wei_2022_emergence/wei_2022_emergence_fig2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/wei_2022_emergence/wei_2022_emergence_fig2.webp",
+      "width": 1600,
+      "height": 1084,
+      "bytes": 105098,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/toy_emergence/toy_analytical_model_try2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/toy_emergence/toy_analytical_model_try2.webp",
+      "width": 1600,
+      "height": 951,
+      "bytes": 63966,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/gpt3_integer_multiplication/multiplication_acc_vs_model_size_by_temp_by_target_str_len.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/gpt3_integer_multiplication/multiplication_acc_vs_model_size_by_temp_by_target_str_len.webp",
+      "width": 1600,
+      "height": 1180,
+      "bytes": 47012,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/big_bench_emergent_tasks/big_bench_breakthrough_scores_by_metric.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/big_bench_emergent_tasks/big_bench_breakthrough_scores_by_metric.webp",
+      "width": 1600,
+      "height": 993,
+      "bytes": 46990,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/vision/no_emergence_and_emergence_dataset=mnist.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/vision/no_emergence_and_emergence_dataset=mnist.webp",
+      "width": 1600,
+      "height": 518,
+      "bytes": 32756,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/return_alloc.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/return_alloc.webp",
+      "width": 1600,
+      "height": 813,
+      "bytes": 85748,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/isoloss_100m.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/isoloss_100m.webp",
+      "width": 1600,
+      "height": 859,
+      "bytes": 88144,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/validation_c4.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/validation_c4.webp",
+      "width": 1600,
+      "height": 783,
+      "bytes": 60176,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.webp",
+      "width": 1500,
+      "height": 844,
+      "bytes": 42054,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure1.webp",
+      "width": 960,
+      "height": 255,
+      "bytes": 15406,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.webp",
+      "width": 1500,
+      "height": 844,
+      "bytes": 36048,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure2.webp",
+      "width": 975,
+      "height": 255,
+      "bytes": 19424,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure3.webp",
+      "width": 990,
+      "height": 258,
+      "bytes": 21302,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100.webp",
+      "width": 895,
+      "height": 656,
+      "bytes": 27924,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/cifar10_to_cifar100.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2002.12462-leep/raw/figs/cifar10_to_cifar100.webp",
+      "width": 895,
+      "height": 656,
+      "bytes": 26902,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_small.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_small.webp",
+      "width": 895,
+      "height": 658,
+      "bytes": 24388,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_convergence.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_convergence.webp",
+      "width": 893,
+      "height": 657,
+      "bytes": 33114,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.11005-logme/raw/setting.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.11005-logme/raw/setting.webp",
+      "width": 1573,
+      "height": 592,
+      "bytes": 37038,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.11005-logme/raw/graphical_model.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.11005-logme/raw/graphical_model.webp",
+      "width": 786,
+      "height": 350,
+      "bytes": 20276,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.11005-logme/raw/logme.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.11005-logme/raw/logme.webp",
+      "width": 1600,
+      "height": 178,
+      "bytes": 18554,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.11005-logme/raw/leep.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.11005-logme/raw/leep.webp",
+      "width": 1600,
+      "height": 178,
+      "bytes": 17170,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2102.11005-logme/raw/nlp.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2102.11005-logme/raw/nlp.webp",
+      "width": 1600,
+      "height": 203,
+      "bytes": 13222,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_freeze.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_freeze.webp",
+      "width": 1200,
+      "height": 900,
+      "bytes": 64422,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_tuned.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_tuned.webp",
+      "width": 1200,
+      "height": 900,
+      "bytes": 65470,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_freeze.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_freeze.webp",
+      "width": 1200,
+      "height": 600,
+      "bytes": 41576,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_tuned.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_tuned.webp",
+      "width": 1200,
+      "height": 600,
+      "bytes": 42132,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/model_vs_dataset_3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/model_vs_dataset_3.webp",
+      "width": 735,
+      "height": 817,
+      "bytes": 32204,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_hpo_baselines4.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_hpo_baselines4.webp",
+      "width": 1600,
+      "height": 554,
+      "bytes": 54574,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_ablation3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_ablation3.webp",
+      "width": 1600,
+      "height": 544,
+      "bytes": 55208,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_transfer_measure3.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_transfer_measure3.webp",
+      "width": 1600,
+      "height": 554,
+      "bytes": 47898,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.03793-lensllm/raw/model_comparison.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.03793-lensllm/raw/model_comparison.webp",
+      "width": 1600,
+      "height": 1272,
+      "bytes": 44820,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/model_selection_comparison_v2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/model_selection_comparison_v2.webp",
+      "width": 1600,
+      "height": 827,
+      "bytes": 36532,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/combined_plots.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/combined_plots.webp",
+      "width": 1600,
+      "height": 841,
+      "bytes": 98236,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/figure-1.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/figure-1.webp",
+      "width": 1082,
+      "height": 575,
+      "bytes": 42840,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_3_phase_diagram.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_3_phase_diagram.webp",
+      "width": 1080,
+      "height": 780,
+      "bytes": 43514,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_1_population_decay_full.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_1_population_decay_full.webp",
+      "width": 1080,
+      "height": 780,
+      "bytes": 41288,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_4_efficiency_frontier.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_4_efficiency_frontier.webp",
+      "width": 1080,
+      "height": 780,
+      "bytes": 28140,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 24692,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_error_models.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_error_models.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 33448,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_generalization.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_generalization.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 25336,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_generalization.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_generalization.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 37126,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_model.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_model.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 48212,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_generalization.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_generalization.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 35274,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_model.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_model.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 33300,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_generalization.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_generalization.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 35486,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_model.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_model.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 25816,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/speech_data_generalization.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/speech_data_generalization.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 33142,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/ds2_data_generalization.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/ds2_data_generalization.webp",
+      "width": 959,
+      "height": 719,
+      "bytes": 32334,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_imagenet_single.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_imagenet_single.webp",
+      "width": 587,
+      "height": 585,
+      "bytes": 19510,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_wiki103.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_wiki103.webp",
+      "width": 871,
+      "height": 655,
+      "bytes": 38902,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_cifar10.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_cifar10.webp",
+      "width": 875,
+      "height": 655,
+      "bytes": 41166,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_vision.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_vision.webp",
+      "width": 889,
+      "height": 887,
+      "bytes": 34626,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_nlp.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_nlp.webp",
+      "width": 889,
+      "height": 887,
+      "bytes": 27328,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_array.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_array.webp",
+      "width": 355,
+      "height": 578,
+      "bytes": 19130,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_wiki103_single.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_wiki103_single.webp",
+      "width": 587,
+      "height": 585,
+      "bytes": 19262,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lc_decision_situations.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lc_decision_situations.webp",
+      "width": 929,
+      "height": 375,
+      "bytes": 13924,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcs-waveform.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcs-waveform.webp",
+      "width": 1052,
+      "height": 315,
+      "bytes": 33376,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcconcepts.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcconcepts.webp",
+      "width": 806,
+      "height": 321,
+      "bytes": 26534,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/modeltypes.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/modeltypes.webp",
+      "width": 786,
+      "height": 281,
+      "bytes": 22786,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/earlystoppingvsdataacquisition.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/earlystoppingvsdataacquisition.webp",
+      "width": 858,
+      "height": 323,
+      "bytes": 22044,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/problem_solution.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/problem_solution.webp",
+      "width": 1051,
+      "height": 779,
+      "bytes": 57332,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/vis_mpl.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/vis_mpl.webp",
+      "width": 1600,
+      "height": 827,
+      "bytes": 98768,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/lr_comp.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/lr_comp.webp",
+      "width": 1372,
+      "height": 822,
+      "bytes": 52678,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/loss_comp.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/loss_comp.webp",
+      "width": 1361,
+      "height": 837,
+      "bytes": 51086,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/const_fit.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/const_fit.webp",
+      "width": 1273,
+      "height": 1064,
+      "bytes": 56408,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/fit_2stage_ld.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/fit_2stage_ld.webp",
+      "width": 734,
+      "height": 584,
+      "bytes": 26934,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_peaking.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_peaking.webp",
+      "width": 960,
+      "height": 560,
+      "bytes": 10102,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_dipping.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_dipping.webp",
+      "width": 960,
+      "height": 560,
+      "bytes": 11890,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_transition.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_transition.webp",
+      "width": 960,
+      "height": 560,
+      "bytes": 11924,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_mono.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_mono.webp",
+      "width": 1020,
+      "height": 870,
+      "bytes": 25990,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_conv.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_conv.webp",
+      "width": 1020,
+      "height": 870,
+      "bytes": 30784,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/denser_peaking_transition.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/denser_peaking_transition.webp",
+      "width": 1600,
+      "height": 673,
+      "bytes": 50336,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/example_MLP_3version.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/example_MLP_3version.webp",
+      "width": 1600,
+      "height": 667,
+      "bytes": 54888,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_mono_CC18.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_mono_CC18.webp",
+      "width": 1600,
+      "height": 729,
+      "bytes": 40126,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_peaking_CC18.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_peaking_CC18.webp",
+      "width": 1600,
+      "height": 729,
+      "bytes": 37398,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_dipping_CC18.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_dipping_CC18.webp",
+      "width": 1600,
+      "height": 729,
+      "bytes": 38864,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_conv_CC18.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_conv_CC18.webp",
+      "width": 1600,
+      "height": 729,
+      "bytes": 39742,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/fit_MSE.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/fit_MSE.webp",
+      "width": 1600,
+      "height": 522,
+      "bytes": 33656,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/lc_crossing_probs_comparison.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/lc_crossing_probs_comparison.webp",
+      "width": 904,
+      "height": 405,
+      "bytes": 25226,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-models-50B.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-models-50B.webp",
+      "width": 1600,
+      "height": 909,
+      "bytes": 65976,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-pile-val-loss-RP-models-50B.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-pile-val-loss-RP-models-50B.webp",
+      "width": 1600,
+      "height": 934,
+      "bytes": 54842,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-RP-val-loss-RP-models-240B.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-RP-val-loss-RP-models-240B.webp",
+      "width": 1600,
+      "height": 919,
+      "bytes": 93788,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-Pile-val-loss-RP-models-240B.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-Pile-val-loss-RP-models-240B.webp",
+      "width": 1600,
+      "height": 919,
+      "bytes": 115308,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-10-27-scratch-models-50B.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-10-27-scratch-models-50B.webp",
+      "width": 1600,
+      "height": 934,
+      "bytes": 88102,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/illus.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/illus.webp",
+      "width": 1136,
+      "height": 344,
+      "bytes": 39772,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/architecture.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/architecture.webp",
+      "width": 1600,
+      "height": 452,
+      "bytes": 15286,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/details.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/details.webp",
+      "width": 1176,
+      "height": 627,
+      "bytes": 60478,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/llama.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/llama.webp",
+      "width": 1174,
+      "height": 606,
+      "bytes": 60854,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/mixed.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/mixed.webp",
+      "width": 1600,
+      "height": 533,
+      "bytes": 135054,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_compute.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_compute.webp",
+      "width": 1476,
+      "height": 1176,
+      "bytes": 27068,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_loss.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_loss.webp",
+      "width": 1476,
+      "height": 1176,
+      "bytes": 28400,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_eval.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_eval.webp",
+      "width": 1476,
+      "height": 1176,
+      "bytes": 37008,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_sp-val.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_sp-val.webp",
+      "width": 1195,
+      "height": 661,
+      "bytes": 41334,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_pile-val.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_pile-val.webp",
+      "width": 1195,
+      "height": 661,
+      "bytes": 34684,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/9B_comparison_sp-val.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/9B_comparison_sp-val.webp",
+      "width": 1195,
+      "height": 649,
+      "bytes": 39774,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_german_replay_german-val.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_german_replay_german-val.webp",
+      "width": 1202,
+      "height": 661,
+      "bytes": 65154,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_rewarming_on_pile.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_rewarming_on_pile.webp",
+      "width": 1215,
+      "height": 649,
+      "bytes": 67420,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_general.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_general.webp",
+      "width": 1389,
+      "height": 1415,
+      "bytes": 81770,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_domain.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_domain.webp",
+      "width": 1357,
+      "height": 1411,
+      "bytes": 77334,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.webp",
+      "width": 1131,
+      "height": 1600,
+      "bytes": 39880,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_general.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_general.webp",
+      "width": 1600,
+      "height": 400,
+      "bytes": 23320,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_domain.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_domain.webp",
+      "width": 1600,
+      "height": 400,
+      "bytes": 26106,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/cptlaw_model_size_generailzability.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/cptlaw_model_size_generailzability.webp",
+      "width": 1500,
+      "height": 855,
+      "bytes": 22046,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/crosscptlaw_main.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/crosscptlaw_main.webp",
+      "width": 1600,
+      "height": 415,
+      "bytes": 35972,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Fig1-critical.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Fig1-critical.webp",
+      "width": 1600,
+      "height": 837,
+      "bytes": 35284,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/3d-model.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/3d-model.webp",
+      "width": 1600,
+      "height": 833,
+      "bytes": 65868,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/gen-dom-ratio-pred.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/gen-dom-ratio-pred.webp",
+      "width": 1108,
+      "height": 1600,
+      "bytes": 45682,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Predicting_T.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Predicting_T.webp",
+      "width": 1600,
+      "height": 1600,
+      "bytes": 75832,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/T_0_Predict_R.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/T_0_Predict_R.webp",
+      "width": 1373,
+      "height": 1196,
+      "bytes": 44946,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/arxiv_T0_R_predict.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/arxiv_T0_R_predict.webp",
+      "width": 1405,
+      "height": 1167,
+      "bytes": 29120,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/d_cpt_scaling_law_fr.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/d_cpt_scaling_law_fr.webp",
+      "width": 1600,
+      "height": 914,
+      "bytes": 62234,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/fixedr_grid_multi_ptpp_single_metric_grid_in_sample.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/fixedr_grid_multi_ptpp_single_metric_grid_in_sample.webp",
+      "width": 1400,
+      "height": 1600,
+      "bytes": 96068,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/use_case.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/use_case.webp",
+      "width": 1347,
+      "height": 492,
+      "bytes": 59732,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/layerwise_collapse.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/layerwise_collapse.webp",
+      "width": 949,
+      "height": 414,
+      "bytes": 31300,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/objective_heatmap.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/objective_heatmap.webp",
+      "width": 1029,
+      "height": 467,
+      "bytes": 23576,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/multi_model_results.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/multi_model_results.webp",
+      "width": 933,
+      "height": 419,
+      "bytes": 26176,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/plasticity_correlation.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/plasticity_correlation.webp",
+      "width": 485,
+      "height": 420,
+      "bytes": 11934,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/mitigation_pareto.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/mitigation_pareto.webp",
+      "width": 571,
+      "height": 420,
+      "bytes": 13570,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/flops_optimization_analysis.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/flops_optimization_analysis.webp",
+      "width": 1536,
+      "height": 1600,
+      "bytes": 90130,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/method.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/method.webp",
+      "width": 1600,
+      "height": 857,
+      "bytes": 98586,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/optimal_combined_figures.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/optimal_combined_figures.webp",
+      "width": 1600,
+      "height": 1158,
+      "bytes": 197748,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/batch_size_loss.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/batch_size_loss.webp",
+      "width": 1520,
+      "height": 1044,
+      "bytes": 79098,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/learning_rate_loss.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/learning_rate_loss.webp",
+      "width": 1536,
+      "height": 1044,
+      "bytes": 79694,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/main-figure0.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.01373-pythia/raw/main-figure0.webp",
+      "width": 448,
+      "height": 366,
+      "bytes": 11118,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.webp",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 26730,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/memorized_sequences.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.01373-pythia/raw/media/memorized_sequences.webp",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 23868,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.webp",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 36716,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.webp",
+      "width": 1236,
+      "height": 1600,
+      "bytes": 43550,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/4_plots.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2312.06550-llm360/raw/figs/4_plots.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 38220,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/core-tasks-progression.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.00838-olmo/raw/figures/core-tasks-progression.webp",
+      "width": 1600,
+      "height": 967,
+      "bytes": 48800,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/lrs.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.00838-olmo/raw/figures/lrs.webp",
+      "width": 960,
+      "height": 720,
+      "bytes": 19712,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen.webp",
+      "width": 724,
+      "height": 711,
+      "bytes": 21478,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen_per_source.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen_per_source.webp",
+      "width": 811,
+      "height": 1600,
+      "bytes": 86694,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/additional_tasks.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.00838-olmo/raw/figures/additional_tasks.webp",
+      "width": 1600,
+      "height": 967,
+      "bytes": 43768,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/weight-tying-norms.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2402.00838-olmo/raw/figures/weight-tying-norms.webp",
+      "width": 1600,
+      "height": 1154,
+      "bytes": 53264,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/olmo2.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/olmo2.webp",
+      "width": 945,
+      "height": 631,
+      "bytes": 47724,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/qk_norm_reorder.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/qk_norm_reorder.webp",
+      "width": 1600,
+      "height": 456,
+      "bytes": 33120,
+      "quality": 82
+    },
+    {
+      "source": "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/rlplots/olmo-2-13b-rlvr.png",
+      "output": "publish/paper-reading/finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/rlplots/olmo-2-13b-rlvr.webp",
+      "width": 1600,
+      "height": 385,
+      "bytes": 37524,
+      "quality": 82
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.png",
@@ -7286,15 +10096,17 @@
     }
   ],
   "files": {
-    "registry.json": "2ba11cf796b12dae663dcb1eb3f51bd54c45a6050ba98010ece35a4621b7303b",
-    "index.html": "a6803f914200b08a31db1e6a9f4a5a727e41227dbd9174c79b52f4e45a4d4397",
-    ".publish-manifest.json": "a5faff02032275967a71962367e2fd3bdee9b60681306f32893fa6401722b8c9",
-    "404.html": "a6803f914200b08a31db1e6a9f4a5a727e41227dbd9174c79b52f4e45a4d4397",
+    "registry.json": "7fb7847c2c7169ab7f77541f485034ed04bf26510416e8fafa563d2a8ef25aa0",
+    "index.html": "fe1e32a64d46295becb08ed89b7a3e13798b1cf5606726f8e4b6e6355697371a",
+    ".publish-manifest.json": "61c027c89b8f94a60c15a4dc1ce96c009f16557203bd9a85c4e301592425ad59",
+    "404.html": "fe1e32a64d46295becb08ed89b7a3e13798b1cf5606726f8e4b6e6355697371a",
     "README.md": "83611cd4fa8cdd490171336d01783a0fe4780185834d314005cf4451868c85e0",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "layer-stacking/index.html": "facb2b83c602e367ebaa7c0f32a4da63c0d59b3537ed289fc8c4ec3b228151da",
     "compaction/index.html": "85cb9f55f343e90a775cd9e4fde0b98113bb8ad34539ae5e9a42f21a2facd0a5",
+    "finetuning-efficiency/index.html": "25a2c02a63b57dbebd359ceb44d6abc1848ce04c282916ca2d0da796d74a7a79",
     "gradient-flow/index.html": "c4abaefc0bee85456548bdb3db80cfd5e263bfceb619ee0140afe2df80be1772",
+    "attn-res/index.html": "8f6ee986004c4a5ae95531ef2443441d263bfbcff000c1e55cb57af8c69ee295",
     "loop-models/index.html": "125f3be9dfa076e809ca76251ff40811dcaf708f3b7188e77386b1a24689b066",
     "layer-stacking/survey/index.html": "4fd9a9d88a4653d2c533f6eed4d79b66ccf635ebfef92e643e50d26c34ed36a9",
     "layer-stacking/papers/2312.15166-solar/raw/images/dus_final.webp": "13e7c81d2e6afb11633f088f7a3997134763cfabcb540f2573c8dda2fa56e27e",
@@ -7529,6 +10341,353 @@
     "compaction/papers/2409.04421-rlpf/raw/sections/figures/rlpf.webp": "e220fd2b157ad11913fe00629a68eb40472dfab8cdc502a4cc0d5ef4a91da332",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/average_attention_weight.webp": "d1cc41e3408422b69c65592e496ec1b5fd18bb10aac17ebf12d6f97936c3e138",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/model_simple_longer.webp": "03df5a735e7b170017f1c6c1e47b625ec3a42907750e54d288e8aae7de5b134a",
+    "finetuning-efficiency/survey/index.html": "a9a42cdcf1036ad1a17f0b6a414935370e68dc56cbc2fe9b2c5e6ff2d62a3fe3",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp": "66bbd74a023698bbe1f7786e037e175186cfeae052769ff692289a0409658b3c",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.webp": "9dda4dddca2282e5d298bd172e08272fa684da2e217429a025125daec813504d",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.webp": "703c1b2575b24b50d93601b7a6a54ef1a66d02073872fdf2d912baeca9979382",
+    "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/SimplePowerLaws.webp": "79ad3ff06083ec79ab8c102c5a796b90cf8a03fc52fcdde56fdff13d38a91af5",
+    "finetuning-efficiency/papers/2102.11005-logme/raw/nlp.webp": "28d5dc396d5e62a13bc97b06fd716b4a1708c3989b4de0b46af41fd5a43ce0cb",
+    "finetuning-efficiency/papers/2102.11005-logme/raw/logme.webp": "ddd7fb58b82f8c14f3287b07fbee7cdb8e43cb7294af3be1a14fb2116f5471d6",
+    "finetuning-efficiency/papers/2102.11005-logme/raw/graphical_model.webp": "95f9018a85f23d8d31eddea2714c72fc3f7923f254cadf21a20b27cc9805da99",
+    "finetuning-efficiency/papers/2102.11005-logme/raw/leep.webp": "ac8510cb1087d5eb96c78f2bdd09dfe34a3b952a671df16e4b98f5d7dd4156be",
+    "finetuning-efficiency/papers/2102.11005-logme/raw/setting.webp": "89130feb98f33fdba96e43a606af37dde50e7b4b309855f611757cfab91d0043",
+    "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/lr_comp.webp": "992104405484677e51db395af1aa9f3f09a9b2b836db88251b2a23fc14c236be",
+    "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/vis_mpl.webp": "45904dcfcda2f2a1779753d3cb9a0bb379a1d1ec41a267b10febabd437671aa0",
+    "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/const_fit.webp": "d5f0a9a43db423077c6dfbc8454e3da731ef418e948f1beb5b3f1039ad631ab0",
+    "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/fit_2stage_ld.webp": "51eeb32431e16cfa4a713347283a9d4fcbc2992a25fbc46da6a0aa857156d2fa",
+    "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/loss_comp.webp": "da84c33b5f91b27a1c567df679dbdcc710d6ce81a121c7188e11f907faced97b",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/loss_landscape.webp": "2ac2856f24a21731794060e6daaa96c0d1c6edc56d343910b5e65a6db7956cb1",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_bbh.webp": "e6610413bdb5c5337c4327f631876bd60a1d582c9a3feb6e0b123d2455e855b1",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_movie_recommendation.webp": "fbf8e8b1a034544eff9fd33087f85b05c4bd3e559ef0384ca08b1644642c8e8e",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_BBH.webp": "698492d19221ae7c4a0951386140651b4a205b48e654347dacabd2c70b24282a",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_MMLU.webp": "2c213aecc8543b893882bfc4ceb2eb96f10347ae87d2df837fa5422d450d7234",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_mmlu.webp": "9e2715b10eac76808f93bf588022799643c3ea3c382422b6361890aa75ae8020",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/increasing_holdout_bbh.webp": "c515c3760f631afeb291ca5bf37ca68d52ff11ce93e2778cb00e64bcd647fb02",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_english_proverbs.webp": "5229bb82fb2e26527a45413b039b745b3944f3c15d2cc134cba303cac09cc9ed",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_human_organs_sense.webp": "f23f354d861e04e3249499929daa6f3725a78418db7dd2d85ae482fc05533b76",
+    "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/per_task_error_vs_pt_ahead.webp": "235bd4daf9e00c4a8c3a32006133f35cb65f90bc987b74a1737e69901d45c7cd",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_cifar10.webp": "0eaa0da6ba50f6239f43acae828aafa4773fd23307cb19a59bc8e2a0766e28c1",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_wiki103_single.webp": "3d7e12b859e9221f0263532d7e2a3b7a57eca98bd3cb25c18bcbdd9774ee8d8a",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_wiki103.webp": "ed21d12b4c36721075f7f5adf508cc424567e03fb065ec38150b0d694166337b",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_array.webp": "e8e2212f888ff37c8e7a1766a714deb5932069d540294ea1e8625f9ed496e7b5",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_imagenet_single.webp": "f1e4fdd2c6c997ced7bae6f5b5bd54da06c2d3e19ad27c183b7622b0e560fe82",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_nlp.webp": "db56e5f9a611275c23d2345cf480811c440cc53921a32f8548efbd6e9a498d71",
+    "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_vision.webp": "ecf76d6e841886e5fd9ae499077a72a4f950d3bbca79d6068b9768228f6e5070",
+    "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-Pile-val-loss-RP-models-240B.webp": "dce98dc7bf2f933727dfd64b9f25751b1d400507be506f75c0880bcd78c6f6e0",
+    "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-10-27-scratch-models-50B.webp": "5e05c71c33c189a68b647ffdb5c713bb385bb09cb4f576c7910bcb05f482658f",
+    "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-RP-val-loss-RP-models-240B.webp": "712e61408968ce99e10c5657e9fd9f61e04408151ce9b75b592b01876c369517",
+    "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-pile-val-loss-RP-models-50B.webp": "1f0418bce562e0fea0c8646a1f9393134e5e0bc32e2adc9e6e7cd517ca86317c",
+    "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-models-50B.webp": "e7af5d752e469f5f8b659723321b71dd37a712fab5b70946d152d2e9fa17c00a",
+    "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/figure1_rpj_c4_val.webp": "abf0eae53e4759a8608b4dce7d208e21cce731503ec5eeeb8392dbebf18a0da5",
+    "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_emperical.webp": "74594d8a41be0cf53dfb04dc19f7ffcdd0f0464847c05480593bbc8cfc340149",
+    "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_corr.webp": "0391efc0ab875991c353e944a2fb16f91d98062a92ef53024a21d7e2db37f3fd",
+    "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/grid_full.webp": "2dce1d72916f2a2219f4538573a01f6a7387b8fe335117375c692ee148081161",
+    "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/emperical.webp": "473b81ab61b99bc3a685165210943cfbce0b1c5c0fa660377fc857fe861053ef",
+    "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/error.webp": "f8a2198b2f6af3976e82fbed465d70e8b4542128a72f880de3672672f3f5ad71",
+    "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/batch_size_loss.webp": "a94a3f6d8ffe9819b025fdde39fec2cbcfe2cf7953c2dccba46c9dcdcd9ff791",
+    "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/method.webp": "7341120081f1cb0d1b254b0705f3a9ecaa2bc7e9d51b9d4b81d387a3a50c5737",
+    "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/flops_optimization_analysis.webp": "53514388df016224331cb8726a430ce9d8b3e9ec68be5295a5e48344d49cd551",
+    "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/learning_rate_loss.webp": "1af2c20605491045780880e5ed7edca55e509d4b340b9d256faf5c92a8884edc",
+    "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/optimal_combined_figures.webp": "f36acc33edf26f3fdca78ccff9af3e0808d62f67d52edfc36b8379826b06ca02",
+    "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/scaling_laws.webp": "8d4708b6a635136b4c83e7d73befe9aba622ffb5bdc734cb7d8bc8507d50db43",
+    "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/effective_data_diagram.webp": "fe531e8cf508ebf04447172fedae8111f8c3708efa10b203bc8f6ea0dee87fd4",
+    "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/compute_curves_3e8.webp": "5687b930b9f04d6b6c1cf3920c4081c3c55b2b2e0edcd867ac2987be2de420f4",
+    "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/transfer_fits.webp": "c1ff58b01c1fb191422ae23fbe6b9c34ae726b1eab06611b3c7639d0c45b4924",
+    "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/ossification.webp": "a3bbf296f5b2a64133c129ef4b1f50bf768bf5128ac22e7a13e520196f81e791",
+    "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_hpo_baselines4.webp": "e3012d25eaaf7bde2f8880caef9c88660f205291596a7170a45a1f950f5181b7",
+    "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_transfer_measure3.webp": "f4ceab73a87ab8e9175ee4c5b9bf2288a8728db89bc71635adaf2a7babe83120",
+    "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_ablation3.webp": "27ed7db81d222ade13df5fa34688ba5476053c26381d9c84c8e386c6d97917d3",
+    "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/model_vs_dataset_3.webp": "840ac97d557d9743cc16cfd1ada5d144149da7d71c951c96bf877f923ac48241",
+    "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/details.webp": "fcf54fe3fc9be6123e9db6e9886c8f873cd8e3e1da1dd7a54c456a378adda5f8",
+    "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/architecture.webp": "ae59f791a563389bf272096a4c2a7522c49041d0e20f75ff50c39dae38b2f4f2",
+    "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/llama.webp": "38f297258931ae06e8f5c7f8e4de2f115ad2bedcbe89d955eec2022e1f04d75c",
+    "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/mixed.webp": "cff43fd1bc8921e0a85a5efadb70fc73d0b7af3bb70cd87b80446ad2e47bc2e7",
+    "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/illus.webp": "ad8d37efa5589c4d45ff83884835408f7a1e25507a8c2b63c735a6e5f53af679",
+    "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/gpt3_integer_multiplication/multiplication_acc_vs_model_size_by_temp_by_target_str_len.webp": "3f8e29353b8482d0f83c6b4ad917ca93b465314cefb060de856121d1d9d05d89",
+    "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/wei_2022_emergence/wei_2022_emergence_fig2.webp": "b85369f461cab25edf46aab38cea518311201f0d0ba4ab36002dbfdeddee8217",
+    "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/vision/no_emergence_and_emergence_dataset=mnist.webp": "9c7d16bfc78341b1551ee62f34976b6bf2d535b53366af7134016f8dc11c7363",
+    "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/big_bench_emergent_tasks/big_bench_breakthrough_scores_by_metric.webp": "32464c6863c8ba6f7f6ab15f1d60d643600ac2167414608914216433663fe824",
+    "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/toy_emergence/toy_analytical_model_try2.webp": "15aaa9f06eb8bb44eeee8014a07c5e72b0c1d76ee628acf009d9099493c2b699",
+    "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/olmo2.webp": "7e8cb42eb9bdb2de05529ec5662b68545b213f2e965fd0bfc6ba3fd51fa0f03c",
+    "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/qk_norm_reorder.webp": "9e8bbada66184849e3676fc930d534daf1fe05390b94531c055bdf7d3a0b1714",
+    "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/rlplots/olmo-2-13b-rlvr.webp": "569acf6b6199925ae98daf71837bbe543d3d3a2dfa04b6676eb70244ade5f3f3",
+    "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/evo_de_svd.webp": "61902ca243725e7d11375f1be1059e6e2fd6e4cde9e969482d299e4a33195dcd",
+    "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/cifar10_logme.webp": "9c41bcb7d45c030bde048cc556ef334fe101ae3854585c82d8291774739de9d5",
+    "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/toy_limited_data.webp": "1ece2dae01fabd9edc38ac14eba34f72f88e15fb67ffa6d8dfd7b3f1be52a056",
+    "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/feature.webp": "a5484e6af78a12cc665b8a1bccf5895f8fe3dcdc7cf4a6aba49954ee6a15f04c",
+    "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/main/CIFAR10.webp": "c0c898089557d476c9ffde8f3299ee4fc37935236aa893b2339bfed61d3aeded",
+    "finetuning-efficiency/papers/2304.01373-pythia/raw/main-figure0.webp": "380d40336a59b0555b102ba0ea05ea085ac044d9f6cedb03c31af0687e5c0da7",
+    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/memorized_sequences.webp": "1375525c4f23ef7ccad4d632b7ab1dc65d79aa2059fb46865be764840383a3d3",
+    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.webp": "fea47b77bfd01401fe80fdd01b7a4caad02091380e302bed00f0ece8b315a6f8",
+    "finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.webp": "6a269766462d06eee52676ce37067874e2d125242060e650fdc09a5c8c98cb78",
+    "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/model.layers.0.self_attn.v_proj.weight.webp": "d896726c53e9e84528947fa19d226adafbdb73184ed0ae1ff96e837139921133",
+    "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/sft-rl_2.webp": "ddf5e7f611f055629396df3ad591f446df48f46ffa9e549fe7c0d8b80227ee2b",
+    "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle.webp": "dd0af2030ca978418f15700fea323a4619f61bfa53a25fceed6e8908eea2a0f7",
+    "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/implicitbias.webp": "7d6640cd9515c2f2f6401ce30fb0d27c90c871abd0b502c1b8abd1a6af26c2eb",
+    "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle_tr_new.webp": "b83c8e84cf1de755602b8620fe9569d24a99872ba26f7dbd14cf92c3c1c31fff",
+    "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_41.webp": "48ed22a67781d24c1bc01dd0d001447cf647c11527724b99ec85230db5425fd5",
+    "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_235_hessian_C_new.webp": "72f393310183fb6ec7958821ef97c214fc5c142c2685e386c64a89d337051e8f",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/main.webp": "a9d205841a1c9103e11e5ebcbbb0922f687c760fbff0e3dcfbbd5d57517dfa97",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_mat.webp": "1db3037ad96129bd75f08c0b8bc232fde48b122b5fa98cf109a3fc44a0c64507",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_scaling_per_model_pc_1.webp": "9e8c3895852e4e1952464248cddaead5d48fdc13753925a72693c488a07a1579",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/agentbench_forecast.webp": "e7eaa3f995f5ac593708fba8e9b9cde6ca8ac7f204e7824c8ddc2002d97a9364",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_explained_variance.webp": "bf8432f745081b7ff78f84382c734a1e8fc97e4c9e149dab092e8be34c886e36",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_post_training_gsm8k_forecast_pc_3.webp": "b2741707d723d8aeffef181585260deb4bdca4bc2ff06c8ca43d47c6e3ebc2ec",
+    "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_emerg_cap_main_tasks_forecast_pc_3.webp": "c924b3226a93d7fa2a8767cfa031fad2433a60d8ce51e5987934d07050a556a4",
+    "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/validation_c4.webp": "2f8b516c9821fb8daec122dccba08b8ac5346407906ad5db70be1db871b0c3e9",
+    "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/isoloss_100m.webp": "f60a08c864e42c2f1383ddcbac509d04218b0b2a369e601ac39d8e62de83f5d9",
+    "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/return_alloc.webp": "1011e2f775cc55d787d18787a029bc4336039d8facd44f0da44b6125a1202458",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig09-intervention_optim_FineWeb-Edu_val_latest.webp": "ed39e2020c297c3d9415ed97ffa17420c18e3f70b3aca26fee18eda62f12b9ff",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_pretr_fw_20250529-120709.webp": "cce16979533ac1856ba6261a0365bd9a45b2e67fe3baf51fa5ca088929b119ef",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig03-schematic_latest.webp": "2053015963965fba00745dcecb3fce0e4174860f222d8cd9fbecac4dea660249",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig02-l2l-abb_fineweb-edu_mamba_tiktoken_xfineweb-edu_20250529-115452.webp": "a55b5a6297fa64578127fba8571bc25cd5152cd0476e1b2f5c5b0fba517dc2d4",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_token_fw_20250529-120620.webp": "b56526a3cce12f1fb27f112c29ae0f37f7b76e1913979252e5ad5304e0405abd",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig07-intervention_size_FineWeb-Edu_val_latest.webp": "3f84204253cf1f5a9afbea6c40f0a6b673c0ddcf23a9f6bc48c4b9033e4bdac5",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig08-intervention_ctx_FineWeb-Edu_val_latest.webp": "82a3a2eb17725b84e1b0226584bd4cdb724efa5a603e98d80022257494fc028c",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_archi_fw_20250529-121016.webp": "fa7741567069d34613ec119158a4c5a7f6c434df991611360d650b7ecb5e12c0",
+    "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig01-overview_rebuttal.webp": "ded8fb08f923cdd7f778ad15151034dd95924adc5a5abaf81d6e050c43ea8e2a",
+    "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/imagenet_accuracy.webp": "bea35dd5636a5fdf50dd530437115878133f57ae7d192ec7fe24d4b64b317f40",
+    "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_imagenet.webp": "86c5b7e24ac891bcf086de5a34875186621abcfef1d7f30956cb7849315bb57d",
+    "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/feature_util.webp": "16c96ddb9c345d5cd051b8b75bd255dcfb5040304cd985f19d03ac484b75d88d",
+    "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_no_cbp.webp": "9bb79a1c29427a8d9027bdf4aa523f3b44cadee81dab38b84454e39e18155bd6",
+    "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/cbp_mnist.webp": "58dc862fb71761b5e68088929213a735b3027ef74a23f42a9229e44bb3466c40",
+    "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/backprop_summaries.webp": "f50bc0c6fab24ea7d71d2fb211c2b4d4ce551f8b5f53d723bf784c25d54add86",
+    "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/scaling.webp": "e6339a85096d972b469d2c305bc50a8ca87c0d355dc8cf1a708f4bf3c7b50951",
+    "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/metric.webp": "b96cb1da5ee981f779718d3d5bb880d8a9a567a62fabd63f6e08efd85dc74ca3",
+    "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/dynamics.webp": "7e5e4b0f61e9a0526dfee1db83f7022249b511be06d0f7e8f7567f26c17556d5",
+    "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/llama.webp": "ad6e90e318539b3d2225c5d168fe117e02946b571dabf4a7145e82d30f473ba5",
+    "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.webp": "4bbd1a14f14833f42cc35877c0e4375ec9c69d5aaff7e734de9026b6b1638a5d",
+    "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/4_plots.webp": "dab4badb52bfa53831cbfda84a38b387ebf23c090fef0b1f16dc29491de817b3",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/learning_rates_schematic.webp": "b9f470507d719dd03b756caf41ed96f424585af87a24cad13ece6c5d1eab3e04",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/large_model_AnthropicHH_OLMo-1B.webp": "cd1b566b7ce9455985a0eb5ada6142258ffbf236168144208033762ed4bdf3fc",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_ft_perplexity.webp": "d9e47dbc83613c2ebfa5ef0efa83142fb6b5c2c15784f0b1a8733c8406fddf69",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/tuned_ft_pt_perplexity.webp": "0f95aefc99fbd4f492996df902fd9b7ae09b2ab4fd650f20fb26f38f4123174f",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/overtraining.webp": "9c87b495fb24dced37025b61c259f7ca91fc4b7415639245ca8045366777acc7",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_gaussian.webp": "6d2a1fdbad4a2746e4b81cbe92003425df82e46e8083dc868d17fc2e062e67e8",
+    "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_delta.webp": "ce748424a7a8a334fde8d3980ed2211578dc820aed3d5fb61216994a6459bac3",
+    "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/objective_heatmap.webp": "0460cd033a6718451bb5897ec3c659a5ea2dcbcdab3df1d19d6131424557e978",
+    "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/layerwise_collapse.webp": "23c876eecc05ab980b6fd2148e1d32f3b4b99e39be2f2108a96b43741df7bb88",
+    "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/plasticity_correlation.webp": "7438d0ce93d6d0ae7026633e1ecf598d25dc993093d67cd8975ed3540be59f8a",
+    "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/mitigation_pareto.webp": "05918a65395f0d96916ba5ecab5a7abf0acd339c60fe2042a60c5119362237fd",
+    "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/multi_model_results.webp": "b5810d1fca5b53288e72861c3b052463fe359e93eebadaeef58873c479b22ed5",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_general.webp": "9533080d1163817e4c685a4c7eda79d8801875bd1b7950fdefc11deba472b6df",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.webp": "11339b55f636af0afa06b460b8219603a4f07cd58e893f95f4db332fbd677a40",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/crosscptlaw_main.webp": "14f38fc588f5e55abcb8f857cef67ebb93d9f8adca45a6eef5ca23774f12bc50",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/cptlaw_model_size_generailzability.webp": "6fda85833fa1d4ea685177c2be0e9bac61c024438b85ce5218dc70523ba1e37a",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_domain.webp": "1edb7e84b8b57f0730d7946942b84853a519a47cdf26f0323ae58efda674ef93",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_domain.webp": "bd624ab9b63c428fc40f413b83c211fb6296c33d78f7bdc00bfd052666afa02c",
+    "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_general.webp": "e0e8d80b0ec00472187b9ae63cbf91569cc1dcffc3eb92f9979dd038a91ae1bd",
+    "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/QAgrid/bio7s.webp": "5dc82a85b35c99dd9a4a62a411cb341c0cc4447a16b78e6b5f69b357201af990",
+    "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/general/mix-vs-QA-bio7.webp": "d399fd661822075f6676bef51c585a550e8dd2965241c1ae3857ae1d84493635",
+    "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/Pprob/bio7-lora2-ftoken.webp": "d8280053b96e390dc5153be30e91ee7c3eafd243daebe2d2833f45022ece285b",
+    "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/mix-analysis/bio7s.webp": "53c6fe1c0fc4dc28904673deaf569471d5ddff9be586efde1155264452f79f88",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/double_10_v2.webp": "9824ea963cdc86bffbc9c0e16ea8df31e1b06d348a6dfe5ed8a2af8c38cbacea",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/dd_learning_curve.webp": "6b8b5e32cc9b076544ac6b2129f25fa94c6ba5ce376c7cca9fbaef8360258d3e",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/broken_copying.webp": "5846c783d79144161dffa8ef575c3e1f97edf7572b7e3bb8b9d2523408b845a0",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/prefix_matching_score_multiplier.webp": "71d951f2219489ec83ca4e55f10fcda2b54fd7306daf40da1225441b2eed392b",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/poor_scaling_emerge.webp": "21c23f5e578e4a5aeaf131b11a6aa024c988aee9d3cccd192b7fe58538a4115e",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.webp": "cd2bdd05f01cb4a606afeda0dc65c9d44a78afd90a9adeb47fe2d5604f5036a7",
+    "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/ossification.webp": "74fdc43fa8beb67ef75fbc26b400f36107f5e33049e6b5bbbb428bbfd9f2cd5e",
+    "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_tuned.webp": "715f167e5bdd2f7f37e5cb62d72e854bfdac2f0f16c1c05437d5148811b46868",
+    "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_freeze.webp": "778d1e3b0d7bbd1173f895b7bc74f2d4b8c6ba94f4d6d5decf8390132129e70f",
+    "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_freeze.webp": "8011b0caad6209a8d8d21f66c7a8611845b606c005e2547d776bba6bae6f1bb4",
+    "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_tuned.webp": "41a670fbfc6fbac101ec3f2b434243ac2f4785082e0954e4eb31b02c7967c010",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.webp": "499becf0bba045e69c9ef3e5061e2b0c4e887639d2c74b3e4ef7f1af37ca2c52",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.webp": "a451e75c2b4dd6d174953098d644ba1814a396705bc25897e10b6c55dbf274cd",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.webp": "f69ed67c46a60c687f4f5bff310d445dd1c111d1d1423e0ad82761a9dc090fca",
+    "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.webp": "16f80b75fcdd687f9f188db53b3e548bfa4c0ea21456c192ec928471ef9fa830",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_b.webp": "2920f1dfff91a0268476b0421f3c0bac5a624c3a4e43d5f3d59d35a74d73f217",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_a.webp": "73c7fbe79952af652c3b32fc6f59e60e355159135094f3bcca647dcc337c7af8",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_b.webp": "a68054619f48df0abe9b997f91cd0bd44da2d486fb3d595c64a2c9f82b29b6d9",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/1_a.webp": "27de307f786c660433573f63e11927ea584436461a7afa5c08b5f91bd57cee9b",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_a.webp": "d27918c15ddab96ed4953315e95d2b63df9b3ad9925e85729f7b8784328772a0",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/images_log_scale/1_b.webp": "02ea4f1bc719b4c6debec5aff279b07d0b9a4114bbeb32f523ddf2d22f639dd3",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/increase_baseline_model_scale.webp": "bd93e29706d9359dfa407337e4b32c30abad4b5fbcaec4af02b54988a8623b67",
+    "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/2-7B_baseline.webp": "00bcd8d10c2c2ce45b4a6b0f3d3758acddccfdf11109f0bba4bbb50c7b0717ae",
+    "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/example_annotated.webp": "877440af9ee3f8e595248719516d3c46422c84880e99c30fb4831b1c18c7cd65",
+    "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/experiments_step113000-unsharded_loss_regularized_duplication.webp": "2d5a7e2a210cbc236b57af195aefb1b9a6b88a911a29a8c96c39cbf8a55d42a5",
+    "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ2_effectivity/olmo-7b-effectivity.webp": "c0884fc95d219839a053c95073945c247192d9a7388d8a234eaedef77fb267f2",
+    "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ1/experiments_step113000-unsharded_dup.webp": "d58a40e006f7effc562aa8a01114bc98f8d5feb2bf7cd52273ef2cf87baeaa02",
+    "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/tokens/experiments_step113000-unsharded_loss_regularized_duplication_tokens.webp": "74ce1e873e51c84c07efb6b9b0d614f421d5d0db7e4f91e9fa496acde375d5f2",
+    "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-1.webp": "b790f2e7dee7f611e5e1b9acf1cbf660a06f76283c5044e680044151281a5f12",
+    "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-double-bio7.webp": "7817e4c0a221a8850703ca1052e7b3bb5df3ef374769e40b0922176c6bbde2ec",
+    "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-3.webp": "5d6a31183f6201187ee5843a8735b727cc6de98fdf4024bf73b9b80ef470ed8c",
+    "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-inverse-bio7.webp": "1129fe80db46dd9f4c2aa30e2fbf7b75be5ddff1fe54ba26109f446db927afe7",
+    "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/plasticity_loss_all_models_updated.webp": "e49a3fade1e0e4665b2918f420ab804a5a85d5f86a4132772043eaf93bead523",
+    "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/continual_learning_problem_definition_light.webp": "012d54dea76da67ddecff9d126a71ff612a5e15c7f8b5116bfd9fd03bc9f14f8",
+    "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/log_log_lop_model_updated_log_scale.webp": "eefb057106798c8c9bde49386dcf0bf040faadf8b863e1258ce79c82966ac8f2",
+    "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/stationary_lop_updated.webp": "82d2c6118a7e6c561f5c18df6b3112ad1d2d3dc17512f67b2197f1dce719f92a",
+    "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/12m_53m_106m_avg_mag_dormant_updated.webp": "ea662422eda567dbe6913c8ff1beb9f75073c655d77006ea45d5cf95f1428413",
+    "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/compressed_exec_10_datasets.webp": "cfa40df6d25114f92aece1b22f581544eb4230afe2d93d8c984deea7c265e64d",
+    "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/fine_tuning_theory_diagram_original.webp": "6a1f67eab061f817c10475f01d0f551098db97178a7649d05f904e76a3d1b961",
+    "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen_per_source.webp": "81fb120da8f0981eb21cb83edae98dbe77c36f7273a47d7c6e83bc0764825e2e",
+    "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/weight-tying-norms.webp": "900fd83aeaefbfa5ec7eb78a6e7b1ec2a2346f746a7f0235348171f8bf2a1303",
+    "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/additional_tasks.webp": "0834678b3d4248ee137ce9e2e6007ab2d369b055bb3e4b8e3f0c190a00d704b9",
+    "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen.webp": "651cd8217b8b2d926b29868c94b3f0c5449fd7c70333fe2b493d4c7e4d983c50",
+    "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/lrs.webp": "fd2e0e2a791146872e552bb806a9aa5fe53265f8b74a702e1a43a287d249c342",
+    "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/core-tasks-progression.webp": "59ec50cbe629625270ff8fe33de9e6e1ce36a65213feabf884a3e460bc072eb2",
+    "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/motivating.webp": "15a308dbfde77c6462a92c212130b632287dbb79f3f6beb3741a9ae954e5a58c",
+    "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HumanEval.webp": "9591d482f891b5b0a5558e3ce9bed09b51f62a9d72a83b49f2a9cd47776cbf15",
+    "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_ARC_challenge.webp": "5b873d32f7020f70b7694dec2bc7983fe1529a50915709d784675f117125df50",
+    "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HellaSwag.webp": "dd874816de0af631768299856188a522d8f9330c029334091e3b0d1187a8a247",
+    "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/HumanEval_performance_prediction.webp": "9429d7c5aa841cb158fd35f47553056bf08804fdf5d2912567d78c7a375d0aa4",
+    "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/arc_challenge_performance_prediction.webp": "cf01ec318604d86af2dbc6097e9401552a5b70e3c8c3a1dfb59ca78ac9cbb2d7",
+    "finetuning-efficiency/papers/2505.03793-lensllm/raw/model_comparison.webp": "354fd2013e31406b9e67ab5b75d13fd97b173972c7bec856c71e6647d533f6cc",
+    "finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/model_selection_comparison_v2.webp": "7140c553776b780a26128a75467a1269f0068f8f04becb27e72af822796ceee1",
+    "finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/combined_plots.webp": "8d990949939e050cc5144c1f5a0afb99d2738a3067a59b65eeaa2cdf5b58d35c",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_loss_x_axis_and_finetune_subsets_v3.webp": "437173d125d078d5a0ff973483c5496bbca7a8f28afb3141c018bc131847fd00",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_flops_v4.webp": "688f6e771b99a7de29ef20bf402316749d4b2264302bec8359bc6aac59e816ff",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/graphical_fig1_final_v3.webp": "c60a380e02506ca54ce477e3e334c52bae51aef1a43df06f772977d741e33760",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/max_liklihood_minimal_v4.webp": "6d863b176f71162ae019febec7dfd33be8661905180669f103c0bd2f5aa60ea6",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_lora_ranks_all_v5.webp": "c70927f469aafa4855788166f8aa51cc7539b849e25c16091222ca633e078f12",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/v1_v_v2_c4_v3.webp": "0de829d3f8a4b78d56914cf27d6cd4ca65eefec8b04833dcf68ada8e6615c3ed",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_prefix_tuning_v3.webp": "4938ecf5aab878a11afcb341344a605b7bf026a28ad7f3495a3276720798a908",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_pred_params_both_apps_v5.webp": "6ef9005bd1d3ad06517a764f2904111a9b64e36c98dbd956dd51cf2e91c47013",
+    "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/gsm8k_loss_x_axis_and_finetune_subsets_v3.webp": "18da76b4ebf16b577a41353cfc2e8e52bfe41224030c06d47ef23eb977f5ec81",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure1.webp": "05a63fe18eb3beefbe18904d57cf71f27a109e1a6710614e967745ef1e9eb7f9",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.webp": "ba078b64ea93bb79773c2ec27fff97a6cffdd22f3492ea224088d7d61d624559",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure2.webp": "285b1ce43acc7917582b19025052e8d04948f7dfd0c0871a02823e993fd09c5f",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.webp": "758d2c5cf09b47467f24e6253f249a60b56a4c0f71250eabb2af23da1c2ec054",
+    "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure3.webp": "a7ef9ac5c19bd484ec780f1d3bc0e69d5e8a71ba38453de60d9293abd08a3c07",
+    "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB2.webp": "8871f2f0a451784482281381ab4d36c1d52d6545b7fb779753d6efe6dcfc7f37",
+    "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB1big.webp": "96e6151517166ec5262f2355693e453c3f2acacaf2d4efe388d2151018080513",
+    "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/linear/linearK2_50.webp": "1a3853be2fdb7d6465b992c0e7d93b6e46443171eb046403ea2202b9e8ec9128",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_pile-val.webp": "f7920c1e44f21dbcb3cd58bc3c1502a085c977b7ef905bf707bcf956cca3cdff",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_rewarming_on_pile.webp": "8aa97986468c88a4d78e8b1dfd1dde88211f2e380b38a900e9410b5ba01ff374",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_german_replay_german-val.webp": "07d36f55ba2182e0bc75a0bbc36c0842d1d5c692d9e578128badc6d7d8fd7dae",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_loss.webp": "97a0425a47a26f7062acfc4ee290ab4e7a30f80f6ddefdc2b82f3ba94f3593fb",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_compute.webp": "1abf147a9d294cf425482c27749eda10a17d25aeff4befa21a7525391495681f",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/9B_comparison_sp-val.webp": "b13ed3a115424b59a9f8bff5bc7ea00439c6e6f3c6a10aed0bf0364297de753c",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_sp-val.webp": "29f50a4334cdc60bf09f2c169ec45ef4d4f7f5107ab09fbafcfe3d1de262a0e8",
+    "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_eval.webp": "42b2fde67f5d047cc3a8baf3f869e70c0826dcd54a4ee6c6d8c84ecb48bb0426",
+    "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/isoflop_7.webp": "eb1e5fb61607ea61f6379e2fce36a18968670fd2625c6f36596f22ac163ada27",
+    "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/approach_3_v2.webp": "29689ccc832abcdc592fedd476940e32f3ea330158c87fe4317b4739b65c32e0",
+    "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/mmlu_0.webp": "82f472e213c04f2f6adf256f5c0c17de6785fa1f88de568db227f61f55354739",
+    "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/combined_predictions_v9.webp": "8b45361f1b4f6e9d8783d032153382d68b0154913bc9bb0d409e42fe5d05173a",
+    "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/d_cpt_scaling_law_fr.webp": "cc43742c6437a06e76789b117f9415a6f9201d4a31bab93a5cf79ca081305f1d",
+    "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/fixedr_grid_multi_ptpp_single_metric_grid_in_sample.webp": "d6d37f2a331b6541af6a2909b9f2304396430a0c9ca3580e1c0dc084fe284bbb",
+    "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/use_case.webp": "5dae9e1cb4bff201fda814a630af48bbc29dda65b0a970e56d64b53275b4aa13",
+    "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/gen-dom-ratio-pred.webp": "253bd05beb04dd496fdee52f69cba03565d33538fe72a317e53f9978929491c4",
+    "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/3d-model.webp": "44a114812805227873023a12b5794e6b78676878de25473252d311d3c3c09b81",
+    "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/arxiv_T0_R_predict.webp": "ceb4b235d5981c95871ef3292670c0056c4d64b920ad8cef28a13ea1c43fe38e",
+    "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Predicting_T.webp": "f3a8e3f62d7581a862b2283e87176a19069bc0a75539104e2c89defb5e6683f9",
+    "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/T_0_Predict_R.webp": "340a06914af74d179979ebcb8937253fc5ceb5d8743851179150be223b119780",
+    "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Fig1-critical.webp": "c2a8dce3c5f9eef7bba61f6d86532792230963b717df789cb02cfdb0afb58f23",
+    "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/emnist_fashionmnist_pretrain_downstream_2x2.webp": "fefe9a92d2d7c27778fd42caad79b11c74d308a33409cbadc6926a0cdd2d7c70",
+    "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/all_hermite_activation_and_square_numerics.webp": "98a94432ce1fc1838c5f261ef5ba7f2ff0a6eba6965f103dc1fd0f621e0f143a",
+    "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/cifar10_svhn_pretrain_downstream_2x2.webp": "c94262ac552fef8b98df5322c4e0744546504638b6568d4d1fe58505ee97bb80",
+    "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/linear2_dynamics_plus_ie1_3panel.webp": "a026de1b6396cedbe92649612227b6ae5f1cb6307d8fd2cb457a1710ee0d1fde",
+    "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/crosstask.webp": "302134961827fac236db32313a655c859344208ebd70ac4130037f74da022bc0",
+    "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/complexity.webp": "a902f0f0a93909a1a4ed908ecb43459e9aa676442bb1ce1287bf7a9b7c9c186a",
+    "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_finetune.webp": "c52f5e10baa97c0d506e19ac9823efd585ae97c9e2fa0d3044be41cfbe589a35",
+    "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_pretrain.webp": "5a4cfe5601c4105d5922db7e0480345d89a9888bc6d595aa87cdb8a9034c25e6",
+    "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/model.webp": "420d7e173ec927d928dbe68e2d1e54d3702974131cc7af479f1fef3ee9fdf17d",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_extrapolation.webp": "6d532c42a35e21304af00785b9e6bbf3f13faed8099e80cea7b8c2ba3e2ee60a",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_transfer.webp": "c27bcb1f1303e019874ecdd4a56d833849db3f4fd3555739df4f34e70effd85d",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_transfer.webp": "a5fec563ef608cd58eca6d74dfcfd21e8e6a3a96e725eeb530c51737c45568b2",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_function_transfer.webp": "5e2bf3aee2e97e2cce2d0af82d58f9920714aac5eeeefb0b50af12d3c0b58f67",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/translate_ours.webp": "e003cfde0abab80345fff0218f924ea4321115e56e54c8d5ebfdd4d9f1c32988",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/fig_1.webp": "b39079fb955d34efbb758efda8ea39a9ee23188283b9e5987561284ffa57500d",
+    "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_to_test_down.webp": "9be5d915ee2bb15737b163d8a042607514deb1ee1239f84bb66be715f66a7226",
+    "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_breakthroughness_6.pt.webp": "e34fddf0e9b92797f4dc6235922b843bc0bdc17b34fa5bb6d4dc525954d0e5e9",
+    "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_linearity_12.pt.webp": "de825ec9472b168d6fd81ef50c35211e25536c5d68266472af19a77d288f8c3d",
+    "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/validation_ppl.webp": "ccbe147d0aa63b53efda28dbb87892e1acd4ef9018be940bf9e42220bc599317",
+    "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/bigbench_all_tasks.webp": "eaa8178aa5ad665a26a898c8f1035886f1b73db1d883c36a8e330343475e09da",
+    "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Increases-None-0.1-ppl-xFLOPs.webp": "cbc6a8cc04f50427b0b786666516e91a3234da80924eaecac61c975b1b4f2431",
+    "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Stagnates-None-0.1-ppl-xppl.webp": "d0a49a45bf910034f3a6be5d284aa1358b4ee59ab25a9033bd26d09001a98f6c",
+    "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/examples-of-scaling-behaviors-v1.webp": "ca8bbd420c7927107331548d3bcbf56c3b28010fd677af8d48718a9347f643b5",
+    "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/distribution-of-scaling-behaviors.webp": "45b7662870c7fa20ce6c0da6b9341088bb5c53815e6c0d9d7260d6176565122b",
+    "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/scaling-behaviors_predictable.webp": "907d6d381171cfd43328e83bdbc1e200678b140e675ac0822caa133ca56b1890",
+    "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/example-of-effect-of-validation-corpus.webp": "f79024ce26f8505c3f6e1632f1eaf97d24ae14a90bb11ef01b4f3c82342863d7",
+    "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_convergence.webp": "a478d69ead3d2ba455f0bae0d33de02c9a1d929564c2b8e01a348ab7e3c4144d",
+    "finetuning-efficiency/papers/2002.12462-leep/raw/figs/cifar10_to_cifar100.webp": "33b4db647f94f9a270b8366b74e83cbe31118b6ef0550f65bb3a04e0eb48da3a",
+    "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100.webp": "68a5404c2f071876b9f62ae2c6f65f46a76fb1b51d44228c090434d970f327df",
+    "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_small.webp": "5c4e53d9b032c0a71428fee9ba552035fc146a826980984c57120d134a217797",
+    "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step2_main.webp": "a053c7ee40d2eab015d32cd552f0eba4851bc45673671f915e64c535d6b47037",
+    "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/chained_main.webp": "960d14d5b5f97f86b8ad0dcf1aa728e893d98cd8faf238ae83faecd04dec7029",
+    "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/figure1.webp": "ed0a9167589791345b6b1a1e78b273ca88bd171a38fea15f1b3ef808a9560cd2",
+    "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/intermediate_feature_comparison.webp": "39dac52fa4fde2ce1bd89f394112a69cc94e396ff482e0c06413a8bd23acf183",
+    "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step1_main.webp": "1698bb53f8607445be7c92abf2b348db49cd060de29859bc7551da4ba8603509",
+    "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/pythia-scaling-tripanel.webp": "9fc27b25b6eb4140e9f2fc699524b89d020b37887aa36210219649da407ab657",
+    "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/similarity-matrix-and-rank-frequency-envelope.webp": "7c156828564f92a1afdce2a0c716e086e9507b9c86e180d2b107cdba139d1ffb",
+    "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.webp": "8de9f2ca2d43b91117816241a994828379dfc7c6c2ce7739e25a5af6927c9152",
+    "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/parameters-steps-data-emergence-and-scaling-scalingtop.webp": "d2491f829d4159b50e738372c540b44ade6dd5d2368a14c37eac401567c01891",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_error_models.webp": "f99114caba57622879c3fff7b3b6d42981887f30189556fd10e4221d096d69ee",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/speech_data_generalization.webp": "4de7c01479c62730a5c140ab5b1db64308dbd50b931a0129b1a8358cfc1dccf9",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_generalization.webp": "5f0aadbae68a0a06991db4445b2a07d368d5a2d146b172259f9adf0e90fc3318",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_model.webp": "50db1404287ebe69848bdec110a86771ccb181805445ac13441473c60b36cc6f",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_model.webp": "98c3980c908f0f6c687a24a6fdf23dfd300c8a538b0168c2b677e214a6cedb1e",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_generalization.webp": "d3931e4b10d5b4879aa30ffe6779db85e24808d3eb0e9d481d9a003b2a9f0eac",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_generalization.webp": "69df73748b3218e57ff6c9dfdbd499bf332eadfc3efab707c2716672ed369d51",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.webp": "de89643b774c806cd80009227db5611a73b73b8847df0f6b0af4a5bf951eee12",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_model.webp": "54a92a999583707e1c72266c028b7e280cecdd7bb2bdd1c7b7b97a296dea5b4a",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_generalization.webp": "90d76368051aa7674dedd540e6dd7da63ba05f39b1820f3da242983ef9cdbd1e",
+    "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/ds2_data_generalization.webp": "589ea9169defe648bbe7f49cdba87d427449657a12de8e1fa2a13330e1d02e82",
+    "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_1_population_decay_full.webp": "fa7b690786c2aed977694fcd7b0b3d9ce355900cc7e16c32ba9f463dab7c9778",
+    "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_3_phase_diagram.webp": "bd0cc0e94ea5f4cd9ac60bfa72eff527c6d99ba67f2868f12c810c1ad56cd380",
+    "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_4_efficiency_frontier.webp": "f6853dc0e7850702ae13b650436a7e4d50d20b37e328304ea64e99756d05a83a",
+    "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/figure-1.webp": "8b138faaad3ec4431ee625c80aea705f6a8d013ac595e1b70bb181f078b9c729",
+    "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lc_decision_situations.webp": "c349568f0d383bddb61d01863a215923f598bd6b0d2a7dd74c4d24f9839e2f3b",
+    "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/modeltypes.webp": "56cf9610450527d0b6944f9e8f86f8afcea1d44a367738f595cecc4e0438e123",
+    "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/problem_solution.webp": "6afe9d9e4b2258f41ee8b3133bf61d22d36ee9c91a50a9ddfbb0aac1f3967521",
+    "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcconcepts.webp": "92f9619d0a97834fb6cd7941ea300750837a20b635aed9233d82e2eb8a95aa93",
+    "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcs-waveform.webp": "5e83c9657b971d3a80e15c1c2b37ca360d15800ede13f45e57aaedbdff097405",
+    "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/earlystoppingvsdataacquisition.webp": "60110411bc01adffc2aa25ce693ecd0b6541e4bbe84e8d38f1b54e177c03ce49",
+    "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_1.webp": "9c6fe6c6064068577a772c5b5fc199e851376e35a88868caa03cba7b44284960",
+    "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_1.webp": "27aaf98e8c0d8c9ec674c1669d98b9f9b6e47148dfb63717993053fc096285d4",
+    "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/evolution_of_fine_tuning.webp": "a0e47fe165c6fc887ee1ca669e460e5947dac59425fa671386efb1b3b53a68dc",
+    "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_2.webp": "43a760fd94440b2f79c2f9a7b466e3160a8ab7224be6e21927d4e7516ef28da4",
+    "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_2.webp": "763c1e920a808209f98c2ca391c148f143e4fedce06cd985d8c86c66c8c545db",
+    "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/transfer_learning_figure1.webp": "649035c9aca82ef86cd2736b523bdf92778a89a8bd897fc36000554ab274f761",
+    "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/nlpassuntil_vs_test_loss_one_fig.webp": "5a02a415c63df242cf1cead13648f8777f9c413ad7fc47e65df237f0c9220915",
+    "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/themegraph.webp": "b9d7b9bcbe4d157fd9e72686b21863ef020e7062aaeb2ecbe7554946c76aebd0",
+    "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/final_predict_2_set.webp": "9e0fca404ec62c5a58c51abdb7533fb6ebe4cc605405729b3f858e3f797feaba",
+    "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/dataset_level_prediction_du.webp": "05ea911a80c5f4c2b3d6f69b019483c2ac6a85d4d5f7e31a69f9fe10535c7572",
+    "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/train_loss_2series.webp": "62714c58b80d80f59ccb15bba025e6f6fd008d279725f90782392883b46004db",
+    "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/pilot-exp-fig.webp": "1bf969c356319680a69744bdf290c99b20b26c374a93b9709ac65f977d02e83b",
+    "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_gen_eval_acc.webp": "e9d4cb47c5229b1d2f172bfcdf14dcd82501ff06fa7d3377ccf4c1f2a7dc58a2",
+    "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_id.webp": "8e80f8e52b1b4050118ecfc7701ff0e9eb69c969f9a8d4672f17b65acb288d32",
+    "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_trajectory.webp": "04274a60159d43582818c96c4c2d9e7f3a12b0f500f5a976e07fd5e3697e2629",
+    "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_parameter_id.webp": "284140fee10fb319b6760ee1df1d71c4b2df59317f7bd6f32ccd77df589bd582",
+    "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/intro-new.webp": "a0e218ff77750c90158dd22adbe09f189d28b6f067d1fcff01cf56e6592b1538",
+    "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/pareto.webp": "7b08ec8a4dc6dd5ab31a61bf7c3fb30e92d5c6945f3dbdc3e084541ec124947a",
+    "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/llmselect.webp": "be06de138bcd92591a2581f071d76aa22d7654097493d171b07b57156af1c320",
+    "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_1.webp": "0f54e04735b5567e06513afc0f8dff4b46d097819ca62728bf3b2132b363d743",
+    "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_2_under_log.webp": "014dc0794016e628fd01f7bfe8d9f75a8280907957979e4695e183db9077079c",
+    "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/figure_intro_v2.webp": "f7fd2a590d8429d62c3fd1978daae564b3c80bdabf42b48da473e96422e45d7b",
+    "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/pretraining_results.webp": "9e986d307e6052df92859326c7d54e769b676d2eb61c5f5ade2f054ebe28f913",
+    "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/ft_hpt_effect.webp": "7f488d6e3fdd619edf11a154e46b93a54a6fb05ba5195088add39b08f87a2979",
+    "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/finetuning_results.webp": "f375d0ff13c387e08ee662186efef26fa03ecbbb074e73bcdaa93b67c905d7ce",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/example_MLP_3version.webp": "110d38034e4472777bd681e0b077286174e5dd5e36e7aeeefe5865c19c7e9c50",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_mono_CC18.webp": "50e51d680fd4ac3b449c9ce7c7b54cae4a23740e4fb6f5d3a05c8e76a7c150cb",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_conv.webp": "63f7ca5d54094a885431e4cd900372ef71acfbf6defb23b3a3b927c83efb898c",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_peaking_CC18.webp": "8a4e5c22a2e615fd2e13ce3fe988405700eb88407b6ad833154b80d07765a60a",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_transition.webp": "40b63093c7ad3fac7777fe4240c7f85be3d0872cf307f85034eac0deaf7eda86",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/lc_crossing_probs_comparison.webp": "0a2b4f861f25fc5971bb07e8fe1c0b110c7a9f6b24faf9f7efb247b14db383ee",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/fit_MSE.webp": "5d98df4e793c5365e4b424ab41736a8bb0f23115c6a10f281088e526f3879d91",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/denser_peaking_transition.webp": "a3de097799a5eb37e3dac479e5e72b31053db0c0930fd66bda58fe8eb3478896",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_mono.webp": "aff3a9161401c11a8c08737516e57176e8ae439411241b801b28713cdf695383",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_dipping.webp": "14298abbe9a7a3f706096d9a3ed3a63b6d064545716913d1fcf6895eaebd922f",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_conv_CC18.webp": "0c5b713bccae9cfbbf4c2e849b7efd503c59f322571252a25a045cfc476882ae",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_dipping_CC18.webp": "68762b562b36ae38c278f04ec25a85dec7aa178a63bd0bf1aa3dba95aacb98a6",
+    "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_peaking.webp": "58ba6336df686cd0e4d05155babadeda4a0f0f2ba446d0deed168fcf7ff1da04",
+    "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_pretrain.webp": "58e87065d8f9e597cb56386a852f13dbeb2df74d969b54123bd83589e45667cf",
+    "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_enzh_model_size.webp": "20685b7bbd76647e634a4ea6c935df0f9d14f5ac017779f77242d0c4e7628b65",
+    "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_prompt_scaling.webp": "54f6502900df05c77d15639d26e14f58cc667fc6572aff477dac7e07d21d80da",
+    "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_lora_scaling.webp": "0790cf9d513b5ade50bcb8dad533054b57f9af852ed354831eacbd51298b0dd5",
+    "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_model_size.webp": "227b23cecb08fbbb4c5bb103fff10376e7103e088e60c7a2497c771c76966942",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_ce_loss.webp": "bd2e89651cadcfb01d5527ca3229c82e302817da9ab5400df605333927e442e4",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_bleu.webp": "29b22b78f1a4b259a61bb6e113d2b4bade13893f220a155d2e47db5c3e1531d9",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_ce_loss.webp": "059a1836e44af4942c522aa53b078fbc98dfbd41be8c48c72a8e2ff9f334bbc2",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_ce.webp": "82da5d8f4607e71423c04522f6815ca6dea0927ed75c63fe51224ea3af06a734",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_bleu.webp": "4f50175f1e2f2b065221a7a131442bffc7346e3bcaad842cdf6468441fd50918",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_bleu.webp": "b1ec5e207450ad678383e1b7ac2d8f69dee01960e9fcff67db349aac39b45783",
+    "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_50_50_bleu.webp": "85acd7d2b87b3217d67e1559fca7b87f78bdcc58c4437f4b12af5196efb05b11",
+    "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/bucket_accs.webp": "20e1862aaaff7f9691d58d3ebee9eea4e3e659d77fe1c54be5ef03d6bd7edfae",
+    "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/pointwise_obj_obj_acc.webp": "4ff82349147a82c934cf929d22044f2e6f04900a7a40f5796c30ddbaa52bbd73",
+    "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/feat-imp-lightGBM.webp": "e93f6793dbfc62a5cc84673097e8fe79416a71d38ff33af5757c5a119a1c5a61",
+    "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/hits_GT.webp": "0a5df594d2dac5136295c0ced9f7ecd99d7aaa2294b1c1fb02592f11c41b56d0",
+    "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/proxy_sft_error.webp": "ef45a36893bbae86a30d81c792a3735d840ee7b3649e93ebe9de5f45b270dbeb",
     "gradient-flow/survey/index.html": "f2cb9bf1b386f1418f7a41c9e924429d06f5090088e3df6c198e9cbb56fc9c3a",
     "gradient-flow/papers/2003.04887-rezero/raw/fc_ana_2.webp": "225519e97672eb4ed06e52847957a1bb65ba94d57fa6a9cac4731920aacb2628",
     "gradient-flow/papers/2003.04887-rezero/raw/heatmap64.webp": "2679103971456f43bf8684a9eb884d6a2e0572d5cd6366a4a0a3f1d2ff333839",
@@ -7666,6 +10825,12 @@
     "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig2.webp": "190112deea733c06a81a5dae88a3191184f676b650840dcda9c261e8fb1cf8fe",
     "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_10.webp": "2548fa233fe2ec708aa5a7d394f6f2f98a08db50cf41b035983bc6a2a9cab0d5",
     "gradient-flow/papers/1803.09327-spectral-rnn/raw/page_11.webp": "93da198d722ad05a3878d927ebc1882d3e3d489d18c7ffd741d5769bd2a85fa1",
+    "attn-res/survey/index.html": "1206ffa53d3a8ca63666d420a9ed68147797824283e1aded422bfed739ca4e5c",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.webp": "1df5c941763e89672d53378e98dc0693e1e12e716ffc873ffc0950e2bfc05540",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.webp": "b46ed2cfc9e376e00371a3e4eee246ae3b41db779a6f339fd03abd94bf7bf2ab",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.webp": "654c14289ec1ebe57b6e23125dc521954989ab2e907473e13cb553c97737632c",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig1-overview.webp": "8b303532b32e7aff0ca0e73a56ab9128717ce5bbb4531d93c9fe3db7303af318",
+    "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.webp": "52d595adb9d2776f01f85bfa1a9ff466620ecfd0e88942def403d16deaf6f559",
     "loop-models/survey/index.html": "6a75bc36a53c43613acdf3d8765caa485fd8f0163b21e1b7a4b98ac5ac5f8581",
     "loop-models/papers/2605.06609-looped-icl-logistic-regression/raw/trajectory_alpha_0.5.webp": "36f86427cf5bfc8d19b40e3dfa652bcd784581043cabb22ba368697e84f35c2b",
     "loop-models/papers/2605.06609-looped-icl-logistic-regression/raw/training_loss_alpha_1.webp": "0f8a5f79a3bb014e5edaa938067939e82e724af453810d02679439800dd799eb",

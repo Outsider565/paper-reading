@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attention Residuals — 深度维度注意力残差综述</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161822;
+  --bg3: #1c1f2e;
+  --card: #1e2132;
+  --border: #2a2d42;
+  --text: #e0e0e8;
+  --text2: #9498b0;
+  --accent: #f97316;
+  --accent2: #38bdf8;
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  background: var(--bg); color: var(--text); line-height:1.75; font-size:16px;
+}
+.container { max-width:960px; margin:0 auto; padding:0 24px; }
+a { color: var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* Header */
+header { padding:64px 0 48px; text-align:center; border-bottom:1px solid var(--border); }
+header h1 {
+  font-size:2.4em; font-weight:800;
+  background:linear-gradient(135deg,#f97316,#38bdf8);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; margin-bottom:8px;
+}
+header p { color:var(--text2); font-size:1.05em; }
+
+/* Navigation */
+nav.toc {
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 28px; margin:32px 0;
+}
+nav.toc h2 { font-size:1.1em; color:var(--accent); margin-bottom:12px; }
+nav.toc ul { list-style:none; columns:1; gap:16px; }
+nav.toc li { margin-bottom:6px; break-inside:avoid; font-size:0.9em; }
+nav.toc a { color:var(--text); }
+nav.toc a:hover { color:var(--accent); }
+
+/* Section separators */
+.section-divider {
+  border:none; border-top:1px solid var(--border); margin:48px 0;
+}
+
+/* Overview */
+.overview { margin:32px 0; }
+.overview h1, .overview h2, .overview h3 { color:var(--accent); margin:24px 0 12px; }
+.overview h1 { font-size:1.6em; }
+.overview h2 { font-size:1.3em; }
+.overview p { margin-bottom:12px; }
+.overview strong { color:#e8e8f0; }
+.overview table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+.overview th, .overview td { padding:8px 12px; text-align:left; border-bottom:1px solid var(--border); }
+.overview th { background:var(--bg3); color:var(--accent); font-weight:600; }
+
+/* Paper articles */
+.paper-article {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  margin-bottom:24px; overflow:hidden;
+}
+.paper-meta-bar {
+  background:var(--bg3); padding:10px 24px; font-size:0.82em; color:var(--text2);
+  border-bottom:1px solid var(--border);
+}
+.paper-body {
+  padding:24px 28px;
+}
+.paper-body h1 { font-size:1.35em; margin:0 0 16px; }
+.paper-body h2 { font-size:1.15em; color:var(--accent); margin:24px 0 10px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+.paper-body h3 { font-size:1.0em; color:#b0b8d0; margin:18px 0 8px; }
+.paper-body h4 { font-size:0.95em; color:#a0a8c0; margin:14px 0 6px; }
+.paper-body p { margin-bottom:10px; }
+.paper-body ul, .paper-body ol { padding-left:24px; margin-bottom:10px; }
+.paper-body li { margin-bottom:4px; }
+.paper-body img {
+  max-width:100%; height:auto; border-radius:8px;
+  margin:12px 0; display:block;
+  background:#fff; padding:4px;
+}
+.paper-body table {
+  width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em;
+}
+.paper-body th, .paper-body td {
+  padding:8px 12px; text-align:left; border-bottom:1px solid var(--border);
+}
+.paper-body th { background:var(--bg3); color:var(--accent); font-weight:600; }
+.paper-body code {
+  background:var(--bg3); padding:2px 6px; border-radius:4px; font-size:0.88em;
+}
+.paper-body pre {
+  background:var(--bg3); padding:16px; border-radius:8px; overflow-x:auto;
+  margin:12px 0; font-size:0.88em;
+}
+.paper-body pre code { background:none; padding:0; }
+.paper-body blockquote {
+  border-left:3px solid var(--accent); padding:8px 16px; margin:12px 0;
+  background:rgba(249,115,22,0.05); color:var(--text2);
+}
+.paper-body hr { border:none; border-top:1px solid var(--border); margin:20px 0; }
+
+/* Footer */
+footer {
+  padding:32px 0; text-align:center; color:var(--text2);
+  font-size:0.82em; border-top:1px solid var(--border); margin-top:48px;
+}
+
+/* Responsive */
+@media (max-width:700px) {
+  header h1 { font-size:1.6em; }
+  nav.toc ul { columns:1; }
+  .container { padding:0 16px; }
+  .paper-body { padding:16px 18px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+</style>
+<style>
+.public-site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 18px;
+  background: var(--bg2, rgba(247, 247, 244, 0.92));
+  border-bottom: 1px solid var(--border, #dedbd2);
+  backdrop-filter: blur(12px);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.public-site-nav a {
+  color: var(--accent, #0f766e);
+  text-decoration: none;
+  font-weight: 700;
+}
+.public-site-nav span {
+  color: var(--text2, #65645f);
+  font-size: 0.92rem;
+}
+.public-attribution {
+  margin: 48px auto 28px;
+  max-width: 980px;
+  padding: 18px 20px;
+  border: 1px solid var(--border, #dedbd2);
+  border-radius: 8px;
+  background: var(--card, #ffffff);
+  color: var(--text2, #65645f);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.94rem;
+}
+@media (max-width: 760px) {
+  .public-site-nav {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="public-site-nav"><a href="../../">paper-reading</a><span>attn-res</span></nav>
+
+<header>
+  <div class="container">
+    <h1>Attention Residuals</h1>
+    <p>深度维度的选择性注意力聚合：从固定残差到 input-dependent depth-wise softmax attention</p>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- TOC -->
+<nav class="toc">
+  <h2>论文目录</h2>
+  <ul>
+<li><a href="#2603.15031-attention-residuals">Attention Residuals (AttnRes)</a></li>
+  </ul>
+</nav>
+
+<!-- Section 1: Overview -->
+<div class="overview">
+<h1>Attention Residuals 综述</h1>
+<h2>从固定残差到选择性深度聚合</h2>
+<p>深度网络的残差连接自 ResNet (2015) 以来就是标准做法，但其<strong>固定等权累加</strong>的本质一直被忽视。展开递推式 <span class="math inline">h_l = h_{l-1} + f_{l-1}(h_{l-1})</span> 可以看到，每层输入 <span class="math inline">h_l</span> 不过是所有前层输出的简单求和——没有任何机制让不同层根据需要选择性地聚合信息。</p>
+<p>PreNorm 范式虽然解决了梯度消失问题，但引入了<strong>隐状态膨胀 (dilution)</strong>：<span class="math inline">\|h_l\|</span> 以 <span class="math inline">O(L)</span> 增长，深层贡献被逐步稀释。近年来的 DeepNorm、(m)HC、DenseFormer 等工作尝试改进，但都未跳出&quot;加权递推&quot;的框架。</p>
+<h2>时间-深度对偶：核心洞见</h2>
+<p>AttnRes 论文的核心洞见是一个形式化的对偶关系：</p>
+<table>
+<thead>
+<tr>
+<th>时间 (序列)维度</th>
+<th>深度维度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RNN 压缩为单状态</td>
+<td>残差连接压缩为 <span class="math inline">h_l</span></td>
+</tr>
+<tr>
+<td>注意力机制替代 RNN</td>
+<td><strong>AttnRes 替代固定残差</strong></td>
+</tr>
+<tr>
+<td>Linear attention → Softmax attention</td>
+<td><strong>(m)HC → AttnRes</strong></td>
+</tr>
+</tbody>
+</table>
+<p>标准残差和 Highway/(m)HC 等变体本质上是<strong>深度维度的线性注意力</strong>（对应不同的半可分矩阵 rank），而 AttnRes 是<strong>深度维度的 softmax 注意力</strong>——完成了同样的&quot;线性→softmax&quot;跃迁。</p>
+<h2>实现的核心要素</h2>
+<ol>
+<li><strong>Pseudo-query <span class="math inline">w_l</span></strong>：每层一个 <span class="math inline">d</span> 维可学习参数，zero-init 保证初始等权</li>
+<li><strong>RMSNorm on keys</strong>：防止大 magnitude 层主导 softmax</li>
+<li><strong>Block 分组</strong>：<span class="math inline">N \approx 8</span> blocks 将 <span class="math inline">O(Ld)</span> 内存/通信降为 <span class="math inline">O(Nd)</span></li>
+<li><strong>Two-phase inference</strong>：利用 query 与前向解耦，batch inter-block attention</li>
+</ol>
+<h2>工程实现 (fla 库)</h2>
+<p>flash-linear-attention 库提供了两个实现层次：</p>
+<ul>
+<li><strong>naive</strong> (<code>fla/ops/attnres/naive.py</code>)：纯 PyTorch 参考实现，便于理解和验证</li>
+<li><strong>fused</strong> (<code>fla/ops/attnres/fused.py</code>)：Triton 融合 kernel，使用 online softmax 单 pass 计算，含完整反向传播</li>
+</ul>
+<p>模型集成层面，每个 TransformerBlock 的 attn 和 mlp 子层各有一对 <code>(res_proj, res_norm)</code>，在 block 边界处将 partial sum 推入 <code>attnres_states</code> 列表。</p>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- Section 2: Per-paper details -->
+<article class="paper-article" id="2603.15031-attention-residuals"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2603.15031" target="_blank">arXiv:2603.15031</a> · <a href="#2603.15031-attention-residuals">README source</a></div><div class="paper-body"><h1>Attention Residuals (AttnRes)</h1>
+<p><strong>论文</strong>: <a href="https://arxiv.org/abs/2603.15031">Attention Residuals</a><br />
+<strong>团队</strong>: Kimi Team (Moonshot AI)<br />
+<strong>代码</strong>: <a href="https://github.com/fla-org/flash-linear-attention">fla-org/flash-linear-attention</a> — <code>fla/ops/attnres/</code></p>
+<hr />
+<h2>问题动机</h2>
+<p>标准残差连接 <span class="math inline">h_l = h_{l-1} + f_{l-1}(h_{l-1})</span> 展开后得到：</p>
+<div class="math block">
+h_l = h_1 + \sum_{i=1}^{l-1} f_i(h_i)
+</div>
+<p>即每层的输入是之前所有层输出的<strong>等权求和</strong>。这种固定的 uniform 聚合带来三个问题：</p>
+<ol>
+<li><strong>无选择性访问</strong>：每一层只能看到单个压缩后的状态 <span class="math inline">h_{l-1}</span>，无法选择性地从不同前层中获取信息</li>
+<li><strong>信息不可逆丢失</strong>：一旦某层信息在聚合中被稀释，后续层无法恢复</li>
+<li><strong>输出增长 (PreNorm dilution)</strong>：使用 PreNorm 时，隐状态的 magnitude 以 <span class="math inline">O(L)</span> 增长，迫使更深的层学习越来越大的输出才能有影响力</li>
+</ol>
+<p><img src="../papers/2603.15031-attention-residuals/raw/figures/fig1-overview.webp" alt="Figure 1: Overview" /></p>
+<hr />
+<h2>核心想法</h2>
+<p><strong>时间-深度对偶 (Time-Depth Duality)</strong>：残差连接在深度上的固定累加，本质上类似 RNN 在时间上的压缩。正如 Transformer 用 attention 替代了时间维度上的 RNN 循环，AttnRes 用 <strong>softmax attention</strong> 替代深度维度上的固定等权累加：</p>
+<div class="math block">
+h_l = \sum_{i=0}^{l-1} \alpha_{i \to l} \cdot v_i
+</div>
+<p>其中 <span class="math inline">\alpha_{i \to l}</span> 是学习到的、<strong>输入依赖的 (input-dependent)</strong> 注意力权重。</p>
+<hr />
+<h2>方法细节</h2>
+<h3>3.1 Full Attention Residuals</h3>
+<p>对每一层 <span class="math inline">l</span>，定义：</p>
+<div class="math block">
+q_l = w_l, \quad k_i = v_i = \begin{cases} h_1 &amp; i = 0 \\ f_i(h_i) &amp; 1 \le i \le l-1 \end{cases}
+</div>
+<p>其中 <span class="math inline">w_l \in \mathbb{R}^d</span> 是<strong>每层一个的可学习 pseudo-query 向量</strong>。</p>
+<p>注意力权重使用 softmax + RMSNorm 计算：</p>
+<div class="math block">
+\phi(q, k) = \exp\left(q^\top \operatorname{RMSNorm}(k)\right)
+</div>
+<div class="math block">
+\alpha_{i \to l} = \frac{\phi(q_l, k_i)}{\sum_{j=0}^{l-1} \phi(q_l, k_j)}
+</div>
+<p>每层的输入为：</p>
+<div class="math block">
+h_l = \sum_{i=0}^{l-1} \alpha_{i \to l} \cdot v_i
+</div>
+<p><strong>复杂度</strong>：<span class="math inline">O(L^2 d)</span> 计算，<span class="math inline">O(Ld)</span> 存储。由于 <span class="math inline">L &lt; 1000</span>（远小于序列长度），计算开销很小。</p>
+<p><strong>关键设计</strong>：pseudo-query <span class="math inline">w_l</span> 是与前向计算解耦的参数，意味着可以并行 batch 计算多层的注意力权重。</p>
+<h3>3.2 Block Attention Residuals</h3>
+<p>为解决大规模训练中 pipeline parallelism 的通信开销，将 <span class="math inline">L</span> 层划分为 <span class="math inline">N</span> 个 block：</p>
+<p><strong>块内累加 (Intra-Block)</strong>：</p>
+<div class="math block">
+b_n = \sum_{j \in \mathcal{B}_n} f_j(h_j)
+</div>
+<p><strong>块间注意力 (Inter-Block)</strong>：对块 <span class="math inline">n</span> 中的第 <span class="math inline">i</span> 层：</p>
+<div class="math block">
+\mathbf{V} = \begin{cases} [b_0, b_1, \ldots, b_{n-1}]^\top &amp; i = 1 \text{ (块的第一层)} \\ [b_0, b_1, \ldots, b_{n-1}, b_n^{i-1}]^\top &amp; i \ge 2 \text{ (后续层)} \end{cases}
+</div>
+<p>其中 <span class="math inline">b_0 = h_1</span>（token embedding 始终参与），<span class="math inline">b_n^{i-1}</span> 为块内的 partial sum。</p>
+<p><strong>效率</strong>：内存从 <span class="math inline">O(Ld)</span> 降到 <span class="math inline">O(Nd)</span>，计算从 <span class="math inline">O(L^2)</span> 降到 <span class="math inline">O(N^2)</span>。实验表明 <strong><span class="math inline">N \approx 8</span> 就能恢复 Full AttnRes 的绝大部分收益</strong>。</p>
+<h3>3.3 PyTorch Pseudocode (Block AttnRes)</h3>
+<p>论文 Figure 2 给出了核心伪代码：</p>
+<pre><code class="language-python">def block_attn_res(blocks, partial_block, proj, norm):
+    &quot;&quot;&quot;
+    blocks: list of [B, T, D] — 已完成的 block 表示
+    partial_block: [B, T, D] — 块内 partial sum
+    &quot;&quot;&quot;
+    V = torch.stack(blocks + [partial_block])  # [N+1, B, T, D]
+    K = norm(V)                                 # RMSNorm on keys
+    logits = torch.einsum('d, n b t d -&gt; n b t', proj.weight.squeeze(), K)
+    h = torch.einsum('n b t, n b t d -&gt; b t d', logits.softmax(0), V)
+    return h
+
+def forward(self, blocks, hidden_states):
+    partial_block = hidden_states
+
+    # AttnRes before Attention
+    h = block_attn_res(blocks, partial_block, self.attn_res_proj, self.attn_res_norm)
+
+    # Block boundary check
+    if self.layer_number % (self.block_size // 2) == 0:
+        blocks.append(partial_block)
+        partial_block = None
+
+    # Self-Attention
+    attn_out = self.attn(self.attn_norm(h))
+    partial_block = partial_block + attn_out if partial_block is not None else attn_out
+
+    # AttnRes before MLP
+    h = block_attn_res(blocks, partial_block, self.mlp_res_proj, self.mlp_res_norm)
+
+    # MLP
+    mlp_out = self.mlp(self.mlp_norm(h))
+    partial_block = partial_block + mlp_out
+
+    return blocks, partial_block
+</code></pre>
+<h3>3.4 fla 库的实际实现</h3>
+<p>在 <code>fla/ops/attnres/naive.py</code> 中，naive 参考实现如下：</p>
+<pre><code class="language-python">def naive_attnres(query, residuals, rms_weight, output_rms_weight=None,
+                  rms_eps=1e-6, scale=1.0, return_weights=False):
+    &quot;&quot;&quot;
+    query: [D] — 每层的 pseudo-query (w_l)
+    residuals: L 个 [..., D] 的 tensor — 各 source 层的输出
+    rms_weight: [D] — RMSNorm 的 scale 参数
+    output_rms_weight: 可选的输出 RMSNorm（融合 prenorm）
+    &quot;&quot;&quot;
+    stacked = torch.stack([r.view(-1, D) for r in residuals], dim=0)
+
+    v = stacked.float()
+    k = F.rms_norm(v, (D,), rms_weight.float(), rms_eps)          # RMSNorm on keys
+    p = einsum(k, query.float() * scale, &quot;l ... d, d -&gt; l ...&quot;).softmax(dim=0)  # softmax over depth
+    o = einsum(p, v, &quot;l ..., l ... d -&gt; ... d&quot;)                    # weighted sum
+
+    if output_rms_weight is not None:
+        o = F.rms_norm(o, (D,), output_rms_weight.float(), rms_eps)
+
+    return o.to(stacked.dtype)
+</code></pre>
+<p><strong>Triton 融合实现</strong> (<code>fla/ops/attnres/fused.py</code>) 使用 <strong>online softmax</strong> 在单次遍历中完成：</p>
+<ul>
+<li>遍历所有 source，对每个 tile 计算 RMSNorm → logit → online softmax update</li>
+<li>保存 <code>rstd</code> 和 <code>logit</code> 供反向传播使用</li>
+<li>可选地融合输出 RMSNorm（即下一层的 prenorm）</li>
+</ul>
+<h3>3.5 模型集成方式 (TransformerBlock)</h3>
+<p>在 <code>fla/models/transformer/modeling_transformer.py</code> 中的集成：</p>
+<pre><code class="language-python">class TransformerBlock(nn.Module):
+    def __init__(self, config, layer_idx):
+        # 每个子层（attn/mlp）各有一对 (proj, norm)
+        self.attn_res_proj = nn.Linear(hidden_size, 1, bias=False)  # pseudo-query
+        self.attn_res_norm = nn.RMSNorm(hidden_size)                # key norm
+        self.mlp_res_proj = nn.Linear(hidden_size, 1, bias=False)
+        self.mlp_res_norm = nn.RMSNorm(hidden_size)
+
+        # 判断是否为 block 边界
+        block_size = config.attnres_block_size
+        self.attnres_is_attn_boundary = (2 * layer_idx) % block_size == 0
+        self.attnres_is_mlp_boundary = (2 * layer_idx + 1) % block_size == 0
+
+        # 重要：proj 权重 zero-init，保证初始 softmax 权重均匀
+        self.attn_res_proj._is_attnres_proj = True  # 标记用于 _init_weights
+
+    def forward(self, hidden_states, attnres_states=None, ...):
+        prefix_sum = hidden_states  # running partial sum
+
+        # 构建 residuals = [已完成 blocks..., 当前 partial_sum]
+        residuals = [*attnres_states, prefix_sum]
+
+        # 如果到达 block 边界，把当前 partial_sum 加入 attnres_states
+        if self.attnres_is_attn_boundary:
+            attnres_states = residuals
+            prefix_sum = None
+
+        # AttnRes 替代 prenorm：融合 attn_norm
+        hidden_states = fused_attnres(
+            query=self.attn_res_proj.weight,
+            residuals=residuals,
+            rms_weight=self.attn_res_norm.weight,
+            output_rms_weight=self.attn_norm.weight,  # 融合 prenorm
+            rms_eps=self.attn_res_norm.eps,
+        )
+
+        # Attention
+        hidden_states = self.attn(hidden_states)
+        prefix_sum = prefix_sum + hidden_states if prefix_sum is not None else hidden_states
+
+        # 类似地对 MLP 执行 AttnRes...
+</code></pre>
+<h3>3.6 初始化策略</h3>
+<p><strong>所有 pseudo-query 向量必须 zero-init</strong>。这确保训练初始阶段注意力权重 <span class="math inline">\alpha_{i \to l}</span> 对所有 source 均匀，AttnRes 退化为等权平均，避免训练不稳定。</p>
+<h3>3.7 Two-Phase 推理策略 (Algorithm 1)</h3>
+<p>由于 <span class="math inline">w_l</span> 与前向计算解耦，可以 batch 处理：</p>
+<ul>
+<li><strong>Phase 1 (并行)</strong>：将块内所有 <span class="math inline">S</span> 个 query batch 起来，对之前的 <span class="math inline">n-1</span> 个 block 做一次 batched attention → 得到 output + lse</li>
+<li><strong>Phase 2 (顺序)</strong>：对块内依次处理，对 intra-block partial sum 做 attention，用 <strong>online softmax merge</strong> 与 Phase 1 结果合并</li>
+</ul>
+<p>这将 per-layer I/O 从 <span class="math inline">O(Ld)</span> 降低到 <span class="math inline">O\left(\frac{N}{S} + 5\right)d \approx 5.5d</span>。</p>
+<hr />
+<h2>关键结果</h2>
+<h3>Scaling Laws</h3>
+<p><img src="../papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.webp" alt="Figure 4: Scaling Laws" /></p>
+<ul>
+<li>Baseline: <span class="math inline">L = 1.891 \times C^{-0.057}</span></li>
+<li>Block AttnRes: <span class="math inline">L = 1.870 \times C^{-0.058}</span></li>
+<li>Full AttnRes: <span class="math inline">L = 1.865 \times C^{-0.057}</span></li>
+</ul>
+<p>Block AttnRes 达到了等效于 baseline <strong>1.25× compute</strong> 的效果。Full 与 Block 的差距随规模增大而缩小（最大规模仅差 0.001）。</p>
+<h3>训练动态</h3>
+<p><img src="../papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.webp" alt="Figure 5: Training Dynamics" /></p>
+<ul>
+<li><strong>Validation loss</strong>: AttnRes 全程更低，decay 阶段差距拉大</li>
+<li><strong>Output magnitude</strong>: Baseline 单调增长 (PreNorm dilution)；Block AttnRes 呈现有界周期性模式</li>
+<li><strong>Gradient magnitude</strong>: Baseline 最浅层梯度异常大；AttnRes 梯度分布更均匀</li>
+</ul>
+<h3>Downstream Performance (48B 参数, 1.4T tokens)</h3>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>Baseline</th>
+<th>AttnRes</th>
+<th><span class="math inline">\Delta</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MMLU</td>
+<td>73.5</td>
+<td>74.6</td>
+<td>+1.1</td>
+</tr>
+<tr>
+<td>GPQA-Diamond</td>
+<td>36.9</td>
+<td>44.4</td>
+<td><strong>+7.5</strong></td>
+</tr>
+<tr>
+<td>BBH</td>
+<td>76.3</td>
+<td>78.0</td>
+<td>+1.7</td>
+</tr>
+<tr>
+<td>Math</td>
+<td>53.5</td>
+<td>57.1</td>
+<td><strong>+3.6</strong></td>
+</tr>
+<tr>
+<td>HumanEval</td>
+<td>59.1</td>
+<td>62.2</td>
+<td><strong>+3.1</strong></td>
+</tr>
+<tr>
+<td>MBPP</td>
+<td>72.0</td>
+<td>73.9</td>
+<td>+1.9</td>
+</tr>
+</tbody>
+</table>
+<p>多步推理任务受益最大，与假设一致：改善深度信息流有利于组合性任务。</p>
+<h3>Ablation Study</h3>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline (PreNorm)</td>
+<td>1.766</td>
+</tr>
+<tr>
+<td>DenseFormer (fixed weights)</td>
+<td>1.767</td>
+</tr>
+<tr>
+<td>mHC (m streams)</td>
+<td>1.747</td>
+</tr>
+<tr>
+<td><strong>Full AttnRes</strong></td>
+<td><strong>1.737</strong></td>
+</tr>
+<tr>
+<td>Block AttnRes (S=4)</td>
+<td>1.746</td>
+</tr>
+<tr>
+<td>w/ input-dependent query</td>
+<td>1.731 (但多一个 d×d proj)</td>
+</tr>
+<tr>
+<td>w/ sigmoid (代替 softmax)</td>
+<td>1.741</td>
+</tr>
+<tr>
+<td>w/o RMSNorm</td>
+<td>1.743</td>
+</tr>
+<tr>
+<td>Sliding Window (W=8+1)</td>
+<td>1.764</td>
+</tr>
+<tr>
+<td>Multihead (H=16)</td>
+<td>1.752</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键发现</strong>：</p>
+<ul>
+<li>softmax 优于 sigmoid（竞争性归一化带来更尖锐的选择）</li>
+<li>单头优于多头（最优深度混合在通道间基本一致）</li>
+<li>RMSNorm 必不可少（防止大 magnitude 的层主导 softmax）</li>
+<li>Sliding window 远不如 Full/Block（选择性访问远处层比只看近处多层更重要）</li>
+</ul>
+<h3>学到的注意力模式</h3>
+<p><img src="../papers/2603.15031-attention-residuals/raw/figures/fig8-weights.webp" alt="Figure 8: Learned Attention Weights" /></p>
+<p>三个关键观察：</p>
+<ol>
+<li><strong>保持局部性</strong>：每层最强注意力在前驱，但有选择性的 off-diagonal 跳连</li>
+<li><strong>层类型特化</strong>：pre-attention 层保持较宽的感受野；pre-MLP 层依赖近期表示</li>
+<li><strong>Embedding 持续参与</strong>：<span class="math inline">h_1</span> 在所有层都维持非零权重</li>
+</ol>
+<h3>深度混合矩阵视角</h3>
+<p><img src="../papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.webp" alt="Figure 9: Depth Mixing Matrices" /></p>
+<hr />
+<h2>统一的结构化矩阵视角</h2>
+<p>所有残差变体可以统一为深度混合矩阵 <span class="math inline">M \in \mathbb{R}^{L \times L}</span>，其中 <span class="math inline">M_{i \to l}</span> 是层 <span class="math inline">l</span> 对层 <span class="math inline">i</span> 输出的权重：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>混合矩阵结构</th>
+<th>权重类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard Residual</td>
+<td>全 1 下三角 (rank-1 semiseparable)</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>Highway</td>
+<td>1-semiseparable (stick-breaking)</td>
+<td>Dynamic</td>
+</tr>
+<tr>
+<td>(m)HC</td>
+<td>m-semiseparable</td>
+<td>Dynamic</td>
+</tr>
+<tr>
+<td><strong>Full AttnRes</strong></td>
+<td>Dense rank-L</td>
+<td>Dynamic</td>
+</tr>
+<tr>
+<td><strong>Block AttnRes</strong></td>
+<td>rank ∈ [N, N+S]</td>
+<td>Dynamic</td>
+</tr>
+</tbody>
+</table>
+<p>核心 insight：标准残差和 Highway/(m)HC 本质是<strong>深度维度的线性注意力</strong>，而 AttnRes 是<strong>深度维度的 softmax 注意力</strong>——完成了与序列维度上&quot;线性→softmax&quot;相同的进化。</p>
+<hr />
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>：</p>
+<ul>
+<li>Full AttnRes 的 <span class="math inline">O(Ld)</span> 通信在当前硬件下对 pipeline parallelism 不友好（这正是 Block 版本存在的原因）</li>
+<li>Block 大小的选择需要和 pipeline stage 数量协调</li>
+<li>比标准残差多了少量参数和计算（训练 &lt;4% overhead, 推理 &lt;2% latency overhead）</li>
+</ul>
+<p><strong>与其他工作的关系</strong>：</p>
+<ul>
+<li><strong>DenseFormer</strong> [Pagliardini+ 2024]: 静态 input-independent 权重，无增益</li>
+<li><strong>(m)HC</strong> [Zhu+ 2025 / Xie+ 2026]: m 条并行流 + 学习的混合矩阵，等价于深度维度线性注意力</li>
+<li><strong>DDL</strong> [Zhang+ 2026]: 矩阵状态 + delta rule，对应深度维度的 DeltaNet</li>
+<li><strong>MRLA</strong> [Fang+ 2023]: 类似于深度维度的 GLA</li>
+<li><strong>Value Residual Learning</strong> [Zhou+ 2025]: 只访问单个早期层</li>
+<li><strong>MUDDFormer</strong> [Xiao+ 2025]: 位置依赖权重，4 条流</li>
+</ul>
+<p>AttnRes 统一了这些方法，并在实验中全面超越。</p>
+</div></article>
+
+</div>
+
+<footer>
+  <p>Generated by build_survey.py · Source: papers/*/README.md · Code: <a href="https://github.com/fla-org/flash-linear-attention">fla-org/flash-linear-attention</a></p>
+</footer>
+
+<script>
+document.querySelectorAll('.math.inline,.math.block').forEach(function(el){
+  try { katex.render(el.textContent, el, {displayMode: el.classList.contains('block'), throwOnError: false}); }
+  catch(e) {}
+});
+</script>
+<section class="public-attribution">本站内容为个人学习笔记与论文解读。论文、图表、实验结果和引用材料的版权归原作者及原出版方所有；本站仅为学习、研究和非商业分享用途。若需要引用原始成果，请以论文原文和官方发布版本为准。</section>
+</body>
+</html>

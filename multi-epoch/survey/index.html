@@ -3,123 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Larger Datasets Can Be Repeated More · 交互式解读</title>
+<title>Multi-Epoch — 更大的数据集可以重复更多遍</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <style>
-:root{
-  --bg:#0e1016; --bg2:#151823; --bg3:#1b1f2e; --card:#1a1d2b; --border:#2a2f44;
-  --text:#e3e5ee; --text2:#9aa0bd; --accent:#6c8cff; --accent2:#4ecdc4;
-  --warm:#ff8a5c; --pink:#ff6b6b; --good:#5ad19b; --radius:14px;
+:root {
+  --bg: #0e1016;
+  --bg2: #151823;
+  --bg3: #1b1f2e;
+  --card: #1a1d2b;
+  --border: #2a2f44;
+  --text: #e3e5ee;
+  --text2: #9aa0bd;
+  --accent: #6c8cff;
+  --accent2: #4ecdc4;
+  --radius: 12px;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC',sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;}
-a{color:var(--accent);text-decoration:none;}
-a:hover{text-decoration:underline;}
-.container{max-width:1080px;margin:0 auto;padding:0 24px;}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  background: var(--bg); color: var(--text); line-height:1.75; font-size:16px;
+}
+.container { max-width:960px; margin:0 auto; padding:0 24px; }
+a { color: var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
 
-header.hero{padding:64px 0 36px;text-align:center;border-bottom:1px solid var(--border);
-  background:radial-gradient(1200px 400px at 50% -10%,rgba(108,140,255,0.14),transparent);}
-header.hero .tag{display:inline-block;font-size:.78em;letter-spacing:.08em;color:var(--accent2);
-  border:1px solid var(--border);border-radius:999px;padding:4px 14px;margin-bottom:18px;}
-header.hero h1{font-size:2.5em;font-weight:800;line-height:1.2;
+header { padding:64px 0 48px; text-align:center; border-bottom:1px solid var(--border); }
+header h1 {
+  font-size:2.4em; font-weight:800;
   background:linear-gradient(120deg,#ff8a5c,#6c8cff 60%,#4ecdc4);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-header.hero h2{font-size:1.05em;font-weight:500;color:var(--text2);margin-top:14px;}
-header.hero .meta{margin-top:16px;font-size:.86em;color:var(--text2);}
-header.hero .meta a{margin:0 6px;}
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; margin-bottom:8px;
+}
+header p { color:var(--text2); font-size:1.05em; }
+header .demo-link {
+  display:inline-block; margin-top:16px; padding:8px 16px;
+  border:1px solid var(--border); border-radius:999px;
+  color:var(--accent2); font-size:0.92em;
+}
+header .demo-link:hover { background:var(--bg3); text-decoration:none; }
 
-nav.toc{position:sticky;top:0;z-index:50;background:rgba(14,16,22,.86);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
-nav.toc .inner{max-width:1080px;margin:0 auto;padding:10px 24px;display:flex;gap:6px;flex-wrap:wrap;
-  align-items:center;font-size:.86em;}
-nav.toc a{color:var(--text2);padding:6px 12px;border-radius:8px;white-space:nowrap;}
-nav.toc a:hover{color:var(--text);background:var(--bg3);text-decoration:none;}
-nav.toc a.active{color:#fff;background:var(--accent);}
+nav.toc {
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 28px; margin:32px 0;
+}
+nav.toc h2 { font-size:1.1em; color:var(--accent); margin-bottom:12px; }
+nav.toc ul { list-style:none; columns:1; gap:16px; }
+nav.toc li { margin-bottom:6px; break-inside:avoid; font-size:0.9em; }
+nav.toc a { color:var(--text); }
+nav.toc a:hover { color:var(--accent); }
 
-section{padding:54px 0;border-bottom:1px solid var(--border);}
-section h2.sec-title{font-size:1.7em;font-weight:800;margin-bottom:6px;}
-section .sec-kicker{color:var(--accent);font-weight:700;font-size:.82em;letter-spacing:.1em;
-  text-transform:uppercase;margin-bottom:8px;}
-section .lede{color:var(--text2);max-width:760px;margin-bottom:24px;}
+.section-divider {
+  border:none; border-top:1px solid var(--border); margin:48px 0;
+}
 
-h3{font-size:1.18em;margin:26px 0 10px;color:#eef0fa;}
-h4{font-size:1.0em;margin:18px 0 6px;color:#c4cae6;}
-p{margin-bottom:12px;}
-strong{color:#fff;}
-ul,ol{padding-left:22px;margin-bottom:12px;}
-li{margin-bottom:5px;}
+.overview { margin:32px 0; }
+.overview h1, .overview h2, .overview h3 { color:var(--accent); margin:24px 0 12px; }
+.overview h1 { font-size:1.6em; }
+.overview h2 { font-size:1.3em; }
+.overview p { margin-bottom:12px; }
+.overview strong { color:#e8e8f0; }
+.overview table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+.overview th, .overview td { padding:8px 12px; text-align:left; border-bottom:1px solid var(--border); }
+.overview th { background:var(--bg3); color:var(--accent); font-weight:600; }
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:22px 24px;margin:18px 0;}
-.grid2{display:grid;grid-template-columns:340px 1fr;gap:22px;align-items:start;}
-.grid2.rev{grid-template-columns:1fr 340px;}
-@media(max-width:860px){.grid2,.grid2.rev{grid-template-columns:1fr;}}
+.paper-article {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  margin-bottom:24px; overflow:hidden;
+}
+.paper-meta-bar {
+  background:var(--bg3); padding:10px 24px; font-size:0.82em; color:var(--text2);
+  border-bottom:1px solid var(--border);
+}
+.paper-body { padding:24px 28px; }
+.paper-body h1 { font-size:1.35em; margin:0 0 16px; }
+.paper-body h2 { font-size:1.15em; color:var(--accent); margin:24px 0 10px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+.paper-body h3 { font-size:1.0em; color:#b0b8d0; margin:18px 0 8px; }
+.paper-body h4 { font-size:0.95em; color:#a0a8c0; margin:14px 0 6px; }
+.paper-body p { margin-bottom:10px; }
+.paper-body ul, .paper-body ol { padding-left:24px; margin-bottom:10px; }
+.paper-body li { margin-bottom:4px; }
+.paper-body img {
+  max-width:100%; height:auto; border-radius:8px;
+  margin:12px 0; display:block;
+  background:#fff; padding:4px;
+}
+.paper-body table {
+  width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em;
+}
+.paper-body th, .paper-body td {
+  padding:8px 12px; text-align:left; border-bottom:1px solid var(--border);
+}
+.paper-body th { background:var(--bg3); color:var(--accent); font-weight:600; }
+.paper-body code {
+  background:var(--bg3); padding:2px 6px; border-radius:4px; font-size:0.88em;
+}
+.paper-body pre {
+  background:var(--bg3); padding:16px; border-radius:8px; overflow-x:auto;
+  margin:12px 0; font-size:0.88em;
+}
+.paper-body pre code { background:none; padding:0; }
+.paper-body blockquote {
+  border-left:3px solid var(--accent); padding:8px 16px; margin:12px 0;
+  background:rgba(108,140,255,0.08); color:var(--text2);
+}
+.paper-body hr { border:none; border-top:1px solid var(--border); margin:20px 0; }
 
-.controls{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
-.controls h4{margin-top:0;color:var(--accent2);}
-.ctl{margin:12px 0;}
-.ctl label{display:flex;justify-content:space-between;font-size:.86em;color:var(--text2);margin-bottom:5px;}
-.ctl label b{color:var(--text);font-variant-numeric:tabular-nums;}
-input[type=range]{width:100%;accent-color:var(--accent);}
-select,input[type=number]{width:100%;background:var(--bg3);color:var(--text);
-  border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:.9em;}
-.radio-row{display:flex;gap:8px;flex-wrap:wrap;}
-.radio-row label{display:flex;align-items:center;gap:5px;font-size:.84em;background:var(--bg3);
-  border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;color:var(--text2);}
-.radio-row input{accent-color:var(--accent);}
-button{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:9px 16px;
-  font-size:.9em;font-weight:600;cursor:pointer;margin:4px 6px 4px 0;}
-button:hover{filter:brightness(1.1);}
-button.ghost{background:var(--bg3);color:var(--text);border:1px solid var(--border);}
-button:disabled{opacity:.45;cursor:not-allowed;}
+footer {
+  padding:32px 0; text-align:center; color:var(--text2);
+  font-size:0.82em; border-top:1px solid var(--border); margin-top:48px;
+}
 
-.plot{width:100%;height:340px;}
-.plot.tall{height:400px;}
-.plot.short{height:260px;}
+@media (max-width:700px) {
+  header h1 { font-size:1.6em; }
+  nav.toc ul { columns:1; }
+  .container { padding:0 16px; }
+  .paper-body { padding:16px 18px; }
+}
 
-.readout{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
-.stat{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:8px 14px;min-width:120px;}
-.stat .k{font-size:.74em;color:var(--text2);}
-.stat .v{font-size:1.12em;font-weight:700;font-variant-numeric:tabular-nums;}
-
-.note{font-size:.86em;color:var(--text2);border-left:3px solid var(--accent);
-  background:rgba(108,140,255,.06);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;}
-.note.warn{border-left-color:var(--warm);background:rgba(255,138,92,.07);}
-.note.good{border-left-color:var(--good);background:rgba(90,209,155,.07);}
-
-.thm{background:linear-gradient(180deg,rgba(108,140,255,.08),rgba(108,140,255,.02));
-  border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;
-  padding:14px 18px;margin:16px 0;}
-.thm .lab{font-weight:800;color:var(--accent);font-size:.88em;letter-spacing:.04em;}
-
-.intuition{background:rgba(78,205,196,.06);border:1px solid var(--border);border-left:4px solid var(--accent2);
-  border-radius:0 12px 12px 0;padding:12px 16px;margin:14px 0;}
-.intuition .lab{font-weight:800;color:var(--accent2);font-size:.84em;}
-
-.progress{height:7px;background:var(--bg3);border-radius:999px;overflow:hidden;margin:10px 0;display:none;}
-.progress.show{display:block;}
-.progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .15s;}
-
-canvas{display:block;width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:12px;}
-
-table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88em;}
-table.tbl th,table.tbl td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:left;
-  font-variant-numeric:tabular-nums;}
-table.tbl th{background:var(--bg3);color:var(--accent);}
-
-.katex{font-size:1.02em;}
-.eqn{overflow-x:auto;padding:6px 0;}
-
-footer{padding:34px 0;text-align:center;color:var(--text2);font-size:.84em;}
-.pill{display:inline-block;font-size:.74em;padding:2px 9px;border-radius:999px;border:1px solid var(--border);
-  color:var(--text2);margin-right:6px;}
-::-webkit-scrollbar{width:9px;height:9px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:5px;}
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
 </style>
 <style>
 .public-site-nav {
@@ -168,1087 +172,133 @@ footer{padding:34px 0;text-align:center;color:var(--text2);font-size:.84em;}
 <body>
 <nav class="public-site-nav"><a href="../../">paper-reading</a><span>multi-epoch</span></nav>
 
-<header class="hero">
+<header>
   <div class="container">
-    <div class="tag">ICLR 2026 · arXiv:2511.13421 · 交互式解读</div>
-    <h1>Larger Datasets Can Be Repeated More</h1>
-    <h2>线性回归中多轮（multi-epoch）训练的数据缩放律 —— 设定、数据假设、证明直觉与技巧，以及可亲手运行的实验</h2>
-    <div class="meta">
-      Yan, Wen, Li, Luo, Chen, Lyu (Tsinghua / PKU)
-      · <a href="https://arxiv.org/abs/2511.13421" target="_blank">arXiv</a>
-      · <a href="https://arxiv.org/pdf/2511.13421" target="_blank">PDF</a>
-    </div>
+    <h1>Multi-Epoch</h1>
+    <p>数据受限时同一份数据可以重复训多少遍：有效复用率 E(K,N) 随数据集变大而饱和更晚</p>
+    <a class="demo-link" href="./assets/interactive.html">打开交互演示（公式滑块 + 浏览器内 SGD）</a>
   </div>
 </header>
 
+<div class="container">
+
 <nav class="toc">
-  <div class="inner">
-    <a href="#s0">① 中心问题</a>
-    <a href="#s1">② 问题设定</a>
-    <a href="#s2">③ 数据假设</a>
-    <a href="#s3">④ 主要命题</a>
-    <a href="#s4">⑤ 证明直觉与技巧</a>
-    <a href="#s5">⑥ 动手实验</a>
-  </div>
+  <h2>论文目录</h2>
+  <ul>
+<li><a href="#2511.13421-larger-datasets-repeated">Larger Datasets Can Be Repeated More</a></li>
+  </ul>
 </nav>
 
-<!-- ============ S0 中心问题 ============ -->
-<section id="s0">
-  <div class="container">
-    <div class="sec-kicker">① The Central Question</div>
-    <h2 class="sec-title">把同一份数据重复训 K 遍，相当于多少份新数据？</h2>
-    <p class="lede">
-      记 <span class="eqn">\(L(K,N)\)</span> 为在 <em>N</em> 个样本上训练 <em>K</em> 轮（epoch）后的期望损失。
-      定义<strong>有效数据量</strong> <span class="eqn">\(N'(K,N)\)</span> 为：一遍（one-pass）训练要达到同样损失所需的最小样本数。
-      本文研究的核心量是<strong>有效复用率</strong>
-      <span class="eqn">\(E(K,N)=N'(K,N)/N\)</span>。
-    </p>
+<div class="overview">
+<h1>综述：数据可以重复多少遍？</h1>
+<p>公开文本涨不过模型胃口之后，预训练不再是「每个 token 看一遍」的 Chinchilla 世界。问题从「还要多少新数据」变成：<strong>同一份大小为 <span class="math inline">N</span> 的数据，再跑 <span class="math inline">K</span> 个 epoch，相当于多少份新数据？</strong></p>
+<p>把这个量写清楚，需要一个会计单位。记 <span class="math inline">\mathcal{L}(K,N)</span> 为 <span class="math inline">N</span> 个样本上训 <span class="math inline">K</span> 轮的期望损失，有效数据量 <span class="math inline">N'(K,N)</span> 是 one-pass 要达到同样损失所需的最少新样本。有效复用率</p>
+<div class="math block">
+E(K,N)=\frac{N'(K,N)}{N}
+</div>
+<p>就是「多训这些遍，数据集被放大了几倍」。</p>
+<p>Muennighoff 的 datablations 给过一个只依赖 <span class="math inline">K</span> 的经验式，饱和常数 <span class="math inline">R^*\approx 15</span>。它能解释「4 epoch 几乎无损、16 epoch 之后收益掉、40 epoch 归零」，但把 <span class="math inline">E</span> 写成与 <span class="math inline">N</span> 无关——更大的语料和更小的语料，重复同样遍数应该同样值钱。Yan et al. (ICLR 2026) 在线性回归 + 随机洗牌 SGD 里证明这不成立：<strong>饱和发生在更晚的 <span class="math inline">K</span>，当且仅当 <span class="math inline">N</span> 更大。</strong> 一句话：更大的数据集可以重复更多遍。</p>
+<p>机制是相变，不是平滑的指数饱和。强凸时拐点在 <span class="math inline">K\sim\log N</span>：左侧 <span class="math inline">E\approx K</span>，右侧 <span class="math inline">E=\Theta(\log N)</span>。长尾 Zipf 谱上，拐点变成 <span class="math inline">N</span> 的幂 <span class="math inline">N^{b/(a-b)}</span>。两边都是「还没榨干时，重复 ≈ 新数据；榨干之后只剩对数或幂级边际」。LLM 实验里饱和点随 <span class="math inline">\log N</span> 近似线性右移，和强凸定理同形。</p>
+<p>本主题目前只有这一篇。它和 <code>finetuning-efficiency</code> 里的记忆 / 数据约束文献共用同一个问题（重复多少遍），但问的是预训练数据缩放，不是下游微调速度。交互演示在 <a href="./assets/interactive.html">assets/interactive.html</a>，公式滑块和浏览器内 SGD 都在那里。</p>
 
-    <div class="card">
-      <div class="grid2">
-        <div class="controls">
-          <h4>调一调数据规模 N</h4>
-          <div class="ctl">
-            <label>新数据量 <b id="s0_Nlab">N = 1.0e4</b></label>
-            <input type="range" id="s0_N" min="2" max="9" step="0.05" value="4">
-          </div>
-          <div class="ctl">
-            <label>维度 <b id="s0_dlab">d = 100</b></label>
-            <input type="range" id="s0_d" min="10" max="400" step="10" value="100">
-          </div>
-          <div class="ctl">
-            <label>谱比例 tr(H)/(λ_d·d) <b id="s0_rlab">R = 8</b></label>
-            <input type="range" id="s0_r" min="1" max="20" step="0.5" value="8">
-          </div>
-          <div class="ctl">
-            <label style="cursor:pointer"><span><input type="checkbox" id="s0_line" checked> 显示理想线 E = K</span></label>
-          </div>
-          <div class="readout">
-            <div class="stat"><div class="k">饱和值 E_sat</div><div class="v" id="s0_sat">–</div></div>
-            <div class="stat"><div class="k">相变点 K*</div><div class="v" id="s0_kstar">–</div></div>
-          </div>
-          <div class="note">
-            曲线说明：小 K 时 <span class="eqn">\(E\approx K\)</span>（每多训一轮≈多一份新数据）；
-            K 增大后 <strong>饱和</strong>到一个随 N 增大的上限。把 N 调大 → 饱和点右移：
-            <em>更大的数据集，可以重复更多次</em>。
-          </div>
-        </div>
-        <div>
-          <div id="s0_plot" class="plot tall"></div>
-        </div>
-      </div>
-    </div>
+</div>
 
-    <div class="intuition">
-      <span class="lab">一句话直觉</span> ——
-      重复数据在“没见够”之前几乎和新数据一样值钱；一旦模型把这点数据“榨干”，再重复就只剩对数级（或幂级）的边际收益。
-      而“榨干”需要的轮数，会随数据量变大而变多。
-    </div>
-  </div>
-</section>
+<hr class="section-divider">
 
-<!-- ============ S1 问题设定 ============ -->
-<section id="s1">
-  <div class="container">
-    <div class="sec-kicker">② The Setting</div>
-    <h2 class="sec-title">线性回归 + 多轮随机洗牌 SGD</h2>
-    <p class="lede">作者选择线性回归——足够简单以暴露数据复用的本质机制，又足够可解析以精确刻画 SGD。</p>
+<article class="paper-article" id="2511.13421-larger-datasets-repeated"><div class="paper-meta-bar"><a href="https://arxiv.org/abs/2511.13421" target="_blank">arXiv:2511.13421</a> · <a href="#2511.13421-larger-datasets-repeated">README source</a></div><div class="paper-body"><h1>Larger Datasets Can Be Repeated More</h1>
+<p><strong>会议</strong>：ICLR 2026<br />
+<strong>作者</strong>：Haodong Yan, Kaiyue Wen, Binghui Li, Zixuan Luo, Xingyu Chen, Kaifeng Lyu（清华 / 北大）</p>
+<h2>问题动机</h2>
+<p>Chinchilla 等 scaling law 默认 <strong>one-pass</strong>：每个 token 最多看一遍。公开文本却可能在 2028 年左右耗尽（Villalobos），实务已经在同一份数据上跑多 epoch。Muennighoff et al. 给出经验公式</p>
+<div class="math block">
+N'(K,N)=\bigl(1+R^*(1-e^{-(K-1)/R^*})\bigr)N,\qquad R^*\approx 15.39,
+</div>
+<p>它暗示有效复用率 <span class="math inline">E=N'/N</span> <strong>只依赖 <span class="math inline">K</span>，与数据集大小 <span class="math inline">N</span> 无关</strong>。拟合和真实曲线仍有缝，而且「4 epoch 几乎无损、16 epoch 递减」到底会不会随 <span class="math inline">N</span> 移动，没有理论。</p>
+<h2>核心想法</h2>
+<p>把「<span class="math inline">K</span> 轮、<span class="math inline">N</span> 个样本」折算成 one-pass 要多少新样本 <span class="math inline">N'(K,N)</span>，看比值</p>
+<div class="math block">
+E(K,N)=\frac{N'(K,N)}{N}.
+</div>
+<p>小 <span class="math inline">K</span> 时 <span class="math inline">E\approx K</span>（多训一轮 ≈ 多一份新数据）；大 <span class="math inline">K</span> 后饱和。<strong>饱和点随 <span class="math inline">N</span> 右移</strong>——更大的数据集可以重复更多遍。这直接否定「<span class="math inline">E</span> 与 <span class="math inline">N</span> 无关」。</p>
+<h2>方法细节</h2>
+<p>设定是带标签噪声的线性回归：<span class="math inline">y=\langle w^*,x\rangle+\xi</span>，<span class="math inline">\mathbb{E}[\xi]=0</span>，<span class="math inline">\mathbb{E}[\xi^2]=\sigma^2</span>，<span class="math inline">\|x\|\le D</span>，<span class="math inline">H=\mathbb{E}[xx^\top]=\mathrm{diag}(\lambda_1\ge\cdots\ge\lambda_d)</span>。超额风险</p>
+<div class="math block">
+R(w)=\mathcal{L}(w)-\tfrac12\sigma^2=\tfrac12\|w-w^*\|_H^2.
+</div>
+<p>算法是 <span class="math inline">K</span>-epoch <strong>随机洗牌 SGD</strong>，每轮独立置换 <span class="math inline">\pi_k</span>，起点 <span class="math inline">w_0=0</span>：</p>
+<div class="math block">
+w_{t+1}=(I-\eta\,x_{j_t}x_{j_t}^\top)w_t+\eta\,\xi_{j_t}x_{j_t}.
+</div>
+<p>比较时两边都取最优常数学习率（并限制 <span class="math inline">\eta\le D^{-2}</span>）：</p>
+<div class="math block">
+\bar R^*(K,N)=\min_{\eta}\bar R(K,N;\eta),\qquad E(K,N)=\frac1N\min\{N':\bar R^*(1,N')\le\bar R^*(K,N)\}.
+</div>
+<p>分析还加了计算可行约束 <span class="math inline">K=O(N^{0.1})</span>，避免误差项爆掉。</p>
+<h3>强凸（<span class="math inline">\lambda_d\ge\mu&gt;0</span>）</h3>
+<p>最优超额风险先出现相变：</p>
+<div class="math block">
+\bar R^*(K,N)=\begin{cases}
+\dfrac{\sigma^2\mathrm{tr}(H)}{8\lambda_d}(1+o(1))\dfrac{\log(KN)}{KN}, &amp; K=o(\log N),\\[8pt]
+\dfrac{\sigma^2 d}{2}(1+o(1))\dfrac1N, &amp; K=\omega(\log N).
+\end{cases}
+</div>
+<p>再反解出复用率：</p>
+<div class="math block">
+E(K,N)=\begin{cases}
+K\,(1+o(1)), &amp; K=o(\log N),\\[6pt]
+\dfrac{\mathrm{tr}(H)}{4\lambda_d d}\,(1+o(1))\,\log N, &amp; K=\omega(\log N).
+\end{cases}
+</div>
+<p>相变在 <span class="math inline">K\sim\log N</span>。过了拐点，再重复只换来 <span class="math inline">\Theta(N\log N)</span> 的等效新数据。最优常数学习率量级是 <span class="math inline">\eta'\propto\log(KN)/(KN)</span>。</p>
+<h3>Zipf / 幂律谱（模拟长尾特征）</h3>
+<p>one-hot 特征 <span class="math inline">x=\mu_i e_i</span>，采样 <span class="math inline">p_i\propto i^{-(a-b)}</span>，谱 <span class="math inline">\Lambda_i=i^{-b}</span>。则</p>
+<div class="math block">
+E(K,N)=\begin{cases}
+K(1+o(1)), &amp; K=o\!\big(N^{b/(a-b)}\big),\\[6pt]
+\Theta\!\big(N^{b/(a-b)}\big), &amp; K=\omega\!\big(N^{b/(a-b)}\big).
+\end{cases}
+</div>
+<p>饱和不再是 <span class="math inline">\log N</span>，而是 <span class="math inline">N</span> 的幂。对数幂律谱则饱和在 <span class="math inline">\Theta(\log^b N)</span>。谱越长尾，同一份数据能重复的遍数越多。</p>
+<p>证明骨架：偏差–方差分解 <span class="math inline">\to</span> 随机矩阵连乘用 <span class="math inline">(I-\eta H)^n</span> 集中 <span class="math inline">\to</span> 最优 <span class="math inline">\eta</span> 代入后反解 <span class="math inline">N'</span>。</p>
+<h2>关键结果</h2>
+<p><img src="../papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_smoothed_shaded.webp" alt="LLM 实验：小 K 时 E 约等于 K，随后饱和；饱和点随 N 右移" /></p>
+<p><img src="../papers/2511.13421-larger-datasets-repeated/raw/figs/loss_over_step_improved_ws3_ratio0.75_alpha0.9_exp.webp" alt="one-pass vs multi-epoch 的验证 loss：更大 N 允许更多 epoch 才开始分叉" /></p>
+<p><img src="../papers/2511.13421-larger-datasets-repeated/raw/figs/E_KN_vs_N_ws3_ratio0.75_alpha0.9_exp.webp" alt="饱和点 K(lambda, N) 随 log N 近似线性（lambda = 0.75）" /></p>
+<ul>
+<li><strong>LLM</strong>：0.3B 模型（改自 Qwen2.5-0.5B），DCLM 子集，fresh token <span class="math inline">N\in\{0.2,0.5,0.8,1,2\}</span>B 各训 100 epoch，另有 200B 对照。常数学习率。小 <span class="math inline">K</span>（大约 <span class="math inline">\le 5</span>）时 <span class="math inline">E\approx K</span>，与 datablations「4 epoch 几乎无损」同方向；定义饱和点为 <span class="math inline">E=\lambda K</span>（主文 <span class="math inline">\lambda=0.75</span>），该点随 <span class="math inline">\log N</span> 近似线性右移。</li>
+<li><strong>强凸仿真</strong>（<span class="math inline">d=100</span>，<span class="math inline">\sigma=0.1</span>，<span class="math inline">\eta\propto\log(KN)/KN</span>）：固定 <span class="math inline">K</span> 时，<span class="math inline">E</span> 先随 <span class="math inline">\log N</span> 涨，再压平到 <span class="math inline">K</span>。</li>
+</ul>
+<p><img src="../papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_avg_vs_N_log_wide_bold.webp" alt="强凸：E(K,N) 对 log N——小 N 随 log N 涨，大 N 压到 K" /></p>
+<ul>
+<li><strong>Zipf 仿真</strong>（<span class="math inline">d=10^5</span>，<span class="math inline">a=4.5</span>，<span class="math inline">b=1</span>）：大 <span class="math inline">K</span> 饱和值拟合 <span class="math inline">c_1 N^{c_2}</span>，指数 <span class="math inline">c_2=0.279\approx b/(a-b)=2/7</span>。</li>
+</ul>
+<p><img src="../papers/2511.13421-larger-datasets-repeated/raw/figs/E_K_comparison_power.webp" alt="Zipf 幂律： vs  与  vs ，饱和高度随  升高" /></p>
+<h2>局限与延伸阅读</h2>
+<p><strong>局限</strong>（作者承认）：</p>
+<ol>
+<li>最优<strong>常数</strong>学习率；decay 时 one-pass 已接近 minimax，<span class="math inline">\bar R^*(1,N)=O(\kappa_H\sigma^2 d/N)</span>，于是 <span class="math inline">E</span> 至多 <span class="math inline">O(\kappa_H)</span>，有限 <span class="math inline">K</span> 如何饱和未解决。</li>
+<li>理论停在线性模型，没有 feature learning。</li>
+<li>整集重复；选择性复用 / 改写高质量数据未做。</li>
+<li>主定理靠强凸；非强凸只给了 Zipf 可解特例。</li>
+</ol>
+<p><strong>延伸阅读</strong>：</p>
+<ul>
+<li><strong>Muennighoff et al.</strong>（<code>finetuning-efficiency/papers/2305.16264-data-constrained-lms</code>）：被本文修正的 <span class="math inline">N</span> 无关经验式。</li>
+<li><strong>Hernandez et al. 2022</strong>（<code>2205.10487-repeated-data</code>）：部分重复会破坏 induction heads，机制不同于整集复用。</li>
+<li><strong>Hestness / Kaplan / Chinchilla</strong>：one-pass 数据缩放的背景。</li>
+</ul>
+</div></article>
 
-    <div class="card">
-      <h3>数据与模型</h3>
-      <div class="eqn">$$ (x,y)\sim\mathcal D,\quad \|x\|\le D,\quad H:=\mathbb E[xx^\top]=\mathrm{diag}(\lambda_1\ge\cdots\ge\lambda_d),\quad y=\langle w^*,x\rangle+\xi,\ \ \mathbb E[\xi]=0,\ \mathbb E[\xi^2]=\sigma^2 $$</div>
-      <p>用 MSE 损失 <span class="eqn">\(\ell(w;x,y)=\tfrac12(\langle w,x\rangle-y)^2\)</span>，超额风险
-        <span class="eqn">\(R(w)=L(w)-\tfrac12\sigma^2=\tfrac12\|w-w^*\|_H^2\)</span>。</p>
-
-      <h3>K-epoch SGD（随机洗牌、起点 w₀=0）</h3>
-      <p>对每一轮做一个独立随机置换 <span class="eqn">\(\pi_k\)</span>，更新规则：</p>
-      <div class="eqn">$$ w_{t+1}=w_t-\eta\,\nabla_w\ell(w_t;x_{j_t},y_{j_t})=\big(I-\eta\,x_{j_t}x_{j_t}^\top\big)w_t+\eta\,\xi_{j_t}x_{j_t},\qquad j_t=\pi_{k_t}(i_t) $$</div>
-      <p>同一个样本会在不同 epoch 反复出现 —— 这正是“数据复用”的来源，也是分析难点。
-        比较时两边都取<strong>最优学习率</strong>：
-        <span class="eqn">\(\bar R^*(K,N)=\min_{\eta\in(0,1/D^2]}\bar R(K,N;\eta)\)</span>。</p>
-    </div>
-
-    <div class="card">
-      <div class="grid2 rev">
-        <div>
-          <h3>动手：看一次真实的 1-D SGD 在 N 个点上反复跑</h3>
-          <p class="lede">下方画布展示 K 轮、每轮 N 个样本的洗牌顺序（高亮当前步），右图是真实的 1 维 SGD 轨迹
-            <span class="eqn">\(w_t\to w^*\)</span>。</p>
-          <canvas id="s1_canvas" height="190"></canvas>
-          <div id="s1_traj" class="plot short"></div>
-        </div>
-        <div class="controls">
-          <h4>动画控制</h4>
-          <div class="ctl"><label>样本数 <b id="s1_Nlab">N = 8</b></label>
-            <input type="range" id="s1_N" min="4" max="16" step="1" value="8"></div>
-          <div class="ctl"><label>轮数 <b id="s1_Klab">K = 4</b></label>
-            <input type="range" id="s1_K" min="1" max="6" step="1" value="4"></div>
-          <div class="ctl"><label>学习率 <b id="s1_etalab">η = 0.30</b></label>
-            <input type="range" id="s1_eta" min="0.02" max="0.9" step="0.02" value="0.3"></div>
-          <div class="ctl"><label>真值 / 噪声 <b id="s1_wlab">w*=2.0, σ=0.3</b></label>
-            <input type="range" id="s1_sig" min="0" max="0.8" step="0.05" value="0.3"></div>
-          <button id="s1_play">▶ 播放</button>
-          <button id="s1_step" class="ghost">单步</button>
-          <button id="s1_reset" class="ghost">重置</button>
-          <div class="note">每个方块 = 一个数据样本；同一份样本在每一轮被重新洗牌后再用一次。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ S2 数据假设 ============ -->
-<section id="s2">
-  <div class="container">
-    <div class="sec-kicker">③ Data Assumptions</div>
-    <h2 class="sec-title">三类数据假设，决定饱和点怎么涨</h2>
-    <p class="lede">论文在两大类数据结构上推导。下面的频谱可视化让你直接看到这些假设长什么样、条件数有多大。</p>
-
-    <div class="card">
-      <div class="grid2">
-        <div class="controls">
-          <h4>选择数据分布</h4>
-          <div class="ctl radio-row">
-            <label><input type="radio" name="s2mode" value="sc" checked> 强凸 (Sec 4)</label>
-            <label><input type="radio" name="s2mode" value="pl"> 幂律 Zipf (Sec 5.1)</label>
-            <label><input type="radio" name="s2mode" value="lpl"> 对数幂律 (Sec 5.2)</label>
-          </div>
-          <div class="ctl"><label>维度 <b id="s2_dlab">d = 200</b></label>
-            <input type="range" id="s2_d" min="20" max="2000" step="20" value="200"></div>
-          <div id="s2_scbox">
-            <div class="ctl"><label>最小特征值 μ（强凸下界） <b id="s2_mulab">μ = 0.05</b></label>
-              <input type="range" id="s2_mu" min="0.005" max="1" step="0.005" value="0.05"></div>
-            <div class="ctl"><label>谱衰减斜率 <b id="s2_decaylab">0.6</b></label>
-              <input type="range" id="s2_decay" min="0" max="1.5" step="0.05" value="0.6"></div>
-          </div>
-          <div id="s2_plbox" style="display:none">
-            <div class="ctl"><label>采样指数 a <b id="s2_alab">a = 4.5</b></label>
-              <input type="range" id="s2_a" min="1.5" max="6" step="0.1" value="4.5"></div>
-            <div class="ctl"><label>谱指数 b <b id="s2_blab">b = 1.0</b></label>
-              <input type="range" id="s2_b" min="0.2" max="3" step="0.1" value="1.0"></div>
-          </div>
-          <div class="readout">
-            <div class="stat"><div class="k">tr(H)</div><div class="v" id="s2_tr">–</div></div>
-            <div class="stat"><div class="k">λ₁</div><div class="v" id="s2_l1">–</div></div>
-            <div class="stat"><div class="k">λ_d</div><div class="v" id="s2_ld">–</div></div>
-            <div class="stat"><div class="k">条件数 κ</div><div class="v" id="s2_kappa">–</div></div>
-          </div>
-        </div>
-        <div>
-          <div id="s2_plot" class="plot tall"></div>
-        </div>
-      </div>
-      <div class="thm">
-        <span class="lab">强凸 (Assump 4.1–4.3)</span>：
-        <span class="eqn">\(\lambda_d\ge\mu>0\)</span>（谱有正下界）、<span class="eqn">\(w^*_i\ne0\)</span>、且
-        <span class="eqn">\(K=O(N^{0.1})\)</span>（轮数不至于太大以控制误差累积）。
-      </div>
-      <div class="thm">
-        <span class="lab">Zipf 幂律 (Assump 5.1–5.2)</span>：one-hot 数据
-        <span class="eqn">\(x=\mu_i e_i\)</span>，采样概率 <span class="eqn">\(p_i=c\,i^{-(a-b)}\)</span>，谱
-        <span class="eqn">\(\Lambda_i=i^{-b}\)</span>，无标签噪声，<span class="eqn">\(\mathbb E[w^*w^{*\top}]=I\)</span>。
-        模拟自然语言等长尾特征分布。
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ S3 主要命题 ============ -->
-<section id="s3">
-  <div class="container">
-    <div class="sec-kicker">④ Main Propositions</div>
-    <h2 class="sec-title">两种数据 → 同一种相变，不同的饱和速度</h2>
-    <p class="lede">下面每个命题都配一段直觉和一张由解析公式实时驱动的图（复刻论文 Fig 2）。拖动滑块即可看相变如何随 N 移动。</p>
-
-    <!-- 强凸 -->
-    <div class="card">
-      <h3>强凸情形：Theorem 4.1 / 4.2</h3>
-      <div class="thm">
-        <span class="lab">Thm 4.1（多轮数据缩放律）</span>
-        <div class="eqn">$$ \bar R^*(K,N)=\begin{cases}\dfrac{\sigma^2\,\mathrm{tr}(H)}{8\lambda_d}\,(1+o(1))\,\dfrac{\log(KN)}{KN}, & K=o(\log N)\\[2mm]\dfrac{\sigma^2 d}{2}\,(1+o(1))\,\dfrac1N, & K=\omega(\log N)\end{cases} $$</div>
-      </div>
-      <div class="thm">
-        <span class="lab">Thm 4.2（有效复用率）</span>
-        <div class="eqn">$$ E(K,N)=\begin{cases}(1+o(1))\,K, & K=o(\log N)\\[1mm]\dfrac{\mathrm{tr}(H)}{4\lambda_d d}\,(1+o(1))\,\log N, & K=\omega(\log N)\end{cases} $$</div>
-      </div>
-      <div class="intuition"><span class="lab">直觉</span>
-        相变发生在 <span class="eqn">\(K\sim\log N\)</span>。左侧“有效复用区”里多训一轮 ≈ 多一份新数据；右侧“有限复用区”里
-        饱和值 <span class="eqn">\(\Theta(\log N)\)</span>。由此：收集到 N 个点，多轮训练可媲美一遍训
-        <span class="eqn">\(\Theta(N\log N)\)</span> 个点 —— 超线性收益。
-      </div>
-      <div class="grid2 rev">
-        <div><div id="s3_sc_plot" class="plot tall"></div></div>
-        <div class="controls">
-          <h4>Fig 2a 复刻（解析）</h4>
-          <div class="ctl"><label>维度 d <b id="s3_dlab">d = 100</b></label>
-            <input type="range" id="s3_d" min="10" max="400" step="10" value="100"></div>
-          <div class="ctl"><label>噪声 σ <b id="s3_slab">σ = 0.10</b></label>
-            <input type="range" id="s3_s" min="0.02" max="1" step="0.02" value="0.1"></div>
-          <div class="ctl"><label>tr(H)/λ_d 比例 <b id="s3_rlab">×1.0</b></label>
-            <input type="range" id="s3_r" min="0.5" max="4" step="0.1" value="1"></div>
-          <div class="note">每条曲线对应固定的 K，横轴是 log N。N 大时 E→K（压平），N 小时 E 随 log N 增长。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 幂律 -->
-    <div class="card">
-      <h3>Zipf 幂律情形：Theorem 5.1 / 5.2 / 5.3</h3>
-      <div class="thm">
-        <span class="lab">Thm 5.2（幂律谱）</span>
-        <div class="eqn">$$ E(K,N)=\begin{cases}K(1+o(1)), & K=o\!\big(N^{\,b/(a-b)}\big)\\[1mm]\Theta\!\big(N^{\,b/(a-b)}\big), & K=\omega\!\big(N^{\,b/(a-b)}\big)\end{cases} $$</div>
-      </div>
-      <div class="intuition"><span class="lab">直觉</span>
-        和强凸同样的“先线性、后饱和”，但饱和点不再是 <span class="eqn">\(\log N\)</span> 而是 <strong>N 的幂</strong>
-        <span class="eqn">\(N^{b/(a-b)}\)</span>。指数由谱衰减 b 与采样衰减 a 共同决定。对数幂律谱（Thm 5.3）则饱和在
-        <span class="eqn">\(\Theta(\log^b N)\)</span>。
-      </div>
-      <div class="grid2">
-        <div class="controls">
-          <h4>Fig 2b 复刻（解析）</h4>
-          <div class="ctl"><label>采样指数 a <b id="s3_alab">a = 4.5</b></label>
-            <input type="range" id="s3_a" min="1.6" max="6" step="0.1" value="4.5"></div>
-          <div class="ctl"><label>谱指数 b <b id="s3_blab">b = 1.0</b></label>
-            <input type="range" id="s3_b" min="0.2" max="3" step="0.1" value="1.0"></div>
-          <div class="readout">
-            <div class="stat"><div class="k">理论饱和指数 b/(a−b)</div><div class="v" id="s3_exp">–</div></div>
-          </div>
-          <div class="note">左图 E vs K（双对数）：小 K 沿 E=K，之后按 N 饱和。论文取 a=4.5,b=1，拟合指数 0.279≈2/7。</div>
-        </div>
-        <div><div id="s3_pl_plot" class="plot tall"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ S4 证明直觉与技巧 ============ -->
-<section id="s4">
-  <div class="container">
-    <div class="sec-kicker">⑤ Proof Intuition & Techniques</div>
-    <h2 class="sec-title">四步证明，三个可玩的关键技巧</h2>
-    <p class="lede">分析难点：随机洗牌 + 多遍 → 权重更新里出现大量<strong>相关、不可交换</strong>的矩阵连乘。下面把核心技巧拆开演示。</p>
-
-    <!-- Step 1 bias-variance -->
-    <div class="card">
-      <h3>技巧一 · 偏差–方差分解（Step 1）</h3>
-      <p>令 <span class="eqn">\(\theta_t=w_t-w^*\)</span>，拆成只含初值的偏差过程与只含噪声的方差过程：</p>
-      <div class="eqn">$$ R(w_t)=\tfrac12\big\|\theta^{\mathrm{bias}}_t\big\|_H^2+\tfrac12\big\|\theta^{\mathrm{var}}_t\big\|_H^2 $$</div>
-      <div class="grid2 rev">
-        <div><div id="s4_bv_plot" class="plot"></div></div>
-        <div class="controls">
-          <h4>偏差 vs 方差随 η</h4>
-          <div class="ctl"><label>学习率 η <b id="s4_etalab">η = 0.05</b></label>
-            <input type="range" id="s4_eta" min="0.005" max="0.5" step="0.005" value="0.05"></div>
-          <div class="ctl"><label>维度 d <b id="s4_dlab">d = 20</b></label>
-            <input type="range" id="s4_d" min="2" max="60" step="1" value="20"></div>
-          <div class="ctl"><label>步数 T <b id="s4_Tlab">T = 2000</b></label>
-            <input type="range" id="s4_T" min="200" max="6000" step="200" value="2000"></div>
-          <div class="intuition"><span class="lab">看什么</span> η 增大 → 偏差衰减更快（曲线更陡），但方差地板抬高。最优 η 是二者的折中。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Step 2 matrix concentration -->
-    <div class="card">
-      <h3>技巧二 · 矩阵连乘的集中（Step 2, Lemma 4.1）</h3>
-      <p>核心近似：随机连乘 <span class="eqn">\(\prod_{j}(I-\eta x_jx_j^\top)\)</span> 在期望意义下可用确定性的
-        <span class="eqn">\((I-\eta H)^{n}\)</span> 代替，误差被
-        <span class="eqn">\(\mathbb E\|A-\mathbb EA\|^\ell\le(\sqrt{\delta_A}\,\eta^2 n\,\ell)^{\ell}\)</span> 控制。</p>
-      <div class="grid2">
-        <div class="controls">
-          <h4>蒙特卡洛验证集中</h4>
-          <div class="ctl"><label>维度 d <b id="s4_mc_dlab">d = 8</b></label>
-            <input type="range" id="s4_mc_d" min="2" max="30" step="1" value="8"></div>
-          <div class="ctl"><label>学习率 η <b id="s4_mc_etalab">η = 0.05</b></label>
-            <input type="range" id="s4_mc_eta" min="0.005" max="0.2" step="0.005" value="0.05"></div>
-          <div class="ctl"><label>试验次数 <b id="s4_mc_trlab">40</b></label>
-            <input type="range" id="s4_mc_tr" min="5" max="120" step="5" value="40"></div>
-          <button id="s4_mc_run">运行蒙特卡洛</button>
-          <div class="progress" id="s4_mc_prog"><div></div></div>
-          <div class="intuition"><span class="lab">看什么</span> 证明真正用到的二阶近似
-            <span class="eqn">\(\mathbb E\|A\theta_0\|^2\approx\|(I-\eta H)^{n}\theta_0\|^2\)</span>：
-            比值<strong>≈1</strong>（差距是高阶项）。把 η 或 n 调大，比值才逐渐偏离 1——
-            这正是论文要求 η 落在特定范围、并限制 <span class="eqn">\(K=O(N^{0.1})\)</span> 的原因。</div>
-        </div>
-        <div><div id="s4_mc_plot" class="plot"></div></div>
-      </div>
-    </div>
-
-    <!-- Step 3/4 optimal LR -->
-    <div class="card">
-      <h3>技巧三 · 最优学习率（Step 3–4, Lemma 4.4）</h3>
-      <p>把风险简化为 <span class="eqn">\(M(K,N;\eta)=\tfrac12\tilde\theta_d^2\lambda_d e^{-2\lambda_d\eta KN}+\tfrac{\eta\,\mathrm{tr}(H)\sigma^2}{4}\)</span>，
-        对 η 求导得到闭式最优解
-        <span class="eqn">\(\eta'=\dfrac{\log(\rho KN)}{2\lambda_d KN}\)</span>，其中
-        <span class="eqn">\(\rho=\dfrac{4\tilde\theta_d^2\lambda_d}{\mathrm{tr}(H)\sigma^2}\)</span>。</p>
-      <div class="grid2 rev">
-        <div><div id="s4_lr_plot" class="plot"></div></div>
-        <div class="controls">
-          <h4>M(η) 曲线与 η′</h4>
-          <div class="ctl"><label>轮数 K <b id="s4_lr_Klab">K = 4</b></label>
-            <input type="range" id="s4_lr_K" min="1" max="60" step="1" value="4"></div>
-          <div class="ctl"><label>样本数 N <b id="s4_lr_Nlab">N = 1.0e3</b></label>
-            <input type="range" id="s4_lr_N" min="2" max="6" step="0.05" value="3"></div>
-          <button id="s4_lr_run" class="ghost">叠加真实 SGD 网格搜索</button>
-          <div class="progress" id="s4_lr_prog"><div></div></div>
-          <div class="intuition"><span class="lab">看什么</span> 解析极小点 η′（竖线）应当落在真实 SGD 最终风险的谷底附近，验证 Lemma 4.4。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ S5 动手实验 ============ -->
-<section id="s5">
-  <div class="container">
-    <div class="sec-kicker">⑥ Run It Yourself</div>
-    <h2 class="sec-title">在你自己生成的数据上做实验</h2>
-    <p class="lede">下面的实验在浏览器里<strong>真实运行多轮 SGD</strong>（Web Worker），并叠加论文的解析理论曲线。Zipf 为 one-hot 更新，单步 O(1)，可以开很大维度。</p>
-
-    <!-- Exp A -->
-    <div class="card">
-      <h3>实验 A · 强凸合成数据（复刻 Sec 6.1 / Fig 2a）</h3>
-      <p><span class="eqn">\(x_i\sim\mathcal N(0,I_d),\ w^*\sim\mathcal N(0,I_d),\ y_i=\langle w^*,x_i\rangle+\xi_i,\ \xi_i\sim\mathcal N(0,\sigma^2)\)</span>，学习率用论文的解析最优 <span class="eqn">\(\eta'\)</span>（可乘系数微调）。</p>
-      <div class="grid2">
-        <div class="controls">
-          <h4>参数</h4>
-          <div class="ctl"><label>维度 d <b id="a_dlab">d = 50</b></label>
-            <input type="range" id="a_d" min="10" max="150" step="10" value="50"></div>
-          <div class="ctl"><label>噪声 σ <b id="a_slab">σ = 0.10</b></label>
-            <input type="range" id="a_s" min="0.02" max="0.6" step="0.02" value="0.1"></div>
-          <div class="ctl"><label>η 系数 <b id="a_etalab">×1.0</b></label>
-            <input type="range" id="a_eta" min="0.2" max="2.5" step="0.1" value="1"></div>
-          <h4 style="margin-top:14px">单次运行</h4>
-          <div class="ctl"><label>样本数 N <b id="a_Nlab">N = 1.0e3</b></label>
-            <input type="range" id="a_N" min="2" max="4.3" step="0.05" value="3"></div>
-          <div class="ctl"><label>轮数 K <b id="a_Klab">K = 5</b></label>
-            <input type="range" id="a_K" min="1" max="40" step="1" value="5"></div>
-          <button id="a_run">▶ 生成数据并跑 SGD</button>
-          <button id="a_sweep" class="ghost">扫描 E(K,N) vs log N</button>
-          <div class="progress" id="a_prog"><div></div></div>
-          <div class="readout">
-            <div class="stat"><div class="k">实测 R̄(K,N)</div><div class="v" id="a_remp">–</div></div>
-            <div class="stat"><div class="k">理论 R̄*(K,N)</div><div class="v" id="a_rth">–</div></div>
-            <div class="stat"><div class="k">实测 E(K,N)</div><div class="v" id="a_e">–</div></div>
-          </div>
-        </div>
-        <div>
-          <div id="a_plot1" class="plot"></div>
-          <div id="a_plot2" class="plot"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Exp B -->
-    <div class="card">
-      <h3>实验 B · Zipf 幂律合成数据（复刻 Sec 6.2 / Fig 2b）</h3>
-      <p>one-hot <span class="eqn">\(x=\mu_i e_i,\ p_i\propto i^{-(a-b)},\ \Lambda_i=i^{-b}\)</span>，无噪声。
-        坐标解耦 → 多轮 SGD 的<strong>期望</strong>超额风险有精确闭式
-        <span class="eqn">\(R=\tfrac12\sum_i\lambda_i\big(1-p_i+p_i(1-\eta\mu_i^2)^{2k}\big)^N\)</span>。
-        左图：你生成的数据上<strong>真实单次 SGD</strong> 的逐轮风险，叠加该闭式期望；右图：理论 E(K,N) 饱和曲线。</p>
-      <div class="note warn">说明：论文的饱和发生在 N≈10⁷、d≈10⁵ 量级；浏览器规模下最优 η 受重尾节流，实测 E 仍≈K（尚未饱和）。
-        因此右图饱和曲线用 Theorem 5.2 的解析式，左图用真实 SGD 验证“仿真=精确期望”。</div>
-      <div class="grid2 rev">
-        <div>
-          <div id="b_plot1" class="plot"></div>
-          <div id="b_plot2" class="plot"></div>
-        </div>
-        <div class="controls">
-          <h4>分布参数</h4>
-          <div class="ctl"><label>维度 d <b id="b_dlab">d = 4000</b></label>
-            <input type="range" id="b_d" min="200" max="8000" step="200" value="4000"></div>
-          <div class="ctl"><label>采样指数 a <b id="b_alab">a = 4.5</b></label>
-            <input type="range" id="b_a" min="2" max="6" step="0.1" value="4.5"></div>
-          <div class="ctl"><label>谱指数 b <b id="b_blab">b = 1.0</b></label>
-            <input type="range" id="b_b" min="0.3" max="2.5" step="0.1" value="1.0"></div>
-          <h4 style="margin-top:14px">单次 SGD</h4>
-          <div class="ctl"><label>样本数 N <b id="b_Nlab">N = 1.0e4</b></label>
-            <input type="range" id="b_N" min="3" max="5" step="0.05" value="4"></div>
-          <div class="ctl"><label>轮数 K <b id="b_Klab">K = 30</b></label>
-            <input type="range" id="b_K" min="2" max="100" step="1" value="30"></div>
-          <div class="ctl"><label>η 系数 <b id="b_etalab">×0.5</b></label>
-            <input type="range" id="b_eta" min="0.1" max="1.2" step="0.05" value="0.5"></div>
-          <button id="b_run">▶ 生成数据并跑 SGD</button>
-          <div class="progress" id="b_prog"><div></div></div>
-          <div class="readout">
-            <div class="stat"><div class="k">理论饱和指数 b/(a−b)</div><div class="v" id="b_exp_th">–</div></div>
-            <div class="stat"><div class="k">用到的 η</div><div class="v" id="b_etaused">–</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Exp C -->
-    <div class="card">
-      <h3>实验 C · LLM 预训练（Sec 6.3，论文数据探索）</h3>
-      <p>这一节无法在浏览器里训 LLM。下面用论文报告的饱和点与拟合，复刻 Fig 1c，并让你调“严格度” λ，
-        在<strong>理论 E(K,N) 曲线</strong>上看饱和点 <span class="eqn">\(E(K,N)=\lambda K\)</span> 是如何被抽取的（示意）。</p>
-      <div class="grid2">
-        <div class="controls">
-          <h4>探索</h4>
-          <div class="ctl radio-row">
-            <label><input type="radio" name="cmode" value="const" checked> 常数 LR</label>
-            <label><input type="radio" name="cmode" value="wsd"> WSD 衰减</label>
-          </div>
-          <div class="ctl"><label>严格度 λ（示意） <b id="c_lamlab">λ = 0.75</b></label>
-            <input type="range" id="c_lam" min="0.5" max="0.95" step="0.01" value="0.75"></div>
-          <div class="readout">
-            <div class="stat"><div class="k">拟合斜率</div><div class="v" id="c_slope">0.80</div></div>
-            <div class="stat"><div class="k">相关系数 r</div><div class="v" id="c_r">0.97</div></div>
-          </div>
-          <div class="note">
-            常数 LR：<span class="eqn">\(K(\lambda,N)\approx 0.80\log N+5.21,\ r=0.97\)</span>；
-            WSD：<span class="eqn">\(2.35\log N+5.25,\ r=0.96\)</span>。N 以 B(十亿 token) 计。
-          </div>
-          <div class="note warn">λ 滑块作用于理论 E(K,N) 曲线，用于演示“饱和点如何随 λ 移动”，并非重训 LLM。</div>
-        </div>
-        <div>
-          <div id="c_plot1" class="plot"></div>
-          <div id="c_plot2" class="plot"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
 <footer>
-  <div class="container">
-    <span class="pill">交互式论文解读</span>
-    <span class="pill">真实浏览器内 SGD</span>
-    <span class="pill">理论曲线由解析公式驱动</span>
-    <p style="margin-top:10px">基于 Yan et al., <em>Larger Datasets Can Be Repeated More</em>, ICLR 2026 (arXiv:2511.13421)。
-      公式/常数取自论文正文与附录 C/G/I。图表使用 KaTeX 与 Plotly（CDN，需联网，但无需本地服务器）。</p>
-    <p style="margin-top:10px">本站内容为个人学习笔记与论文解读。论文、图表、实验结果和引用材料的版权归原作者及原出版方所有；本站仅为学习、研究和非商业分享用途。若需要引用原始成果，请以论文原文和官方发布版本为准。</p>
-  </div>
+  <p>Generated by build_survey.py · Source: papers/*/README.md · Interactive demo: <a href="./assets/interactive.html">assets/interactive.html</a></p>
 </footer>
 
-<script id="worker-src" type="javascript/worker">
-/* ===== Web Worker: real multi-epoch SGD ===== */
-function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-function makeGauss(rng){var sp=false,sv=0;return function(){if(sp){sp=false;return sv;}var u=0,v=0;while(u===0)u=rng();while(v===0)v=rng();var r=Math.sqrt(-2*Math.log(u));sv=r*Math.sin(2*Math.PI*v);sp=true;return r*Math.cos(2*Math.PI*v);};}
-
-// ---- Gaussian (H = I) ----
-function gaussFinalRisk(N,K,d,sigma,eta,seed){
-  var rng=mulberry32(seed),gn=makeGauss(rng);
-  var X=new Float64Array(N*d),y=new Float64Array(N),ws=new Float64Array(d),w=new Float64Array(d);
-  var i,n,base,dot;
-  for(i=0;i<d;i++)ws[i]=gn();
-  for(n=0;n<N;n++){base=n*d;dot=0;for(i=0;i<d;i++){var v=gn();X[base+i]=v;dot+=ws[i]*v;}y[n]=dot+sigma*gn();}
-  var idx=new Int32Array(N);for(n=0;n<N;n++)idx[n]=n;
-  var k,m,j,r,coef;
-  for(k=0;k<K;k++){
-    for(m=N-1;m>0;m--){var q=Math.floor(rng()*(m+1));var tmp=idx[m];idx[m]=idx[q];idx[q]=tmp;}
-    for(m=0;m<N;m++){j=idx[m];base=j*d;dot=0;for(i=0;i<d;i++)dot+=w[i]*X[base+i];r=dot-y[j];coef=eta*r;for(i=0;i<d;i++)w[i]-=coef*X[base+i];}
-  }
-  var risk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];risk+=e*e;}return 0.5*risk;
-}
-function gaussTrajectory(N,K,d,sigma,eta,seed){
-  var rng=mulberry32(seed),gn=makeGauss(rng);
-  var X=new Float64Array(N*d),y=new Float64Array(N),ws=new Float64Array(d),w=new Float64Array(d);
-  var i,n,base,dot;
-  for(i=0;i<d;i++)ws[i]=gn();
-  for(n=0;n<N;n++){base=n*d;dot=0;for(i=0;i<d;i++){var v=gn();X[base+i]=v;dot+=ws[i]*v;}y[n]=dot+sigma*gn();}
-  var idx=new Int32Array(N);for(n=0;n<N;n++)idx[n]=n;
-  var total=K*N,nCk=120,steps=[],risks=[],nextLog=Math.log(2),dLog=(Math.log(total))/nCk;
-  var k,m,j,r,coef,t=0;
-  for(k=0;k<K;k++){
-    for(m=N-1;m>0;m--){var q=Math.floor(rng()*(m+1));var tmp=idx[m];idx[m]=idx[q];idx[q]=tmp;}
-    for(m=0;m<N;m++){j=idx[m];base=j*d;dot=0;for(i=0;i<d;i++)dot+=w[i]*X[base+i];r=dot-y[j];coef=eta*r;for(i=0;i<d;i++)w[i]-=coef*X[base+i];t++;
-      if(Math.log(t+1)>=nextLog){var rk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];rk+=e*e;}steps.push(t);risks.push(0.5*rk);nextLog+=dLog;}}
-  }
-  var risk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];risk+=e*e;}return {steps:steps,risks:risks,finalRisk:0.5*risk};
-}
-function etaGauss(K,N,d,sigma,mul){var rho=4.0/(sigma*sigma);var lamd=1.0;var L=Math.log(Math.max(rho*K*N,Math.E));return mul*L/(2*lamd*K*N);}
-// streaming one-pass (K=1): no stored dataset -> O(d) memory
-function gaussOnePassRisk(N,d,sigma,eta,seed){
-  var rng=mulberry32(seed),gn=makeGauss(rng);
-  var ws=new Float64Array(d),w=new Float64Array(d),x=new Float64Array(d);var i,n,dot,yd,r,coef;
-  for(i=0;i<d;i++)ws[i]=gn();
-  for(n=0;n<N;n++){dot=0;yd=0;for(i=0;i<d;i++){var v=gn();x[i]=v;dot+=w[i]*v;yd+=ws[i]*v;}r=dot-(yd+sigma*gn());coef=eta*r;for(i=0;i<d;i++)w[i]-=coef*x[i];}
-  var risk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];risk+=e*e;}return 0.5*risk;
-}
-
-// invert one-pass baseline (array of {N,R} sorted by N asc, R desc) for target R -> N'
-function invertBaseline(baseN,baseR,target){
-  var m=baseN.length;
-  if(target>=baseR[0])return baseN[0];
-  if(target<=baseR[m-1])return baseN[m-1];
-  for(var i=0;i<m-1;i++){if(baseR[i]>=target&&target>=baseR[i+1]){
-    var lx=Math.log(baseN[i]),rx=Math.log(baseN[i+1]),ly=Math.log(baseR[i]),ry=Math.log(baseR[i+1]);
-    var f=(Math.log(target)-ly)/(ry-ly);return Math.exp(lx+f*(rx-lx));
-  }}
-  return baseN[m-1];
-}
-
-// ---- Zipf (one-hot) ----
-function zipfSetup(d,a,b){
-  var p=new Float64Array(d),lam=new Float64Array(d),mu2=new Float64Array(d),cdf=new Float64Array(d);
-  var i,s=0;for(i=0;i<d;i++){p[i]=Math.pow(i+1,-(a-b));s+=p[i];}
-  var acc=0;for(i=0;i<d;i++){p[i]/=s;acc+=p[i];cdf[i]=acc;lam[i]=Math.pow(i+1,-b);mu2[i]=lam[i]/p[i];}
-  return {p:p,lam:lam,mu2:mu2,cdf:cdf,sumP:s,a:a,b:b,d:d};
-}
-// stability-aware LR: throttle by the largest mu^2 among coordinates likely sampled in KN draws
-function zipfEta(K,N,S,mul){
-  var ab=S.a-S.b;
-  var istar=Math.pow(Math.max(K*N/S.sumP,1),1/ab); // p_{i*} ~ 1/(KN)
-  var ic=Math.max(1,Math.min(S.d,Math.round(istar)));
-  var mu2max=S.mu2[ic-1]; // mu2 increasing in i (for a>2b); covers sampled head
-  if(mu2max<S.mu2[0])mu2max=S.mu2[0];
-  return mul/mu2max;
-}
-function sampleCdf(cdf,r){var lo=0,hi=cdf.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(r<=cdf[mid])hi=mid;else lo=mid+1;}return lo;}
-function zipfOnePassRisk(N,d,S,eta,seed){
-  var rng=mulberry32(seed),gn=makeGauss(rng);var ws=new Float64Array(d),w=new Float64Array(d);var i,n,j,coef;
-  for(i=0;i<d;i++)ws[i]=gn();
-  for(n=0;n<N;n++){j=sampleCdf(S.cdf,rng());coef=eta*S.mu2[j]*(w[j]-ws[j]);w[j]-=coef;}
-  var risk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];risk+=S.lam[i]*e*e;}return isFinite(risk)?0.5*risk:1e9;
-}
-function zipfFinalRisk(N,K,d,S,eta,seed){
-  var rng=mulberry32(seed),gn=makeGauss(rng);
-  var ws=new Float64Array(d),w=new Float64Array(d);var i;
-  for(i=0;i<d;i++)ws[i]=gn();
-  var data=new Int32Array(N);for(i=0;i<N;i++)data[i]=sampleCdf(S.cdf,rng());
-  var idx=new Int32Array(N);for(i=0;i<N;i++)idx[i]=i;
-  var k,m,j,coef;
-  for(k=0;k<K;k++){
-    for(m=N-1;m>0;m--){var q=Math.floor(rng()*(m+1));var tmp=idx[m];idx[m]=idx[q];idx[q]=tmp;}
-    for(m=0;m<N;m++){j=data[idx[m]];coef=eta*S.mu2[j]*(w[j]-ws[j]);w[j]-=coef;}
-  }
-  var risk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];risk+=S.lam[i]*e*e;}return isFinite(risk)?0.5*risk:1e9;
-}
-
-onmessage=function(ev){
-  var msg=ev.data,type=msg.type,p=msg.p;
-  if(type==='gaussRun'){
-    var eta=etaGauss(p.K,p.N,p.d,p.sigma,p.etaMul);
-    var tr=gaussTrajectory(p.N,p.K,p.d,p.sigma,eta,p.seed||7);
-    postMessage({type:'gaussRun',eta:eta,steps:tr.steps,risks:tr.risks,finalRisk:tr.finalRisk});
-  } else if(type==='gaussSweep'){
-    var Ns=p.Ns,Ks=p.Ks,d=p.d,sigma=p.sigma,mul=p.etaMul;
-    var maxN=Ns[Ns.length-1],maxK=Ks[Ks.length-1];
-    var baseN=[],baseR=[];var b,nb,topN=Math.ceil(p.topN||maxN*maxK*4);
-    var grid=24;for(b=0;b<grid;b++){nb=Math.round(Ns[0]*Math.pow(topN/Ns[0],b/(grid-1)));baseN.push(nb);}
-    var done=0,total=baseN.length+Ns.length*Ks.length;
-    for(b=0;b<baseN.length;b++){
-      var er=etaGauss(1,baseN[b],d,sigma,mul);
-      var rr=0.5*(gaussOnePassRisk(baseN[b],d,sigma,er,11)+gaussOnePassRisk(baseN[b],d,sigma,er,29));
-      baseR.push(rr);done++;postMessage({type:'progress',frac:done/total});
-    }
-    var curves=[];
-    for(var ki=0;ki<Ks.length;ki++){var K=Ks[ki];var pts=[];
-      for(var ni=0;ni<Ns.length;ni++){var N=Ns[ni];var e2=etaGauss(K,N,d,sigma,mul);
-        var R=0.5*(gaussFinalRisk(N,K,d,sigma,e2,5)+gaussFinalRisk(N,K,d,sigma,e2,17));
-        var Np=invertBaseline(baseN,baseR,R);pts.push({N:N,E:Np/N});done++;postMessage({type:'progress',frac:done/total});}
-      curves.push({K:K,pts:pts});}
-    postMessage({type:'gaussSweep',curves:curves});
-  } else if(type==='gaussLRgrid'){
-    var etas=p.etas,res=[];for(var i=0;i<etas.length;i++){res.push(gaussFinalRisk(p.N,p.K,p.d,p.sigma,etas[i],3));postMessage({type:'progress',frac:(i+1)/etas.length});}
-    postMessage({type:'gaussLRgrid',etas:etas,risks:res});
-  } else if(type==='zipfRun'){
-    var S=zipfSetup(p.d,p.a,p.b);var eta=zipfEta(p.K,p.N,S,p.etaMul);
-    var rng=mulberry32(p.seed||7),gn=makeGauss(rng);var d=p.d,N=p.N,K=p.K;
-    var ws=new Float64Array(d),w=new Float64Array(d),i;
-    for(i=0;i<d;i++)ws[i]=gn();
-    var data=new Int32Array(N);for(i=0;i<N;i++)data[i]=sampleCdf(S.cdf,rng());
-    var idx=new Int32Array(N);for(i=0;i<N;i++)idx[i]=i;
-    var risks=[],epochs=[],k,m,j,coef;
-    for(k=0;k<K;k++){
-      for(m=N-1;m>0;m--){var q=Math.floor(rng()*(m+1));var tmp=idx[m];idx[m]=idx[q];idx[q]=tmp;}
-      for(m=0;m<N;m++){j=data[idx[m]];coef=eta*S.mu2[j]*(w[j]-ws[j]);w[j]-=coef;}
-      var risk=0;for(i=0;i<d;i++){var e=w[i]-ws[i];risk+=S.lam[i]*e*e;}
-      risks.push(isFinite(risk)?0.5*risk:1e9);epochs.push(k+1);
-    }
-    postMessage({type:'zipfRun',eta:eta,epochs:epochs,risks:risks,
-      pArr:Array.from(S.p),lamArr:Array.from(S.lam),mu2Arr:Array.from(S.mu2)});
-  }
-};
-</script>
-
 <script>
-/* ================= main thread ================= */
-const PLOT_FONT={family:"-apple-system,Segoe UI,PingFang SC,sans-serif",color:"#9aa0bd"};
-function baseLayout(over){
-  const L={paper_bgcolor:"rgba(0,0,0,0)",plot_bgcolor:"rgba(0,0,0,0)",font:PLOT_FONT,
-    margin:{l:56,r:18,t:34,b:46},showlegend:true,
-    legend:{font:{size:10,color:"#9aa0bd"},bgcolor:"rgba(0,0,0,0)",orientation:"h",y:1.14,x:0},
-    xaxis:{gridcolor:"#23283b",zerolinecolor:"#2a2f44",linecolor:"#2a2f44"},
-    yaxis:{gridcolor:"#23283b",zerolinecolor:"#2a2f44",linecolor:"#2a2f44"}};
-  return Object.assign(L,over||{});
-}
-const PCFG={displayModeBar:false,responsive:true};
-function plot(id,traces,layout){if(window.Plotly)Plotly.react(id,traces,baseLayout(layout),PCFG);}
-const C={accent:"#6c8cff",accent2:"#4ecdc4",warm:"#ff8a5c",pink:"#ff6b6b",good:"#5ad19b",gray:"#9aa0bd"};
-const PAL=["#6c8cff","#4ecdc4","#ff8a5c","#ff6b6b","#c792ea","#5ad19b","#ffd166"];
-
-/* ---------- analytic theory ---------- */
-function RstarSC(K,N,p){ // p:{trH,lamd,d,sigma}
-  const rho=4/(p.sigma*p.sigma);
-  const a=p.sigma*p.sigma*p.trH/(8*p.lamd)*Math.log(Math.max(rho*K*N,Math.E))/(K*N);
-  const b=p.sigma*p.sigma*p.d/(2*N);
-  return a+b;
-}
-function E_SC(K,N,p){
-  const target=RstarSC(K,N,p);
-  let lo=N,hi=N*1e9;
-  if(RstarSC(1,hi,p)>target)return hi/N;
-  for(let it=0;it<80;it++){const mid=Math.sqrt(lo*hi);if(RstarSC(1,mid,p)>target)lo=mid;else hi=mid;}
-  return Math.sqrt(lo*hi)/N;
-}
-function RstarZipf(K,N,a,b){
-  return Math.pow(K*N,-(a-1)/a)+Math.pow(N,-(a-1)/(a-b));
-}
-function E_Zipf(K,N,a,b){
-  const target=RstarZipf(K,N,a,b);
-  let lo=N,hi=N*1e12;
-  if(RstarZipf(1,hi,a,b)>target)return hi/N;
-  for(let it=0;it<90;it++){const mid=Math.sqrt(lo*hi);if(RstarZipf(1,mid,a,b)>target)lo=mid;else hi=mid;}
-  return Math.sqrt(lo*hi)/N;
-}
-const fmt=(x)=>{if(!isFinite(x))return"–";const ax=Math.abs(x);if(ax!==0&&(ax<1e-3||ax>=1e4))return x.toExponential(2);return x.toFixed(ax<1?3:2);};
-const logspace=(a,b,n)=>{const r=[];for(let i=0;i<n;i++)r.push(Math.pow(10,a+(b-a)*i/(n-1)));return r;};
-
-/* ---------- worker ---------- */
-const workerSrc=document.getElementById('worker-src').textContent;
-const workerURL=URL.createObjectURL(new Blob([workerSrc],{type:'application/javascript'}));
-function newWorker(){return new Worker(workerURL);}
-
-/* =================================================================== */
-/* S0 hero */
-(function(){
-  const N=document.getElementById('s0_N'),d=document.getElementById('s0_d'),s=document.getElementById('s0_r'),line=document.getElementById('s0_line');
-  function draw(){
-    const Nv=Math.pow(10,+N.value), dv=+d.value, Rv=+s.value;
-    document.getElementById('s0_Nlab').textContent='N = '+Nv.toExponential(1);
-    document.getElementById('s0_dlab').textContent='d = '+dv;
-    document.getElementById('s0_rlab').textContent='R = '+Rv.toFixed(1);
-    const p={trH:dv*Rv,lamd:1,d:dv,sigma:0.1};
-    const Ks=[];for(let k=1;k<=60;k++)Ks.push(k);
-    const E=Ks.map(k=>E_SC(k,Nv,p));
-    const traces=[{x:Ks,y:E,mode:'lines',name:'E(K,N)',line:{color:C.accent,width:3}}];
-    if(line.checked)traces.push({x:Ks,y:Ks,mode:'lines',name:'E = K（理想）',line:{color:C.gray,width:1.5,dash:'dash'}});
-    const Esat=p.trH/(4*p.lamd*p.d)*Math.log(Nv);
-    traces.push({x:[1,60],y:[Esat,Esat],mode:'lines',name:'饱和 ≈ tr(H)/(4λ_d d)·log N',line:{color:C.warm,width:1.5,dash:'dot'}});
-    plot('s0_plot',traces,{xaxis:{title:'轮数 K'},yaxis:{title:'E(K,N)',rangemode:'tozero'}});
-    document.getElementById('s0_sat').textContent=fmt(Esat);
-    let kstar=60;for(let k=1;k<=60;k++){if(E_SC(k,Nv,p)<0.75*k){kstar=k;break;}}
-    document.getElementById('s0_kstar').textContent='≈ '+kstar;
-  }
-  [N,d,s].forEach(e=>e.addEventListener('input',draw));line.addEventListener('change',draw);
-  window.__s0=draw;
-})();
-
-/* S1 animation */
-(function(){
-  const cv=document.getElementById('s1_canvas'),ctx=cv.getContext('2d');
-  const Nel=document.getElementById('s1_N'),Kel=document.getElementById('s1_K'),etaEl=document.getElementById('s1_eta'),sigEl=document.getElementById('s1_sig');
-  let N=8,K=4,eta=0.3,wstar=2.0,sig=0.3,perms=[],X=[],Y=[],w=0,k=0,m=0,traj=[],playing=false,timer=null;
-  function rebuild(){
-    N=+Nel.value;K=+Kel.value;eta=+etaEl.value;sig=+sigEl.value;wstar=2.0;
-    document.getElementById('s1_Nlab').textContent='N = '+N;
-    document.getElementById('s1_Klab').textContent='K = '+K;
-    document.getElementById('s1_etalab').textContent='η = '+eta.toFixed(2);
-    document.getElementById('s1_wlab').textContent='w*='+wstar.toFixed(1)+', σ='+sig.toFixed(2);
-    X=[];Y=[];for(let i=0;i<N;i++){const x=(Math.random()*2-1)*1.4;X.push(x);Y.push(wstar*x+sig*(Math.random()*2-1));}
-    perms=[];for(let kk=0;kk<K;kk++){const a=[...Array(N).keys()];for(let i=N-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}perms.push(a);}
-    w=0;k=0;m=0;traj=[{t:0,w:0}];render();
-  }
-  function stepOnce(){
-    if(k>=K)return false;
-    const j=perms[k][m];const x=X[j];const pred=w*x;const r=pred-Y[j];w=w-eta*r*x;
-    traj.push({t:traj.length,w:w});m++;if(m>=N){m=0;k++;}render();return true;
-  }
-  function render(){
-    const Wd=cv.clientWidth||cv.parentElement.clientWidth||600;
-    const pad=14,lblW=64,gap=4;
-    const cell=Math.max(15,Math.min(32,(Wd-2*pad-lblW)/N-gap));
-    const rowH=cell+10;
-    cv.width=Wd;cv.height=pad*2+K*rowH;
-    ctx.clearRect(0,0,cv.width,cv.height);
-    for(let kk=0;kk<K;kk++){const y0=pad+kk*rowH;
-      ctx.fillStyle="#9aa0bd";ctx.font="11px sans-serif";ctx.textAlign="left";
-      ctx.fillText("epoch "+(kk+1),pad,y0+cell/2+4);
-      for(let mm=0;mm<N;mm++){const x0=pad+lblW+mm*(cell+gap);
-        const isCur=(kk===k&&mm===m);const isDone=(kk<k)||(kk===k&&mm<m);
-        ctx.fillStyle=isCur?"#6c8cff":(isDone?"#2f3550":"#1b1f2e");
-        ctx.strokeStyle=isCur?"#9db4ff":"#2a2f44";ctx.lineWidth=isCur?2:1;
-        roundRect(ctx,x0,y0,cell,cell,6);ctx.fill();ctx.stroke();
-        ctx.fillStyle=isCur?"#fff":"#6b7290";ctx.font="10px sans-serif";ctx.textAlign="center";
-        ctx.fillText(perms[kk][mm],x0+cell/2,y0+cell/2+3);ctx.textAlign="left";
-      }
-    }
-    plotTraj();
-  }
-  function plotTraj(){
-    plot('s1_traj',[
-      {x:traj.map(p=>p.t),y:traj.map(p=>p.w),mode:'lines',name:'w_t',line:{color:C.accent2,width:2}},
-      {x:[0,Math.max(1,traj.length)],y:[wstar,wstar],mode:'lines',name:'w* = '+wstar,line:{color:C.warm,dash:'dash',width:1.5}}
-    ],{xaxis:{title:'步数 t'},yaxis:{title:'w_t'},margin:{l:48,r:12,t:30,b:40}});
-  }
-  function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
-  function play(){if(playing){clearInterval(timer);playing=false;document.getElementById('s1_play').textContent='▶ 播放';return;}
-    playing=true;document.getElementById('s1_play').textContent='⏸ 暂停';
-    timer=setInterval(()=>{if(!stepOnce()){clearInterval(timer);playing=false;document.getElementById('s1_play').textContent='▶ 播放';}},Math.max(40,400/N));}
-  [Nel,Kel,etaEl,sigEl].forEach(e=>e.addEventListener('input',()=>{if(playing)play();rebuild();}));
-  document.getElementById('s1_play').addEventListener('click',play);
-  document.getElementById('s1_step').addEventListener('click',stepOnce);
-  document.getElementById('s1_reset').addEventListener('click',()=>{if(playing)play();rebuild();});
-  window.__s1=rebuild;
-})();
-
-/* S2 spectrum */
-(function(){
-  const dEl=document.getElementById('s2_d'),muEl=document.getElementById('s2_mu'),decEl=document.getElementById('s2_decay'),
-        aEl=document.getElementById('s2_a'),bEl=document.getElementById('s2_b');
-  function mode(){return document.querySelector('input[name=s2mode]:checked').value;}
-  function draw(){
-    const md=mode(),d=+dEl.value;
-    document.getElementById('s2_dlab').textContent='d = '+d;
-    document.getElementById('s2_scbox').style.display=(md==='sc')?'block':'none';
-    document.getElementById('s2_plbox').style.display=(md==='sc')?'none':'block';
-    const idx=[];for(let i=1;i<=d;i++)idx.push(i);
-    let lam,prob=null,trH=0;
-    if(md==='sc'){
-      const mu=+muEl.value,dec=+decEl.value;
-      document.getElementById('s2_mulab').textContent='μ = '+mu.toFixed(3);
-      document.getElementById('s2_decaylab').textContent=dec.toFixed(2);
-      lam=idx.map(i=>mu+(1-mu)*Math.pow(i,-dec));
-    } else {
-      const a=+aEl.value,b=+bEl.value;
-      document.getElementById('s2_alab').textContent='a = '+a.toFixed(1);
-      document.getElementById('s2_blab').textContent='b = '+b.toFixed(1);
-      if(md==='pl'){lam=idx.map(i=>Math.pow(i,-b));}
-      else{lam=idx.map(i=>1/Math.pow(Math.log(i+1),b));}
-      let s=0;const praw=idx.map(i=>md==='pl'?Math.pow(i,-(a-b)):Math.pow(i,-a)*Math.pow(Math.log(i+1),b));
-      praw.forEach(v=>s+=v);prob=praw.map(v=>v/s);
-    }
-    lam.forEach(v=>trH+=v);
-    const l1=lam[0],ld=lam[lam.length-1];
-    document.getElementById('s2_tr').textContent=fmt(trH);
-    document.getElementById('s2_l1').textContent=fmt(l1);
-    document.getElementById('s2_ld').textContent=fmt(ld);
-    document.getElementById('s2_kappa').textContent=fmt(l1/ld);
-    const traces=[{x:idx,y:lam,mode:'lines',name:'特征值 λ_i',line:{color:C.accent,width:2.5}}];
-    if(prob)traces.push({x:idx,y:prob,mode:'lines',name:'采样概率 p_i',line:{color:C.warm,width:2}});
-    const lay={xaxis:{title:'坐标 i',type:'log'},yaxis:{title:'数值',type:'log'}};
-    if(md==='sc')lay.yaxis.type='linear';
-    plot('s2_plot',traces,lay);
-  }
-  [dEl,muEl,decEl,aEl,bEl].forEach(e=>e.addEventListener('input',draw));
-  document.querySelectorAll('input[name=s2mode]').forEach(e=>e.addEventListener('change',draw));
-  window.__s2=draw;
-})();
-
-/* S3 strongly convex Fig2a */
-(function(){
-  const dEl=document.getElementById('s3_d'),sEl=document.getElementById('s3_s'),rEl=document.getElementById('s3_r');
-  function draw(){
-    const d=+dEl.value,s=+sEl.value,ratio=+rEl.value;
-    document.getElementById('s3_dlab').textContent='d = '+d;
-    document.getElementById('s3_slab').textContent='σ = '+s.toFixed(2);
-    document.getElementById('s3_rlab').textContent='×'+ratio.toFixed(1);
-    const p={trH:d*ratio,lamd:1,d:d,sigma:s};
-    const Ns=logspace(2,6,40);const Ks=[2,3,5,10,20];
-    const traces=Ks.map((k,i)=>({x:Ns.map(N=>Math.log(N)),y:Ns.map(N=>E_SC(k,N,p)),mode:'lines',
-      name:'K = '+k,line:{color:PAL[i%PAL.length],width:2}}));
-    plot('s3_sc_plot',traces,{xaxis:{title:'log N'},yaxis:{title:'E(K,N)',rangemode:'tozero'}});
-  }
-  [dEl,sEl,rEl].forEach(e=>e.addEventListener('input',draw));window.__s3sc=draw;
-})();
-
-/* S3 zipf Fig2b */
-(function(){
-  const aEl=document.getElementById('s3_a'),bEl=document.getElementById('s3_b');
-  function draw(){
-    const a=+aEl.value,b=+bEl.value;
-    document.getElementById('s3_alab').textContent='a = '+a.toFixed(1);
-    document.getElementById('s3_blab').textContent='b = '+b.toFixed(1);
-    document.getElementById('s3_exp').textContent=fmt(b/(a-b));
-    const Ks=logspace(0,3,40);const Ns=[5e4,1e5,5e5,1e6,5e6,1e7];
-    const traces=Ns.map((N,i)=>({x:Ks,y:Ks.map(k=>E_Zipf(k,N,a,b)),mode:'lines',
-      name:'N='+N.toExponential(0),line:{color:PAL[i%PAL.length],width:2}}));
-    traces.push({x:Ks,y:Ks,mode:'lines',name:'E=K',line:{color:C.gray,dash:'dash',width:1.3}});
-    plot('s3_pl_plot',traces,{xaxis:{title:'K',type:'log'},yaxis:{title:'E(K,N)',type:'log'}});
-  }
-  [aEl,bEl].forEach(e=>e.addEventListener('input',draw));window.__s3pl=draw;
-})();
-
-/* S4 bias-variance (main thread small SGD) */
-(function(){
-  const etaEl=document.getElementById('s4_eta'),dEl=document.getElementById('s4_d'),TEl=document.getElementById('s4_T');
-  function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-  function draw(){
-    const eta=+etaEl.value,d=+dEl.value,T=+TEl.value,sigma=0.3;
-    document.getElementById('s4_etalab').textContent='η = '+eta.toFixed(3);
-    document.getElementById('s4_dlab').textContent='d = '+d;
-    document.getElementById('s4_Tlab').textContent='T = '+T;
-    const lam=[];for(let i=0;i<d;i++)lam.push(0.1+0.9*Math.pow(i+1,-0.5));
-    const tb=new Float64Array(d),tv=new Float64Array(d);for(let i=0;i<d;i++)tb[i]=randn();
-    const steps=[],bias=[],vari=[],tot=[];let chk=Math.log(2),dl=Math.log(T)/100;
-    for(let t=1;t<=T;t++){
-      const j=Math.floor(Math.random()*d);const xj=Math.sqrt(lam[j])*(Math.random()<0.5?-1:1)*1.0;
-      tb[j]=tb[j]-eta*xj*xj*tb[j];
-      const noise=sigma*randn();tv[j]=tv[j]-eta*xj*xj*tv[j]+eta*noise*xj;
-      if(Math.log(t)>=chk){let rb=0,rv=0;for(let i=0;i<d;i++){rb+=lam[i]*tb[i]*tb[i];rv+=lam[i]*tv[i]*tv[i];}
-        steps.push(t);bias.push(0.5*rb);vari.push(0.5*rv);tot.push(0.5*(rb+rv));chk+=dl;}
-    }
-    plot('s4_bv_plot',[
-      {x:steps,y:bias,mode:'lines',name:'偏差项',line:{color:C.accent,width:2}},
-      {x:steps,y:vari,mode:'lines',name:'方差项',line:{color:C.warm,width:2}},
-      {x:steps,y:tot,mode:'lines',name:'总风险',line:{color:C.good,width:2.5}}
-    ],{xaxis:{title:'步数 t',type:'log'},yaxis:{title:'超额风险（分量）',type:'log'}});
-  }
-  [etaEl,dEl,TEl].forEach(e=>e.addEventListener('input',draw));window.__s4bv=draw;
-})();
-
-/* S4 matrix concentration */
-(function(){
-  const dEl=document.getElementById('s4_mc_d'),etaEl=document.getElementById('s4_mc_eta'),trEl=document.getElementById('s4_mc_tr');
-  const prog=document.getElementById('s4_mc_prog');
-  function lab(){document.getElementById('s4_mc_dlab').textContent='d = '+dEl.value;
-    document.getElementById('s4_mc_etalab').textContent='η = '+(+etaEl.value).toFixed(3);
-    document.getElementById('s4_mc_trlab').textContent=trEl.value;}
-  function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-  function run(){
-    lab();const d=+dEl.value,eta=+etaEl.value,trials=+trEl.value;
-    prog.classList.add('show');prog.firstElementChild.style.width='0%';
-    const ns=[1,2,4,8,16,32,64,128,256];
-    // fixed theta0 across all n and trials
-    const theta0=new Float64Array(d);let nrm0=0;for(let i=0;i<d;i++){theta0[i]=randn();nrm0+=theta0[i]*theta0[i];}
-    const emp=[],det=[];let idx=0;
-    function stepN(){
-      if(idx>=ns.length){prog.classList.remove('show');finish();return;}
-      const n=ns[idx];let acc=0;
-      for(let tr=0;tr<trials;tr++){
-        const v=Float64Array.from(theta0);
-        for(let s=0;s<n;s++){const x=new Float64Array(d);let dot=0;for(let i=0;i<d;i++){x[i]=randn();dot+=x[i]*v[i];}
-          const f=eta*dot;for(let i=0;i<d;i++)v[i]-=f*x[i];}
-        let nv=0;for(let i=0;i<d;i++)nv+=v[i]*v[i];acc+=nv;
-      }
-      emp.push(acc/trials);                       // E||A theta0||^2  (Monte Carlo)
-      det.push(Math.pow(1-eta,2*n)*nrm0);         // ||(I-eta H)^n theta0||^2  (H=I)
-      idx++;prog.firstElementChild.style.width=(100*idx/ns.length)+'%';setTimeout(stepN,0);
-    }
-    function finish(){
-      const ratio=emp.map((e,i)=>e/det[i]);
-      plot('s4_mc_plot',[
-        {x:ns,y:ratio,mode:'lines+markers',name:'E‖Aθ₀‖² / ‖(I−ηH)ⁿθ₀‖²',line:{color:C.accent,width:2}},
-        {x:[ns[0],ns[ns.length-1]],y:[1,1],mode:'lines',name:'理想比值 = 1',line:{color:C.warm,dash:'dash',width:1.5}}
-      ],{xaxis:{title:'连乘长度 n',type:'log'},yaxis:{title:'实测 / 确定性 近似比值',type:'log'}});
-    }
-    stepN();
-  }
-  [dEl,etaEl,trEl].forEach(e=>e.addEventListener('input',lab));
-  document.getElementById('s4_mc_run').addEventListener('click',run);
-  window.__s4mc=lab;
-})();
-
-/* S4 optimal LR */
-(function(){
-  const KEl=document.getElementById('s4_lr_K'),NEl=document.getElementById('s4_lr_N');
-  const prog=document.getElementById('s4_lr_prog');
-  let gridData=null;
-  function draw(){
-    const K=+KEl.value,N=Math.round(Math.pow(10,+NEl.value));
-    document.getElementById('s4_lr_Klab').textContent='K = '+K;
-    document.getElementById('s4_lr_Nlab').textContent='N = '+N.toExponential(1);
-    const d=50,sigma=0.1,lamd=1,trH=d,theta2=d;
-    const rho=4*theta2*lamd/(trH*sigma*sigma);
-    const etaPrime=Math.log(Math.max(rho*K*N,Math.E))/(2*lamd*K*N);
-    const etas=logspace(Math.log10(etaPrime/30),Math.log10(etaPrime*30),60);
-    const M=etas.map(eta=>0.5*theta2*lamd*Math.exp(-2*lamd*eta*K*N)+eta*trH*sigma*sigma/4);
-    const traces=[{x:etas,y:M,mode:'lines',name:'M(K,N;η) 解析',line:{color:C.accent,width:2.5}}];
-    const Mmin=Math.min(...M),Mmax=Math.max(...M);
-    traces.push({x:[etaPrime,etaPrime],y:[Mmin*0.7,Mmax],mode:'lines',name:"η′ 闭式最优",line:{color:C.warm,dash:'dash',width:2}});
-    if(gridData&&gridData.K===K&&gridData.N===N){
-      traces.push({x:gridData.etas,y:gridData.risks,mode:'markers',name:'真实 SGD 终风险',marker:{color:C.good,size:6}});
-    }
-    plot('s4_lr_plot',traces,{xaxis:{title:'学习率 η',type:'log'},yaxis:{title:'风险',type:'log'}});
-    return {K,N,etaPrime};
-  }
-  function runGrid(){
-    const st=draw();const K=st.K,N=st.N,etaPrime=st.etaPrime;
-    const etas=logspace(Math.log10(etaPrime/15),Math.log10(etaPrime*15),18);
-    prog.classList.add('show');prog.firstElementChild.style.width='0%';
-    const w=newWorker();
-    w.onmessage=(e)=>{const m=e.data;if(m.type==='progress'){prog.firstElementChild.style.width=(100*m.frac)+'%';}
-      else if(m.type==='gaussLRgrid'){gridData={K,N,etas:m.etas,risks:m.risks};prog.classList.remove('show');w.terminate();draw();}};
-    w.postMessage({type:'gaussLRgrid',p:{etas,N,K,d:50,sigma:0.1}});
-  }
-  [KEl,NEl].forEach(e=>e.addEventListener('input',()=>{gridData=null;draw();}));
-  document.getElementById('s4_lr_run').addEventListener('click',runGrid);
-  window.__s4lr=draw;
-})();
-
-/* S5 Exp A */
-(function(){
-  const dEl=document.getElementById('a_d'),sEl=document.getElementById('a_s'),etaEl=document.getElementById('a_eta'),
-        NEl=document.getElementById('a_N'),KEl=document.getElementById('a_K');
-  const prog=document.getElementById('a_prog');
-  function lab(){document.getElementById('a_dlab').textContent='d = '+dEl.value;
-    document.getElementById('a_slab').textContent='σ = '+(+sEl.value).toFixed(2);
-    document.getElementById('a_etalab').textContent='×'+(+etaEl.value).toFixed(1);
-    document.getElementById('a_Nlab').textContent='N = '+Math.round(Math.pow(10,+NEl.value)).toExponential(1);
-    document.getElementById('a_Klab').textContent='K = '+KEl.value;}
-  function single(){
-    lab();const d=+dEl.value,s=+sEl.value,mul=+etaEl.value,N=Math.round(Math.pow(10,+NEl.value)),K=+KEl.value;
-    prog.classList.add('show');prog.firstElementChild.style.width='30%';
-    const w=newWorker();
-    w.onmessage=(e)=>{const m=e.data;if(m.type==='gaussRun'){
-      prog.classList.remove('show');w.terminate();
-      const p={trH:d,lamd:1,d:d,sigma:s};
-      const Rth=RstarSC(K,N,p);
-      const thx=m.steps,thy=m.steps.map(()=>Rth);
-      plot('a_plot1',[
-        {x:m.steps,y:m.risks,mode:'lines',name:'实测超额风险',line:{color:C.accent,width:2}},
-        {x:thx,y:thy,mode:'lines',name:'理论 R̄*(K,N)',line:{color:C.warm,dash:'dash',width:1.8}}
-      ],{xaxis:{title:'步数 t',type:'log'},yaxis:{title:'超额风险',type:'log'}});
-      document.getElementById('a_remp').textContent=fmt(m.finalRisk);
-      document.getElementById('a_rth').textContent=fmt(Rth);
-      const E=E_SC(K,N,p);
-      // empirical E via analytic baseline inversion
-      let lo=N,hi=N*1e7,target=m.finalRisk;
-      for(let it=0;it<70;it++){const mid=Math.sqrt(lo*hi);if(RstarSC(1,mid,p)>target)lo=mid;else hi=mid;}
-      document.getElementById('a_e').textContent=fmt(Math.sqrt(lo*hi)/N)+' (理论 '+fmt(E)+')';
-    } else if(m.type==='progress'){prog.firstElementChild.style.width=(100*m.frac)+'%';}};
-    w.postMessage({type:'gaussRun',p:{N,K,d,sigma:s,etaMul:mul,seed:9}});
-  }
-  function sweep(){
-    lab();const d=+dEl.value,s=+sEl.value,mul=+etaEl.value;
-    const Ns=[200,500,1000,2000,5000,10000,20000];const Ks=[2,3,5,10];
-    prog.classList.add('show');prog.firstElementChild.style.width='0%';
-    const w=newWorker();
-    w.onmessage=(e)=>{const m=e.data;if(m.type==='progress'){prog.firstElementChild.style.width=(100*m.frac)+'%';}
-      else if(m.type==='gaussSweep'){prog.classList.remove('show');w.terminate();
-        const p={trH:d,lamd:1,d:d,sigma:s};
-        const traces=[];
-        m.curves.forEach((cv,i)=>{
-          traces.push({x:cv.pts.map(pt=>Math.log(pt.N)),y:cv.pts.map(pt=>pt.E),mode:'markers',
-            name:'K='+cv.K+'（实测）',marker:{color:PAL[i%PAL.length],size:7}});
-          const NsTh=logspace(Math.log10(200),Math.log10(20000),30);
-          traces.push({x:NsTh.map(N=>Math.log(N)),y:NsTh.map(N=>E_SC(cv.K,N,p)),mode:'lines',
-            name:'K='+cv.K+'（理论）',line:{color:PAL[i%PAL.length],width:1.6,dash:'dot'}});
-        });
-        plot('a_plot2',traces,{xaxis:{title:'log N'},yaxis:{title:'E(K,N)',rangemode:'tozero'}});
-      }};
-    const pTop={trH:d,lamd:1,d:d,sigma:s};
-    const topN=Math.ceil(20000*E_SC(10,20000,pTop)*3);
-    w.postMessage({type:'gaussSweep',p:{Ns,Ks,d,sigma:s,etaMul:mul,topN}});
-  }
-  [dEl,sEl,etaEl,NEl,KEl].forEach(e=>e.addEventListener('input',lab));
-  document.getElementById('a_run').addEventListener('click',single);
-  document.getElementById('a_sweep').addEventListener('click',sweep);
-  window.__a=lab;
-})();
-
-/* S5 Exp B */
-(function(){
-  const dEl=document.getElementById('b_d'),aEl=document.getElementById('b_a'),bEl=document.getElementById('b_b'),etaEl=document.getElementById('b_eta'),
-        NEl=document.getElementById('b_N'),KEl=document.getElementById('b_K');
-  const prog=document.getElementById('b_prog');
-  // typical-run expected risk: cap unstable (eta*mu^2>=2) coords at contraction 1 (they stay unlearned, not blow up)
-  function zipfExpRisk(k,N,eta,P,L,M){let s=0;for(let i=0;i<P.length;i++){const rho=1-eta*M[i];const r2=Math.min(rho*rho,1);
-    const term=1-P[i]+P[i]*Math.pow(r2,k);s+=L[i]*Math.pow(term,N);}return isFinite(s)?0.5*s:1e9;}
-  function satPlot(){
-    const a=+aEl.value,b=+bEl.value;
-    document.getElementById('b_exp_th').textContent=fmt(b/(a-b));
-    const Ks=logspace(0,3,40);const Ns=[1e5,1e6,1e7,1e8];
-    const traces=Ns.map((N,i)=>({x:Ks,y:Ks.map(k=>E_Zipf(k,N,a,b)),mode:'lines',
-      name:'N='+N.toExponential(0),line:{color:PAL[i%PAL.length],width:2}}));
-    traces.push({x:Ks,y:Ks,mode:'lines',name:'E=K',line:{color:C.gray,dash:'dash',width:1.3}});
-    plot('b_plot2',traces,{xaxis:{title:'K',type:'log'},yaxis:{title:'E(K,N) 理论',type:'log'}});
-  }
-  function lab(){document.getElementById('b_dlab').textContent='d = '+dEl.value;
-    document.getElementById('b_alab').textContent='a = '+(+aEl.value).toFixed(1);
-    document.getElementById('b_blab').textContent='b = '+(+bEl.value).toFixed(1);
-    document.getElementById('b_etalab').textContent='×'+(+etaEl.value).toFixed(2);
-    document.getElementById('b_Nlab').textContent='N = '+Math.round(Math.pow(10,+NEl.value)).toExponential(1);
-    document.getElementById('b_Klab').textContent='K = '+KEl.value;
-    satPlot();}
-  function run(){
-    lab();const d=+dEl.value,a=+aEl.value,b=+bEl.value,eta=+etaEl.value,
-      N=Math.round(Math.pow(10,+NEl.value)),K=+KEl.value;
-    prog.classList.add('show');prog.firstElementChild.style.width='40%';
-    const w=newWorker();
-    w.onmessage=(e)=>{const m=e.data;if(m.type==='zipfRun'){prog.classList.remove('show');w.terminate();
-      document.getElementById('b_etaused').textContent=m.eta.toExponential(2);
-      const expR=m.epochs.map(k=>zipfExpRisk(k,N,m.eta,m.pArr,m.lamArr,m.mu2Arr));
-      plot('b_plot1',[
-        {x:m.epochs,y:m.risks,mode:'markers',name:'真实单次 SGD',marker:{color:C.accent2,size:7}},
-        {x:m.epochs,y:expR,mode:'lines',name:'精确期望（闭式）',line:{color:C.warm,width:2}}
-      ],{xaxis:{title:'轮数 k (epoch)'},yaxis:{title:'超额风险',type:'log'}});
-    }};
-    w.postMessage({type:'zipfRun',p:{N,K,d,a,b,etaMul:eta,seed:7}});
-  }
-  [dEl,aEl,bEl,etaEl,NEl,KEl].forEach(e=>e.addEventListener('input',lab));
-  document.getElementById('b_run').addEventListener('click',run);
-  window.__b=lab;
-})();
-
-/* S5 Exp C */
-(function(){
-  const lamEl=document.getElementById('c_lam');
-  function mode(){return document.querySelector('input[name=cmode]:checked').value;}
-  const DATA={const:{slope:0.80,intercept:5.21,r:0.97,Ns:[0.2,0.5,0.8,1.0,2.0]},
-              wsd:{slope:2.35,intercept:5.25,r:0.96,Ns:[0.2,0.5,1.0,2.0]}};
-  function draw(){
-    const md=mode(),lam=+lamEl.value;const D=DATA[md];
-    document.getElementById('c_lamlab').textContent='λ = '+lam.toFixed(2);
-    document.getElementById('c_slope').textContent=D.slope.toFixed(2);
-    document.getElementById('c_r').textContent=D.r.toFixed(2);
-    // Fig 1c style: saturation points vs N with linear-in-logN fit
-    const sat=D.Ns.map(N=>D.slope*Math.log(N)+D.intercept);
-    const fx=logspace(Math.log10(0.18),Math.log10(2.2),20);
-    plot('c_plot1',[
-      {x:D.Ns,y:sat,mode:'markers',name:'饱和点（论文报告）',marker:{color:C.accent,size:9}},
-      {x:fx,y:fx.map(N=>D.slope*Math.log(N)+D.intercept),mode:'lines',
-        name:'拟合 '+D.slope+'·logN+'+D.intercept+' (r='+D.r+')',line:{color:C.warm,width:2}}
-    ],{xaxis:{title:'新数据量 N (B tokens)',type:'log'},yaxis:{title:'饱和点 K(λ,N)'}});
-    // illustrative extraction on theoretical E(K,N) curve (strongly convex proxy)
-    const Ns=[0.2,0.5,1.0,2.0];const colors=PAL;
-    const traces=[];const extr=[];
-    Ns.forEach((Nb,i)=>{
-      const Nproxy=Nb*1e8; // map B-token to a large proxy N for the theoretical curve shape
-      const p={trH:200,lamd:1,d:200,sigma:0.1};
-      const Ks=[];for(let k=1;k<=40;k++)Ks.push(k);
-      const ratio=Ks.map(k=>E_SC(k,Nproxy,p)/k);
-      traces.push({x:Ks,y:ratio,mode:'lines',name:'N='+Nb+'B',line:{color:colors[i%colors.length],width:2}});
-      let ks=40;for(let k=1;k<=40;k++){if(E_SC(k,Nproxy,p)/k<lam){ks=k;break;}}extr.push({N:Nb,k:ks});
-    });
-    traces.push({x:[1,40],y:[lam,lam],mode:'lines',name:'λ 阈值',line:{color:C.gray,dash:'dash',width:1.5}});
-    plot('c_plot2',traces,{xaxis:{title:'K'},yaxis:{title:'E(K,N)/K（示意）',rangemode:'tozero'}});
-  }
-  lamEl.addEventListener('input',draw);
-  document.querySelectorAll('input[name=cmode]').forEach(e=>e.addEventListener('change',draw));
-  window.__c=draw;
-})();
-
-/* ---------- init ---------- */
-function renderAllMath(){
-  if(window.renderMathInElement){
-    renderMathInElement(document.body,{delimiters:[
-      {left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},
-      {left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}
-    ],throwOnError:false});
-  }
-}
-function drawAll(){
-  window.__s0&&__s0();window.__s1&&__s1();window.__s2&&__s2();window.__s3sc&&__s3sc();window.__s3pl&&__s3pl();
-  window.__s4bv&&__s4bv();window.__s4mc&&__s4mc();window.__s4lr&&__s4lr();window.__a&&__a();window.__b&&__b();window.__c&&__c();
-}
-function start(){renderAllMath();drawAll();
-  window.__s4bv&&__s4bv();
-  // initial draws that need plotly
-  setTimeout(drawAll,60);
-}
-if(document.readyState==='complete')start();
-else window.addEventListener('load',start);
-
-/* nav active state */
-const navLinks=[...document.querySelectorAll('nav.toc a')];
-const secs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
-window.addEventListener('scroll',()=>{
-  let cur=0;for(let i=0;i<secs.length;i++){if(secs[i]&&secs[i].getBoundingClientRect().top<140)cur=i;}
-  navLinks.forEach((a,i)=>a.classList.toggle('active',i===cur));
+document.querySelectorAll('.math.inline,.math.block').forEach(function(el){
+  try { katex.render(el.textContent, el, {displayMode: el.classList.contains('block'), throwOnError: false}); }
+  catch(e) {}
 });
 </script>
 <section class="public-attribution">本站内容为个人学习笔记与论文解读。论文、图表、实验结果和引用材料的版权归原作者及原出版方所有；本站仅为学习、研究和非商业分享用途。若需要引用原始成果，请以论文原文和官方发布版本为准。</section>

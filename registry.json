@@ -37,7 +37,7 @@
   },
   {
     "slug": "multi-epoch",
-    "description": "数据重复使用的 scaling：更大的数据集可以重复更多遍。Yan et al. ICLR 2026（arXiv:2511.13421）的交互式解读，含解析曲线与浏览器内 SGD。",
+    "description": "数据重复使用的 scaling：有效复用率 $E(K,N)$ 在小 $K$ 时约等于 $K$，随后饱和，且饱和点随 $N$ 右移。Yan et al. ICLR 2026（arXiv:2511.13421）给出线性回归 SGD 的相变理论与 LLM 实验；含中文解读、综述，以及公式滑块 / 浏览器内 SGD 交互页。",
     "updated": "2026-08-15",
     "survey": "multi-epoch/survey/"
   }

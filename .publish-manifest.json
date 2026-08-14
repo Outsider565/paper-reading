@@ -10094,13 +10094,58 @@
       "height": 881,
       "bytes": 58184,
       "cached": "true"
+    },
+    {
+      "source": "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_smoothed_shaded.png",
+      "output": "publish/paper-reading/multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_smoothed_shaded.webp",
+      "width": 1600,
+      "height": 1120,
+      "bytes": 45000,
+      "cached": "true"
+    },
+    {
+      "source": "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/loss_over_step_improved_ws3_ratio0.75_alpha0.9_exp.png",
+      "output": "publish/paper-reading/multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/loss_over_step_improved_ws3_ratio0.75_alpha0.9_exp.webp",
+      "width": 1600,
+      "height": 1087,
+      "bytes": 48942,
+      "cached": "true"
+    },
+    {
+      "source": "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_KN_vs_N_ws3_ratio0.75_alpha0.9_exp.png",
+      "output": "publish/paper-reading/multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_KN_vs_N_ws3_ratio0.75_alpha0.9_exp.webp",
+      "width": 1280,
+      "height": 960,
+      "bytes": 27646,
+      "cached": "true"
+    },
+    {
+      "source": "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_avg_vs_N_log_wide_bold.png",
+      "output": "publish/paper-reading/multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_avg_vs_N_log_wide_bold.webp",
+      "width": 1600,
+      "height": 1164,
+      "bytes": 65778,
+      "cached": "true"
+    },
+    {
+      "source": "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_K_comparison_power.png",
+      "output": "publish/paper-reading/multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_K_comparison_power.webp",
+      "width": 1600,
+      "height": 600,
+      "bytes": 49026,
+      "cached": "true"
+    },
+    {
+      "source": "multi-epoch/survey/assets/interactive.html",
+      "output": "publish/paper-reading/multi-epoch/survey/assets/interactive.html",
+      "bytes": 70569
     }
   ],
   "files": {
-    "registry.json": "c1fcbf3dfcaaccf5a5c248d95050d966d5c2fc534c438206377ff4efeb675245",
-    "index.html": "77dbcae3ec6f8d8176e1a8749e4cc9f3a9d531be4037650f28089f44af8c8833",
-    ".publish-manifest.json": "94ffa64f33606626d927b632473981adb188705e762025e7c472be8bf99fb65b",
-    "404.html": "77dbcae3ec6f8d8176e1a8749e4cc9f3a9d531be4037650f28089f44af8c8833",
+    "registry.json": "5cbafc2f301f44d6770ab5638ae05e07f9474262c9234cc7fa444bc7bb1e7a19",
+    "index.html": "83a9e22dc4d4c582e62d7b32b2fc8eb836761c83e0fa67b96235375e29d90227",
+    ".publish-manifest.json": "fcf8e3098e403c2983b3538f09ab869f9cc41f2e0c116e492f6415b3b94c62aa",
+    "404.html": "83a9e22dc4d4c582e62d7b32b2fc8eb836761c83e0fa67b96235375e29d90227",
     "README.md": "83611cd4fa8cdd490171336d01783a0fe4780185834d314005cf4451868c85e0",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "layer-stacking/index.html": "facb2b83c602e367ebaa7c0f32a4da63c0d59b3537ed289fc8c4ec3b228151da",
@@ -10343,7 +10388,13 @@
     "compaction/papers/2409.04421-rlpf/raw/sections/figures/rlpf.webp": "e220fd2b157ad11913fe00629a68eb40472dfab8cdc502a4cc0d5ef4a91da332",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/average_attention_weight.webp": "d1cc41e3408422b69c65592e496ec1b5fd18bb10aac17ebf12d6f97936c3e138",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/model_simple_longer.webp": "03df5a735e7b170017f1c6c1e47b625ec3a42907750e54d288e8aae7de5b134a",
-    "multi-epoch/survey/index.html": "b2cce8640f2fc0053d4dcb23aec8f7b9e750b24baa3a38c54bcdd8ee264e401d",
+    "multi-epoch/survey/index.html": "0e8e3620f9281795fdca55e8e14d2b64add1cddd5558867c2b4bd4668686e225",
+    "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_smoothed_shaded.webp": "a99287f23b3757df89f178d4cf45bb3792e42b26b8fef01fee83fd3c51882ef3",
+    "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/loss_over_step_improved_ws3_ratio0.75_alpha0.9_exp.webp": "76e3d8cfba33594fb3a01db3d6baaa34943418e3a1740faffd51ef5293747fa4",
+    "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_k_avg_vs_N_log_wide_bold.webp": "ccc2e34f55ab9141e9fb9eb01adef9b907a2e7798a8dd3860a74e5ffd734991b",
+    "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_KN_vs_N_ws3_ratio0.75_alpha0.9_exp.webp": "ccb4bc432a8cab7e098a2340d5a4b721c82b515216ea4200c42b6c6277d365de",
+    "multi-epoch/papers/2511.13421-larger-datasets-repeated/raw/figs/E_K_comparison_power.webp": "b286e982478e7a6b48b99e8e02bb0f9b2c5093799156fcd3ffed34f77933d36d",
+    "multi-epoch/survey/assets/interactive.html": "5db4372ccf7186135fe90fcab70679bbefdb33e951aad33f40c546fe63e3bcd5",
     "finetuning-efficiency/survey/index.html": "a9a42cdcf1036ad1a17f0b6a414935370e68dc56cbc2fe9b2c5e6ff2d62a3fe3",
     "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp": "66bbd74a023698bbe1f7786e037e175186cfeae052769ff692289a0409658b3c",
     "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.webp": "9dda4dddca2282e5d298bd172e08272fa684da2e217429a025125daec813504d",

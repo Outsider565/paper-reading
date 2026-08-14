@@ -34,5 +34,11 @@
     "description": "Loop Models（循环深度架构）：在单次前向传播中复用共享权重层的架构（flat-loop、hierarchical-loop、parallel-loop、implicit-layer）。涵盖 Universal Transformers、DEQ、Ouro、Huginn、Parcae、i-DEQ 等论文，跟随 [Awesome-Loop-Models](https://github.com/huskydoge/Awesome-Loop-Models) 仓库。新增：MoDr — block-wise LoRA 多分支 + hard-gate 动态路由扩展 Huginn 循环模块。",
     "updated": "2026-06-02",
     "survey": "loop-models/survey/"
+  },
+  {
+    "slug": "multi-epoch",
+    "description": "数据重复使用的 scaling：更大的数据集可以重复更多遍。Yan et al. ICLR 2026（arXiv:2511.13421）的交互式解读，含解析曲线与浏览器内 SGD。",
+    "updated": "2026-08-15",
+    "survey": "multi-epoch/survey/"
   }
 ]

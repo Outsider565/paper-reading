@@ -11,7 +11,8 @@
     "finetuning-efficiency",
     "gradient-flow",
     "layer-stacking",
-    "loop-models"
+    "loop-models",
+    "multi-epoch"
   ],
   "images": [
     {
@@ -20,7 +21,7 @@
       "width": 1236,
       "height": 1600,
       "bytes": 151848,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig4-scaling.png",
@@ -28,7 +29,7 @@
       "width": 1236,
       "height": 1600,
       "bytes": 217036,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig5-dynamics.png",
@@ -36,7 +37,7 @@
       "width": 1236,
       "height": 1600,
       "bytes": 145094,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig8-weights.png",
@@ -44,7 +45,7 @@
       "width": 1236,
       "height": 1600,
       "bytes": 166876,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "attn-res/papers/2603.15031-attention-residuals/raw/figures/fig9-matrices.png",
@@ -52,7 +53,7 @@
       "width": 1236,
       "height": 1600,
       "bytes": 191290,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "compaction/papers/2310.04408-recomp/raw/figs/recomp_part_1.png",
@@ -1492,7 +1493,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 35082,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/EfficiencyIllustration.png",
@@ -1500,7 +1501,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 53912,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.png",
@@ -1508,7 +1509,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 23892,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.png",
@@ -1516,7 +1517,7 @@
       "width": 857,
       "height": 559,
       "bytes": 34580,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/effective_data_diagram.png",
@@ -1524,7 +1525,7 @@
       "width": 855,
       "height": 598,
       "bytes": 29996,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/transfer_fits.png",
@@ -1532,7 +1533,7 @@
       "width": 1442,
       "height": 628,
       "bytes": 68628,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/scaling_laws.png",
@@ -1540,7 +1541,7 @@
       "width": 1428,
       "height": 592,
       "bytes": 76664,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/compute_curves_3e8.png",
@@ -1548,7 +1549,7 @@
       "width": 1432,
       "height": 603,
       "bytes": 66322,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.01293-scaling-laws-transfer/raw/scaling-laws-for-transfer/figures/ossification.png",
@@ -1556,7 +1557,7 @@
       "width": 1453,
       "height": 615,
       "bytes": 65910,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/crosstask.png",
@@ -1564,7 +1565,7 @@
       "width": 1050,
       "height": 525,
       "bytes": 34808,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_pretrain.png",
@@ -1572,7 +1573,7 @@
       "width": 300,
       "height": 300,
       "bytes": 7456,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/example_finetune.png",
@@ -1580,7 +1581,7 @@
       "width": 300,
       "height": 300,
       "bytes": 5928,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/model.png",
@@ -1588,7 +1589,7 @@
       "width": 600,
       "height": 450,
       "bytes": 23612,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2108.11018-syn2real-transfer/raw/img/complexity.png",
@@ -1596,7 +1597,7 @@
       "width": 600,
       "height": 525,
       "bytes": 25212,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/isoflop_7.png",
@@ -1604,7 +1605,7 @@
       "width": 1600,
       "height": 461,
       "bytes": 39692,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/approach_3_v2.png",
@@ -1612,7 +1613,7 @@
       "width": 1600,
       "height": 693,
       "bytes": 159922,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/combined_predictions_v9.png",
@@ -1620,7 +1621,7 @@
       "width": 1600,
       "height": 844,
       "bytes": 46154,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.15556-chinchilla/raw/figures/mmlu_0.png",
@@ -1628,7 +1629,7 @@
       "width": 1600,
       "height": 830,
       "bytes": 90070,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/intro-new.png",
@@ -1636,7 +1637,7 @@
       "width": 1600,
       "height": 343,
       "bytes": 60320,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_1.png",
@@ -1644,7 +1645,7 @@
       "width": 1600,
       "height": 492,
       "bytes": 90910,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/sec3_2_under_log.png",
@@ -1652,7 +1653,7 @@
       "width": 1600,
       "height": 636,
       "bytes": 40392,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/llmselect.png",
@@ -1660,7 +1661,7 @@
       "width": 474,
       "height": 250,
       "bytes": 16308,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.02314-rectified-scaling-law/raw/Figures/pareto.png",
@@ -1668,7 +1669,7 @@
       "width": 1600,
       "height": 492,
       "bytes": 33454,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_bleu.png",
@@ -1676,7 +1677,7 @@
       "width": 735,
       "height": 573,
       "bytes": 22450,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_alignment_ce.png",
@@ -1684,7 +1685,7 @@
       "width": 749,
       "height": 573,
       "bytes": 17380,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_bleu.png",
@@ -1692,7 +1693,7 @@
       "width": 576,
       "height": 432,
       "bytes": 18458,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt17_en_de_50_50_ce_loss.png",
@@ -1700,7 +1701,7 @@
       "width": 576,
       "height": 432,
       "bytes": 17214,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_50_50_bleu.png",
@@ -1708,7 +1709,7 @@
       "width": 576,
       "height": 432,
       "bytes": 17048,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_bleu.png",
@@ -1716,7 +1717,7 @@
       "width": 576,
       "height": 432,
       "bytes": 16158,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.04177-scaling-laws-mt/raw/figures/wmt15_en_fr_100_0_ce_loss.png",
@@ -1724,7 +1725,7 @@
       "width": 576,
       "height": 432,
       "bytes": 16222,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_model_size.png",
@@ -1732,7 +1733,7 @@
       "width": 1459,
       "height": 496,
       "bytes": 74032,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_enzh_model_size.png",
@@ -1740,7 +1741,7 @@
       "width": 1459,
       "height": 496,
       "bytes": 75890,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_ende_pretrain.png",
@@ -1748,7 +1749,7 @@
       "width": 1459,
       "height": 496,
       "bytes": 77152,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_prompt_scaling.png",
@@ -1756,7 +1757,7 @@
       "width": 1474,
       "height": 496,
       "bytes": 74608,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.17193-when-scaling-meets-finetuning/raw/figs/cmb_lora_scaling.png",
@@ -1764,7 +1765,7 @@
       "width": 1474,
       "height": 494,
       "bytes": 69502,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/transfer_learning_figure1.png",
@@ -1772,7 +1773,7 @@
       "width": 1157,
       "height": 679,
       "bytes": 21932,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_1.png",
@@ -1780,7 +1781,7 @@
       "width": 1500,
       "height": 900,
       "bytes": 30680,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/basic_data_loglog_2.png",
@@ -1788,7 +1789,7 @@
       "width": 1500,
       "height": 900,
       "bytes": 21194,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_1.png",
@@ -1796,7 +1797,7 @@
       "width": 1500,
       "height": 1050,
       "bytes": 63730,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/iso_loss_lines_2.png",
@@ -1804,7 +1805,7 @@
       "width": 1500,
       "height": 1050,
       "bytes": 56578,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2408.16947-empirical-scaling-transfer/raw/Plots/evolution_of_fine_tuning.png",
@@ -1812,7 +1813,7 @@
       "width": 1500,
       "height": 900,
       "bytes": 59280,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_id.png",
@@ -1820,7 +1821,7 @@
       "width": 1600,
       "height": 454,
       "bytes": 56556,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_trajectory.png",
@@ -1828,7 +1829,7 @@
       "width": 1600,
       "height": 458,
       "bytes": 36844,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/mrpc_parameter_id.png",
@@ -1836,7 +1837,7 @@
       "width": 1600,
       "height": 538,
       "bytes": 18910,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2012.13255-intrinsic-dimensionality/raw/figures/roberta_gen_eval_acc.png",
@@ -1844,7 +1845,7 @@
       "width": 1600,
       "height": 461,
       "bytes": 31524,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/1_a.png",
@@ -1852,7 +1853,7 @@
       "width": 1517,
       "height": 946,
       "bytes": 17128,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/images_log_scale/1_b.png",
@@ -1860,7 +1861,7 @@
       "width": 1508,
       "height": 946,
       "bytes": 38836,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_a.png",
@@ -1868,7 +1869,7 @@
       "width": 1516,
       "height": 946,
       "bytes": 34158,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/3_b.png",
@@ -1876,7 +1877,7 @@
       "width": 1516,
       "height": 962,
       "bytes": 31414,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_a.png",
@@ -1884,7 +1885,7 @@
       "width": 1536,
       "height": 972,
       "bytes": 25530,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_1_images/4_b.png",
@@ -1892,7 +1893,7 @@
       "width": 1536,
       "height": 972,
       "bytes": 25120,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/2-7B_baseline.png",
@@ -1900,7 +1901,7 @@
       "width": 1535,
       "height": 969,
       "bytes": 34534,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10770-memorization-without-overfitting/raw/claim_2_images/increase_baseline_model_scale.png",
@@ -1908,7 +1909,7 @@
       "width": 1576,
       "height": 946,
       "bytes": 28566,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/mix-analysis/bio7s.png",
@@ -1916,7 +1917,7 @@
       "width": 900,
       "height": 600,
       "bytes": 37482,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/general/mix-vs-QA-bio7.png",
@@ -1924,7 +1925,7 @@
       "width": 1500,
       "height": 600,
       "bytes": 146010,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/QAgrid/bio7s.png",
@@ -1932,7 +1933,7 @@
       "width": 1050,
       "height": 300,
       "bytes": 31734,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14316-knowledge-storage/raw/Pprob/bio7-lora2-ftoken.png",
@@ -1940,7 +1941,7 @@
       "width": 1600,
       "height": 444,
       "bytes": 142518,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-double-bio7.png",
@@ -1948,7 +1949,7 @@
       "width": 1500,
       "height": 600,
       "bytes": 137736,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-1.png",
@@ -1956,7 +1957,7 @@
       "width": 1600,
       "height": 1400,
       "bytes": 237986,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/UB-3.png",
@@ -1964,7 +1965,7 @@
       "width": 1600,
       "height": 700,
       "bytes": 117912,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2309.14402-knowledge-manipulation/raw/manipulation/QA-inverse-bio7.png",
@@ -1972,7 +1973,7 @@
       "width": 1500,
       "height": 675,
       "bytes": 184564,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB2.png",
@@ -1980,7 +1981,7 @@
       "width": 1500,
       "height": 975,
       "bytes": 108892,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/capB1big.png",
@@ -1988,7 +1989,7 @@
       "width": 1500,
       "height": 975,
       "bytes": 110330,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2404.05405-knowledge-capacity/raw/linear/linearK2_50.png",
@@ -1996,7 +1997,7 @@
       "width": 1600,
       "height": 667,
       "bytes": 106914,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/figure_intro_v2.png",
@@ -2004,7 +2005,7 @@
       "width": 1600,
       "height": 1302,
       "bytes": 51938,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/pretraining_results.png",
@@ -2012,7 +2013,7 @@
       "width": 1600,
       "height": 519,
       "bytes": 40908,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/finetuning_results.png",
@@ -2020,7 +2021,7 @@
       "width": 1600,
       "height": 634,
       "bytes": 67218,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2202.06387-scaling-under-microscope/raw/figures/ft_hpt_effect.png",
@@ -2028,7 +2029,7 @@
       "width": 1600,
       "height": 632,
       "bytes": 68312,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Stagnates-None-0.1-ppl-xppl.png",
@@ -2036,7 +2037,7 @@
       "width": 692,
       "height": 481,
       "bytes": 22026,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/next_token_predictions/Increases-None-0.1-ppl-xFLOPs.png",
@@ -2044,7 +2045,7 @@
       "width": 685,
       "height": 481,
       "bytes": 21032,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/bigbench_all_tasks.png",
@@ -2052,7 +2053,7 @@
       "width": 1600,
       "height": 304,
       "bytes": 30582,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_linearity_12.pt.png",
@@ -2060,7 +2061,7 @@
       "width": 750,
       "height": 600,
       "bytes": 17144,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/Validation_PPL_breakthroughness_6.pt.png",
@@ -2068,7 +2069,7 @@
       "width": 750,
       "height": 600,
       "bytes": 19142,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2212.09803-training-trajectories/raw/images/validation_ppl.png",
@@ -2076,7 +2077,7 @@
       "width": 685,
       "height": 442,
       "bytes": 15704,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/themegraph.png",
@@ -2084,7 +2085,7 @@
       "width": 1600,
       "height": 477,
       "bytes": 44416,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/pilot-exp-fig.png",
@@ -2092,7 +2093,7 @@
       "width": 1600,
       "height": 471,
       "bytes": 17292,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/train_loss_2series.png",
@@ -2100,7 +2101,7 @@
       "width": 1600,
       "height": 527,
       "bytes": 55628,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/dataset_level_prediction_du.png",
@@ -2108,7 +2109,7 @@
       "width": 1600,
       "height": 739,
       "bytes": 91064,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/final_predict_2_set.png",
@@ -2116,7 +2117,7 @@
       "width": 1600,
       "height": 638,
       "bytes": 56958,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2310.03262-passuntil/raw/figs/nlpassuntil_vs_test_loss_one_fig.png",
@@ -2124,7 +2125,7 @@
       "width": 1264,
       "height": 1018,
       "bytes": 57264,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_bbh.png",
@@ -2132,7 +2133,7 @@
       "width": 483,
       "height": 375,
       "bytes": 14654,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/overall_extrap_mmlu.png",
@@ -2140,7 +2141,7 @@
       "width": 495,
       "height": 374,
       "bytes": 15228,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/loss_landscape.png",
@@ -2148,7 +2149,7 @@
       "width": 523,
       "height": 381,
       "bytes": 20634,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/increasing_holdout_bbh.png",
@@ -2156,7 +2157,7 @@
       "width": 476,
       "height": 374,
       "bytes": 15448,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_BBH.png",
@@ -2164,7 +2165,7 @@
       "width": 447,
       "height": 354,
       "bytes": 12334,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/absolute_err_overall_MMLU.png",
@@ -2172,7 +2173,7 @@
       "width": 447,
       "height": 360,
       "bytes": 9622,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_human_organs_sense.png",
@@ -2180,7 +2181,7 @@
       "width": 374,
       "height": 307,
       "bytes": 12036,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_english_proverbs.png",
@@ -2188,7 +2189,7 @@
       "width": 389,
       "height": 307,
       "bytes": 12378,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/task_example_movie_recommendation.png",
@@ -2196,7 +2197,7 @@
       "width": 374,
       "height": 307,
       "bytes": 11722,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2401.04757-predictable-benchmark/raw/media/per_task_error_vs_pt_ahead.png",
@@ -2204,7 +2205,7 @@
       "width": 488,
       "height": 366,
       "bytes": 9798,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/figure1_rpj_c4_val.png",
@@ -2212,7 +2213,7 @@
       "width": 1600,
       "height": 667,
       "bytes": 54762,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/emperical.png",
@@ -2220,7 +2221,7 @@
       "width": 1600,
       "height": 498,
       "bytes": 62028,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_emperical.png",
@@ -2228,7 +2229,7 @@
       "width": 1600,
       "height": 498,
       "bytes": 38232,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/grid_full.png",
@@ -2236,7 +2237,7 @@
       "width": 1600,
       "height": 498,
       "bytes": 36342,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/error.png",
@@ -2244,7 +2245,7 @@
       "width": 1600,
       "height": 498,
       "bytes": 75824,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08540-overtraining-downstream/raw/figs/downstream_corr.png",
@@ -2252,7 +2253,7 @@
       "width": 1500,
       "height": 600,
       "bytes": 51754,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/main.png",
@@ -2260,7 +2261,7 @@
       "width": 1600,
       "height": 686,
       "bytes": 50392,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_explained_variance.png",
@@ -2268,7 +2269,7 @@
       "width": 717,
       "height": 570,
       "bytes": 10404,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_pca_mat.png",
@@ -2276,7 +2277,7 @@
       "width": 1162,
       "height": 723,
       "bytes": 41996,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_scaling_per_model_pc_1.png",
@@ -2284,7 +2285,7 @@
       "width": 1600,
       "height": 521,
       "bytes": 74588,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_emerg_cap_main_tasks_forecast_pc_3.png",
@@ -2292,7 +2293,7 @@
       "width": 1600,
       "height": 429,
       "bytes": 60850,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/agentbench_forecast.png",
@@ -2300,7 +2301,7 @@
       "width": 1075,
       "height": 639,
       "bytes": 37364,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2405.10938-observational-scaling/raw/Figures/Exp/base_llm_post_training_gsm8k_forecast_pc_3.png",
@@ -2308,7 +2309,7 @@
       "width": 1600,
       "height": 617,
       "bytes": 67894,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/motivating.png",
@@ -2316,7 +2317,7 @@
       "width": 640,
       "height": 480,
       "bytes": 40122,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HellaSwag.png",
@@ -2324,7 +2325,7 @@
       "width": 640,
       "height": 480,
       "bytes": 34876,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_HumanEval.png",
@@ -2332,7 +2333,7 @@
       "width": 640,
       "height": 480,
       "bytes": 35366,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLP/performance_prediction_ARC_challenge.png",
@@ -2340,7 +2341,7 @@
       "width": 640,
       "height": 480,
       "bytes": 30900,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/arc_challenge_performance_prediction.png",
@@ -2348,7 +2349,7 @@
       "width": 640,
       "height": 480,
       "bytes": 37076,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2410.08527-predicting-downstream-flp/raw/figs/FLPMix_FLP/HumanEval_performance_prediction.png",
@@ -2356,7 +2357,7 @@
       "width": 640,
       "height": 480,
       "bytes": 41758,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/fig_1.png",
@@ -2364,7 +2365,7 @@
       "width": 1526,
       "height": 588,
       "bytes": 64720,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_transfer.png",
@@ -2372,7 +2373,7 @@
       "width": 1274,
       "height": 700,
       "bytes": 75216,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/train_function_transfer.png",
@@ -2380,7 +2381,7 @@
       "width": 1281,
       "height": 699,
       "bytes": 59636,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_transfer.png",
@@ -2388,7 +2389,7 @@
       "width": 1293,
       "height": 699,
       "bytes": 63784,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_to_test_down.png",
@@ -2396,7 +2397,7 @@
       "width": 1497,
       "height": 553,
       "bytes": 66094,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/translate_ours.png",
@@ -2404,7 +2405,7 @@
       "width": 1541,
       "height": 479,
       "bytes": 49204,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.12925-loss-to-loss/raw/images/test_extrapolation.png",
@@ -2412,7 +2413,7 @@
       "width": 1557,
       "height": 479,
       "bytes": 50124,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/graphical_fig1_final_v3.png",
@@ -2420,7 +2421,7 @@
       "width": 1600,
       "height": 544,
       "bytes": 51864,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_loss_x_axis_and_finetune_subsets_v3.png",
@@ -2428,7 +2429,7 @@
       "width": 1600,
       "height": 659,
       "bytes": 39194,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/gsm8k_loss_x_axis_and_finetune_subsets_v3.png",
@@ -2436,7 +2437,7 @@
       "width": 1600,
       "height": 654,
       "bytes": 38392,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_lora_ranks_all_v5.png",
@@ -2444,7 +2445,7 @@
       "width": 1600,
       "height": 317,
       "bytes": 34942,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/mmlu_finetuning_vs_prompting_vs_prefix_tuning_v3.png",
@@ -2452,7 +2453,7 @@
       "width": 1200,
       "height": 900,
       "bytes": 29998,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/max_liklihood_minimal_v4.png",
@@ -2460,7 +2461,7 @@
       "width": 1600,
       "height": 1083,
       "bytes": 111638,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_flops_v4.png",
@@ -2468,7 +2469,7 @@
       "width": 1600,
       "height": 1174,
       "bytes": 76502,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/v1_v_v2_c4_v3.png",
@@ -2476,7 +2477,7 @@
       "width": 1600,
       "height": 608,
       "bytes": 36658,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2411.16035-predicting-emergent-finetuning/raw/figures/emergence_pred_params_both_apps_v5.png",
@@ -2484,7 +2485,7 @@
       "width": 1600,
       "height": 618,
       "bytes": 54260,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/figure1.png",
@@ -2492,7 +2493,7 @@
       "width": 1600,
       "height": 535,
       "bytes": 58070,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step1_main.png",
@@ -2500,7 +2501,7 @@
       "width": 1600,
       "height": 698,
       "bytes": 107882,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/step2_main.png",
@@ -2508,7 +2509,7 @@
       "width": 1600,
       "height": 774,
       "bytes": 82810,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/chained_main.png",
@@ -2516,7 +2517,7 @@
       "width": 1600,
       "height": 698,
       "bytes": 107880,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2412.04403-task-scaling-ladders/raw/images/intermediate_feature_comparison.png",
@@ -2524,7 +2525,7 @@
       "width": 1600,
       "height": 1433,
       "bytes": 88988,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig01-overview_rebuttal.png",
@@ -2532,7 +2533,7 @@
       "width": 927,
       "height": 804,
       "bytes": 39526,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig02-l2l-abb_fineweb-edu_mamba_tiktoken_xfineweb-edu_20250529-115452.png",
@@ -2540,7 +2541,7 @@
       "width": 997,
       "height": 929,
       "bytes": 57626,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig03-schematic_latest.png",
@@ -2548,7 +2549,7 @@
       "width": 842,
       "height": 546,
       "bytes": 14532,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_pretr_fw_20250529-120709.png",
@@ -2556,7 +2557,7 @@
       "width": 1600,
       "height": 718,
       "bytes": 79220,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_token_fw_20250529-120620.png",
@@ -2564,7 +2565,7 @@
       "width": 1600,
       "height": 726,
       "bytes": 60432,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig04-intervention_archi_fw_20250529-121016.png",
@@ -2572,7 +2573,7 @@
       "width": 1600,
       "height": 726,
       "bytes": 69880,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig07-intervention_size_FineWeb-Edu_val_latest.png",
@@ -2580,7 +2581,7 @@
       "width": 995,
       "height": 694,
       "bytes": 27878,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig08-intervention_ctx_FineWeb-Edu_val_latest.png",
@@ -2588,7 +2589,7 @@
       "width": 995,
       "height": 694,
       "bytes": 28088,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2502.12120-data-determines-loss-to-loss/raw/figs/fig09-intervention_optim_FineWeb-Edu_val_latest.png",
@@ -2596,7 +2597,7 @@
       "width": 997,
       "height": 731,
       "bytes": 44478,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/dynamics.png",
@@ -2604,7 +2605,7 @@
       "width": 1600,
       "height": 1226,
       "bytes": 120226,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/scaling.png",
@@ -2612,7 +2613,7 @@
       "width": 1600,
       "height": 1220,
       "bytes": 111302,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/llama.png",
@@ -2620,7 +2621,7 @@
       "width": 1600,
       "height": 1108,
       "bytes": 84622,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.15796-emergent-abilities-loss/raw/figures/metric.png",
@@ -2628,7 +2629,7 @@
       "width": 1600,
       "height": 1114,
       "bytes": 99974,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/figure1.png",
@@ -2636,7 +2637,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 27536,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/timePlot.png",
@@ -2644,7 +2645,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 59794,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/magFig.png",
@@ -2652,7 +2653,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 44008,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1910.08475-warm-starting/raw/figures/shrink_online.png",
@@ -2660,7 +2661,7 @@
       "width": 1600,
       "height": 1200,
       "bytes": 52872,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/fine_tuning_theory_diagram_original.png",
@@ -2668,7 +2669,7 @@
       "width": 1600,
       "height": 550,
       "bytes": 37086,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2202.10054-lp-ft/raw/figures/compressed_exec_10_datasets.png",
@@ -2676,7 +2677,7 @@
       "width": 1600,
       "height": 687,
       "bytes": 55368,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/toy_limited_data.png",
@@ -2684,7 +2685,7 @@
       "width": 640,
       "height": 480,
       "bytes": 15432,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/main/CIFAR10.png",
@@ -2692,7 +2693,7 @@
       "width": 640,
       "height": 480,
       "bytes": 17250,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/feature.png",
@@ -2700,7 +2701,7 @@
       "width": 1314,
       "height": 1164,
       "bytes": 54210,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/evo_de_svd.png",
@@ -2708,7 +2709,7 @@
       "width": 1280,
       "height": 960,
       "bytes": 27198,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2203.04668-inadequately-pretrained/raw/figures/cifar10_logme.png",
@@ -2716,7 +2717,7 @@
       "width": 565,
       "height": 399,
       "bytes": 12554,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_41.png",
@@ -2724,7 +2725,7 @@
       "width": 1377,
       "height": 732,
       "bytes": 36424,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle.png",
@@ -2732,7 +2733,7 @@
       "width": 1431,
       "height": 963,
       "bytes": 50742,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_epoch_235_hessian_C_new.png",
@@ -2740,7 +2741,7 @@
       "width": 1377,
       "height": 732,
       "bytes": 60888,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/implicitbias.png",
@@ -2748,7 +2749,7 @@
       "width": 1600,
       "height": 321,
       "bytes": 39844,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.14199-same-loss-better-downstream/raw/figures/pcfg_middle_tr_new.png",
@@ -2756,7 +2757,7 @@
       "width": 1600,
       "height": 909,
       "bytes": 58002,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/imagenet_accuracy.png",
@@ -2764,7 +2765,7 @@
       "width": 1600,
       "height": 584,
       "bytes": 54910,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/backprop_summaries.png",
@@ -2772,7 +2773,7 @@
       "width": 1600,
       "height": 499,
       "bytes": 69704,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_no_cbp.png",
@@ -2780,7 +2781,7 @@
       "width": 1600,
       "height": 958,
       "bytes": 107390,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/cbp_mnist.png",
@@ -2788,7 +2789,7 @@
       "width": 1600,
       "height": 1002,
       "bytes": 131126,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/all_methods_imagenet.png",
@@ -2796,7 +2797,7 @@
       "width": 1600,
       "height": 957,
       "bytes": 74468,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.13812-loss-of-plasticity/raw/images/old-images/feature_util.png",
@@ -2804,7 +2805,7 @@
       "width": 509,
       "height": 444,
       "bytes": 11844,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/example_annotated.png",
@@ -2812,7 +2813,7 @@
       "width": 1600,
       "height": 503,
       "bytes": 35726,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ1/experiments_step113000-unsharded_dup.png",
@@ -2820,7 +2821,7 @@
       "width": 1600,
       "height": 239,
       "bytes": 43444,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ2_effectivity/olmo-7b-effectivity.png",
@@ -2828,7 +2829,7 @@
       "width": 1600,
       "height": 640,
       "bytes": 28592,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/experiments_step113000-unsharded_loss_regularized_duplication.png",
@@ -2836,7 +2837,7 @@
       "width": 1200,
       "height": 750,
       "bytes": 37878,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.11813-factual-knowledge-pretraining/raw/figs/RQ3_retainability/tokens/experiments_step113000-unsharded_loss_regularized_duplication_tokens.png",
@@ -2844,7 +2845,7 @@
       "width": 1200,
       "height": 750,
       "bytes": 38944,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/overtraining.png",
@@ -2852,7 +2853,7 @@
       "width": 502,
       "height": 307,
       "bytes": 15700,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/large_model_AnthropicHH_OLMo-1B.png",
@@ -2860,7 +2861,7 @@
       "width": 799,
       "height": 473,
       "bytes": 37854,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_gaussian.png",
@@ -2868,7 +2869,7 @@
       "width": 691,
       "height": 318,
       "bytes": 21312,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_perplexity_delta.png",
@@ -2876,7 +2877,7 @@
       "width": 804,
       "height": 349,
       "bytes": 36490,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/pt_ft_perplexity.png",
@@ -2884,7 +2885,7 @@
       "width": 1499,
       "height": 529,
       "bytes": 98664,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/learning_rates_schematic.png",
@@ -2892,7 +2893,7 @@
       "width": 871,
       "height": 640,
       "bytes": 46856,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.19206-catastrophic-overtraining/raw/media/tuned_ft_pt_perplexity.png",
@@ -2900,7 +2901,7 @@
       "width": 1506,
       "height": 389,
       "bytes": 47042,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/proxy_sft_error.png",
@@ -2908,7 +2909,7 @@
       "width": 1600,
       "height": 517,
       "bytes": 28174,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/pointwise_obj_obj_acc.png",
@@ -2916,7 +2917,7 @@
       "width": 1600,
       "height": 1317,
       "bytes": 111768,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/feat-imp-lightGBM.png",
@@ -2924,7 +2925,7 @@
       "width": 1600,
       "height": 474,
       "bytes": 22456,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/bucket_accs.png",
@@ -2932,7 +2933,7 @@
       "width": 1600,
       "height": 361,
       "bytes": 38392,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2504.12491-pretraining-indicators/raw/figures/hits_GT.png",
@@ -2940,7 +2941,7 @@
       "width": 1600,
       "height": 1161,
       "bytes": 112382,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/examples-of-scaling-behaviors-v1.png",
@@ -2948,7 +2949,7 @@
       "width": 1600,
       "height": 1067,
       "bytes": 100848,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/distribution-of-scaling-behaviors.png",
@@ -2956,7 +2957,7 @@
       "width": 626,
       "height": 495,
       "bytes": 12090,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/scaling-behaviors_predictable.png",
@@ -2964,7 +2965,7 @@
       "width": 1511,
       "height": 1211,
       "bytes": 135288,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2507.00885-scaling-laws-unreliable/raw/figures/example-of-effect-of-validation-corpus.png",
@@ -2972,7 +2973,7 @@
       "width": 611,
       "height": 639,
       "bytes": 28244,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/linear2_dynamics_plus_ie1_3panel.png",
@@ -2980,7 +2981,7 @@
       "width": 1600,
       "height": 531,
       "bytes": 47476,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/all_hermite_activation_and_square_numerics.png",
@@ -2988,7 +2989,7 @@
       "width": 1600,
       "height": 390,
       "bytes": 52966,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/cifar10_svhn_pretrain_downstream_2x2.png",
@@ -2996,7 +2997,7 @@
       "width": 1600,
       "height": 1038,
       "bytes": 97982,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2602.02855-pretraining-hurts-lora/raw/figures/emnist_fashionmnist_pretrain_downstream_2x2.png",
@@ -3004,7 +3005,7 @@
       "width": 1600,
       "height": 1037,
       "bytes": 91158,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/sft-rl_2.png",
@@ -3012,7 +3013,7 @@
       "width": 1600,
       "height": 667,
       "bytes": 103132,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.09932-rl-fails-after-sft/raw/figures/model.layers.0.self_attn.v_proj.weight.png",
@@ -3020,7 +3021,7 @@
       "width": 1600,
       "height": 901,
       "bytes": 73704,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/continual_learning_problem_definition_light.png",
@@ -3028,7 +3029,7 @@
       "width": 1418,
       "height": 1600,
       "bytes": 70782,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/plasticity_loss_all_models_updated.png",
@@ -3036,7 +3037,7 @@
       "width": 1421,
       "height": 661,
       "bytes": 53588,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/log_log_lop_model_updated_log_scale.png",
@@ -3044,7 +3045,7 @@
       "width": 728,
       "height": 638,
       "bytes": 31234,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/stationary_lop_updated.png",
@@ -3052,7 +3053,7 @@
       "width": 1421,
       "height": 638,
       "bytes": 41470,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.24752-scale-plasticity-loss/raw/figures/12m_53m_106m_avg_mag_dormant_updated.png",
@@ -3060,7 +3061,7 @@
       "width": 1600,
       "height": 558,
       "bytes": 43662,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/setup.png",
@@ -3068,7 +3069,7 @@
       "width": 1600,
       "height": 800,
       "bytes": 25594,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/double_10_v2.png",
@@ -3076,7 +3077,7 @@
       "width": 900,
       "height": 600,
       "bytes": 33926,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/dd_learning_curve.png",
@@ -3084,7 +3085,7 @@
       "width": 938,
       "height": 625,
       "bytes": 29266,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/poor_scaling_emerge.png",
@@ -3092,7 +3093,7 @@
       "width": 938,
       "height": 625,
       "bytes": 28178,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/prefix_matching_score_multiplier.png",
@@ -3100,7 +3101,7 @@
       "width": 938,
       "height": 625,
       "bytes": 33496,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/broken_copying.png",
@@ -3108,7 +3109,7 @@
       "width": 938,
       "height": 625,
       "bytes": 31696,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2205.10487-repeated-data/raw/figures/ossification.png",
@@ -3116,7 +3117,7 @@
       "width": 938,
       "height": 625,
       "bytes": 23486,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/sparse-parity-diagram.png",
@@ -3124,7 +3125,7 @@
       "width": 1146,
       "height": 250,
       "bytes": 18028,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/parameters-steps-data-emergence-and-scaling-scalingtop.png",
@@ -3132,7 +3133,7 @@
       "width": 1600,
       "height": 1018,
       "bytes": 81960,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/pythia-scaling-tripanel.png",
@@ -3140,7 +3141,7 @@
       "width": 1600,
       "height": 668,
       "bytes": 72248,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2303.13506-quantization-model/raw/figures/similarity-matrix-and-rank-frequency-envelope.png",
@@ -3148,7 +3149,7 @@
       "width": 1600,
       "height": 727,
       "bytes": 58784,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/wei_2022_emergence/wei_2022_emergence_fig2.png",
@@ -3156,7 +3157,7 @@
       "width": 1600,
       "height": 1084,
       "bytes": 105098,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/toy_emergence/toy_analytical_model_try2.png",
@@ -3164,7 +3165,7 @@
       "width": 1600,
       "height": 951,
       "bytes": 63966,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/gpt3_integer_multiplication/multiplication_acc_vs_model_size_by_temp_by_target_str_len.png",
@@ -3172,7 +3173,7 @@
       "width": 1600,
       "height": 1180,
       "bytes": 47012,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/big_bench_emergent_tasks/big_bench_breakthrough_scores_by_metric.png",
@@ -3180,7 +3181,7 @@
       "width": 1600,
       "height": 993,
       "bytes": 46990,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.15004-emergent-mirage/raw/figures/vision/no_emergence_and_emergence_dataset=mnist.png",
@@ -3188,7 +3189,7 @@
       "width": 1600,
       "height": 518,
       "bytes": 32756,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/return_alloc.png",
@@ -3196,7 +3197,7 @@
       "width": 1600,
       "height": 813,
       "bytes": 85748,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/isoloss_100m.png",
@@ -3204,7 +3205,7 @@
       "width": 1600,
       "height": 859,
       "bytes": 88144,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2305.16264-data-constrained-lms/raw/figures/validation_c4.png",
@@ -3212,7 +3213,7 @@
       "width": 1600,
       "height": 783,
       "bytes": 60176,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/presentation_setup.png",
@@ -3220,7 +3221,7 @@
       "width": 1500,
       "height": 844,
       "bytes": 42054,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure1.png",
@@ -3228,7 +3229,7 @@
       "width": 960,
       "height": 255,
       "bytes": 15406,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure_mechanistic_understanding.png",
@@ -3236,7 +3237,7 @@
       "width": 1500,
       "height": 844,
       "bytes": 36048,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure2.png",
@@ -3244,7 +3245,7 @@
       "width": 975,
       "height": 255,
       "bytes": 19424,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.21676-how-lms-learn-facts/raw/figures/figure3.png",
@@ -3252,7 +3253,7 @@
       "width": 990,
       "height": 258,
       "bytes": 21302,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100.png",
@@ -3260,7 +3261,7 @@
       "width": 895,
       "height": 656,
       "bytes": 27924,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/cifar10_to_cifar100.png",
@@ -3268,7 +3269,7 @@
       "width": 895,
       "height": 656,
       "bytes": 26902,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_small.png",
@@ -3276,7 +3277,7 @@
       "width": 895,
       "height": 658,
       "bytes": 24388,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2002.12462-leep/raw/figs/imagenet_to_cifar100_convergence.png",
@@ -3284,7 +3285,7 @@
       "width": 893,
       "height": 657,
       "bytes": 33114,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.11005-logme/raw/setting.png",
@@ -3292,7 +3293,7 @@
       "width": 1573,
       "height": 592,
       "bytes": 37038,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.11005-logme/raw/graphical_model.png",
@@ -3300,7 +3301,7 @@
       "width": 786,
       "height": 350,
       "bytes": 20276,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.11005-logme/raw/logme.png",
@@ -3308,7 +3309,7 @@
       "width": 1600,
       "height": 178,
       "bytes": 18554,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.11005-logme/raw/leep.png",
@@ -3316,7 +3317,7 @@
       "width": 1600,
       "height": 178,
       "bytes": 17170,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2102.11005-logme/raw/nlp.png",
@@ -3324,7 +3325,7 @@
       "width": 1600,
       "height": 203,
       "bytes": 13222,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_freeze.png",
@@ -3332,7 +3333,7 @@
       "width": 1200,
       "height": 900,
       "bytes": 64422,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/mean_tuned.png",
@@ -3340,7 +3341,7 @@
       "width": 1200,
       "height": 900,
       "bytes": 65470,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_freeze.png",
@@ -3348,7 +3349,7 @@
       "width": 1200,
       "height": 600,
       "bytes": 41576,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2210.11255-evidence-intuition/raw/figures/cls_tuned.png",
@@ -3356,7 +3357,7 @@
       "width": 1200,
       "height": 600,
       "bytes": 42132,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/model_vs_dataset_3.png",
@@ -3364,7 +3365,7 @@
       "width": 735,
       "height": 817,
       "bytes": 32204,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_hpo_baselines4.png",
@@ -3372,7 +3373,7 @@
       "width": 1600,
       "height": 554,
       "bytes": 54574,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_ablation3.png",
@@ -3380,7 +3381,7 @@
       "width": 1600,
       "height": 544,
       "bytes": 55208,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2306.03828-quick-tune/raw/Figures/extended_transfer_measure3.png",
@@ -3388,7 +3389,7 @@
       "width": 1600,
       "height": 554,
       "bytes": 47898,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.03793-lensllm/raw/model_comparison.png",
@@ -3396,7 +3397,7 @@
       "width": 1600,
       "height": 1272,
       "bytes": 44820,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/model_selection_comparison_v2.png",
@@ -3404,7 +3405,7 @@
       "width": 1600,
       "height": 827,
       "bytes": 36532,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.03793-lensllm/raw/figures/combined_plots.png",
@@ -3412,7 +3413,7 @@
       "width": 1600,
       "height": 841,
       "bytes": 98236,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/figure-1.png",
@@ -3420,7 +3421,7 @@
       "width": 1082,
       "height": 575,
       "bytes": 42840,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_3_phase_diagram.png",
@@ -3428,7 +3429,7 @@
       "width": 1080,
       "height": 780,
       "bytes": 43514,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_1_population_decay_full.png",
@@ -3436,7 +3437,7 @@
       "width": 1080,
       "height": 780,
       "bytes": 41288,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.17649-risk-decomposition/raw/figures/Fig_7_4_efficiency_frontier.png",
@@ -3444,7 +3445,7 @@
       "width": 1080,
       "height": 780,
       "bytes": 28140,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/learning_curve_cartoon.png",
@@ -3452,7 +3453,7 @@
       "width": 959,
       "height": 719,
       "bytes": 24692,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_error_models.png",
@@ -3460,7 +3461,7 @@
       "width": 959,
       "height": 719,
       "bytes": 33448,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/machine_translation_generalization.png",
@@ -3468,7 +3469,7 @@
       "width": 959,
       "height": 719,
       "bytes": 25336,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_generalization.png",
@@ -3476,7 +3477,7 @@
       "width": 959,
       "height": 719,
       "bytes": 37126,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/word_lms_data_model.png",
@@ -3484,7 +3485,7 @@
       "width": 959,
       "height": 719,
       "bytes": 48212,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_generalization.png",
@@ -3492,7 +3493,7 @@
       "width": 959,
       "height": 719,
       "bytes": 35274,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/char_lms_data_model.png",
@@ -3500,7 +3501,7 @@
       "width": 959,
       "height": 719,
       "bytes": 33300,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_generalization.png",
@@ -3508,7 +3509,7 @@
       "width": 959,
       "height": 719,
       "bytes": 35486,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/image_data_model.png",
@@ -3516,7 +3517,7 @@
       "width": 959,
       "height": 719,
       "bytes": 25816,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/speech_data_generalization.png",
@@ -3524,7 +3525,7 @@
       "width": 959,
       "height": 719,
       "bytes": 33142,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1712.00409-hestness-scaling/raw/ds2_data_generalization.png",
@@ -3532,7 +3533,7 @@
       "width": 959,
       "height": 719,
       "bytes": 32334,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_imagenet_single.png",
@@ -3540,7 +3541,7 @@
       "width": 587,
       "height": 585,
       "bytes": 19510,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_wiki103.png",
@@ -3548,7 +3549,7 @@
       "width": 871,
       "height": 655,
       "bytes": 38902,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/observe_2d_cifar10.png",
@@ -3556,7 +3557,7 @@
       "width": 875,
       "height": 655,
       "bytes": 41166,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_vision.png",
@@ -3564,7 +3565,7 @@
       "width": 889,
       "height": 887,
       "bytes": 34626,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/fit_nlp.png",
@@ -3572,7 +3573,7 @@
       "width": 889,
       "height": 887,
       "bytes": 27328,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_array.png",
@@ -3580,7 +3581,7 @@
       "width": 355,
       "height": 578,
       "bytes": 19130,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/1909.12673-constructive-prediction/raw/figures/extrap_wiki103_single.png",
@@ -3588,7 +3589,7 @@
       "width": 587,
       "height": 585,
       "bytes": 19262,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lc_decision_situations.png",
@@ -3596,7 +3597,7 @@
       "width": 929,
       "height": 375,
       "bytes": 13924,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcs-waveform.png",
@@ -3604,7 +3605,7 @@
       "width": 1052,
       "height": 315,
       "bytes": 33376,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/lcconcepts.png",
@@ -3612,7 +3613,7 @@
       "width": 806,
       "height": 321,
       "bytes": 26534,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/modeltypes.png",
@@ -3620,7 +3621,7 @@
       "width": 786,
       "height": 281,
       "bytes": 22786,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/earlystoppingvsdataacquisition.png",
@@ -3628,7 +3629,7 @@
       "width": 858,
       "height": 323,
       "bytes": 22044,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2201.12150-learning-curves-survey/raw/fig/problem_solution.png",
@@ -3636,7 +3637,7 @@
       "width": 1051,
       "height": 779,
       "bytes": 57332,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/vis_mpl.png",
@@ -3644,7 +3645,7 @@
       "width": 1600,
       "height": 827,
       "bytes": 98768,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/lr_comp.png",
@@ -3652,7 +3653,7 @@
       "width": 1372,
       "height": 822,
       "bytes": 52678,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/loss_comp.png",
@@ -3660,7 +3661,7 @@
       "width": 1361,
       "height": 837,
       "bytes": 51086,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/const_fit.png",
@@ -3668,7 +3669,7 @@
       "width": 1273,
       "height": 1064,
       "bytes": 56408,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2503.12811-multi-power-law/raw/figures/fit_2stage_ld.png",
@@ -3676,7 +3677,7 @@
       "width": 734,
       "height": 584,
       "bytes": 26934,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_peaking.png",
@@ -3684,7 +3685,7 @@
       "width": 960,
       "height": 560,
       "bytes": 10102,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_dipping.png",
@@ -3692,7 +3693,7 @@
       "width": 960,
       "height": 560,
       "bytes": 11890,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/overview_transition.png",
@@ -3700,7 +3701,7 @@
       "width": 960,
       "height": 560,
       "bytes": 11924,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_mono.png",
@@ -3708,7 +3709,7 @@
       "width": 1020,
       "height": 870,
       "bytes": 25990,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/eg_global_conv.png",
@@ -3716,7 +3717,7 @@
       "width": 1020,
       "height": 870,
       "bytes": 30784,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/denser_peaking_transition.png",
@@ -3724,7 +3725,7 @@
       "width": 1600,
       "height": 673,
       "bytes": 50336,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/example_MLP_3version.png",
@@ -3732,7 +3733,7 @@
       "width": 1600,
       "height": 667,
       "bytes": 54888,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_mono_CC18.png",
@@ -3740,7 +3741,7 @@
       "width": 1600,
       "height": 729,
       "bytes": 40126,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_peaking_CC18.png",
@@ -3748,7 +3749,7 @@
       "width": 1600,
       "height": 729,
       "bytes": 37398,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_dipping_CC18.png",
@@ -3756,7 +3757,7 @@
       "width": 1600,
       "height": 729,
       "bytes": 38864,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/percent_conv_CC18.png",
@@ -3764,7 +3765,7 @@
       "width": 1600,
       "height": 729,
       "bytes": 39742,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/fit_MSE.png",
@@ -3772,7 +3773,7 @@
       "width": 1600,
       "height": 522,
       "bytes": 33656,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2505.15657-lcdb-1.1/raw/Figures/lc_crossing_probs_comparison.png",
@@ -3780,7 +3781,7 @@
       "width": 904,
       "height": 405,
       "bytes": 25226,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-models-50B.png",
@@ -3788,7 +3789,7 @@
       "width": 1600,
       "height": 909,
       "bytes": 65976,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-pile-val-loss-RP-models-50B.png",
@@ -3796,7 +3797,7 @@
       "width": 1600,
       "height": 934,
       "bytes": 54842,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-RP-val-loss-RP-models-240B.png",
@@ -3804,7 +3805,7 @@
       "width": 1600,
       "height": 919,
       "bytes": 93788,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/wu=0.01-Pile-val-loss-RP-models-240B.png",
@@ -3812,7 +3813,7 @@
       "width": 1600,
       "height": 919,
       "bytes": 115308,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.04014-rewarm/raw/figs/SP-300B/lr=3e-4-RP-val-loss-RP-10-27-scratch-models-50B.png",
@@ -3820,7 +3821,7 @@
       "width": 1600,
       "height": 934,
       "bytes": 88102,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/illus.png",
@@ -3828,7 +3829,7 @@
       "width": 1136,
       "height": 344,
       "bytes": 39772,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/architecture.png",
@@ -3836,7 +3837,7 @@
       "width": 1600,
       "height": 452,
       "bytes": 15286,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/details.png",
@@ -3844,7 +3845,7 @@
       "width": 1176,
       "height": 627,
       "bytes": 60478,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/llama.png",
@@ -3852,7 +3853,7 @@
       "width": 1174,
       "height": 606,
       "bytes": 60854,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2308.08747-catastrophic-forgetting/raw/mixed.png",
@@ -3860,7 +3861,7 @@
       "width": 1600,
       "height": 533,
       "bytes": 135054,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_compute.png",
@@ -3868,7 +3869,7 @@
       "width": 1476,
       "height": 1176,
       "bytes": 27068,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_loss.png",
@@ -3876,7 +3877,7 @@
       "width": 1476,
       "height": 1176,
       "bytes": 28400,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/main_figure_final_eval.png",
@@ -3884,7 +3885,7 @@
       "width": 1476,
       "height": 1176,
       "bytes": 37008,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_sp-val.png",
@@ -3892,7 +3893,7 @@
       "width": 1195,
       "height": 661,
       "bytes": 41334,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_comparison_pile-val.png",
@@ -3900,7 +3901,7 @@
       "width": 1195,
       "height": 661,
       "bytes": 34684,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/9B_comparison_sp-val.png",
@@ -3908,7 +3909,7 @@
       "width": 1195,
       "height": 649,
       "bytes": 39774,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_german_replay_german-val.png",
@@ -3916,7 +3917,7 @@
       "width": 1202,
       "height": 661,
       "bytes": 65154,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2403.08763-continually-pretrain/raw/figs/new_results_405M/405M_rewarming_on_pile.png",
@@ -3924,7 +3925,7 @@
       "width": 1215,
       "height": 649,
       "bytes": 67420,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_general.png",
@@ -3932,7 +3933,7 @@
       "width": 1389,
       "height": 1415,
       "bytes": 81770,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/abstract_domain.png",
@@ -3940,7 +3941,7 @@
       "width": 1357,
       "height": 1411,
       "bytes": 77334,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/introduction_main.png",
@@ -3948,7 +3949,7 @@
       "width": 1131,
       "height": 1600,
       "bytes": 39880,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_general.png",
@@ -3956,7 +3957,7 @@
       "width": 1600,
       "height": 400,
       "bytes": 23320,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/main_cpt_law_domain.png",
@@ -3964,7 +3965,7 @@
       "width": 1600,
       "height": 400,
       "bytes": 26106,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/cptlaw_model_size_generailzability.png",
@@ -3972,7 +3973,7 @@
       "width": 1500,
       "height": 855,
       "bytes": 22046,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2406.01375-d-cpt-law/raw/Figures/crosscptlaw_main.png",
@@ -3980,7 +3981,7 @@
       "width": 1600,
       "height": 415,
       "bytes": 35972,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Fig1-critical.png",
@@ -3988,7 +3989,7 @@
       "width": 1600,
       "height": 837,
       "bytes": 35284,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/3d-model.png",
@@ -3996,7 +3997,7 @@
       "width": 1600,
       "height": 833,
       "bytes": 65868,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/gen-dom-ratio-pred.png",
@@ -4004,7 +4005,7 @@
       "width": 1108,
       "height": 1600,
       "bytes": 45682,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/Predicting_T.png",
@@ -4012,7 +4013,7 @@
       "width": 1600,
       "height": 1600,
       "bytes": 75832,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/T_0_Predict_R.png",
@@ -4020,7 +4021,7 @@
       "width": 1373,
       "height": 1196,
       "bytes": 44946,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2407.17467-cmr-scaling/raw/Fig/arxiv_T0_R_predict.png",
@@ -4028,7 +4029,7 @@
       "width": 1405,
       "height": 1167,
       "bytes": 29120,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/d_cpt_scaling_law_fr.png",
@@ -4036,7 +4037,7 @@
       "width": 1600,
       "height": 914,
       "bytes": 62234,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/fixedr_grid_multi_ptpp_single_metric_grid_in_sample.png",
@@ -4044,7 +4045,7 @@
       "width": 1400,
       "height": 1600,
       "bytes": 96068,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2510.23198-ptpp-aware/raw/use_case.png",
@@ -4052,7 +4053,7 @@
       "width": 1347,
       "height": 492,
       "bytes": 59732,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/layerwise_collapse.png",
@@ -4060,7 +4061,7 @@
       "width": 949,
       "height": 414,
       "bytes": 31300,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/objective_heatmap.png",
@@ -4068,7 +4069,7 @@
       "width": 1029,
       "height": 467,
       "bytes": 23576,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/multi_model_results.png",
@@ -4076,7 +4077,7 @@
       "width": 933,
       "height": 419,
       "bytes": 26176,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/plasticity_correlation.png",
@@ -4084,7 +4085,7 @@
       "width": 485,
       "height": 420,
       "bytes": 11934,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2605.30524-representation-collapse/raw/figures/mitigation_pareto.png",
@@ -4092,7 +4093,7 @@
       "width": 571,
       "height": 420,
       "bytes": 13570,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/flops_optimization_analysis.png",
@@ -4100,7 +4101,7 @@
       "width": 1536,
       "height": 1600,
       "bytes": 90130,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/method.png",
@@ -4108,7 +4109,7 @@
       "width": 1600,
       "height": 857,
       "bytes": 98586,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/optimal_combined_figures.png",
@@ -4116,7 +4117,7 @@
       "width": 1600,
       "height": 1158,
       "bytes": 197748,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/batch_size_loss.png",
@@ -4124,7 +4125,7 @@
       "width": 1520,
       "height": 1044,
       "bytes": 79098,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2606.05610-predictable-hp-cpt/raw/figure/learning_rate_loss.png",
@@ -4132,7 +4133,7 @@
       "width": 1536,
       "height": 1044,
       "bytes": 79694,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/main-figure0.png",
@@ -4140,7 +4141,7 @@
       "width": 448,
       "height": 366,
       "bytes": 11118,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/qq_plot_12B-deduped-146M.png",
@@ -4148,7 +4149,7 @@
       "width": 1600,
       "height": 1067,
       "bytes": 26730,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/memorized_sequences.png",
@@ -4156,7 +4157,7 @@
       "width": 1600,
       "height": 1067,
       "bytes": 23868,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2304.01373-pythia/raw/media/lambada_openai_70M_6.9B_vstack.png",
@@ -4164,7 +4165,7 @@
       "width": 1600,
       "height": 1067,
       "bytes": 36716,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/overview-diagram-01.png",
@@ -4172,7 +4173,7 @@
       "width": 1236,
       "height": 1600,
       "bytes": 43550,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2312.06550-llm360/raw/figs/4_plots.png",
@@ -4180,7 +4181,7 @@
       "width": 1600,
       "height": 900,
       "bytes": 38220,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/core-tasks-progression.png",
@@ -4188,7 +4189,7 @@
       "width": 1600,
       "height": 967,
       "bytes": 48800,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/lrs.png",
@@ -4196,7 +4197,7 @@
       "width": 960,
       "height": 720,
       "bytes": 19712,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen.png",
@@ -4204,7 +4205,7 @@
       "width": 724,
       "height": 711,
       "bytes": 21478,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/paloma_bpb_over_tokens_seen_per_source.png",
@@ -4212,7 +4213,7 @@
       "width": 811,
       "height": 1600,
       "bytes": 86694,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/additional_tasks.png",
@@ -4220,7 +4221,7 @@
       "width": 1600,
       "height": 967,
       "bytes": 43768,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2402.00838-olmo/raw/figures/weight-tying-norms.png",
@@ -4228,7 +4229,7 @@
       "width": 1600,
       "height": 1154,
       "bytes": 53264,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/olmo2.png",
@@ -4236,7 +4237,7 @@
       "width": 945,
       "height": 631,
       "bytes": 47724,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/qk_norm_reorder.png",
@@ -4244,7 +4245,7 @@
       "width": 1600,
       "height": 456,
       "bytes": 33120,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "finetuning-efficiency/papers/2501.00656-olmo-2/raw/figures/rlplots/olmo-2-13b-rlvr.png",
@@ -4252,7 +4253,7 @@
       "width": 1600,
       "height": 385,
       "bytes": 37524,
-      "quality": 82
+      "cached": "true"
     },
     {
       "source": "gradient-flow/papers/1711.04735-dynamical-isometry/raw/Figures/NIPS_fig1.png",
@@ -10096,14 +10097,15 @@
     }
   ],
   "files": {
-    "registry.json": "7fb7847c2c7169ab7f77541f485034ed04bf26510416e8fafa563d2a8ef25aa0",
-    "index.html": "fe1e32a64d46295becb08ed89b7a3e13798b1cf5606726f8e4b6e6355697371a",
-    ".publish-manifest.json": "61c027c89b8f94a60c15a4dc1ce96c009f16557203bd9a85c4e301592425ad59",
-    "404.html": "fe1e32a64d46295becb08ed89b7a3e13798b1cf5606726f8e4b6e6355697371a",
+    "registry.json": "c1fcbf3dfcaaccf5a5c248d95050d966d5c2fc534c438206377ff4efeb675245",
+    "index.html": "77dbcae3ec6f8d8176e1a8749e4cc9f3a9d531be4037650f28089f44af8c8833",
+    ".publish-manifest.json": "94ffa64f33606626d927b632473981adb188705e762025e7c472be8bf99fb65b",
+    "404.html": "77dbcae3ec6f8d8176e1a8749e4cc9f3a9d531be4037650f28089f44af8c8833",
     "README.md": "83611cd4fa8cdd490171336d01783a0fe4780185834d314005cf4451868c85e0",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "layer-stacking/index.html": "facb2b83c602e367ebaa7c0f32a4da63c0d59b3537ed289fc8c4ec3b228151da",
     "compaction/index.html": "85cb9f55f343e90a775cd9e4fde0b98113bb8ad34539ae5e9a42f21a2facd0a5",
+    "multi-epoch/index.html": "16ad08b3f3c11e28b501c92afbea7a31652edb8a35718bde3f362ec28017e382",
     "finetuning-efficiency/index.html": "25a2c02a63b57dbebd359ceb44d6abc1848ce04c282916ca2d0da796d74a7a79",
     "gradient-flow/index.html": "c4abaefc0bee85456548bdb3db80cfd5e263bfceb619ee0140afe2df80be1772",
     "attn-res/index.html": "8f6ee986004c4a5ae95531ef2443441d263bfbcff000c1e55cb57af8c69ee295",
@@ -10341,6 +10343,7 @@
     "compaction/papers/2409.04421-rlpf/raw/sections/figures/rlpf.webp": "e220fd2b157ad11913fe00629a68eb40472dfab8cdc502a4cc0d5ef4a91da332",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/average_attention_weight.webp": "d1cc41e3408422b69c65592e496ec1b5fd18bb10aac17ebf12d6f97936c3e138",
     "compaction/papers/1911.05507-compressive-transformer/raw/figures/model_simple_longer.webp": "03df5a735e7b170017f1c6c1e47b625ec3a42907750e54d288e8aae7de5b134a",
+    "multi-epoch/survey/index.html": "b2cce8640f2fc0053d4dcb23aec8f7b9e750b24baa3a38c54bcdd8ee264e401d",
     "finetuning-efficiency/survey/index.html": "a9a42cdcf1036ad1a17f0b6a414935370e68dc56cbc2fe9b2c5e6ff2d62a3fe3",
     "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/ContributionIllustration.webp": "66bbd74a023698bbe1f7786e037e175186cfeae052769ff692289a0409658b3c",
     "finetuning-efficiency/papers/2001.08361-kaplan-scaling-laws/raw/figures/PerfVsParams-ComputeBudget.webp": "9dda4dddca2282e5d298bd172e08272fa684da2e217429a025125daec813504d",
